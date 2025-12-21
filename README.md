@@ -7,10 +7,20 @@ A collection of free, privacy-focused developer tools that run entirely in your 
 
 **Live Site:** [https://onedevkit.com](https://onedevkit.com)
 
+## Project Purpose
+
+This is a **passive income project** designed to generate revenue through advertising (Google AdSense) by attracting high organic traffic from developers searching for free online tools. The strategy focuses on:
+
+- **SEO-optimized content** to rank for developer tool searches
+- **High-quality, fast tools** that users bookmark and return to
+- **Ad placements** that monetize traffic without degrading user experience
+- **Zero server costs** through static hosting on Cloudflare Pages free tier
+
 ---
 
 ## Table of Contents
 
+- [Project Purpose](#project-purpose)
 - [Features](#features)
 - [Available Tools](#available-tools)
 - [Tech Stack](#tech-stack)
@@ -314,12 +324,15 @@ npm run test:unit        # Run all unit tests
 npm run test:unit:watch  # Watch mode
 ```
 
-**Coverage:** 101 tests across 5 test suites
+**Coverage:** 177 tests across 8 test suites
 - JSON Formatter (30 tests)
 - Base64 Encoder (24 tests)
 - Password Generator (17 tests)
 - UUID Generator (15 tests)
 - Lorem Ipsum (15 tests)
+- QR Generator (18 tests)
+- Common Utilities (33 tests)
+- Cookie Consent (25 tests)
 
 ### E2E Tests (Playwright)
 
@@ -328,7 +341,7 @@ npm run test:e2e     # Run headless
 npm run test:e2e:ui  # Interactive UI mode
 ```
 
-**Coverage:** 35 tests covering all tools and UI interactions
+**Coverage:** 41 tests covering all tools, UI interactions, and content integrity
 
 ### Manual Testing
 
