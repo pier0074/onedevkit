@@ -216,6 +216,51 @@
     </div>
   </div>
 
+  <!-- Base64 Encoder Tests -->
+  <h2>Base64 Encoder/Decoder</h2>
+  <div class="test-group">
+    <div class="test">
+      <span class="test-name">Encode simple text</span>
+      <span class="test-status pending" id="base64-1">Pending</span>
+    </div>
+    <div class="test">
+      <span class="test-name">Decode Base64 to text</span>
+      <span class="test-status pending" id="base64-2">Pending</span>
+    </div>
+    <div class="test">
+      <span class="test-name">Encode/decode roundtrip</span>
+      <span class="test-status pending" id="base64-3">Pending</span>
+    </div>
+    <div class="test">
+      <span class="test-name">URL-safe encoding</span>
+      <span class="test-status pending" id="base64-4">Pending</span>
+    </div>
+    <div class="test">
+      <span class="test-name">Unicode characters (UTF-8)</span>
+      <span class="test-status pending" id="base64-5">Pending</span>
+    </div>
+    <div class="test">
+      <span class="test-name">Invalid Base64 detection</span>
+      <span class="test-status pending" id="base64-6">Pending</span>
+    </div>
+    <div class="test">
+      <span class="test-name">Empty string handling</span>
+      <span class="test-status pending" id="base64-7">Pending</span>
+    </div>
+    <div class="test">
+      <span class="test-name">Line breaks (MIME format)</span>
+      <span class="test-status pending" id="base64-8">Pending</span>
+    </div>
+    <div class="test">
+      <span class="test-name">Whitespace handling in decode</span>
+      <span class="test-status pending" id="base64-9">Pending</span>
+    </div>
+    <div class="test">
+      <span class="test-name">Large text encoding</span>
+      <span class="test-status pending" id="base64-10">Pending</span>
+    </div>
+  </div>
+
   <!-- Common Utilities Tests -->
   <h2>Common Utilities</h2>
   <div class="test-group">
@@ -529,6 +574,104 @@
     }
 
     // ========================================
+    // Base64 Tests
+    // ========================================
+    function testBase64() {
+      console.log('Running Base64 tests...');
+
+      // Helper functions (matching base64.js implementation)
+      function encode(str, options = {}) {
+        const utf8Bytes = new TextEncoder().encode(str);
+        const binaryString = Array.from(utf8Bytes, byte => String.fromCharCode(byte)).join('');
+        let base64 = btoa(binaryString);
+
+        if (options.urlSafe) {
+          base64 = base64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+        }
+
+        if (options.lineBreaks) {
+          base64 = base64.match(/.{1,76}/g)?.join('\n') || base64;
+        }
+
+        return base64;
+      }
+
+      function decode(base64, options = {}) {
+        let cleaned = base64.trim().replace(/[\r\n]/g, '');
+
+        if (options.urlSafe || cleaned.includes('-') || cleaned.includes('_')) {
+          cleaned = cleaned.replace(/-/g, '+').replace(/_/g, '/');
+          const padding = cleaned.length % 4;
+          if (padding) {
+            cleaned += '='.repeat(4 - padding);
+          }
+        }
+
+        const binaryString = atob(cleaned);
+        const bytes = new Uint8Array(binaryString.length);
+        for (let i = 0; i < binaryString.length; i++) {
+          bytes[i] = binaryString.charCodeAt(i);
+        }
+
+        return new TextDecoder().decode(bytes);
+      }
+
+      function isValidBase64(str) {
+        const cleaned = str.replace(/[\r\n\s]/g, '').replace(/-/g, '+').replace(/_/g, '/');
+        const base64Regex = /^[A-Za-z0-9+/]*={0,2}$/;
+        if (!base64Regex.test(cleaned)) return false;
+        try { atob(cleaned); return true; } catch { return false; }
+      }
+
+      // Test 1: Encode simple text
+      const encoded1 = encode('Hello, World!');
+      setStatus('base64-1', encoded1 === 'SGVsbG8sIFdvcmxkIQ==');
+
+      // Test 2: Decode Base64 to text
+      const decoded2 = decode('SGVsbG8sIFdvcmxkIQ==');
+      setStatus('base64-2', decoded2 === 'Hello, World!');
+
+      // Test 3: Roundtrip
+      const original = 'The quick brown fox jumps over the lazy dog.';
+      const encoded3 = encode(original);
+      const decoded3 = decode(encoded3);
+      setStatus('base64-3', decoded3 === original);
+
+      // Test 4: URL-safe encoding
+      const urlSafeEncoded = encode('Test+/Data', { urlSafe: true });
+      setStatus('base64-4', !urlSafeEncoded.includes('+') && !urlSafeEncoded.includes('/') && !urlSafeEncoded.includes('='));
+
+      // Test 5: Unicode/UTF-8
+      const unicodeStr = 'Hello, 世界! Emoji: 🎉';
+      const unicodeEncoded = encode(unicodeStr);
+      const unicodeDecoded = decode(unicodeEncoded);
+      setStatus('base64-5', unicodeDecoded === unicodeStr);
+
+      // Test 6: Invalid Base64 detection
+      setStatus('base64-6', !isValidBase64('Invalid@#$%') && !isValidBase64('!!!'));
+
+      // Test 7: Empty string
+      const emptyEncoded = encode('');
+      const emptyDecoded = decode('');
+      setStatus('base64-7', emptyEncoded === '' && emptyDecoded === '');
+
+      // Test 8: Line breaks (MIME format)
+      const longText = 'A'.repeat(100);
+      const mimeEncoded = encode(longText, { lineBreaks: true });
+      setStatus('base64-8', mimeEncoded.includes('\n') && mimeEncoded.split('\n').every(line => line.length <= 76));
+
+      // Test 9: Whitespace handling
+      const withSpaces = decode('SGVs\nbG8s\nIFdv\ncmxk\nIQ==');
+      setStatus('base64-9', withSpaces === 'Hello, World!');
+
+      // Test 10: Large text
+      const largeText = 'Lorem ipsum '.repeat(1000);
+      const largeEncoded = encode(largeText);
+      const largeDecoded = decode(largeEncoded);
+      setStatus('base64-10', largeDecoded === largeText);
+    }
+
+    // ========================================
     // Utility Tests
     // ========================================
     function testUtilities() {
@@ -587,6 +730,7 @@
       testUUID();
       testLoremIpsum();
       testQRCode();
+      testBase64();
       testUtilities();
 
       // Show summary
