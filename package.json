@@ -1,0 +1,24 @@
+{
+  "name": "onedevkit",
+  "version": "1.2.0",
+  "description": "Free online developer tools - JSON formatter, Base64 encoder, password generator, and more",
+  "scripts": {
+    "build": "npx @11ty/eleventy",
+    "dev": "npx @11ty/eleventy --serve",
+    "clean": "rm -rf dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pier0074/onedevkit.git"
+  },
+  "keywords": ["developer-tools", "json-formatter", "base64", "password-generator", "uuid"],
+  "author": "OneDevKit",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pier0074/onedevkit/issues"
+  },
+  "homepage": "https://onedevkit.com",
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.2"
+  }
+}

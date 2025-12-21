@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>{{ title }} | {{ site.name }}</title>
+  <meta name="description" content="{{ description }}">
+  {% if keywords %}<meta name="keywords" content="{{ keywords }}">{% endif %}
+  <meta name="author" content="{{ site.author }}">
+  <meta name="robots" content="{{ robots | default('index, follow') }}">
+
+  <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="{{ ogType | default('website') }}">
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+  <meta property="og:title" content="{{ ogTitle | default(title) }}">
+  <meta property="og:description" content="{{ ogDescription | default(description) }}">
+  <meta property="og:image" content="{{ site.url }}/images/og/{{ ogImage | default('og-default.jpg') }}">
+  <meta property="og:site_name" content="{{ site.name }}">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ ogTitle | default(title) }}">
+  <meta name="twitter:description" content="{{ ogDescription | default(description) }}">
+  <meta name="twitter:image" content="{{ site.url }}/images/og/{{ ogImage | default('og-default.jpg') }}">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="{{ site.themeColor }}">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/css/style.css">
+
+  <!-- Preload critical resources -->
+  <link rel="preload" href="/js/common.js" as="script">
+  {% if toolJs %}<link rel="preload" href="/js/{{ toolJs }}" as="script">{% endif %}
+
+  <!-- Schema.org -->
+  {% block schema %}{% endblock %}
+
+  <!-- Additional head content -->
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <!-- Skip to main content -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  {% include "partials/header.njk" %}
+
+  <!-- Main Content -->
+  <main id="main-content" class="main-content">
+    {% block content %}{{ content | safe }}{% endblock %}
+  </main>
+
+  {% include "partials/footer.njk" %}
+  {% include "partials/cookie-banner.njk" %}
+
+  <!-- Scripts -->
+  <script src="/js/common.js"></script>
+  <script src="/js/cookie-consent.js"></script>
+  {% if toolJs %}<script src="/js/{{ toolJs }}"></script>{% endif %}
+  {% block scripts %}{% endblock %}
+</body>
+</html>
