@@ -365,7 +365,7 @@ npm run test:e2e     # Run headless
 npm run test:e2e:ui  # Interactive UI mode
 ```
 
-**Coverage:** 87 tests covering all 14 tools, UI interactions, and content integrity
+**Coverage:** 88 tests covering all 14 tools, UI interactions, and content integrity
 
 ### Manual Testing
 

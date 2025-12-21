@@ -21,7 +21,7 @@ Revenue = Traffic × Pages/Visit × Ad Impressions × RPM
 
 ## Current State
 
-**Version:** 1.5.0
+**Version:** 1.5.1
 **Tools:** 14
 **Monthly Traffic:** TBD (check Google Analytics)
 **Revenue:** TBD (AdSense not yet implemented)

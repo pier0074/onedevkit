@@ -45,12 +45,12 @@ ogImage: url-encoder.jpg
 {% block head %}
 <style>
   .encoding-mode { display: flex; gap: var(--space-2); margin-bottom: var(--space-4); }
-  .encoding-mode-btn { flex: 1; padding: var(--space-3); border: 2px solid var(--border-color); background: var(--bg-primary); border-radius: var(--radius-md); cursor: pointer; font-weight: 500; transition: all 0.2s; }
-  .encoding-mode-btn:hover { border-color: var(--color-primary); }
+  .encoding-mode-btn { flex: 1; padding: var(--space-3); border: 1px solid var(--color-border); background: transparent; border-radius: var(--radius-md); cursor: pointer; font-weight: 500; color: var(--color-text-secondary); transition: all 0.2s; }
+  .encoding-mode-btn:hover { border-color: var(--color-border-hover); background: var(--color-bg-alt); color: var(--color-text); }
   .encoding-mode-btn.active { border-color: var(--color-primary); background: var(--color-primary); color: white; }
-  .url-stats { display: flex; gap: 1.5rem; flex-wrap: wrap; font-size: 0.875rem; color: var(--text-muted); }
+  .url-stats { display: flex; gap: 1.5rem; flex-wrap: wrap; font-size: 0.875rem; color: var(--color-text-muted); }
   .url-stat-item { display: flex; flex-direction: column; gap: 0.25rem; }
-  .url-stats dt { font-weight: 500; color: var(--text-secondary); }
+  .url-stats dt { font-weight: 500; color: var(--color-text-secondary); }
   .url-stats dd { margin: 0; font-family: monospace; }
 </style>
 {% endblock %}

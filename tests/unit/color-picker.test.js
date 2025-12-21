@@ -11,6 +11,12 @@ describe('Color Picker', () => {
       <input type="color" id="color-picker" value="#2563eb">
       <div id="color-preview"></div>
       <span id="preview-text"></span>
+      <div id="color-gradient-box" style="background-color: hsl(221, 100%, 50%);">
+        <div id="color-cursor" style="left: 84%; top: 8%;"></div>
+      </div>
+      <div id="color-hue-slider">
+        <div id="hue-cursor" style="left: 61%;"></div>
+      </div>
       <input type="text" id="hex-input" value="#2563EB">
       <input type="number" id="rgb-r" value="37">
       <input type="number" id="rgb-g" value="99">

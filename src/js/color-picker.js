@@ -9,6 +9,12 @@ class ColorPicker {
     this.colorPreview = document.getElementById('color-preview');
     this.previewText = document.getElementById('preview-text');
 
+    // Custom visual picker
+    this.gradientBox = document.getElementById('color-gradient-box');
+    this.colorCursor = document.getElementById('color-cursor');
+    this.hueSlider = document.getElementById('color-hue-slider');
+    this.hueCursor = document.getElementById('hue-cursor');
+
     // HEX
     this.hexInput = document.getElementById('hex-input');
 
@@ -36,12 +42,29 @@ class ColorPicker {
     this.complementaryPalette = document.getElementById('complementary-palette');
 
     this.currentColor = { r: 37, g: 99, b: 235 };
+    this.currentHue = 221; // Track hue separately for the gradient box
+    this.isDraggingGradient = false;
+    this.isDraggingHue = false;
 
     this.init();
   }
 
   init() {
-    // Native color picker
+    // Custom visual picker - Gradient box
+    this.gradientBox.addEventListener('mousedown', (e) => this.startGradientDrag(e));
+    this.gradientBox.addEventListener('touchstart', (e) => this.startGradientDrag(e), { passive: false });
+
+    // Custom visual picker - Hue slider
+    this.hueSlider.addEventListener('mousedown', (e) => this.startHueDrag(e));
+    this.hueSlider.addEventListener('touchstart', (e) => this.startHueDrag(e), { passive: false });
+
+    // Global mouse/touch events for dragging
+    document.addEventListener('mousemove', (e) => this.handleDrag(e));
+    document.addEventListener('touchmove', (e) => this.handleDrag(e), { passive: false });
+    document.addEventListener('mouseup', () => this.stopDrag());
+    document.addEventListener('touchend', () => this.stopDrag());
+
+    // Native color picker (hidden, but still functional)
     this.colorPicker.addEventListener('input', (e) => {
       this.setFromHex(e.target.value);
     });
@@ -102,12 +125,166 @@ class ColorPicker {
 
     // Initialize palettes
     this.updatePalettes();
+
+    // Initialize visual picker cursor positions
+    this.updateVisualPickerFromColor();
+  }
+
+  // Visual picker methods
+  startGradientDrag(e) {
+    e.preventDefault();
+    this.isDraggingGradient = true;
+    this.updateGradientFromEvent(e);
+  }
+
+  startHueDrag(e) {
+    e.preventDefault();
+    this.isDraggingHue = true;
+    this.updateHueFromEvent(e);
+  }
+
+  handleDrag(e) {
+    if (this.isDraggingGradient) {
+      e.preventDefault();
+      this.updateGradientFromEvent(e);
+    } else if (this.isDraggingHue) {
+      e.preventDefault();
+      this.updateHueFromEvent(e);
+    }
+  }
+
+  stopDrag() {
+    this.isDraggingGradient = false;
+    this.isDraggingHue = false;
+  }
+
+  updateGradientFromEvent(e) {
+    const rect = this.gradientBox.getBoundingClientRect();
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+    // Calculate position as percentage (0-1)
+    let x = (clientX - rect.left) / rect.width;
+    let y = (clientY - rect.top) / rect.height;
+
+    // Clamp to 0-1
+    x = this.clamp(x, 0, 1);
+    y = this.clamp(y, 0, 1);
+
+    // Update cursor position
+    this.colorCursor.style.left = (x * 100) + '%';
+    this.colorCursor.style.top = (y * 100) + '%';
+
+    // Convert to HSV: x = saturation, y = value (inverted)
+    const s = x * 100;
+    const v = (1 - y) * 100;
+
+    // Convert HSV to RGB
+    this.currentColor = this.hsvToRgb(this.currentHue, s, v);
+    this.updateAllDisplays();
+  }
+
+  updateHueFromEvent(e) {
+    const rect = this.hueSlider.getBoundingClientRect();
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+
+    // Calculate position as percentage (0-1)
+    let x = (clientX - rect.left) / rect.width;
+    x = this.clamp(x, 0, 1);
+
+    // Update cursor position
+    this.hueCursor.style.left = (x * 100) + '%';
+
+    // Convert to hue (0-360)
+    this.currentHue = x * 360;
+
+    // Update gradient box background
+    this.gradientBox.style.backgroundColor = `hsl(${this.currentHue}, 100%, 50%)`;
+
+    // Recalculate color based on current gradient position
+    const cursorLeft = parseFloat(this.colorCursor.style.left) / 100;
+    const cursorTop = parseFloat(this.colorCursor.style.top) / 100;
+    const s = cursorLeft * 100;
+    const v = (1 - cursorTop) * 100;
+
+    this.currentColor = this.hsvToRgb(this.currentHue, s, v);
+    this.updateAllDisplays();
+  }
+
+  updateVisualPickerFromColor() {
+    const { r, g, b } = this.currentColor;
+    const hsv = this.rgbToHsv(r, g, b);
+
+    // Update hue
+    this.currentHue = hsv.h;
+    this.hueCursor.style.left = (hsv.h / 360 * 100) + '%';
+    this.gradientBox.style.backgroundColor = `hsl(${hsv.h}, 100%, 50%)`;
+
+    // Update gradient cursor (x = saturation, y = 1 - value)
+    this.colorCursor.style.left = hsv.s + '%';
+    this.colorCursor.style.top = (100 - hsv.v) + '%';
+  }
+
+  // HSV conversion methods
+  hsvToRgb(h, s, v) {
+    h /= 360;
+    s /= 100;
+    v /= 100;
+
+    let r, g, b;
+    const i = Math.floor(h * 6);
+    const f = h * 6 - i;
+    const p = v * (1 - s);
+    const q = v * (1 - f * s);
+    const t = v * (1 - (1 - f) * s);
+
+    switch (i % 6) {
+      case 0: r = v; g = t; b = p; break;
+      case 1: r = q; g = v; b = p; break;
+      case 2: r = p; g = v; b = t; break;
+      case 3: r = p; g = q; b = v; break;
+      case 4: r = t; g = p; b = v; break;
+      case 5: r = v; g = p; b = q; break;
+    }
+
+    return {
+      r: Math.round(r * 255),
+      g: Math.round(g * 255),
+      b: Math.round(b * 255)
+    };
+  }
+
+  rgbToHsv(r, g, b) {
+    r /= 255;
+    g /= 255;
+    b /= 255;
+
+    const max = Math.max(r, g, b);
+    const min = Math.min(r, g, b);
+    const d = max - min;
+
+    let h, s, v = max;
+
+    s = max === 0 ? 0 : d / max;
+
+    if (max === min) {
+      h = 0;
+    } else {
+      switch (max) {
+        case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
+        case g: h = ((b - r) / d + 2) / 6; break;
+        case b: h = ((r - g) / d + 4) / 6; break;
+      }
+    }
+
+    return { h: h * 360, s: s * 100, v: v * 100 };
   }
 
   setFromHex(hex) {
     const rgb = this.hexToRgb(hex);
     if (rgb) {
       this.currentColor = rgb;
+      this.updateVisualPickerFromColor();
       this.updateAllDisplays();
     }
   }
@@ -118,6 +295,7 @@ class ColorPicker {
       g: this.clamp(parseInt(this.rgbG.value) || 0, 0, 255),
       b: this.clamp(parseInt(this.rgbB.value) || 0, 0, 255)
     };
+    this.updateVisualPickerFromColor();
     this.updateAllDisplays();
   }
 
@@ -126,6 +304,7 @@ class ColorPicker {
     const s = this.clamp(parseInt(this.hslS.value) || 0, 0, 100);
     const l = this.clamp(parseInt(this.hslL.value) || 0, 0, 100);
     this.currentColor = this.hslToRgb(h, s, l);
+    this.updateVisualPickerFromColor();
     this.updateAllDisplays(true); // Skip HSL update to avoid loop
   }
 
@@ -231,6 +410,7 @@ class ColorPicker {
       g: Math.floor(Math.random() * 256),
       b: Math.floor(Math.random() * 256)
     };
+    this.updateVisualPickerFromColor();
     this.updateAllDisplays();
   }
 
