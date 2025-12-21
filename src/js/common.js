@@ -196,7 +196,7 @@
         if (!question || !answer) return;
 
         // Set initial ARIA attributes
-        const id = 'faq-' + Math.random().toString(36).substr(2, 9);
+        const id = 'faq-' + Math.random().toString(36).substring(2, 11);
         question.setAttribute('aria-expanded', 'false');
         question.setAttribute('aria-controls', id);
         answer.id = id;
