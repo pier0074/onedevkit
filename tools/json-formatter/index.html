@@ -351,100 +351,74 @@
       </header>
 
       <div class="tool-container">
-          <!-- Input Section -->
-          <div class="tool-input-group">
-            <div class="input-header">
-              <label for="json-input" class="input-label">Enter JSON</label>
-              <div class="input-actions">
-                <button type="button" id="sample-json" class="btn btn-text btn-sm">
-                  Load Sample
-                </button>
-              </div>
-            </div>
-            <textarea
-              id="json-input"
-              class="tool-textarea"
-              rows="12"
-              placeholder='{"key": "value", "array": [1, 2, 3]}'
-              spellcheck="false"
-              aria-describedby="json-input-hint"
-            ></textarea>
-            <p id="json-input-hint" class="input-hint">Paste your JSON here or click "Load Sample" to see an example</p>
-          </div>
-
-          <!-- Options -->
-          <div class="tool-options">
-            <div class="option-group">
-              <label for="json-indent" class="option-label">Indentation</label>
-              <select id="json-indent" class="tool-select">
-                <option value="2" selected>2 Spaces</option>
-                <option value="4">4 Spaces</option>
-                <option value="tab">Tab</option>
-              </select>
+        <!-- Input Section -->
+        <div class="tool-input-group">
+          <div class="input-header">
+            <label for="json-input" class="input-label">Enter JSON</label>
+            <div class="input-actions">
+              <button type="button" id="sample-json" class="btn btn-text btn-sm">Load Sample</button>
             </div>
           </div>
+          <textarea
+            id="json-input"
+            class="tool-textarea"
+            rows="10"
+            placeholder='{"key": "value", "array": [1, 2, 3]}'
+            spellcheck="false"
+            aria-describedby="json-input-hint"
+          ></textarea>
+          <p id="json-input-hint" class="input-hint">Paste your JSON here or click "Load Sample" to see an example</p>
+        </div>
 
-          <!-- Action Buttons -->
-          <div class="tool-actions">
-            <button type="button" id="format-json" class="btn btn-primary">
-              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <path d="M4 6h16M4 12h16M4 18h16"/>
-              </svg>
-              Format
-            </button>
-            <button type="button" id="minify-json" class="btn btn-secondary">
-              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <path d="M4 12h16"/>
-              </svg>
-              Minify
-            </button>
-            <button type="button" id="validate-json" class="btn btn-secondary">
-              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                <polyline points="22 4 12 14.01 9 11.01"/>
-              </svg>
-              Validate
-            </button>
-            <button type="button" id="copy-json" class="btn btn-secondary">
-              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
-                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
-              </svg>
-              Copy
-            </button>
-            <button type="button" id="clear-json" class="btn btn-ghost">
-              Clear
-            </button>
-          </div>
-
-          <!-- Error Display -->
-          <div id="json-error" class="hidden" role="alert" aria-live="polite"></div>
-
-          <!-- Output Section -->
-          <div class="tool-output-group">
-            <div class="output-header">
-              <span class="output-label">Output</span>
-              <div class="json-stats" aria-label="JSON Statistics">
-                <div class="json-stat-item">
-                  <dt>Size</dt>
-                  <dd id="json-size">-</dd>
-                </div>
-                <div class="json-stat-item">
-                  <dt>Keys</dt>
-                  <dd id="json-keys">-</dd>
-                </div>
-                <div class="json-stat-item">
-                  <dt>Depth</dt>
-                  <dd id="json-depth">-</dd>
-                </div>
-              </div>
-            </div>
-            <div class="tool-output-wrapper">
-              <pre id="json-output" class="tool-output tool-output-placeholder" aria-live="polite">Formatted JSON will appear here</pre>
-              <pre id="json-highlighted" class="tool-output hidden" aria-live="polite"></pre>
-            </div>
+        <!-- Options -->
+        <div class="tool-options">
+          <div class="option-group">
+            <label for="json-indent" class="option-label">Indentation</label>
+            <select id="json-indent" class="tool-select">
+              <option value="2" selected>2 Spaces</option>
+              <option value="4">4 Spaces</option>
+              <option value="tab">Tab</option>
+            </select>
           </div>
         </div>
+
+        <!-- Action Buttons -->
+        <div class="tool-actions">
+          <button type="button" id="format-json" class="btn btn-primary">Format</button>
+          <button type="button" id="minify-json" class="btn btn-secondary">Minify</button>
+          <button type="button" id="validate-json" class="btn btn-secondary">Validate</button>
+          <button type="button" id="copy-json" class="btn btn-secondary">Copy</button>
+          <button type="button" id="clear-json" class="btn btn-ghost">Clear</button>
+        </div>
+
+        <!-- Error Display -->
+        <div id="json-error" class="hidden" role="alert" aria-live="polite"></div>
+
+        <!-- Output Section -->
+        <div class="tool-output-group">
+          <div class="output-header">
+            <span class="output-label">Output</span>
+            <div class="json-stats" aria-label="JSON Statistics">
+              <div class="json-stat-item">
+                <dt>Size</dt>
+                <dd id="json-size">-</dd>
+              </div>
+              <div class="json-stat-item">
+                <dt>Keys</dt>
+                <dd id="json-keys">-</dd>
+              </div>
+              <div class="json-stat-item">
+                <dt>Depth</dt>
+                <dd id="json-depth">-</dd>
+              </div>
+            </div>
+          </div>
+          <div class="tool-output-wrapper">
+            <pre id="json-output" class="tool-output tool-output-placeholder" aria-live="polite">Formatted JSON will appear here</pre>
+            <pre id="json-highlighted" class="tool-output hidden" aria-live="polite"></pre>
+          </div>
+        </div>
+      </div>
 
       <!-- How to Use Section -->
       <section class="content-section" aria-labelledby="how-to-use">
