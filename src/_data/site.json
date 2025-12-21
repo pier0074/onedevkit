@@ -1,7 +1,7 @@
 {
   "name": "OneDevKit",
   "url": "https://onedevkit.com",
-  "description": "Free online developer tools for everyday tasks. JSON formatter, Base64 encoder, password generator, UUID generator, and more.",
+  "description": "Free online developer tools for everyday tasks. JSON formatter, Base64 encoder, URL encoder, JWT decoder, hash generator, timestamp converter, password generator, UUID generator, and more.",
   "author": "OneDevKit",
   "email": "contact@onedevkit.com",
   "twitter": "@onedevkit",
