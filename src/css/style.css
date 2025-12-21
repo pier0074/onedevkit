@@ -275,6 +275,8 @@ li {
 .main-content {
   flex: 1;
   padding: var(--space-8) 0;
+  position: relative;
+  z-index: 1;
 }
 
 /* Header */
@@ -529,11 +531,29 @@ li {
    Tool Card Grid (Homepage)
    ============================================ */
 
+.tool-category {
+  margin-bottom: var(--space-10);
+}
+
+.tool-category:last-child {
+  margin-bottom: 0;
+}
+
+.tool-category-title {
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: var(--space-2);
+  padding-bottom: var(--space-2);
+  border-bottom: 2px solid var(--color-primary);
+  display: inline-block;
+}
+
 .tool-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: var(--space-6);
-  margin-top: var(--space-8);
+  margin-top: var(--space-4);
 }
 
 .tool-card {
