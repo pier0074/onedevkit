@@ -36,7 +36,7 @@ permalink: /contact/
 {% block head %}
 <style>
   .lead { font-size: 1.125rem; color: var(--text-secondary); line-height: 1.7; }
-  .contact-methods { display: grid; gap: 1.5rem; margin-top: 1.5rem; }
+  .contact-methods { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
   .contact-card { background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.5rem; text-align: center; }
   .contact-icon { width: 48px; height: 48px; margin: 0 auto 1rem; color: var(--primary); }
   .contact-icon svg { width: 100%; height: 100%; }
@@ -69,6 +69,16 @@ permalink: /contact/
       <h3>Email</h3>
       <p>For general inquiries, feedback, or support:</p>
       <a href="mailto:{{ site.email }}" class="contact-link">{{ site.email }}</a>
+    </div>
+    <div class="contact-card">
+      <div class="contact-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+      </div>
+      <h3>X (Twitter)</h3>
+      <p>Follow us for updates and quick support:</p>
+      <a href="https://x.com/{{ site.twitter | replace('@', '') }}" target="_blank" rel="noopener noreferrer" class="contact-link">{{ site.twitter }}</a>
     </div>
   </div>
 </section>
