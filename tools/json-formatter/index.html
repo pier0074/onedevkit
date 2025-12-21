@@ -307,7 +307,21 @@
       </button>
 
       <nav class="nav" aria-label="Main navigation">
-        <a href="../../" class="nav-link">Tools</a>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">
+            Tools
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="nav-dropdown-menu" role="menu">
+            <a href="../json-formatter/" role="menuitem">JSON Formatter<small>Format, validate & beautify</small></a>
+            <a href="../password-generator/" role="menuitem">Password Generator<small>Secure random passwords</small></a>
+            <a href="../uuid-generator/" role="menuitem">UUID Generator<small>Generate unique IDs</small></a>
+            <a href="../lorem-ipsum/" role="menuitem">Lorem Ipsum<small>Placeholder text</small></a>
+            <a href="../qr-code-generator/" role="menuitem">QR Code Generator<small>Create QR codes</small></a>
+          </div>
+        </div>
         <a href="../../about/" class="nav-link">About</a>
         <a href="../../contact/" class="nav-link">Contact</a>
         <button class="theme-toggle" aria-label="Toggle dark mode">
@@ -321,26 +335,22 @@
 
   <!-- Main Content -->
   <main id="main-content" class="main-content">
-    <!-- Breadcrumb -->
-    <div class="container">
+    <div class="container tool-page">
+      <!-- Breadcrumb -->
       <nav class="breadcrumb" aria-label="Breadcrumb">
         <ol>
           <li><a href="../../">Home</a></li>
-          <li><a href="../../#tools">Tools</a></li>
           <li><span aria-current="page">JSON Formatter</span></li>
         </ol>
       </nav>
-    </div>
 
-    <!-- Tool Section -->
-    <section class="tool-section">
-      <div class="container">
-        <header class="tool-header">
-          <h1>JSON Formatter & Validator</h1>
-          <p class="tool-description">Format, beautify, minify, and validate JSON with syntax highlighting. Instant error detection with line numbers.</p>
-        </header>
+      <!-- Tool Header -->
+      <header class="tool-header">
+        <h1>JSON Formatter & Validator</h1>
+        <p class="tool-description">Format, beautify, minify, and validate JSON with syntax highlighting. Instant error detection with line numbers.</p>
+      </header>
 
-        <div class="tool-container">
+      <div class="tool-container">
           <!-- Input Section -->
           <div class="tool-input-group">
             <div class="input-header">
@@ -435,13 +445,10 @@
             </div>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- How to Use Section -->
-    <section class="content-section">
-      <div class="container container-narrow">
-        <h2>How to Use the JSON Formatter</h2>
+      <!-- How to Use Section -->
+      <section class="content-section" aria-labelledby="how-to-use">
+        <h2 id="how-to-use">How to Use the JSON Formatter</h2>
 
         <div class="steps">
           <div class="step">
@@ -468,13 +475,11 @@
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Features Section -->
-    <section class="content-section bg-muted">
-      <div class="container container-narrow">
-        <h2>Features</h2>
+      <!-- Features Section -->
+      <section class="content-section" aria-labelledby="features">
+        <h2 id="features">Features</h2>
 
         <div class="features-grid">
           <div class="feature-card">
@@ -542,13 +547,11 @@
             <p>All processing happens locally in your browser. Your data never leaves your device.</p>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- FAQ Section -->
-    <section class="content-section">
-      <div class="container container-narrow">
-        <h2>Frequently Asked Questions</h2>
+      <!-- FAQ Section -->
+      <section class="content-section" aria-labelledby="faq">
+        <h2 id="faq">Frequently Asked Questions</h2>
 
         <div class="faq-list">
           <details class="faq-item">
@@ -600,124 +603,89 @@
             </div>
           </details>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Related Tools Section -->
-    <section class="content-section bg-muted">
-      <div class="container">
-        <h2>Related Tools</h2>
-
-        <div class="tools-grid tools-grid-small">
-          <a href="../uuid-generator/" class="tool-card">
-            <div class="tool-card-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <rect x="3" y="3" width="7" height="7"/>
-                <rect x="14" y="3" width="7" height="7"/>
-                <rect x="14" y="14" width="7" height="7"/>
-                <rect x="3" y="14" width="7" height="7"/>
-              </svg>
-            </div>
-            <h3 class="tool-card-title">UUID Generator</h3>
-            <p class="tool-card-description">Generate unique identifiers for your applications.</p>
+      <!-- Related Tools -->
+      <section class="content-section" aria-labelledby="related-tools">
+        <h2 id="related-tools">Related Tools</h2>
+        <div class="related-tools">
+          <a href="../uuid-generator/" class="related-tool-link">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"/>
+            </svg>
+            UUID Generator
           </a>
-
-          <a href="../password-generator/" class="tool-card">
-            <div class="tool-card-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                <circle cx="12" cy="16" r="1"/>
-                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-              </svg>
-            </div>
-            <h3 class="tool-card-title">Password Generator</h3>
-            <p class="tool-card-description">Create strong, secure passwords instantly.</p>
+          <a href="../password-generator/" class="related-tool-link">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+            </svg>
+            Password Generator
           </a>
-
-          <a href="../qr-code-generator/" class="tool-card">
-            <div class="tool-card-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <rect x="3" y="3" width="7" height="7"/>
-                <rect x="14" y="3" width="7" height="7"/>
-                <rect x="3" y="14" width="7" height="7"/>
-                <rect x="14" y="14" width="7" height="7"/>
-              </svg>
-            </div>
-            <h3 class="tool-card-title">QR Code Generator</h3>
-            <p class="tool-card-description">Create QR codes for URLs, text, and more.</p>
+          <a href="../qr-code-generator/" class="related-tool-link">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h2M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/>
+            </svg>
+            QR Code Generator
           </a>
-
-          <a href="../lorem-ipsum/" class="tool-card">
-            <div class="tool-card-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                <polyline points="14 2 14 8 20 8"/>
-                <line x1="16" y1="13" x2="8" y2="13"/>
-                <line x1="16" y1="17" x2="8" y2="17"/>
-                <polyline points="10 9 9 9 8 9"/>
-              </svg>
-            </div>
-            <h3 class="tool-card-title">Lorem Ipsum Generator</h3>
-            <p class="tool-card-description">Generate placeholder text for your designs.</p>
+          <a href="../lorem-ipsum/" class="related-tool-link">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+            Lorem Ipsum Generator
           </a>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   </main>
 
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      <div class="footer-content">
-        <div class="footer-brand">
-          <a href="../../" class="logo">
-            <svg class="logo-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <rect width="32" height="32" rx="8" fill="currentColor"/>
-              <path d="M8 10h4v12H8V10zm6 0h4v12h-4V10zm6 0h4v12h-4V10z" fill="white" opacity="0.9"/>
-            </svg>
-            <span class="logo-text">OneDevKit</span>
-          </a>
-          <p class="footer-tagline">Free online tools for developers</p>
+      <div class="footer-inner">
+        <div class="footer-section">
+          <h4>Tools</h4>
+          <ul class="footer-links">
+            <li><a href="../json-formatter/" aria-current="page">JSON Formatter</a></li>
+            <li><a href="../password-generator/">Password Generator</a></li>
+            <li><a href="../uuid-generator/">UUID Generator</a></li>
+            <li><a href="../lorem-ipsum/">Lorem Ipsum</a></li>
+            <li><a href="../qr-code-generator/">QR Code Generator</a></li>
+          </ul>
         </div>
-
-        <nav class="footer-nav" aria-label="Footer navigation">
-          <div class="footer-nav-group">
-            <h4>Tools</h4>
-            <ul>
-              <li><a href="../json-formatter/">JSON Formatter</a></li>
-              <li><a href="../uuid-generator/">UUID Generator</a></li>
-              <li><a href="../password-generator/">Password Generator</a></li>
-              <li><a href="../lorem-ipsum/">Lorem Ipsum</a></li>
-              <li><a href="../qr-code-generator/">QR Code Generator</a></li>
-            </ul>
-          </div>
-
-          <div class="footer-nav-group">
-            <h4>Company</h4>
-            <ul>
-              <li><a href="../../about/">About</a></li>
-              <li><a href="../../contact/">Contact</a></li>
-              <li><a href="../../privacy/">Privacy Policy</a></li>
-              <li><a href="../../terms/">Terms of Service</a></li>
-            </ul>
-          </div>
-        </nav>
+        <div class="footer-section">
+          <h4>Company</h4>
+          <ul class="footer-links">
+            <li><a href="../../about/">About</a></li>
+            <li><a href="../../contact/">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Legal</h4>
+          <ul class="footer-links">
+            <li><a href="../../privacy/">Privacy Policy</a></li>
+            <li><a href="../../terms/">Terms of Service</a></li>
+          </ul>
+        </div>
       </div>
-
       <div class="footer-bottom">
-        <p>&copy; 2025 OneDevKit. All rights reserved.</p>
+        <p class="footer-copyright">
+          &copy; 2025 OneDevKit. All rights reserved.<br>
+          <small>Tools provided "as is" without warranty.</small>
+        </p>
       </div>
     </div>
   </footer>
 
-  <!-- Cookie Consent -->
-  <div id="cookie-consent" class="cookie-banner hidden" role="dialog" aria-labelledby="cookie-title" aria-describedby="cookie-description">
-    <div class="cookie-content">
-      <h3 id="cookie-title" class="cookie-title">Cookie Notice</h3>
-      <p id="cookie-description" class="cookie-text">We use cookies to analyze site traffic and improve your experience. No personal data is collected.</p>
-      <div class="cookie-actions">
-        <button type="button" id="cookie-accept" class="btn btn-primary btn-sm">Accept</button>
-        <button type="button" id="cookie-decline" class="btn btn-ghost btn-sm">Decline</button>
+  <!-- Cookie Consent Banner -->
+  <div class="cookie-banner" role="dialog" aria-label="Cookie consent" aria-describedby="cookie-message">
+    <div class="cookie-banner-inner">
+      <p class="cookie-banner-text" id="cookie-message">
+        We use cookies to analyze traffic and improve your experience. By clicking "Accept", you consent to our use of cookies.
+        <a href="../../privacy/">Learn more</a>
+      </p>
+      <div class="cookie-banner-actions">
+        <button class="btn btn-secondary" data-cookie-reject>Reject</button>
+        <button class="btn btn-primary" data-cookie-accept>Accept</button>
       </div>
     </div>
   </div>

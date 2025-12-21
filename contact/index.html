@@ -102,7 +102,36 @@
       </button>
 
       <nav class="nav" aria-label="Main navigation">
-        <a href="../" class="nav-link">Tools</a>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">
+            Tools
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="nav-dropdown-menu" role="menu">
+            <a href="../tools/json-formatter/" role="menuitem">
+              JSON Formatter
+              <small>Format, validate & beautify</small>
+            </a>
+            <a href="../tools/password-generator/" role="menuitem">
+              Password Generator
+              <small>Secure random passwords</small>
+            </a>
+            <a href="../tools/uuid-generator/" role="menuitem">
+              UUID Generator
+              <small>Generate unique IDs</small>
+            </a>
+            <a href="../tools/lorem-ipsum/" role="menuitem">
+              Lorem Ipsum
+              <small>Placeholder text</small>
+            </a>
+            <a href="../tools/qr-code-generator/" role="menuitem">
+              QR Code Generator
+              <small>Create QR codes</small>
+            </a>
+          </div>
+        </div>
         <a href="../about/" class="nav-link">About</a>
         <a href="../contact/" class="nav-link" aria-current="page">Contact</a>
         <button class="theme-toggle" aria-label="Toggle dark mode">
