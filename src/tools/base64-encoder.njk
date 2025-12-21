@@ -9,7 +9,7 @@ toolJs: base64.js
 ogImage: base64-encoder.jpg
 ---
 {# Get tool data from tools.json #}
-{% set toolData = tools | selectattr("id", "equalto", toolId) | first %}
+{% set toolData = tools | findById(toolId) %}
 
 {% block schema %}
 <!-- Schema.org BreadcrumbList -->
