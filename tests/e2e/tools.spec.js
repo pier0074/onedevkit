@@ -307,6 +307,40 @@ test.describe('QR Code Generator', () => {
   });
 });
 
+test.describe('Tool Page Content Integrity', () => {
+  // These tests ensure each tool page displays its OWN content, not another tool's
+  // This prevents regressions like the selectattr bug where all pages showed JSON Formatter
+
+  const tools = [
+    { path: '/tools/json-formatter/', h1: 'JSON Formatter', breadcrumb: 'JSON Formatter' },
+    { path: '/tools/base64-encoder/', h1: 'Base64 Encoder', breadcrumb: 'Base64 Encoder' },
+    { path: '/tools/password-generator/', h1: 'Password Generator', breadcrumb: 'Password Generator' },
+    { path: '/tools/uuid-generator/', h1: 'UUID Generator', breadcrumb: 'UUID Generator' },
+    { path: '/tools/lorem-ipsum/', h1: 'Lorem Ipsum', breadcrumb: 'Lorem Ipsum' },
+    { path: '/tools/qr-code-generator/', h1: 'QR Code Generator', breadcrumb: 'QR Code Generator' },
+  ];
+
+  for (const tool of tools) {
+    test(`${tool.h1} page displays correct content`, async ({ page }) => {
+      await page.goto(tool.path);
+
+      // Check h1 contains the correct tool name (not another tool's name)
+      const h1 = await page.locator('.tool-header h1').textContent();
+      expect(h1).toContain(tool.h1);
+
+      // Check breadcrumb shows correct tool name
+      const breadcrumb = await page.locator('.breadcrumb').textContent();
+      expect(breadcrumb).toContain(tool.breadcrumb);
+
+      // Verify it does NOT show other tool names in h1
+      const otherTools = tools.filter(t => t.h1 !== tool.h1);
+      for (const other of otherTools) {
+        expect(h1).not.toContain(other.h1);
+      }
+    });
+  }
+});
+
 test.describe('Navigation & Layout', () => {
   test('theme toggle works', async ({ page }) => {
     await page.goto('/');
