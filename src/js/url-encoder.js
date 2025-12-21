@@ -61,7 +61,7 @@
      * Get sample text
      */
     getSampleText() {
-      return 'Hello World! Special chars: &param=value @#$%^&*()';
+      return 'https://example.com/search?query=hello world&email=user@email.com&price=$100';
     },
 
     /**
