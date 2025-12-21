@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Primary Meta Tags -->
+  <title>Password Generator - Free Secure Random Password Generator | OneDevKit</title>
+  <meta name="title" content="Password Generator - Free Secure Random Password Generator | OneDevKit">
+  <meta name="description" content="Generate secure, random passwords instantly. Customize length, include symbols, numbers, and uppercase letters. Free online password generator with strength indicator.">
+  <meta name="keywords" content="password generator, random password, secure password, strong password, password creator, online password generator, free password generator">
+  <meta name="author" content="OneDevKit">
+  <meta name="robots" content="index, follow">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://onedevkit.com/tools/password-generator/">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://onedevkit.com/tools/password-generator/">
+  <meta property="og:title" content="Password Generator - Free Secure Random Password Generator">
+  <meta property="og:description" content="Generate secure, random passwords instantly. Customize length, symbols, numbers, and more.">
+  <meta property="og:image" content="https://onedevkit.com/images/og-password-generator.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="OneDevKit">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://onedevkit.com/tools/password-generator/">
+  <meta name="twitter:title" content="Password Generator - Free Secure Random Password Generator">
+  <meta name="twitter:description" content="Generate secure, random passwords instantly. Customize length, symbols, numbers, and more.">
+  <meta name="twitter:image" content="https://onedevkit.com/images/og-password-generator.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#2563eb">
+
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/css/style.css">
+
+  <!-- Additional styles for password generator -->
+  <style>
+    .strength-meter {
+      margin-top: var(--space-4);
+    }
+
+    .strength-bar-container {
+      height: 8px;
+      background: var(--color-border);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+    }
+
+    .strength-bar {
+      height: 100%;
+      width: 0%;
+      transition: width 0.3s ease, background-color 0.3s ease;
+      border-radius: var(--radius-full);
+    }
+
+    .strength-label {
+      font-size: var(--text-sm);
+      font-weight: 500;
+      margin-top: var(--space-2);
+      display: block;
+    }
+
+    .password-display {
+      font-family: var(--font-mono);
+      font-size: var(--text-lg);
+      word-break: break-all;
+      letter-spacing: 0.05em;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: var(--space-3);
+      margin-top: var(--space-4);
+    }
+
+    .length-control {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+    }
+
+    .length-control input[type="range"] {
+      flex: 1;
+    }
+
+    .length-value {
+      min-width: 50px;
+      text-align: center;
+      font-weight: 600;
+      font-size: var(--text-lg);
+      color: var(--color-primary);
+    }
+  </style>
+
+  <!-- Schema.org - WebApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Password Generator",
+    "url": "https://onedevkit.com/tools/password-generator/",
+    "description": "Generate secure, random passwords with customizable options. Includes strength indicator and bulk generation.",
+    "applicationCategory": "SecurityApplication",
+    "operatingSystem": "Any",
+    "browserRequirements": "Requires JavaScript",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "featureList": [
+      "Cryptographically secure random generation",
+      "Customizable password length (4-128 characters)",
+      "Include/exclude uppercase, lowercase, numbers, symbols",
+      "Exclude ambiguous characters option",
+      "Password strength indicator",
+      "Bulk password generation",
+      "One-click copy to clipboard"
+    ],
+    "author": {
+      "@type": "Organization",
+      "name": "OneDevKit",
+      "url": "https://onedevkit.com"
+    }
+  }
+  </script>
+
+  <!-- Schema.org - BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://onedevkit.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Password Generator",
+        "item": "https://onedevkit.com/tools/password-generator/"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Schema.org - FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How secure are the generated passwords?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Our password generator uses the browser's cryptographic API (crypto.getRandomValues) which provides cryptographically secure random numbers. The passwords are generated entirely in your browser and are never sent to any server, making them highly secure."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What makes a strong password?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A strong password should be at least 12-16 characters long and include a mix of uppercase letters, lowercase letters, numbers, and symbols. Avoid using personal information, common words, or sequential patterns. Our generator creates passwords that meet these criteria by default."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I use the same password for multiple accounts?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No, you should never reuse passwords across different accounts. If one account is compromised, all accounts using the same password become vulnerable. Use our bulk generation feature to create unique passwords for each of your accounts."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are ambiguous characters?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ambiguous characters are letters and numbers that look similar and can be confused, such as 'l' (lowercase L), '1' (one), 'I' (uppercase i), 'O' (uppercase o), and '0' (zero). Excluding these makes passwords easier to read and type correctly."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long should my password be?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We recommend passwords of at least 16 characters for most accounts. For highly sensitive accounts like email or banking, consider using 20+ characters. Longer passwords are exponentially harder to crack through brute force attacks."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <!-- Skip to content link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="/" class="logo" aria-label="OneDevKit Home">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="16 18 22 12 16 6"></polyline>
+          <polyline points="8 6 2 12 8 18"></polyline>
+        </svg>
+        OneDevKit
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+
+      <nav class="nav" aria-label="Main navigation">
+        <a href="/" class="nav-link">Tools</a>
+        <a href="/about/" class="nav-link">About</a>
+        <a href="/contact/" class="nav-link">Contact</a>
+        <button class="theme-toggle" aria-label="Toggle dark mode">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+          </svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main id="main-content" class="main-content">
+    <div class="container tool-page">
+      <!-- Breadcrumbs -->
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="breadcrumbs-separator" aria-hidden="true">/</span>
+        <span aria-current="page">Password Generator</span>
+      </nav>
+
+      <!-- Tool Header -->
+      <header class="tool-header">
+        <h1>Password Generator</h1>
+        <p class="tool-description">
+          Generate secure, random passwords for your accounts. This free password generator creates strong passwords using cryptographically secure randomness.
+        </p>
+      </header>
+
+      <!-- Tool Container -->
+      <div class="tool-container">
+        <!-- Password Output -->
+        <div class="tool-output" aria-live="polite">
+          <div id="password-output" class="tool-output-text password-display tool-output-placeholder">Click "Generate" to create a password</div>
+        </div>
+
+        <!-- Strength Meter -->
+        <div class="strength-meter">
+          <div class="strength-bar-container">
+            <div id="strength-bar" class="strength-bar"></div>
+          </div>
+          <span id="strength-label" class="strength-label">-</span>
+        </div>
+
+        <div class="tool-actions">
+          <button id="generate-password" class="btn btn-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="18" height="18" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+            </svg>
+            Generate Password
+          </button>
+          <button id="copy-password" class="btn btn-secondary">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="18" height="18" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+            </svg>
+            Copy
+          </button>
+        </div>
+
+        <!-- Password Options -->
+        <div style="margin-top: var(--space-6); padding-top: var(--space-6); border-top: 1px solid var(--color-border);">
+          <h3 style="margin-top: 0; margin-bottom: var(--space-4); font-size: var(--text-base);">Password Options</h3>
+
+          <!-- Length Slider -->
+          <div class="tool-input-group">
+            <label for="password-length">Password Length</label>
+            <div class="length-control">
+              <input type="range" id="password-length" min="4" max="128" value="16" aria-describedby="length-hint">
+              <span id="length-display" class="length-value">16</span>
+            </div>
+            <small id="length-hint" style="color: var(--color-text-muted); font-size: var(--text-xs);">Recommended: 16+ characters</small>
+          </div>
+
+          <!-- Character Options -->
+          <div class="options-grid">
+            <label class="checkbox-label">
+              <input type="checkbox" id="include-uppercase" class="password-option" checked>
+              Uppercase (A-Z)
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" id="include-lowercase" class="password-option" checked>
+              Lowercase (a-z)
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" id="include-numbers" class="password-option" checked>
+              Numbers (0-9)
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" id="include-symbols" class="password-option" checked>
+              Symbols (!@#$%...)
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" id="exclude-ambiguous" class="password-option">
+              Exclude Ambiguous (il1Lo0O)
+            </label>
+          </div>
+        </div>
+
+        <!-- Bulk Generation -->
+        <div style="margin-top: var(--space-6); padding-top: var(--space-6); border-top: 1px solid var(--color-border);">
+          <h3 style="margin-top: 0; margin-bottom: var(--space-4); font-size: var(--text-base);">Bulk Generation</h3>
+          <div class="tool-controls">
+            <div class="tool-input-group" style="max-width: 150px;">
+              <label for="bulk-password-count">Count (1-20)</label>
+              <input type="number" id="bulk-password-count" min="1" max="20" value="5">
+            </div>
+          </div>
+          <div class="tool-actions" style="margin-top: var(--space-3);">
+            <button id="bulk-generate-passwords" class="btn btn-secondary">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="18" height="18" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+              </svg>
+              Generate Bulk
+            </button>
+            <button id="copy-all-passwords" class="btn btn-secondary">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="18" height="18" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+              </svg>
+              Copy All
+            </button>
+          </div>
+          <pre id="bulk-passwords-output" class="tool-output hidden" style="margin-top: var(--space-4); max-height: 300px; overflow-y: auto; font-family: var(--font-mono);" aria-live="polite"></pre>
+        </div>
+      </div>
+
+      <!-- How to Use Section -->
+      <section class="content-section" aria-labelledby="how-to-use">
+        <h2 id="how-to-use">How to Use</h2>
+        <ol>
+          <li><strong>Set your preferred length:</strong> Use the slider to choose between 4-128 characters. We recommend at least 16 characters for strong security.</li>
+          <li><strong>Choose character types:</strong> Select which characters to include - uppercase, lowercase, numbers, and symbols.</li>
+          <li><strong>Generate:</strong> Click "Generate Password" to create a new secure password.</li>
+          <li><strong>Copy:</strong> Use the "Copy" button to copy the password to your clipboard.</li>
+          <li><strong>Bulk generation:</strong> Need multiple passwords? Set a count and use "Generate Bulk".</li>
+        </ol>
+      </section>
+
+      <!-- Password Security Tips -->
+      <section class="content-section" aria-labelledby="security-tips">
+        <h2 id="security-tips">Password Security Tips</h2>
+        <ul class="features-list">
+          <li class="feature-item">
+            <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span class="feature-text"><strong>Use unique passwords</strong> - Never reuse the same password across different accounts.</span>
+          </li>
+          <li class="feature-item">
+            <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span class="feature-text"><strong>Longer is stronger</strong> - Each additional character exponentially increases security.</span>
+          </li>
+          <li class="feature-item">
+            <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span class="feature-text"><strong>Use a password manager</strong> - Store your unique passwords securely in a trusted password manager.</span>
+          </li>
+          <li class="feature-item">
+            <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span class="feature-text"><strong>Enable 2FA</strong> - Add two-factor authentication for an extra layer of security.</span>
+          </li>
+          <li class="feature-item">
+            <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span class="feature-text"><strong>Change compromised passwords</strong> - Update passwords immediately if a service is breached.</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Features Section -->
+      <section class="content-section" aria-labelledby="features">
+        <h2 id="features">Features</h2>
+        <ul class="features-list">
+          <li class="feature-item">
+            <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span class="feature-text"><strong>Cryptographically Secure</strong> - Uses Web Crypto API for true randomness</span>
+          </li>
+          <li class="feature-item">
+            <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span class="feature-text"><strong>Customizable Length</strong> - Choose from 4 to 128 characters</span>
+          </li>
+          <li class="feature-item">
+            <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span class="feature-text"><strong>Character Options</strong> - Control uppercase, lowercase, numbers, symbols</span>
+          </li>
+          <li class="feature-item">
+            <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span class="feature-text"><strong>Strength Indicator</strong> - Visual feedback on password strength</span>
+          </li>
+          <li class="feature-item">
+            <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span class="feature-text"><strong>Bulk Generation</strong> - Create up to 20 passwords at once</span>
+          </li>
+          <li class="feature-item">
+            <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span class="feature-text"><strong>Privacy First</strong> - All generation happens locally in your browser</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- FAQ Section -->
+      <section class="content-section" aria-labelledby="faq">
+        <h2 id="faq">Frequently Asked Questions</h2>
+        <ul class="faq-list">
+          <li class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              How secure are the generated passwords?
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <p>Our password generator uses the browser's cryptographic API (crypto.getRandomValues) which provides cryptographically secure random numbers. The passwords are generated entirely in your browser and are never sent to any server, making them highly secure.</p>
+            </div>
+          </li>
+          <li class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              What makes a strong password?
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <p>A strong password should be at least 12-16 characters long and include a mix of uppercase letters, lowercase letters, numbers, and symbols. Avoid using personal information, common words, or sequential patterns. Our generator creates passwords that meet these criteria by default.</p>
+            </div>
+          </li>
+          <li class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              Should I use the same password for multiple accounts?
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <p>No, you should never reuse passwords across different accounts. If one account is compromised, all accounts using the same password become vulnerable. Use our bulk generation feature to create unique passwords for each of your accounts.</p>
+            </div>
+          </li>
+          <li class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              What are ambiguous characters?
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <p>Ambiguous characters are letters and numbers that look similar and can be confused, such as 'l' (lowercase L), '1' (one), 'I' (uppercase i), 'O' (uppercase o), and '0' (zero). Excluding these makes passwords easier to read and type correctly.</p>
+            </div>
+          </li>
+          <li class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              How long should my password be?
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <p>We recommend passwords of at least 16 characters for most accounts. For highly sensitive accounts like email or banking, consider using 20+ characters. Longer passwords are exponentially harder to crack through brute force attacks.</p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Related Tools -->
+      <section class="content-section" aria-labelledby="related-tools">
+        <h2 id="related-tools">Related Tools</h2>
+        <div class="related-tools">
+          <a href="/tools/uuid-generator/" class="related-tool-link">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"/>
+            </svg>
+            UUID Generator
+          </a>
+          <a href="/tools/json-formatter/" class="related-tool-link">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+            </svg>
+            JSON Formatter
+          </a>
+          <a href="/tools/qr-code-generator/" class="related-tool-link">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h2M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/>
+            </svg>
+            QR Code Generator
+          </a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-section">
+          <h4>Tools</h4>
+          <ul class="footer-links">
+            <li><a href="/tools/json-formatter/">JSON Formatter</a></li>
+            <li><a href="/tools/password-generator/" aria-current="page">Password Generator</a></li>
+            <li><a href="/tools/uuid-generator/">UUID Generator</a></li>
+            <li><a href="/tools/lorem-ipsum/">Lorem Ipsum</a></li>
+            <li><a href="/tools/qr-code-generator/">QR Code Generator</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Company</h4>
+          <ul class="footer-links">
+            <li><a href="/about/">About</a></li>
+            <li><a href="/contact/">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Legal</h4>
+          <ul class="footer-links">
+            <li><a href="/privacy-policy/">Privacy Policy</a></li>
+            <li><a href="/terms-of-service/">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">
+          &copy; 2025 OneDevKit. All rights reserved.<br>
+          <small>Tools provided "as is" without warranty.</small>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cookie Consent Banner -->
+  <div class="cookie-banner" role="dialog" aria-label="Cookie consent" aria-describedby="cookie-message">
+    <div class="cookie-banner-inner">
+      <p class="cookie-banner-text" id="cookie-message">
+        We use cookies to analyze traffic and improve your experience.
+        <a href="/privacy-policy/">Learn more</a>
+      </p>
+      <div class="cookie-banner-actions">
+        <button class="btn btn-secondary" data-cookie-reject>Reject</button>
+        <button class="btn btn-primary" data-cookie-accept>Accept</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/js/common.js"></script>
+  <script src="/js/cookie-consent.js"></script>
+  <script src="/js/password-generator.js"></script>
+</body>
+</html>
