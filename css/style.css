@@ -1081,48 +1081,82 @@ input[type="radio"] {
    Cookie Consent Banner
    ============================================ */
 
+/* Cookie Banner - Prominent but non-blocking */
 .cookie-banner {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  background: var(--color-bg-elevated);
-  border-top: 1px solid var(--color-border);
-  padding: var(--space-4);
+  top: 0;
+  background: rgba(0, 0, 0, 0.5);
   z-index: var(--z-modal);
-  box-shadow: 0 -4px 6px -1px rgb(0 0 0 / 0.1);
-  transform: translateY(100%);
-  transition: transform var(--transition-slow);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: var(--space-4);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-slow), visibility var(--transition-slow);
 }
 
 .cookie-banner.show {
-  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
 }
 
 .cookie-banner-inner {
-  max-width: var(--container-max);
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-4);
+  background: var(--color-bg-elevated);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  text-align: center;
+  transform: translateY(20px);
+  transition: transform var(--transition-slow);
+}
+
+.cookie-banner.show .cookie-banner-inner {
+  transform: translateY(0);
+}
+
+.cookie-banner-title {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  margin-bottom: var(--space-3);
+  color: var(--color-text);
+}
+
+.cookie-banner-icon {
+  margin-bottom: var(--space-3);
+  color: var(--color-primary);
+}
+
+.cookie-banner-icon svg {
+  width: 48px;
+  height: 48px;
 }
 
 .cookie-banner-text {
-  flex: 1;
-  min-width: 280px;
   font-size: var(--text-sm);
   color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--space-5);
 }
 
 .cookie-banner-text a {
   color: var(--color-primary);
+  text-decoration: underline;
 }
 
 .cookie-banner-actions {
   display: flex;
   gap: var(--space-3);
+  justify-content: center;
+}
+
+.cookie-banner-actions .btn {
+  min-width: 100px;
 }
 
 /* ============================================
