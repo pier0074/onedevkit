@@ -1,0 +1,49 @@
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-section">
+        <h4>Tools</h4>
+        <ul class="footer-links">
+          {% for tool in tools %}
+          <li><a href="/tools/{{ tool.id }}/"{% if page.url == '/tools/' + tool.id + '/' %} aria-current="page"{% endif %}>{{ tool.name }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Company</h4>
+        <ul class="footer-links">
+          <li><a href="/about/">About</a></li>
+          <li><a href="/contact/">Contact</a></li>
+          <li><a href="/faq/">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Legal</h4>
+        <ul class="footer-links">
+          <li><a href="/privacy/">Privacy Policy</a></li>
+          <li><a href="/terms/">Terms of Service</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Follow Us</h4>
+        <ul class="footer-links">
+          <li>
+            <a href="https://x.com/{{ site.twitter | replace('@', '') }}" target="_blank" rel="noopener noreferrer" class="footer-social-link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle; margin-right: 0.5rem;">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+              {{ site.twitter }}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copyright">
+        &copy; {% year %} {{ site.name }}. All rights reserved.<br>
+        <small>Tools provided "as is" without warranty.</small>
+      </p>
+    </div>
+  </div>
+</footer>

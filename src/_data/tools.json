@@ -1,0 +1,62 @@
+[
+  {
+    "id": "json-formatter",
+    "name": "JSON Formatter",
+    "fullName": "JSON Formatter & Validator",
+    "description": "Format, validate, and beautify JSON data instantly. Supports minification and syntax highlighting.",
+    "shortDescription": "Format, validate & beautify",
+    "icon": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4\"/>",
+    "js": "json-formatter.js",
+    "priority": 0.9
+  },
+  {
+    "id": "base64-encoder",
+    "name": "Base64 Encoder",
+    "fullName": "Base64 Encoder & Decoder",
+    "description": "Encode text to Base64 or decode Base64 to readable text. Supports file uploads and URL-safe encoding.",
+    "shortDescription": "Encode & decode Base64",
+    "icon": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4\"/>",
+    "js": "base64.js",
+    "priority": 0.9
+  },
+  {
+    "id": "password-generator",
+    "name": "Password Generator",
+    "fullName": "Password Generator",
+    "description": "Generate secure, random passwords for your accounts. Cryptographically secure with customizable options.",
+    "shortDescription": "Secure random passwords",
+    "icon": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z\"/>",
+    "js": "password-generator.js",
+    "priority": 0.9
+  },
+  {
+    "id": "uuid-generator",
+    "name": "UUID Generator",
+    "fullName": "UUID Generator",
+    "description": "Generate random UUIDs (v4) instantly. Create unique identifiers for databases, APIs, and applications.",
+    "shortDescription": "Generate unique IDs",
+    "icon": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M7 20l4-16m2 16l4-16M6 9h14M4 15h14\"/>",
+    "js": "uuid-generator.js",
+    "priority": 0.9
+  },
+  {
+    "id": "lorem-ipsum",
+    "name": "Lorem Ipsum",
+    "fullName": "Lorem Ipsum Generator",
+    "description": "Generate placeholder text for your designs, mockups, and prototypes in paragraphs, sentences, or words.",
+    "shortDescription": "Placeholder text",
+    "icon": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M4 6h16M4 12h16M4 18h7\"/>",
+    "js": "lorem-ipsum.js",
+    "priority": 0.9
+  },
+  {
+    "id": "qr-code-generator",
+    "name": "QR Code Generator",
+    "fullName": "QR Code Generator",
+    "description": "Generate QR codes for URLs, text, and other data. Create scannable codes that work with any smartphone.",
+    "shortDescription": "Create QR codes",
+    "icon": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h2M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z\"/>",
+    "js": "qr-generator.js",
+    "priority": 0.9
+  }
+]

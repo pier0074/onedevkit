@@ -1,0 +1,87 @@
+---
+layout: layouts/page.njk
+title: About OneDevKit
+description: Learn about OneDevKit, our mission to provide free, privacy-focused developer tools, and why we built this platform for developers worldwide.
+keywords: about onedevkit, developer tools, free online tools, privacy-focused tools
+permalink: /about/
+---
+{% block schema %}
+<!-- Schema.org BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "{{ site.url }}/"},
+    {"@type": "ListItem", "position": 2, "name": "About", "item": "{{ site.url }}/about/"}
+  ]
+}
+</script>
+
+<!-- Schema.org AboutPage -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "name": "About {{ site.name }}",
+  "description": "{{ description }}",
+  "url": "{{ site.url }}/about/",
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "{{ site.name }}",
+    "url": "{{ site.url }}",
+    "description": "{{ site.description }}"
+  }
+}
+</script>
+{% endblock %}
+
+<h1>About OneDevKit</h1>
+
+<section class="content-section">
+  <h2>Our Mission</h2>
+  <p>OneDevKit was created with a simple mission: to provide developers with free, fast, and privacy-focused tools for everyday tasks. We believe that essential developer utilities should be accessible to everyone, regardless of budget or technical expertise.</p>
+  <p>Every tool on OneDevKit runs entirely in your browser. Your data never leaves your device, and we don't track, store, or sell any information you enter into our tools.</p>
+</section>
+
+<section class="content-section">
+  <h2>Why We Built This</h2>
+  <p>As developers ourselves, we were frustrated with existing online tools that:</p>
+  <ul>
+    <li>Required unnecessary signups or subscriptions</li>
+    <li>Sent your data to remote servers</li>
+    <li>Were cluttered with intrusive ads</li>
+    <li>Loaded slowly with excessive JavaScript</li>
+    <li>Didn't work well on mobile devices</li>
+  </ul>
+  <p>We set out to build the toolkit we wished existed: simple, fast, private, and free.</p>
+</section>
+
+<section class="content-section">
+  <h2>Our Tools</h2>
+  <p>We currently offer the following free developer tools:</p>
+  <ul>
+    {% for tool in tools %}
+    <li><strong><a href="/tools/{{ tool.id }}/">{{ tool.fullName }}</a></strong> - {{ tool.description }}</li>
+    {% endfor %}
+  </ul>
+  <p>More tools are coming soon. Have a suggestion? <a href="/contact/">Let us know</a>!</p>
+</section>
+
+<section class="content-section">
+  <h2>Privacy Commitment</h2>
+  <p>Privacy isn't just a feature for us - it's a core principle. Here's what that means:</p>
+  <ul>
+    <li><strong>Client-side processing:</strong> All tools run entirely in your browser using JavaScript</li>
+    <li><strong>No data collection:</strong> We don't collect, store, or transmit any data you enter</li>
+    <li><strong>Minimal analytics:</strong> We only use privacy-respecting analytics for basic traffic stats</li>
+    <li><strong>No third-party trackers:</strong> No social media widgets or advertising trackers</li>
+    <li><strong>Open source friendly:</strong> You can inspect our code in your browser's developer tools</li>
+  </ul>
+  <p>Read our full <a href="/privacy/">Privacy Policy</a> for more details.</p>
+</section>
+
+<section class="content-section">
+  <h2>Contact Us</h2>
+  <p>We'd love to hear from you! Whether you have feedback, suggestions, or just want to say hello, feel free to <a href="/contact/">get in touch</a>.</p>
+</section>

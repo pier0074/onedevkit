@@ -1,0 +1,156 @@
+---
+layout: layouts/tool.njk
+title: JSON Formatter & Validator
+description: Free online JSON formatter, validator, and beautifier. Format, minify, and validate JSON with syntax highlighting and error detection. No signup required.
+keywords: JSON formatter, JSON beautifier, JSON validator, JSON minifier, format JSON online, validate JSON, pretty print JSON
+permalink: /tools/json-formatter/
+toolId: json-formatter
+toolJs: json-formatter.js
+ogImage: json-formatter.jpg
+---
+{% set toolData = tools | selectattr("id", "equalto", toolId) | first %}
+
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "{{ site.url }}/"},
+    {"@type": "ListItem", "position": 2, "name": "Tools", "item": "{{ site.url }}/#tools"},
+    {"@type": "ListItem", "position": 3, "name": "{{ toolData.name }}", "item": "{{ site.url }}{{ page.url }}"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "{{ toolData.fullName }}",
+  "description": "{{ description }}",
+  "url": "{{ site.url }}{{ page.url }}",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+  "featureList": ["Format/beautify JSON", "Minify JSON", "Validate JSON with error highlighting", "Syntax highlighting", "Customizable indentation"],
+  "author": {"@type": "Organization", "name": "{{ site.name }}", "url": "{{ site.url }}"}
+}
+</script>
+{% endblock %}
+
+{% block head %}
+<style>
+  .json-key { color: #881391; }
+  .json-string { color: #1a1aa6; }
+  .json-number { color: #1c00cf; }
+  .json-boolean { color: #0d22aa; }
+  .json-null { color: #808080; }
+  [data-theme="dark"] .json-key { color: #9cdcfe; }
+  [data-theme="dark"] .json-string { color: #ce9178; }
+  [data-theme="dark"] .json-number { color: #b5cea8; }
+  [data-theme="dark"] .json-boolean { color: #569cd6; }
+  [data-theme="dark"] .json-null { color: #808080; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .json-key { color: #9cdcfe; }
+    :root:not([data-theme="light"]) .json-string { color: #ce9178; }
+    :root:not([data-theme="light"]) .json-number { color: #b5cea8; }
+    :root:not([data-theme="light"]) .json-boolean { color: #569cd6; }
+    :root:not([data-theme="light"]) .json-null { color: #808080; }
+  }
+  #json-highlighted { white-space: pre-wrap; word-wrap: break-word; font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace; font-size: 0.875rem; line-height: 1.5; }
+  #json-error { background-color: #fef2f2; border: 1px solid #fecaca; color: #b91c1c; padding: 0.75rem 1rem; border-radius: 0.375rem; margin-top: 0.5rem; font-family: monospace; font-size: 0.875rem; }
+  [data-theme="dark"] #json-error { background-color: #450a0a; border-color: #7f1d1d; color: #fca5a5; }
+  .json-stats { display: flex; gap: 1.5rem; flex-wrap: wrap; font-size: 0.875rem; color: var(--text-muted); }
+  .json-stats dt { font-weight: 500; color: var(--text-secondary); }
+  .json-stats dd { margin: 0; font-family: monospace; }
+  .json-stat-item { display: flex; flex-direction: column; gap: 0.25rem; }
+</style>
+{% endblock %}
+
+<div class="tool-container">
+  <div class="tool-input-group">
+    <div class="input-header">
+      <label for="json-input" class="input-label">Enter JSON</label>
+      <button type="button" id="sample-json" class="btn btn-text btn-sm">Load Sample</button>
+    </div>
+    <textarea id="json-input" class="tool-textarea" rows="10" placeholder='{"key": "value", "array": [1, 2, 3]}' spellcheck="false"></textarea>
+  </div>
+
+  <div class="tool-options">
+    <div class="option-group">
+      <label for="json-indent" class="option-label">Indentation</label>
+      <select id="json-indent" class="tool-select">
+        <option value="2" selected>2 Spaces</option>
+        <option value="4">4 Spaces</option>
+        <option value="tab">Tab</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="tool-actions">
+    <button type="button" id="format-json" class="btn btn-primary">Format</button>
+    <button type="button" id="minify-json" class="btn btn-secondary">Minify</button>
+    <button type="button" id="validate-json" class="btn btn-secondary">Validate</button>
+    <button type="button" id="copy-json" class="btn btn-secondary">Copy</button>
+    <button type="button" id="clear-json" class="btn btn-ghost">Clear</button>
+  </div>
+
+  <div id="json-error" class="hidden" role="alert"></div>
+
+  <div class="tool-output-group">
+    <div class="output-header">
+      <span class="output-label">Output</span>
+      <div class="json-stats">
+        <div class="json-stat-item"><dt>Size</dt><dd id="json-size">-</dd></div>
+        <div class="json-stat-item"><dt>Keys</dt><dd id="json-keys">-</dd></div>
+        <div class="json-stat-item"><dt>Depth</dt><dd id="json-depth">-</dd></div>
+      </div>
+    </div>
+    <div class="tool-output-wrapper">
+      <pre id="json-output" class="tool-output tool-output-placeholder">Formatted JSON will appear here</pre>
+      <pre id="json-highlighted" class="tool-output hidden"></pre>
+    </div>
+  </div>
+</div>
+
+<section class="content-section">
+  <h2>How to Use</h2>
+  <div class="steps">
+    <div class="step"><div class="step-number">1</div><div class="step-content"><h3>Paste Your JSON</h3><p>Enter or paste your JSON data into the input field. You can also click "Load Sample" to see an example.</p></div></div>
+    <div class="step"><div class="step-number">2</div><div class="step-content"><h3>Choose an Action</h3><p><strong>Format</strong> to beautify with proper indentation, <strong>Minify</strong> to compress, or <strong>Validate</strong> to check for errors.</p></div></div>
+    <div class="step"><div class="step-number">3</div><div class="step-content"><h3>Copy the Result</h3><p>Click "Copy" to copy the formatted or minified JSON to your clipboard.</p></div></div>
+  </div>
+</section>
+
+<section class="content-section">
+  <h2>FAQ</h2>
+  <div class="faq-list">
+    <details class="faq-item">
+      <summary class="faq-question">What is JSON formatting?</summary>
+      <div class="faq-answer"><p>JSON formatting (also called beautifying) adds proper indentation and line breaks to make JSON human-readable.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-question">What's the difference between formatting and minifying?</summary>
+      <div class="faq-answer"><p>Formatting adds whitespace for readability. Minifying removes all unnecessary whitespace to reduce file size.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-question">Is my data secure?</summary>
+      <div class="faq-answer"><p>Yes. All processing happens in your browser. Your data never leaves your device.</p></div>
+    </details>
+  </div>
+</section>
+
+<section class="content-section">
+  <h2>Related Tools</h2>
+  <div class="related-tools">
+    {% for tool in tools %}
+    {% if tool.id != toolId %}
+    <a href="/tools/{{ tool.id }}/" class="related-tool-link">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16">{{ tool.icon | safe }}</svg>
+      {{ tool.name }}
+    </a>
+    {% endif %}
+    {% endfor %}
+  </div>
+</section>

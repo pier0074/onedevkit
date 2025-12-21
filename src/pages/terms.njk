@@ -1,0 +1,109 @@
+---
+layout: layouts/page.njk
+title: Terms of Service
+description: OneDevKit Terms of Service. Read our terms and conditions for using our free online developer tools.
+keywords: terms of service, terms and conditions, onedevkit terms, legal
+permalink: /terms/
+---
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "{{ site.url }}/"},
+    {"@type": "ListItem", "position": 2, "name": "Terms of Service", "item": "{{ site.url }}/terms/"}
+  ]
+}
+</script>
+{% endblock %}
+
+<h1>Terms of Service</h1>
+<p class="last-updated"><strong>Last updated:</strong> January 1, 2025</p>
+
+<section class="content-section">
+  <h2>1. Acceptance of Terms</h2>
+  <p>By accessing or using {{ site.name }} ("the Service"), located at {{ site.url }}, you agree to be bound by these Terms of Service ("Terms"). If you do not agree to these Terms, please do not use the Service.</p>
+  <p>We reserve the right to update these Terms at any time. Continued use of the Service after changes constitutes acceptance of the new Terms.</p>
+</section>
+
+<section class="content-section">
+  <h2>2. Description of Service</h2>
+  <p>{{ site.name }} provides free online developer tools including:</p>
+  <ul>
+    {% for tool in tools %}
+    <li>{{ tool.fullName }}</li>
+    {% endfor %}
+  </ul>
+  <p>All tools are provided free of charge and operate entirely in your web browser.</p>
+</section>
+
+<section class="content-section">
+  <h2>3. Use of the Service</h2>
+  <p>You agree to use the Service only for lawful purposes. You agree not to:</p>
+  <ul>
+    <li>Use the Service for any illegal or unauthorized purpose</li>
+    <li>Attempt to interfere with or disrupt the Service</li>
+    <li>Use automated systems to extract data from the Service (scraping)</li>
+    <li>Transmit any viruses, malware, or harmful code</li>
+    <li>Attempt to gain unauthorized access to our systems</li>
+  </ul>
+</section>
+
+<section class="content-section">
+  <h2>4. Intellectual Property</h2>
+  <p>The Service and its original content, features, and functionality are owned by {{ site.name }} and are protected by intellectual property laws.</p>
+  <p><strong>Your Generated Content:</strong> Any output you generate using our tools (passwords, UUIDs, formatted JSON, etc.) belongs to you. We make no claim to content you create.</p>
+</section>
+
+<section class="content-section">
+  <h2>5. Disclaimer of Warranties</h2>
+  <p>THE SERVICE IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND, INCLUDING:</p>
+  <ul>
+    <li>Implied warranties of merchantability</li>
+    <li>Fitness for a particular purpose</li>
+    <li>Non-infringement</li>
+    <li>Accuracy or reliability of content</li>
+    <li>Uninterrupted or error-free operation</li>
+  </ul>
+</section>
+
+<section class="content-section">
+  <h2>6. Limitation of Liability</h2>
+  <p>TO THE MAXIMUM EXTENT PERMITTED BY LAW, {{ site.name | upper }} SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING:</p>
+  <ul>
+    <li>Loss of profits, data, or use</li>
+    <li>Business interruption</li>
+    <li>Security breaches resulting from generated passwords</li>
+    <li>Errors in generated output</li>
+  </ul>
+</section>
+
+<section class="content-section">
+  <h2>7. Security Considerations</h2>
+  <ul>
+    <li><strong>Password Generator:</strong> Generated passwords use cryptographic methods, but we cannot guarantee their security in all contexts.</li>
+    <li><strong>JSON Validator:</strong> The validator checks syntax only, not business logic or security concerns.</li>
+    <li><strong>All Tools:</strong> Processing happens in your browser. We recommend not using our tools for extremely sensitive data on shared computers.</li>
+  </ul>
+</section>
+
+<section class="content-section">
+  <h2>8. Termination</h2>
+  <p>We reserve the right to terminate or suspend access to the Service immediately, without prior notice, for any reason, including breach of these Terms.</p>
+</section>
+
+<section class="content-section">
+  <h2>9. Governing Law</h2>
+  <p>These Terms shall be governed by and construed in accordance with applicable laws, without regard to conflict of law provisions.</p>
+</section>
+
+<section class="content-section">
+  <h2>10. Entire Agreement</h2>
+  <p>These Terms, together with our <a href="/privacy/">Privacy Policy</a>, constitute the entire agreement between you and {{ site.name }} regarding the use of the Service.</p>
+</section>
+
+<section class="content-section">
+  <h2>11. Contact Us</h2>
+  <p>If you have any questions about these Terms, please <a href="/contact/">contact us</a>.</p>
+</section>

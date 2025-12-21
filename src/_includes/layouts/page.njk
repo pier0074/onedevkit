@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+---
+<div class="container">
+  <!-- Breadcrumb -->
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="/">Home</a></li>
+      <li><span aria-current="page">{{ title }}</span></li>
+    </ol>
+  </nav>
+
+  <article class="content-page{% if isLegal %} legal-page{% endif %}">
+    {{ content | safe }}
+  </article>
+</div>

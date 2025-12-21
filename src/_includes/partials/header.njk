@@ -1,0 +1,44 @@
+<!-- Header -->
+<header class="header">
+  <div class="container header-inner">
+    <a href="/" class="logo" aria-label="{{ site.name }} Home">
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="16 18 22 12 16 6"></polyline>
+        <polyline points="8 6 2 12 8 18"></polyline>
+      </svg>
+      {{ site.name }}
+    </a>
+
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+
+    <nav class="nav" aria-label="Main navigation">
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">
+          Tools
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </button>
+        <div class="nav-dropdown-menu" role="menu">
+          {% for tool in tools %}
+          <a href="/tools/{{ tool.id }}/" role="menuitem"{% if page.url == '/tools/' + tool.id + '/' %} aria-current="page"{% endif %}>
+            {{ tool.name }}
+            <small>{{ tool.shortDescription }}</small>
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+      <a href="/about/" class="nav-link"{% if page.url == '/about/' %} aria-current="page"{% endif %}>About</a>
+      <a href="/contact/" class="nav-link"{% if page.url == '/contact/' %} aria-current="page"{% endif %}>Contact</a>
+      <button class="theme-toggle" aria-label="Toggle dark mode">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+        </svg>
+      </button>
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,147 @@
+---
+layout: layouts/tool.njk
+title: QR Code Generator
+description: Generate QR codes for URLs, text, WiFi, and more. Free online QR code generator with customizable size. Download as PNG or copy to clipboard.
+keywords: qr code generator, qr code maker, free qr code, qr code online, create qr code, url qr code
+permalink: /tools/qr-code-generator/
+toolId: qr-code-generator
+toolJs: qr-generator.js
+ogImage: qr-code-generator.jpg
+---
+{% set toolData = tools | selectattr("id", "equalto", toolId) | first %}
+
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "{{ site.url }}/"},
+    {"@type": "ListItem", "position": 2, "name": "Tools", "item": "{{ site.url }}/#tools"},
+    {"@type": "ListItem", "position": 3, "name": "{{ toolData.name }}", "item": "{{ site.url }}{{ page.url }}"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "{{ toolData.fullName }}",
+  "description": "{{ description }}",
+  "url": "{{ site.url }}{{ page.url }}",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+  "featureList": ["Generate QR codes for any text or URL", "Multiple size options", "Adjustable error correction", "Download as PNG", "Copy to clipboard"],
+  "author": {"@type": "Organization", "name": "{{ site.name }}", "url": "{{ site.url }}"}
+}
+</script>
+{% endblock %}
+
+{% block head %}
+<style>
+  .qr-preview { display: flex; justify-content: center; align-items: center; min-height: 280px; background: var(--color-bg-alt); border: 2px dashed var(--color-border); border-radius: var(--radius-lg); padding: var(--space-6); }
+  .qr-preview canvas { max-width: 100%; height: auto; border-radius: var(--radius-md); box-shadow: var(--shadow-md); }
+  .qr-placeholder { text-align: center; color: var(--color-text-muted); }
+  .qr-placeholder svg { width: 64px; height: 64px; margin-bottom: var(--space-4); opacity: 0.5; }
+  .options-row { display: flex; gap: var(--space-4); flex-wrap: wrap; }
+  .options-row .tool-input-group { flex: 1; min-width: 150px; }
+</style>
+{% endblock %}
+
+<div class="tool-container">
+  <div class="tool-input-group">
+    <label for="qr-text">Enter URL or Text</label>
+    <input type="text" id="qr-text" placeholder="https://example.com or any text...">
+    <small style="color: var(--color-text-muted); font-size: var(--text-xs);">Enter the content you want to encode in the QR code</small>
+  </div>
+
+  <div class="options-row" style="margin-top: var(--space-4);">
+    <div class="tool-input-group">
+      <label for="qr-size">Size</label>
+      <select id="qr-size">
+        <option value="128">Small (128x128)</option>
+        <option value="256" selected>Medium (256x256)</option>
+        <option value="384">Large (384x384)</option>
+        <option value="512">Extra Large (512x512)</option>
+      </select>
+    </div>
+    <div class="tool-input-group">
+      <label for="qr-ec-level">Error Correction</label>
+      <select id="qr-ec-level">
+        <option value="L">Low (7%)</option>
+        <option value="M" selected>Medium (15%)</option>
+        <option value="Q">Quartile (25%)</option>
+        <option value="H">High (30%)</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="tool-actions" style="margin-top: var(--space-4);">
+    <button id="generate-qr" class="btn btn-primary">Generate QR Code</button>
+    <button id="clear-qr" class="btn btn-ghost">Clear</button>
+  </div>
+
+  <div id="qr-output" class="qr-preview" style="margin-top: var(--space-6);" aria-live="polite">
+    <div id="qr-placeholder" class="qr-placeholder">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h2M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/>
+      </svg>
+      <p>Enter text or URL above to generate a QR code</p>
+    </div>
+    <canvas id="qr-canvas" class="hidden" aria-label="Generated QR code"></canvas>
+  </div>
+
+  <div class="tool-actions" style="margin-top: var(--space-4); justify-content: center;">
+    <button id="download-qr" class="btn btn-secondary">Download PNG</button>
+    <button id="copy-qr" class="btn btn-secondary">Copy to Clipboard</button>
+  </div>
+</div>
+
+<section class="content-section">
+  <h2>How to Use</h2>
+  <div class="steps">
+    <div class="step"><div class="step-number">1</div><div class="step-content"><h3>Enter Content</h3><p>Type or paste a URL, text, phone number, or any data you want to encode.</p></div></div>
+    <div class="step"><div class="step-number">2</div><div class="step-content"><h3>Choose Options</h3><p>Select size and error correction level based on your needs.</p></div></div>
+    <div class="step"><div class="step-number">3</div><div class="step-content"><h3>Download or Copy</h3><p>Save as PNG or copy directly to your clipboard.</p></div></div>
+  </div>
+</section>
+
+<section class="content-section">
+  <h2>What is a QR Code?</h2>
+  <p>A <strong>QR code (Quick Response code)</strong> is a two-dimensional barcode invented in 1994 by Denso Wave. Unlike traditional barcodes, QR codes store data in both directions, allowing them to hold significantly more information.</p>
+  <p>QR codes are used everywhere - from website links and payments to restaurant menus and product information. Any smartphone camera can scan them instantly.</p>
+</section>
+
+<section class="content-section">
+  <h2>FAQ</h2>
+  <div class="faq-list">
+    <details class="faq-item">
+      <summary class="faq-question">What can I encode in a QR code?</summary>
+      <div class="faq-answer"><p>URLs, plain text, phone numbers, email addresses, WiFi credentials, geographic coordinates, calendar events, and contact information (vCards).</p></div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-question">What is error correction level?</summary>
+      <div class="faq-answer"><p>Error correction allows QR codes to be read even if partially damaged. Level L (7%), M (15%), Q (25%), H (30%). Higher levels mean larger but more resilient codes.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-question">Are the QR codes stored or tracked?</summary>
+      <div class="faq-answer"><p>No. QR codes are generated entirely in your browser. No data is sent to any server.</p></div>
+    </details>
+  </div>
+</section>
+
+<section class="content-section">
+  <h2>Related Tools</h2>
+  <div class="related-tools">
+    {% for tool in tools %}
+    {% if tool.id != toolId %}
+    <a href="/tools/{{ tool.id }}/" class="related-tool-link">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16">{{ tool.icon | safe }}</svg>
+      {{ tool.name }}
+    </a>
+    {% endif %}
+    {% endfor %}
+  </div>
+</section>

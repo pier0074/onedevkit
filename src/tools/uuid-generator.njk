@@ -1,0 +1,123 @@
+---
+layout: layouts/tool.njk
+title: UUID Generator
+description: Generate random UUIDs (v4) instantly. Free online UUID/GUID generator with bulk generation support. No signup required, works offline.
+keywords: uuid generator, guid generator, random uuid, uuid v4, unique identifier, uuid online, bulk uuid
+permalink: /tools/uuid-generator/
+toolId: uuid-generator
+toolJs: uuid-generator.js
+ogImage: uuid-generator.jpg
+---
+{% set toolData = tools | selectattr("id", "equalto", toolId) | first %}
+
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "{{ site.url }}/"},
+    {"@type": "ListItem", "position": 2, "name": "Tools", "item": "{{ site.url }}/#tools"},
+    {"@type": "ListItem", "position": 3, "name": "{{ toolData.name }}", "item": "{{ site.url }}{{ page.url }}"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "{{ toolData.fullName }}",
+  "description": "{{ description }}",
+  "url": "{{ site.url }}{{ page.url }}",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+  "featureList": ["UUID v4 generation", "Bulk UUID generation (up to 100)", "UUID validation", "One-click copy", "Works offline"],
+  "author": {"@type": "Organization", "name": "{{ site.name }}", "url": "{{ site.url }}"}
+}
+</script>
+{% endblock %}
+
+<div class="tool-container">
+  <div class="tool-output" aria-live="polite">
+    <div id="uuid-output" class="tool-output-text tool-output-placeholder">Click "Generate" to create a UUID</div>
+  </div>
+
+  <div class="tool-actions">
+    <button id="generate-uuid" class="btn btn-primary">Generate UUID</button>
+    <button id="copy-uuid" class="btn btn-secondary">Copy</button>
+  </div>
+
+  <div style="margin-top: var(--space-6); padding-top: var(--space-6); border-top: 1px solid var(--color-border);">
+    <h3 style="margin-top: 0; margin-bottom: var(--space-4); font-size: var(--text-base);">Bulk Generation</h3>
+    <div class="tool-input-group" style="max-width: 150px;">
+      <label for="bulk-count">Count (1-100)</label>
+      <input type="number" id="bulk-count" min="1" max="100" value="10">
+    </div>
+    <div class="tool-actions" style="margin-top: var(--space-3);">
+      <button id="bulk-generate" class="btn btn-secondary">Generate Bulk</button>
+      <button id="copy-all" class="btn btn-secondary">Copy All</button>
+    </div>
+    <pre id="bulk-output" class="tool-output hidden" style="margin-top: var(--space-4); max-height: 300px; overflow-y: auto;"></pre>
+  </div>
+
+  <div style="margin-top: var(--space-6); padding-top: var(--space-6); border-top: 1px solid var(--color-border);">
+    <h3 style="margin-top: 0; margin-bottom: var(--space-4); font-size: var(--text-base);">Validate UUID</h3>
+    <div class="tool-input-group">
+      <label for="validate-input">Enter UUID to validate</label>
+      <input type="text" id="validate-input" placeholder="e.g., 550e8400-e29b-41d4-a716-446655440000">
+    </div>
+    <div class="tool-actions" style="margin-top: var(--space-3);">
+      <button id="validate-btn" class="btn btn-secondary">Validate</button>
+    </div>
+    <div id="validate-result" style="margin-top: var(--space-4);"></div>
+  </div>
+</div>
+
+<section class="content-section">
+  <h2>How to Use</h2>
+  <div class="steps">
+    <div class="step"><div class="step-number">1</div><div class="step-content"><h3>Generate UUID</h3><p>Click "Generate UUID" to create a new random UUID (v4).</p></div></div>
+    <div class="step"><div class="step-number">2</div><div class="step-content"><h3>Copy to Clipboard</h3><p>Click "Copy" to copy the UUID for use in your code or database.</p></div></div>
+    <div class="step"><div class="step-number">3</div><div class="step-content"><h3>Bulk Generate</h3><p>Enter a count (1-100) and click "Generate Bulk" for multiple UUIDs at once.</p></div></div>
+  </div>
+</section>
+
+<section class="content-section">
+  <h2>What is a UUID?</h2>
+  <p>A <strong>UUID (Universally Unique Identifier)</strong>, also known as a <strong>GUID</strong>, is a 128-bit identifier that is practically unique across all systems. UUIDs are formatted as 32 hexadecimal digits in five groups:</p>
+  <code style="display: block; padding: var(--space-4); margin: var(--space-4) 0; text-align: center; font-size: var(--text-lg);">550e8400-e29b-41d4-a716-446655440000</code>
+</section>
+
+<section class="content-section">
+  <h2>FAQ</h2>
+  <div class="faq-list">
+    <details class="faq-item">
+      <summary class="faq-question">What is a UUID?</summary>
+      <div class="faq-answer"><p>A UUID is a 128-bit identifier guaranteed to be unique across all systems. It's commonly used for database primary keys, session IDs, and API references.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-question">What's the difference between UUID and GUID?</summary>
+      <div class="faq-answer"><p>UUID and GUID are the same thing. UUID is the standard term, while GUID is Microsoft's terminology. Both follow the same format.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-question">Can two UUIDs be the same?</summary>
+      <div class="faq-answer"><p>Theoretically possible, but the probability is astronomically low (about 1 in 2^122). For practical purposes, collisions are considered impossible.</p></div>
+    </details>
+  </div>
+</section>
+
+<section class="content-section">
+  <h2>Related Tools</h2>
+  <div class="related-tools">
+    {% for tool in tools %}
+    {% if tool.id != toolId %}
+    <a href="/tools/{{ tool.id }}/" class="related-tool-link">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16">{{ tool.icon | safe }}</svg>
+      {{ tool.name }}
+    </a>
+    {% endif %}
+    {% endfor %}
+  </div>
+</section>

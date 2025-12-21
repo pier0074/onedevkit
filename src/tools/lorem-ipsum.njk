@@ -1,0 +1,135 @@
+---
+layout: layouts/tool.njk
+title: Lorem Ipsum Generator
+description: Generate Lorem Ipsum placeholder text for designs. Choose paragraphs, sentences or words. Free online generator with instant copy.
+keywords: lorem ipsum generator, placeholder text, dummy text, filler text, lorem ipsum, design mockup text
+permalink: /tools/lorem-ipsum/
+toolId: lorem-ipsum
+toolJs: lorem-ipsum.js
+ogImage: lorem-ipsum.jpg
+---
+{% set toolData = tools | selectattr("id", "equalto", toolId) | first %}
+
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "{{ site.url }}/"},
+    {"@type": "ListItem", "position": 2, "name": "Tools", "item": "{{ site.url }}/#tools"},
+    {"@type": "ListItem", "position": 3, "name": "{{ toolData.name }}", "item": "{{ site.url }}{{ page.url }}"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "{{ toolData.fullName }}",
+  "description": "{{ description }}",
+  "url": "{{ site.url }}{{ page.url }}",
+  "applicationCategory": "DesignApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+  "featureList": ["Generate paragraphs, sentences, or words", "Generate list items", "Classic 'Lorem ipsum' opening option", "Word and character count"],
+  "author": {"@type": "Organization", "name": "{{ site.name }}", "url": "{{ site.url }}"}
+}
+</script>
+{% endblock %}
+
+{% block head %}
+<style>
+  .stats-bar { display: flex; gap: var(--space-6); margin-top: var(--space-4); padding: var(--space-3) var(--space-4); background: var(--color-bg-alt); border-radius: var(--radius-md); font-size: var(--text-sm); color: var(--color-text-secondary); }
+  .stat-item { display: flex; align-items: center; gap: var(--space-2); }
+  .stat-value { font-weight: 600; color: var(--color-text); }
+  .lorem-output { white-space: pre-wrap; line-height: var(--line-height-relaxed); max-height: 400px; overflow-y: auto; }
+</style>
+{% endblock %}
+
+<div class="tool-container">
+  <div class="tool-controls">
+    <div class="tool-input-group">
+      <label for="lorem-type">Output Type</label>
+      <select id="lorem-type">
+        <option value="paragraphs">Paragraphs</option>
+        <option value="sentences">Sentences</option>
+        <option value="words">Words</option>
+        <option value="list">List Items</option>
+      </select>
+    </div>
+    <div class="tool-input-group" style="max-width: 150px;">
+      <label for="lorem-count" id="count-label">Number of Paragraphs</label>
+      <input type="number" id="lorem-count" min="1" max="50" value="3">
+    </div>
+  </div>
+
+  <div style="margin-top: var(--space-4);">
+    <label class="checkbox-label">
+      <input type="checkbox" id="start-with-lorem" checked> Start with "Lorem ipsum..."
+    </label>
+  </div>
+
+  <div class="tool-actions" style="margin-top: var(--space-4);">
+    <button id="generate-lorem" class="btn btn-primary">Generate</button>
+    <button id="copy-lorem" class="btn btn-secondary">Copy</button>
+    <button id="clear-lorem" class="btn btn-ghost">Clear</button>
+  </div>
+
+  <div class="tool-output" style="margin-top: var(--space-6);" aria-live="polite">
+    <div id="lorem-output" class="tool-output-text lorem-output tool-output-placeholder">Click "Generate" to create Lorem Ipsum text</div>
+  </div>
+
+  <div class="stats-bar">
+    <div class="stat-item"><span>Words:</span><span id="word-count" class="stat-value">0</span></div>
+    <div class="stat-item"><span>Characters:</span><span id="char-count" class="stat-value">0</span></div>
+  </div>
+</div>
+
+<section class="content-section">
+  <h2>How to Use</h2>
+  <div class="steps">
+    <div class="step"><div class="step-number">1</div><div class="step-content"><h3>Choose Output Type</h3><p>Select paragraphs, sentences, words, or list items based on your needs.</p></div></div>
+    <div class="step"><div class="step-number">2</div><div class="step-content"><h3>Set the Count</h3><p>Enter how many units of text you want to generate.</p></div></div>
+    <div class="step"><div class="step-number">3</div><div class="step-content"><h3>Generate & Copy</h3><p>Click "Generate" and then "Copy" to use in your design.</p></div></div>
+  </div>
+</section>
+
+<section class="content-section">
+  <h2>What is Lorem Ipsum?</h2>
+  <p><strong>Lorem Ipsum</strong> is placeholder text used in the design industry since the 1500s. It originated from a classical Latin text by Cicero, though the Lorem Ipsum version is scrambled to be nonsensical.</p>
+  <p>Unlike using "Content here," Lorem Ipsum has a natural letter distribution, making it look like readable text. This helps designers focus on visual elements rather than content.</p>
+</section>
+
+<section class="content-section">
+  <h2>FAQ</h2>
+  <div class="faq-list">
+    <details class="faq-item">
+      <summary class="faq-question">What is Lorem Ipsum?</summary>
+      <div class="faq-answer"><p>Lorem Ipsum is placeholder text used in design since the 1500s when a printer scrambled classical Latin literature to create a type specimen book.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-question">Why use Lorem Ipsum instead of real text?</summary>
+      <div class="faq-answer"><p>It has a natural letter distribution that mimics real text without being distracting, so reviewers focus on design rather than content.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-question">Is Lorem Ipsum real Latin?</summary>
+      <div class="faq-answer"><p>It's derived from Latin but intentionally scrambled. It resembles Latin but has no actual meaning.</p></div>
+    </details>
+  </div>
+</section>
+
+<section class="content-section">
+  <h2>Related Tools</h2>
+  <div class="related-tools">
+    {% for tool in tools %}
+    {% if tool.id != toolId %}
+    <a href="/tools/{{ tool.id }}/" class="related-tool-link">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16">{{ tool.icon | safe }}</svg>
+      {{ tool.name }}
+    </a>
+    {% endif %}
+    {% endfor %}
+  </div>
+</section>
