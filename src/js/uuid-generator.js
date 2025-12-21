@@ -204,28 +204,40 @@
       const uuid = input.value.trim();
 
       if (!uuid) {
-        result.innerHTML = '';
+        result.textContent = '';
         return;
       }
 
       const isValid = this.validate(uuid);
       const version = this.getVersion(uuid);
 
-      if (isValid) {
-        result.innerHTML = `<div class="alert alert-success">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-          </svg>
-          <div>Valid UUID (Version ${version})</div>
-        </div>`;
-      } else {
-        result.innerHTML = `<div class="alert alert-error">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-          </svg>
-          <div>Invalid UUID format</div>
-        </div>`;
-      }
+      // Clear previous content safely
+      result.textContent = '';
+
+      // Create alert element
+      const alertDiv = document.createElement('div');
+      alertDiv.className = isValid ? 'alert alert-success' : 'alert alert-error';
+
+      // Create SVG icon
+      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.setAttribute('fill', 'none');
+      svg.setAttribute('viewBox', '0 0 24 24');
+      svg.setAttribute('stroke', 'currentColor');
+
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      path.setAttribute('stroke-linecap', 'round');
+      path.setAttribute('stroke-linejoin', 'round');
+      path.setAttribute('stroke-width', '2');
+      path.setAttribute('d', isValid ? 'M5 13l4 4L19 7' : 'M6 18L18 6M6 6l12 12');
+      svg.appendChild(path);
+
+      // Create message element
+      const messageDiv = document.createElement('div');
+      messageDiv.textContent = isValid ? `Valid UUID (Version ${version})` : 'Invalid UUID format';
+
+      alertDiv.appendChild(svg);
+      alertDiv.appendChild(messageDiv);
+      result.appendChild(alertDiv);
     }
   };
 

@@ -214,7 +214,7 @@
 
         // Convert to bytes
         for (let i = 0; i < bits.length; i += 8) {
-          result.push(parseInt(bits.substr(i, 8), 2));
+          result.push(parseInt(bits.substring(i, i + 8), 2));
         }
 
         // Pad with alternating bytes
