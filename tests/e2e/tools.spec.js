@@ -33,6 +33,10 @@ test.describe('Homepage', () => {
     await expect(page.locator('.tool-card[href*="uuid-generator"]')).toBeVisible();
     await expect(page.locator('.tool-card[href*="lorem-ipsum"]')).toBeVisible();
     await expect(page.locator('.tool-card[href*="qr-code-generator"]')).toBeVisible();
+    await expect(page.locator('.tool-card[href*="url-encoder"]')).toBeVisible();
+    await expect(page.locator('.tool-card[href*="hash-generator"]')).toBeVisible();
+    await expect(page.locator('.tool-card[href*="timestamp-converter"]')).toBeVisible();
+    await expect(page.locator('.tool-card[href*="jwt-decoder"]')).toBeVisible();
   });
 
   test('navigation works', async ({ page }) => {
@@ -307,6 +311,203 @@ test.describe('QR Code Generator', () => {
   });
 });
 
+test.describe('URL Encoder', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/tools/url-encoder/');
+  });
+
+  test('page loads with correct title', async ({ page }) => {
+    await expect(page).toHaveTitle(/URL Encoder/);
+  });
+
+  test('encodes text with special characters', async ({ page }) => {
+    await page.fill('#url-input', 'hello world?test=1');
+    await page.click('#encode-url');
+
+    const output = await page.locator('#url-output').textContent();
+    expect(output).toContain('%20');
+    expect(output).toContain('%3D');
+  });
+
+  test('decodes URL-encoded text', async ({ page }) => {
+    await page.fill('#url-input', 'hello%20world');
+    await page.click('#decode-url');
+
+    const output = await page.locator('#url-output').textContent();
+    expect(output).toBe('hello world');
+  });
+
+  test('mode toggle works', async ({ page }) => {
+    // Component mode should encode slashes (default active mode)
+    await page.click('#mode-component');
+    await page.fill('#url-input', 'a/b');
+    await page.click('#encode-url');
+
+    const componentOutput = await page.locator('#url-output').textContent();
+    expect(componentOutput).toContain('%2F');
+
+    // Full URL mode should preserve slashes
+    await page.click('#mode-full');
+    await page.fill('#url-input', 'a/b');
+    await page.click('#encode-url');
+
+    const fullOutput = await page.locator('#url-output').textContent();
+    expect(fullOutput).toBe('a/b');
+  });
+
+  test('sample button loads sample text', async ({ page }) => {
+    await page.click('#sample-url');
+
+    const input = await page.locator('#url-input').inputValue();
+    expect(input.length).toBeGreaterThan(0);
+  });
+});
+
+test.describe('Hash Generator', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/tools/hash-generator/');
+  });
+
+  test('page loads with correct title', async ({ page }) => {
+    await expect(page).toHaveTitle(/Hash Generator/);
+  });
+
+  test('generates MD5 hash', async ({ page }) => {
+    await page.fill('#hash-input', 'hello');
+    await page.click('#generate-hash');
+
+    const md5Output = await page.locator('#hash-md5').textContent();
+    expect(md5Output).toBe('5d41402abc4b2a76b9719d911017c592');
+  });
+
+  test('generates SHA-256 hash', async ({ page }) => {
+    await page.fill('#hash-input', 'hello');
+    await page.click('#generate-hash');
+
+    const sha256Output = await page.locator('#hash-sha256').textContent();
+    expect(sha256Output).toBe('2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824');
+  });
+
+  test('all hash outputs have correct lengths', async ({ page }) => {
+    await page.fill('#hash-input', 'test');
+    await page.click('#generate-hash');
+
+    const md5 = await page.locator('#hash-md5').textContent();
+    const sha1 = await page.locator('#hash-sha1').textContent();
+    const sha256 = await page.locator('#hash-sha256').textContent();
+    const sha512 = await page.locator('#hash-sha512').textContent();
+
+    expect(md5.length).toBe(32);
+    expect(sha1.length).toBe(40);
+    expect(sha256.length).toBe(64);
+    expect(sha512.length).toBe(128);
+  });
+
+  test('sample button loads sample text', async ({ page }) => {
+    await page.click('#sample-hash');
+
+    const input = await page.locator('#hash-input').inputValue();
+    expect(input.length).toBeGreaterThan(0);
+  });
+});
+
+test.describe('Timestamp Converter', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/tools/timestamp-converter/');
+  });
+
+  test('page loads with correct title', async ({ page }) => {
+    await expect(page).toHaveTitle(/Timestamp/);
+  });
+
+  test('displays current timestamp', async ({ page }) => {
+    const currentTimestamp = await page.locator('#current-timestamp').textContent();
+    const timestamp = parseInt(currentTimestamp);
+
+    // Should be a valid Unix timestamp (greater than year 2020)
+    expect(timestamp).toBeGreaterThan(1577836800);
+  });
+
+  test('converts timestamp to date', async ({ page }) => {
+    await page.fill('#timestamp-input', '1704067200');
+    await page.click('#convert-to-date');
+
+    const localResult = await page.locator('#result-local').textContent();
+    const isoResult = await page.locator('#result-iso').textContent();
+
+    expect(localResult).not.toBe('Invalid timestamp');
+    expect(isoResult).toContain('2024-01-01');
+  });
+
+  test('use current button works', async ({ page }) => {
+    await page.click('#use-current');
+
+    const input = await page.locator('#timestamp-input').inputValue();
+    const timestamp = parseInt(input);
+
+    expect(timestamp).toBeGreaterThan(1577836800);
+  });
+
+  test('date to timestamp conversion works', async ({ page }) => {
+    // Set a specific date
+    await page.fill('#date-input', '2024-01-01T00:00');
+    await page.click('#convert-to-timestamp');
+
+    const timestampResult = await page.locator('#result-timestamp').textContent();
+    // The exact value depends on timezone, but should be a valid number
+    expect(parseInt(timestampResult)).toBeGreaterThan(0);
+  });
+});
+
+test.describe('JWT Decoder', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/tools/jwt-decoder/');
+  });
+
+  test('page loads with correct title', async ({ page }) => {
+    await expect(page).toHaveTitle(/JWT Decoder/);
+  });
+
+  test('decodes valid JWT', async ({ page }) => {
+    const jwt = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
+
+    await page.fill('#jwt-input', jwt);
+    await page.click('#decode-jwt');
+
+    const headerOutput = await page.locator('#jwt-header').textContent();
+    const payloadOutput = await page.locator('#jwt-payload').textContent();
+    const signatureOutput = await page.locator('#jwt-signature').textContent();
+
+    expect(headerOutput).toContain('HS256');
+    expect(payloadOutput).toContain('John Doe');
+    expect(signatureOutput).not.toBe('-');
+  });
+
+  test('sample button loads sample JWT', async ({ page }) => {
+    await page.click('#sample-jwt');
+
+    const input = await page.locator('#jwt-input').inputValue();
+    expect(input).toContain('.');
+    expect(input.split('.').length).toBe(3);
+  });
+
+  test('shows error for invalid JWT', async ({ page }) => {
+    await page.fill('#jwt-input', 'invalid.token');
+    await page.click('#decode-jwt');
+
+    const status = await page.locator('#jwt-status').textContent();
+    expect(status.toLowerCase()).toContain('error');
+  });
+
+  test('clear button works', async ({ page }) => {
+    await page.click('#sample-jwt');
+    await page.click('#clear-jwt');
+
+    const input = await page.locator('#jwt-input').inputValue();
+    expect(input).toBe('');
+  });
+});
+
 test.describe('Tool Page Content Integrity', () => {
   // These tests ensure each tool page displays its OWN content, not another tool's
   // This prevents regressions like the selectattr bug where all pages showed JSON Formatter
@@ -318,6 +519,10 @@ test.describe('Tool Page Content Integrity', () => {
     { path: '/tools/uuid-generator/', h1: 'UUID Generator', breadcrumb: 'UUID Generator' },
     { path: '/tools/lorem-ipsum/', h1: 'Lorem Ipsum', breadcrumb: 'Lorem Ipsum' },
     { path: '/tools/qr-code-generator/', h1: 'QR Code Generator', breadcrumb: 'QR Code Generator' },
+    { path: '/tools/url-encoder/', h1: 'URL Encoder', breadcrumb: 'URL Encoder' },
+    { path: '/tools/hash-generator/', h1: 'Hash Generator', breadcrumb: 'Hash Generator' },
+    { path: '/tools/timestamp-converter/', h1: 'Timestamp Converter', breadcrumb: 'Timestamp Converter' },
+    { path: '/tools/jwt-decoder/', h1: 'JWT Decoder', breadcrumb: 'JWT Decoder' },
   ];
 
   for (const tool of tools) {

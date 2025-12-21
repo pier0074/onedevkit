@@ -24,11 +24,17 @@
           </svg>
         </button>
         <div class="nav-dropdown-menu" role="menu">
-          {% for tool in tools %}
-          <a href="/tools/{{ tool.id }}/" role="menuitem"{% if page.url == '/tools/' + tool.id + '/' %} aria-current="page"{% endif %}>
-            {{ tool.name }}
-            <small>{{ tool.shortDescription }}</small>
-          </a>
+          {# Group tools by category #}
+          {% set categories = tools | groupby("category") %}
+          {% for category, categoryTools in categories %}
+          <div class="nav-dropdown-category">
+            <span class="nav-dropdown-category-title">{{ category }}</span>
+            {% for tool in categoryTools %}
+            <a href="/tools/{{ tool.id }}/" role="menuitem"{% if page.url == '/tools/' + tool.id + '/' %} aria-current="page"{% endif %}>
+              {{ tool.name }}
+            </a>
+            {% endfor %}
+          </div>
           {% endfor %}
         </div>
       </div>

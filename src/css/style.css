@@ -410,6 +410,26 @@ li {
   margin-top: 2px;
 }
 
+/* Dropdown categories */
+.nav-dropdown-category {
+  padding: var(--space-1) 0;
+}
+
+.nav-dropdown-category:not(:last-child) {
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: var(--space-1);
+}
+
+.nav-dropdown-category-title {
+  display: block;
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
 /* Mobile nav toggle */
 .nav-toggle {
   display: none;

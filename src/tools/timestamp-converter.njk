@@ -1,0 +1,171 @@
+---
+layout: layouts/tool.njk
+title: Unix Timestamp Converter
+description: Free online Unix timestamp converter. Convert Unix timestamps to human-readable dates and vice versa. Supports multiple date formats and timezones.
+keywords: unix timestamp converter, epoch converter, timestamp to date, date to timestamp, unix time, epoch time, time converter
+permalink: /tools/timestamp-converter/
+toolId: timestamp-converter
+toolJs: timestamp-converter.js
+ogImage: timestamp-converter.jpg
+---
+{# Get tool data from tools.json #}
+{% set toolData = tools | findById(toolId) %}
+
+{% block schema %}
+<!-- Schema.org BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "{{ site.url }}/"},
+    {"@type": "ListItem", "position": 2, "name": "Tools", "item": "{{ site.url }}/#tools"},
+    {"@type": "ListItem", "position": 3, "name": "{{ toolData.name }}", "item": "{{ site.url }}{{ page.url }}"}
+  ]
+}
+</script>
+
+<!-- Schema.org WebApplication -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "{{ toolData.fullName }}",
+  "description": "{{ description }}",
+  "url": "{{ site.url }}{{ page.url }}",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+  "author": {"@type": "Organization", "name": "{{ site.name }}", "url": "{{ site.url }}"}
+}
+</script>
+{% endblock %}
+
+{% block head %}
+<style>
+  .timestamp-sections { display: grid; gap: var(--space-6); }
+  .timestamp-section { background: var(--bg-secondary); border-radius: var(--radius-lg); padding: var(--space-5); }
+  .timestamp-section h3 { margin-top: 0; margin-bottom: var(--space-4); font-size: var(--text-lg); }
+  .current-time { background: var(--color-primary); color: white; padding: var(--space-4); border-radius: var(--radius-md); text-align: center; margin-bottom: var(--space-6); }
+  .current-time-label { font-size: var(--text-sm); opacity: 0.9; margin-bottom: var(--space-1); }
+  .current-time-value { font-size: var(--text-2xl); font-weight: 700; font-family: monospace; }
+  .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-3); margin-top: var(--space-4); }
+  .result-item { background: var(--bg-primary); padding: var(--space-3); border-radius: var(--radius-sm); border: 1px solid var(--border-color); }
+  .result-item-label { font-size: var(--text-xs); color: var(--text-muted); margin-bottom: var(--space-1); }
+  .result-item-value { font-family: monospace; font-size: var(--text-sm); word-break: break-all; }
+  .input-row { display: flex; gap: var(--space-3); align-items: flex-end; }
+  .input-row .tool-input-group { flex: 1; margin-bottom: 0; }
+  @media (max-width: 640px) { .input-row { flex-direction: column; align-items: stretch; } }
+</style>
+{% endblock %}
+
+<div class="tool-container">
+  <!-- Current Time Display -->
+  <div class="current-time">
+    <div class="current-time-label">Current Unix Timestamp</div>
+    <div class="current-time-value" id="current-timestamp">-</div>
+  </div>
+
+  <div class="timestamp-sections">
+    <!-- Timestamp to Date -->
+    <div class="timestamp-section">
+      <h3>Unix Timestamp → Date</h3>
+      <div class="input-row">
+        <div class="tool-input-group">
+          <label for="timestamp-input" class="input-label">Enter Unix Timestamp</label>
+          <input type="text" id="timestamp-input" class="tool-input" placeholder="e.g., 1703001600">
+        </div>
+        <button type="button" id="convert-to-date" class="btn btn-primary">Convert</button>
+        <button type="button" id="use-current" class="btn btn-secondary">Use Current</button>
+      </div>
+
+      <div class="result-grid" id="date-results">
+        <div class="result-item">
+          <div class="result-item-label">Local Time</div>
+          <div class="result-item-value" id="result-local">-</div>
+        </div>
+        <div class="result-item">
+          <div class="result-item-label">UTC Time</div>
+          <div class="result-item-value" id="result-utc">-</div>
+        </div>
+        <div class="result-item">
+          <div class="result-item-label">ISO 8601</div>
+          <div class="result-item-value" id="result-iso">-</div>
+        </div>
+        <div class="result-item">
+          <div class="result-item-label">Relative Time</div>
+          <div class="result-item-value" id="result-relative">-</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Date to Timestamp -->
+    <div class="timestamp-section">
+      <h3>Date → Unix Timestamp</h3>
+      <div class="input-row">
+        <div class="tool-input-group">
+          <label for="date-input" class="input-label">Enter Date & Time</label>
+          <input type="datetime-local" id="date-input" class="tool-input">
+        </div>
+        <button type="button" id="convert-to-timestamp" class="btn btn-primary">Convert</button>
+        <button type="button" id="use-now" class="btn btn-secondary">Use Now</button>
+      </div>
+
+      <div class="result-grid">
+        <div class="result-item">
+          <div class="result-item-label">Unix Timestamp (seconds)</div>
+          <div class="result-item-value" id="result-timestamp">-</div>
+        </div>
+        <div class="result-item">
+          <div class="result-item-label">Unix Timestamp (milliseconds)</div>
+          <div class="result-item-value" id="result-timestamp-ms">-</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- How to Use Section -->
+<section class="content-section">
+  <h2>How to Use</h2>
+  <div class="steps">
+    <div class="step"><div class="step-number">1</div><div class="step-content"><h3>Timestamp to Date</h3><p>Enter a Unix timestamp (seconds since Jan 1, 1970) to convert it to a human-readable date.</p></div></div>
+    <div class="step"><div class="step-number">2</div><div class="step-content"><h3>Date to Timestamp</h3><p>Select a date and time using the picker to convert it to a Unix timestamp.</p></div></div>
+    <div class="step"><div class="step-number">3</div><div class="step-content"><h3>Use Current Time</h3><p>Click "Use Current" or "Use Now" to populate with the current time.</p></div></div>
+  </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="content-section">
+  <h2>FAQ</h2>
+  <div class="faq-list">
+    <details class="faq-item">
+      <summary class="faq-question">What is a Unix timestamp?</summary>
+      <div class="faq-answer"><p>A Unix timestamp (or Epoch time) is the number of seconds that have elapsed since January 1, 1970 at 00:00:00 UTC. It's a standard way to represent time in computing.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-question">Why use Unix timestamps?</summary>
+      <div class="faq-answer"><p>Unix timestamps are timezone-independent, easy to store (just a number), and simple to compare. They're widely used in databases, APIs, and programming.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-question">What's the difference between seconds and milliseconds?</summary>
+      <div class="faq-answer"><p>Standard Unix timestamps are in seconds. JavaScript and some APIs use milliseconds (1000x larger). This tool provides both formats.</p></div>
+    </details>
+  </div>
+</section>
+
+<!-- Related Tools -->
+<section class="content-section">
+  <h2>Related Tools</h2>
+  <div class="related-tools">
+    {% for tool in tools %}
+    {% if tool.id != toolId %}
+    <a href="/tools/{{ tool.id }}/" class="related-tool-link">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16">{{ tool.icon | safe }}</svg>
+      {{ tool.name }}
+    </a>
+    {% endif %}
+    {% endfor %}
+  </div>
+</section>

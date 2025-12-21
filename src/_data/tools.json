@@ -5,6 +5,7 @@
     "fullName": "JSON Formatter & Validator",
     "description": "Format, validate, and beautify JSON data instantly. Supports minification and syntax highlighting.",
     "shortDescription": "Format, validate & beautify",
+    "category": "Formatters",
     "icon": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4\"/>",
     "js": "json-formatter.js",
     "priority": 0.9
@@ -15,8 +16,31 @@
     "fullName": "Base64 Encoder & Decoder",
     "description": "Encode text to Base64 or decode Base64 to readable text. Supports file uploads and URL-safe encoding.",
     "shortDescription": "Encode & decode Base64",
+    "category": "Encoders",
     "icon": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4\"/>",
     "js": "base64.js",
+    "priority": 0.9
+  },
+  {
+    "id": "url-encoder",
+    "name": "URL Encoder",
+    "fullName": "URL Encoder & Decoder",
+    "description": "Encode special characters for URLs or decode URL-encoded strings. Essential for web development and API work.",
+    "shortDescription": "Encode & decode URLs",
+    "category": "Encoders",
+    "icon": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1\"/>",
+    "js": "url-encoder.js",
+    "priority": 0.9
+  },
+  {
+    "id": "jwt-decoder",
+    "name": "JWT Decoder",
+    "fullName": "JWT Decoder & Inspector",
+    "description": "Decode and inspect JSON Web Tokens (JWT). View header, payload, and verify token structure instantly.",
+    "shortDescription": "Decode & inspect JWTs",
+    "category": "Encoders",
+    "icon": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z\"/>",
+    "js": "jwt-decoder.js",
     "priority": 0.9
   },
   {
@@ -25,6 +49,7 @@
     "fullName": "Password Generator",
     "description": "Generate secure, random passwords for your accounts. Cryptographically secure with customizable options.",
     "shortDescription": "Secure random passwords",
+    "category": "Generators",
     "icon": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z\"/>",
     "js": "password-generator.js",
     "priority": 0.9
@@ -35,8 +60,20 @@
     "fullName": "UUID Generator",
     "description": "Generate random UUIDs (v4) instantly. Create unique identifiers for databases, APIs, and applications.",
     "shortDescription": "Generate unique IDs",
+    "category": "Generators",
     "icon": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M7 20l4-16m2 16l4-16M6 9h14M4 15h14\"/>",
     "js": "uuid-generator.js",
+    "priority": 0.9
+  },
+  {
+    "id": "hash-generator",
+    "name": "Hash Generator",
+    "fullName": "Hash Generator",
+    "description": "Generate MD5, SHA-1, SHA-256, and SHA-512 hashes from text. Useful for checksums and data integrity verification.",
+    "shortDescription": "MD5, SHA-1, SHA-256 hashes",
+    "category": "Generators",
+    "icon": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z\"/>",
+    "js": "hash-generator.js",
     "priority": 0.9
   },
   {
@@ -45,6 +82,7 @@
     "fullName": "Lorem Ipsum Generator",
     "description": "Generate placeholder text for your designs, mockups, and prototypes in paragraphs, sentences, or words.",
     "shortDescription": "Placeholder text",
+    "category": "Generators",
     "icon": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M4 6h16M4 12h16M4 18h7\"/>",
     "js": "lorem-ipsum.js",
     "priority": 0.9
@@ -55,8 +93,20 @@
     "fullName": "QR Code Generator",
     "description": "Generate QR codes for URLs, text, and other data. Create scannable codes that work with any smartphone.",
     "shortDescription": "Create QR codes",
+    "category": "Generators",
     "icon": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h2M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z\"/>",
     "js": "qr-generator.js",
+    "priority": 0.9
+  },
+  {
+    "id": "timestamp-converter",
+    "name": "Timestamp Converter",
+    "fullName": "Unix Timestamp Converter",
+    "description": "Convert Unix timestamps to human-readable dates and vice versa. Supports multiple date formats and timezones.",
+    "shortDescription": "Unix time ↔ Date",
+    "category": "Converters",
+    "icon": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z\"/>",
+    "js": "timestamp-converter.js",
     "priority": 0.9
   }
 ]
