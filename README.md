@@ -55,10 +55,14 @@ This is a **passive income project** designed to generate revenue through advert
 |------|-------------|-----|
 | **JSON Formatter** | Format, validate, beautify, and minify JSON | `/tools/json-formatter/` |
 | **Base64 Encoder** | Encode/decode Base64, file upload support | `/tools/base64-encoder/` |
+| **URL Encoder** | Encode/decode URLs and query strings | `/tools/url-encoder/` |
+| **JWT Decoder** | Decode and inspect JSON Web Tokens | `/tools/jwt-decoder/` |
 | **Password Generator** | Generate secure random passwords | `/tools/password-generator/` |
 | **UUID Generator** | Generate UUID v4 with bulk support | `/tools/uuid-generator/` |
+| **Hash Generator** | Generate MD5, SHA-1, SHA-256, SHA-512 hashes | `/tools/hash-generator/` |
 | **Lorem Ipsum** | Generate placeholder text | `/tools/lorem-ipsum/` |
 | **QR Code Generator** | Create QR codes for URLs/text | `/tools/qr-code-generator/` |
+| **Timestamp Converter** | Convert Unix timestamps to dates and vice versa | `/tools/timestamp-converter/` |
 
 ---
 
@@ -98,10 +102,14 @@ onedevkit/
 │   │   ├── cookie-consent.js  # GDPR/CCPA compliance
 │   │   ├── json-formatter.js  # JSON tool logic
 │   │   ├── base64.js          # Base64 tool logic
+│   │   ├── url-encoder.js     # URL encoder/decoder
+│   │   ├── jwt-decoder.js     # JWT decoder
 │   │   ├── password-generator.js
 │   │   ├── uuid-generator.js
+│   │   ├── hash-generator.js  # Hash generator (MD5, SHA)
 │   │   ├── lorem-ipsum.js
-│   │   └── qr-generator.js
+│   │   ├── qr-generator.js
+│   │   └── timestamp-converter.js
 │   │
 │   ├── images/
 │   │   └── og/                # Open Graph images (1200x630)
@@ -324,13 +332,17 @@ npm run test:unit        # Run all unit tests
 npm run test:unit:watch  # Watch mode
 ```
 
-**Coverage:** 177 tests across 8 test suites
+**Coverage:** 289 tests across 12 test suites
 - JSON Formatter (30 tests)
 - Base64 Encoder (24 tests)
+- URL Encoder (17 tests)
+- JWT Decoder (20 tests)
 - Password Generator (17 tests)
 - UUID Generator (15 tests)
+- Hash Generator (16 tests)
 - Lorem Ipsum (15 tests)
 - QR Generator (18 tests)
+- Timestamp Converter (18 tests)
 - Common Utilities (33 tests)
 - Cookie Consent (25 tests)
 
@@ -341,7 +353,7 @@ npm run test:e2e     # Run headless
 npm run test:e2e:ui  # Interactive UI mode
 ```
 
-**Coverage:** 41 tests covering all tools, UI interactions, and content integrity
+**Coverage:** 65 tests covering all 10 tools, UI interactions, and content integrity
 
 ### Manual Testing
 

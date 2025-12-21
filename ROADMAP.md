@@ -21,8 +21,8 @@ Revenue = Traffic × Pages/Visit × Ad Impressions × RPM
 
 ## Current State
 
-**Version:** 1.3.0
-**Tools:** 6
+**Version:** 1.4.0
+**Tools:** 10
 **Monthly Traffic:** TBD (check Google Analytics)
 **Revenue:** TBD (AdSense not yet implemented)
 
@@ -35,6 +35,10 @@ Revenue = Traffic × Pages/Visit × Ad Impressions × RPM
 | UUID Generator | "uuid generator", "generate uuid" | 50K-100K |
 | Lorem Ipsum | "lorem ipsum generator" | 50K-100K |
 | QR Code Generator | "qr code generator", "create qr code" | 500K-1M |
+| URL Encoder | "url encode", "urlencode online" | 50K-100K |
+| Hash Generator | "md5 hash generator", "sha256 online" | 100K-300K |
+| Timestamp Converter | "unix timestamp converter", "epoch converter" | 50K-100K |
+| JWT Decoder | "jwt decoder", "decode jwt token" | 50K-150K |
 
 **Note:** Verify actual search volumes using [Ahrefs](https://ahrefs.com), [SEMrush](https://semrush.com), or [Ubersuggest](https://neilpatel.com/ubersuggest/).
 
@@ -59,16 +63,16 @@ Fast pages rank higher, but this is maintenance, not growth
 ## Phase 1: High-Traffic Tools
 **Goal:** Add tools with highest search volume first
 
-| Tool | Est. Monthly Searches | Effort | Traffic Potential |
-|------|----------------------|--------|-------------------|
-| **Regex Tester** | 200K-500K | Medium | Very High |
-| **Hash Generator (MD5/SHA)** | 100K-300K | Small | Very High |
-| **JWT Decoder** | 50K-150K | Medium | High |
-| **Timestamp Converter** | 50K-100K | Small | High |
-| **URL Encoder/Decoder** | 50K-100K | Small | High |
-| **Diff Checker** | 50K-100K | Medium | High |
-| **Color Picker/Converter** | 100K-200K | Small | High |
-| **Markdown Preview** | 30K-80K | Small | Medium |
+| Tool | Est. Monthly Searches | Effort | Traffic Potential | Status |
+|------|----------------------|--------|-------------------|--------|
+| **Regex Tester** | 200K-500K | Medium | Very High | Planned |
+| **Hash Generator (MD5/SHA)** | 100K-300K | Small | Very High | ✅ Done |
+| **JWT Decoder** | 50K-150K | Medium | High | ✅ Done |
+| **Timestamp Converter** | 50K-100K | Small | High | ✅ Done |
+| **URL Encoder/Decoder** | 50K-100K | Small | High | ✅ Done |
+| **Diff Checker** | 50K-100K | Medium | High | Planned |
+| **Color Picker/Converter** | 100K-200K | Small | High | Planned |
+| **Markdown Preview** | 30K-80K | Small | Medium | Planned |
 
 ### Why These Tools First
 
@@ -221,7 +225,7 @@ These features are nice but don't drive ad revenue:
 | QR Code Generator | qr code generator | ✅ Yes |
 | Regex Tester | regex tester, regex101 | ❌ No |
 | Color Picker | color picker, hex to rgb | ❌ No |
-| Hash Generator | md5 generator, sha256 | ❌ No |
+| Hash Generator | md5 generator, sha256 | ✅ Yes |
 | Base64 Encoder | base64 decode | ✅ Yes |
 
 ### Tier 2: High Volume (50K-100K monthly searches)
@@ -231,9 +235,9 @@ These features are nice but don't drive ad revenue:
 |------|-----------------|---------------|
 | UUID Generator | uuid generator | ✅ Yes |
 | Lorem Ipsum | lorem ipsum generator | ✅ Yes |
-| Timestamp Converter | unix timestamp converter | ❌ No |
-| URL Encoder | url encode, urlencode | ❌ No |
-| JWT Decoder | jwt decoder | ❌ No |
+| Timestamp Converter | unix timestamp converter | ✅ Yes |
+| URL Encoder | url encode, urlencode | ✅ Yes |
+| JWT Decoder | jwt decoder | ✅ Yes |
 | Diff Checker | diff checker, text compare | ❌ No |
 | Image to Base64 | image to base64 | ❌ No |
 
@@ -323,12 +327,11 @@ Use [SimilarWeb](https://www.similarweb.com/) or [Ahrefs](https://ahrefs.com/tra
 - [ ] Verify all existing tools rank for target keywords
 - [ ] Check Core Web Vitals in Search Console
 - [ ] Identify keyword gaps vs competitors
-- [ ] Plan first 3 high-traffic tools to build
 
-### This Month
-- [ ] Launch Hash Generator (1-2 days dev)
-- [ ] Launch URL Encoder (1 day dev)
-- [ ] Launch Timestamp Converter (1-2 days dev)
+### Next Tools to Build
+- [ ] Regex Tester (highest volume remaining)
+- [ ] Color Picker/Converter
+- [ ] Diff Checker
 - [ ] Write first blog article
 
 ---
@@ -400,6 +403,7 @@ Once you have consistent traffic (10K+ monthly):
 
 | Date | Version | Changes |
 |------|---------|---------|
+| 2025-12-21 | 1.2 | Updated for v1.4.0 - marked 4 new tools as complete |
 | 2025-12-21 | 1.1 | Reframed for traffic-first passive income strategy |
 | 2025-12-21 | 1.0 | Initial roadmap created |
 
