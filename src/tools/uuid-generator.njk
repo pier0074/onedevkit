@@ -8,7 +8,7 @@ toolId: uuid-generator
 toolJs: uuid-generator.js
 ogImage: uuid-generator.jpg
 ---
-{% set toolData = tools | selectattr("id", "equalto", toolId) | first %}
+{% set toolData = tools | findById(toolId) %}
 
 {% block schema %}
 <script type="application/ld+json">

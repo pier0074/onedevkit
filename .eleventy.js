@@ -13,6 +13,11 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addWatchTarget("src/css/");
   eleventyConfig.addWatchTarget("src/js/");
 
+  // Custom filter to find tool by ID
+  eleventyConfig.addFilter("findById", function(array, id) {
+    return array.find(item => item.id === id);
+  });
+
   // Get current date for sitemap
   eleventyConfig.addShortcode("currentDate", () => {
     return new Date().toISOString().split('T')[0];

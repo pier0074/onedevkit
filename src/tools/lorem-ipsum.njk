@@ -8,7 +8,7 @@ toolId: lorem-ipsum
 toolJs: lorem-ipsum.js
 ogImage: lorem-ipsum.jpg
 ---
-{% set toolData = tools | selectattr("id", "equalto", toolId) | first %}
+{% set toolData = tools | findById(toolId) %}
 
 {% block schema %}
 <script type="application/ld+json">
