@@ -63,6 +63,10 @@ This is a **passive income project** designed to generate revenue through advert
 | **Lorem Ipsum** | Generate placeholder text | `/tools/lorem-ipsum/` |
 | **QR Code Generator** | Create QR codes for URLs/text | `/tools/qr-code-generator/` |
 | **Timestamp Converter** | Convert Unix timestamps to dates and vice versa | `/tools/timestamp-converter/` |
+| **Regex Tester** | Test and debug regular expressions with live matching | `/tools/regex-tester/` |
+| **Color Picker** | Pick colors and convert between HEX, RGB, HSL | `/tools/color-picker/` |
+| **Diff Checker** | Compare two texts and highlight differences | `/tools/diff-checker/` |
+| **Markdown Preview** | Write Markdown with live preview | `/tools/markdown-preview/` |
 
 ---
 
@@ -109,7 +113,11 @@ onedevkit/
 │   │   ├── hash-generator.js  # Hash generator (MD5, SHA)
 │   │   ├── lorem-ipsum.js
 │   │   ├── qr-generator.js
-│   │   └── timestamp-converter.js
+│   │   ├── timestamp-converter.js
+│   │   ├── regex-tester.js    # Regex tester
+│   │   ├── color-picker.js    # Color picker/converter
+│   │   ├── diff-checker.js    # Text diff checker
+│   │   └── markdown-preview.js # Markdown editor
 │   │
 │   ├── images/
 │   │   └── og/                # Open Graph images (1200x630)
@@ -332,7 +340,7 @@ npm run test:unit        # Run all unit tests
 npm run test:unit:watch  # Watch mode
 ```
 
-**Coverage:** 289 tests across 12 test suites
+**Coverage:** 359 tests across 16 test suites
 - JSON Formatter (30 tests)
 - Base64 Encoder (24 tests)
 - URL Encoder (17 tests)
@@ -343,6 +351,10 @@ npm run test:unit:watch  # Watch mode
 - Lorem Ipsum (15 tests)
 - QR Generator (18 tests)
 - Timestamp Converter (18 tests)
+- Regex Tester (14 tests)
+- Color Picker (16 tests)
+- Diff Checker (14 tests)
+- Markdown Preview (26 tests)
 - Common Utilities (33 tests)
 - Cookie Consent (25 tests)
 
@@ -353,7 +365,7 @@ npm run test:e2e     # Run headless
 npm run test:e2e:ui  # Interactive UI mode
 ```
 
-**Coverage:** 65 tests covering all 10 tools, UI interactions, and content integrity
+**Coverage:** 87 tests covering all 14 tools, UI interactions, and content integrity
 
 ### Manual Testing
 

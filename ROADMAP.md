@@ -21,8 +21,8 @@ Revenue = Traffic × Pages/Visit × Ad Impressions × RPM
 
 ## Current State
 
-**Version:** 1.4.0
-**Tools:** 10
+**Version:** 1.5.0
+**Tools:** 14
 **Monthly Traffic:** TBD (check Google Analytics)
 **Revenue:** TBD (AdSense not yet implemented)
 
@@ -39,6 +39,10 @@ Revenue = Traffic × Pages/Visit × Ad Impressions × RPM
 | Hash Generator | "md5 hash generator", "sha256 online" | 100K-300K |
 | Timestamp Converter | "unix timestamp converter", "epoch converter" | 50K-100K |
 | JWT Decoder | "jwt decoder", "decode jwt token" | 50K-150K |
+| Regex Tester | "regex tester", "regex101 alternative" | 200K-500K |
+| Color Picker | "color picker", "hex to rgb converter" | 100K-200K |
+| Diff Checker | "diff checker", "text compare online" | 50K-100K |
+| Markdown Preview | "markdown preview", "markdown editor online" | 30K-80K |
 
 **Note:** Verify actual search volumes using [Ahrefs](https://ahrefs.com), [SEMrush](https://semrush.com), or [Ubersuggest](https://neilpatel.com/ubersuggest/).
 
@@ -65,14 +69,14 @@ Fast pages rank higher, but this is maintenance, not growth
 
 | Tool | Est. Monthly Searches | Effort | Traffic Potential | Status |
 |------|----------------------|--------|-------------------|--------|
-| **Regex Tester** | 200K-500K | Medium | Very High | Planned |
+| **Regex Tester** | 200K-500K | Medium | Very High | ✅ Done |
 | **Hash Generator (MD5/SHA)** | 100K-300K | Small | Very High | ✅ Done |
 | **JWT Decoder** | 50K-150K | Medium | High | ✅ Done |
 | **Timestamp Converter** | 50K-100K | Small | High | ✅ Done |
 | **URL Encoder/Decoder** | 50K-100K | Small | High | ✅ Done |
-| **Diff Checker** | 50K-100K | Medium | High | Planned |
-| **Color Picker/Converter** | 100K-200K | Small | High | Planned |
-| **Markdown Preview** | 30K-80K | Small | Medium | Planned |
+| **Diff Checker** | 50K-100K | Medium | High | ✅ Done |
+| **Color Picker/Converter** | 100K-200K | Small | High | ✅ Done |
+| **Markdown Preview** | 30K-80K | Small | Medium | ✅ Done |
 
 ### Why These Tools First
 
@@ -223,8 +227,8 @@ These features are nice but don't drive ad revenue:
 | JSON Formatter | json formatter, json validator | ✅ Yes |
 | Password Generator | password generator | ✅ Yes |
 | QR Code Generator | qr code generator | ✅ Yes |
-| Regex Tester | regex tester, regex101 | ❌ No |
-| Color Picker | color picker, hex to rgb | ❌ No |
+| Regex Tester | regex tester, regex101 | ✅ Yes |
+| Color Picker | color picker, hex to rgb | ✅ Yes |
 | Hash Generator | md5 generator, sha256 | ✅ Yes |
 | Base64 Encoder | base64 decode | ✅ Yes |
 
@@ -238,7 +242,7 @@ These features are nice but don't drive ad revenue:
 | Timestamp Converter | unix timestamp converter | ✅ Yes |
 | URL Encoder | url encode, urlencode | ✅ Yes |
 | JWT Decoder | jwt decoder | ✅ Yes |
-| Diff Checker | diff checker, text compare | ❌ No |
+| Diff Checker | diff checker, text compare | ✅ Yes |
 | Image to Base64 | image to base64 | ❌ No |
 
 ### Tier 3: Medium Volume (20K-50K monthly searches)
@@ -329,9 +333,9 @@ Use [SimilarWeb](https://www.similarweb.com/) or [Ahrefs](https://ahrefs.com/tra
 - [ ] Identify keyword gaps vs competitors
 
 ### Next Tools to Build
-- [ ] Regex Tester (highest volume remaining)
-- [ ] Color Picker/Converter
-- [ ] Diff Checker
+- [ ] Image to Base64 converter
+- [ ] XML Formatter
+- [ ] YAML to JSON converter
 - [ ] Write first blog article
 
 ---
@@ -403,6 +407,7 @@ Once you have consistent traffic (10K+ monthly):
 
 | Date | Version | Changes |
 |------|---------|---------|
+| 2025-12-21 | 1.3 | Updated for v1.5.0 - Phase 1 complete with all 8 high-traffic tools done |
 | 2025-12-21 | 1.2 | Updated for v1.4.0 - marked 4 new tools as complete |
 | 2025-12-21 | 1.1 | Reframed for traffic-first passive income strategy |
 | 2025-12-21 | 1.0 | Initial roadmap created |

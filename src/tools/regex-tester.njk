@@ -1,0 +1,205 @@
+---
+layout: layouts/tool.njk
+title: Regex Tester & Debugger
+description: Free online regex tester and debugger. Test regular expressions in real-time with match highlighting, capture groups, and pattern explanations.
+keywords: regex tester, regular expression tester, regex debugger, regex101 alternative, test regex online, regex pattern matcher
+permalink: /tools/regex-tester/
+toolId: regex-tester
+toolJs: regex-tester.js
+ogImage: regex-tester.jpg
+---
+{# Get tool data from tools.json #}
+{% set toolData = tools | findById(toolId) %}
+
+{% block schema %}
+<!-- Schema.org BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "{{ site.url }}/"},
+    {"@type": "ListItem", "position": 2, "name": "Tools", "item": "{{ site.url }}/#tools"},
+    {"@type": "ListItem", "position": 3, "name": "{{ toolData.name }}", "item": "{{ site.url }}{{ page.url }}"}
+  ]
+}
+</script>
+
+<!-- Schema.org WebApplication -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "{{ toolData.fullName }}",
+  "description": "{{ description }}",
+  "url": "{{ site.url }}{{ page.url }}",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+  "author": {"@type": "Organization", "name": "{{ site.name }}", "url": "{{ site.url }}"}
+}
+</script>
+{% endblock %}
+
+{% block head %}
+<style>
+  .regex-container { display: grid; gap: var(--space-4); }
+  .regex-input-group { display: grid; gap: var(--space-2); }
+  .regex-input-row { display: flex; gap: var(--space-2); align-items: center; }
+  .regex-input-row input[type="text"] { flex: 1; }
+  .regex-flags { display: flex; gap: var(--space-3); flex-wrap: wrap; }
+  .regex-flag { display: flex; align-items: center; gap: var(--space-1); cursor: pointer; }
+  .regex-flag input { cursor: pointer; }
+  .regex-flag label { cursor: pointer; font-size: var(--text-sm); color: var(--text-secondary); }
+  .match-highlight { background: #fef08a; color: #854d0e; padding: 1px 2px; border-radius: 2px; }
+  .match-highlight:nth-child(even) { background: #bbf7d0; color: #166534; }
+  .test-string-output { font-family: var(--font-mono); font-size: var(--text-sm); line-height: 1.8; white-space: pre-wrap; word-break: break-all; padding: var(--space-4); background: var(--color-bg-alt); border: 1px solid var(--color-border); border-radius: var(--radius-md); min-height: 100px; }
+  .matches-info { display: grid; gap: var(--space-3); }
+  .match-card { background: var(--color-bg-alt); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--space-3); }
+  .match-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-2); }
+  .match-index { font-weight: 600; color: var(--color-primary); }
+  .match-position { font-size: var(--text-xs); color: var(--text-muted); }
+  .match-value { font-family: var(--font-mono); font-size: var(--text-sm); background: var(--color-bg); padding: var(--space-2); border-radius: var(--radius-sm); word-break: break-all; }
+  .match-groups { margin-top: var(--space-2); padding-top: var(--space-2); border-top: 1px solid var(--color-border); }
+  .match-group { display: flex; gap: var(--space-2); font-size: var(--text-sm); margin-top: var(--space-1); }
+  .match-group-name { color: var(--text-muted); min-width: 80px; }
+  .match-group-value { font-family: var(--font-mono); color: var(--color-primary); }
+  .regex-stats { display: flex; gap: var(--space-4); padding: var(--space-3); background: var(--color-bg-alt); border-radius: var(--radius-md); }
+  .regex-stat { text-align: center; }
+  .regex-stat-value { font-size: var(--text-xl); font-weight: 600; color: var(--color-primary); }
+  .regex-stat-label { font-size: var(--text-xs); color: var(--text-muted); }
+  .regex-error { color: var(--color-error); font-size: var(--text-sm); padding: var(--space-2); background: #fef2f2; border: 1px solid #fecaca; border-radius: var(--radius-md); }
+</style>
+{% endblock %}
+
+<div class="tool-container">
+  <!-- Pattern Input -->
+  <div class="tool-input-group">
+    <div class="input-header">
+      <label for="regex-pattern" class="input-label">Regular Expression</label>
+      <button type="button" id="sample-regex" class="btn btn-text btn-sm">Load Sample</button>
+    </div>
+    <div class="regex-input-row">
+      <span style="font-size: var(--text-lg); color: var(--text-muted);">/</span>
+      <input type="text" id="regex-pattern" class="tool-input" placeholder="Enter regex pattern (e.g., \d+)" spellcheck="false">
+      <span style="font-size: var(--text-lg); color: var(--text-muted);">/</span>
+      <input type="text" id="regex-flags-input" class="tool-input" style="width: 60px;" placeholder="gi" value="g" spellcheck="false">
+    </div>
+    <div id="regex-error" class="regex-error hidden"></div>
+  </div>
+
+  <!-- Flags -->
+  <div class="regex-flags">
+    <div class="regex-flag">
+      <input type="checkbox" id="flag-g" checked>
+      <label for="flag-g">Global (g)</label>
+    </div>
+    <div class="regex-flag">
+      <input type="checkbox" id="flag-i">
+      <label for="flag-i">Case Insensitive (i)</label>
+    </div>
+    <div class="regex-flag">
+      <input type="checkbox" id="flag-m">
+      <label for="flag-m">Multiline (m)</label>
+    </div>
+    <div class="regex-flag">
+      <input type="checkbox" id="flag-s">
+      <label for="flag-s">Dot All (s)</label>
+    </div>
+    <div class="regex-flag">
+      <input type="checkbox" id="flag-u">
+      <label for="flag-u">Unicode (u)</label>
+    </div>
+  </div>
+
+  <!-- Test String Input -->
+  <div class="tool-input-group">
+    <label for="test-string" class="input-label">Test String</label>
+    <textarea id="test-string" class="tool-textarea" rows="5" placeholder="Enter text to test against the regex pattern..." spellcheck="false"></textarea>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="tool-actions">
+    <button type="button" id="clear-regex" class="btn btn-ghost">Clear All</button>
+  </div>
+
+  <!-- Stats -->
+  <div class="regex-stats" id="regex-stats">
+    <div class="regex-stat">
+      <div class="regex-stat-value" id="match-count">0</div>
+      <div class="regex-stat-label">Matches</div>
+    </div>
+    <div class="regex-stat">
+      <div class="regex-stat-value" id="group-count">0</div>
+      <div class="regex-stat-label">Groups</div>
+    </div>
+    <div class="regex-stat">
+      <div class="regex-stat-value" id="exec-time">0ms</div>
+      <div class="regex-stat-label">Exec Time</div>
+    </div>
+  </div>
+
+  <!-- Highlighted Output -->
+  <div class="tool-input-group">
+    <label class="input-label">Matches Highlighted</label>
+    <div class="test-string-output" id="highlighted-output">Enter a pattern and test string to see matches highlighted.</div>
+  </div>
+
+  <!-- Match Details -->
+  <div class="tool-input-group">
+    <label class="input-label">Match Details</label>
+    <div class="matches-info" id="matches-info">
+      <p style="color: var(--text-muted); font-size: var(--text-sm);">Match details will appear here.</p>
+    </div>
+  </div>
+</div>
+
+<!-- How to Use Section -->
+<section class="content-section">
+  <h2>How to Use</h2>
+  <div class="steps">
+    <div class="step"><div class="step-number">1</div><div class="step-content"><h3>Enter Your Pattern</h3><p>Type your regular expression in the pattern field. Use standard regex syntax.</p></div></div>
+    <div class="step"><div class="step-number">2</div><div class="step-content"><h3>Set Flags</h3><p>Choose flags like global (g), case-insensitive (i), or multiline (m) to modify matching behavior.</p></div></div>
+    <div class="step"><div class="step-number">3</div><div class="step-content"><h3>Add Test Text</h3><p>Enter the text you want to test. Matches will be highlighted in real-time.</p></div></div>
+    <div class="step"><div class="step-number">4</div><div class="step-content"><h3>View Results</h3><p>See all matches highlighted with detailed information about each match and capture groups.</p></div></div>
+  </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="content-section">
+  <h2>FAQ</h2>
+  <div class="faq-list">
+    <details class="faq-item">
+      <summary class="faq-question">What regex syntax is supported?</summary>
+      <div class="faq-answer"><p>This tool uses JavaScript's native RegExp engine. It supports standard regex syntax including character classes, quantifiers, groups, lookahead/lookbehind, and Unicode properties.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-question">What do the flags mean?</summary>
+      <div class="faq-answer"><p><strong>g (global)</strong>: Find all matches. <strong>i</strong>: Case-insensitive. <strong>m (multiline)</strong>: ^ and $ match line boundaries. <strong>s (dotAll)</strong>: . matches newlines. <strong>u (unicode)</strong>: Enable Unicode features.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-question">How do I use capture groups?</summary>
+      <div class="faq-answer"><p>Use parentheses to create groups: <code>(pattern)</code>. Named groups use <code>(?&lt;name&gt;pattern)</code>. Groups are shown in the match details section.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-question">Is my data secure?</summary>
+      <div class="faq-answer"><p>Yes. All regex processing happens in your browser. Your patterns and test strings never leave your device.</p></div>
+    </details>
+  </div>
+</section>
+
+<!-- Related Tools -->
+<section class="content-section">
+  <h2>Related Tools</h2>
+  <div class="related-tools">
+    {% for tool in tools %}
+    {% if tool.id != toolId %}
+    <a href="/tools/{{ tool.id }}/" class="related-tool-link">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16">{{ tool.icon | safe }}</svg>
+      {{ tool.name }}
+    </a>
+    {% endif %}
+    {% endfor %}
+  </div>
+</section>

@@ -1,0 +1,217 @@
+---
+layout: layouts/tool.njk
+title: Color Picker & Converter
+description: Free online color picker and converter. Convert between HEX, RGB, HSL, and HSV color formats. Pick colors and generate palettes instantly.
+keywords: color picker, hex to rgb, rgb to hex, color converter, hsl converter, color palette generator, hex color picker
+permalink: /tools/color-picker/
+toolId: color-picker
+toolJs: color-picker.js
+ogImage: color-picker.jpg
+---
+{# Get tool data from tools.json #}
+{% set toolData = tools | findById(toolId) %}
+
+{% block schema %}
+<!-- Schema.org BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "{{ site.url }}/"},
+    {"@type": "ListItem", "position": 2, "name": "Tools", "item": "{{ site.url }}/#tools"},
+    {"@type": "ListItem", "position": 3, "name": "{{ toolData.name }}", "item": "{{ site.url }}{{ page.url }}"}
+  ]
+}
+</script>
+
+<!-- Schema.org WebApplication -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "{{ toolData.fullName }}",
+  "description": "{{ description }}",
+  "url": "{{ site.url }}{{ page.url }}",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+  "author": {"@type": "Organization", "name": "{{ site.name }}", "url": "{{ site.url }}"}
+}
+</script>
+{% endblock %}
+
+{% block head %}
+<style>
+  .color-picker-container { display: grid; gap: var(--space-6); }
+  .color-main { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); }
+  @media (max-width: 768px) { .color-main { grid-template-columns: 1fr; } }
+  .color-preview-section { display: flex; flex-direction: column; gap: var(--space-4); }
+  .color-preview { width: 100%; aspect-ratio: 1; border-radius: var(--radius-lg); border: 1px solid var(--color-border); display: flex; align-items: center; justify-content: center; font-size: var(--text-2xl); font-weight: 600; transition: background-color 0.2s; }
+  .color-picker-native { width: 100%; height: 50px; border: none; border-radius: var(--radius-md); cursor: pointer; padding: 0; }
+  .color-picker-native::-webkit-color-swatch-wrapper { padding: 0; }
+  .color-picker-native::-webkit-color-swatch { border: 1px solid var(--color-border); border-radius: var(--radius-md); }
+  .color-inputs { display: flex; flex-direction: column; gap: var(--space-4); }
+  .color-input-group { display: grid; gap: var(--space-2); }
+  .color-input-row { display: flex; gap: var(--space-2); align-items: center; }
+  .color-input-row label { min-width: 45px; font-size: var(--text-sm); font-weight: 500; color: var(--text-secondary); }
+  .color-input-row input[type="text"] { flex: 1; font-family: var(--font-mono); }
+  .color-input-row input[type="number"] { width: 70px; font-family: var(--font-mono); text-align: center; }
+  .color-input-row input[type="range"] { flex: 1; }
+  .copy-btn { padding: var(--space-2) var(--space-3); font-size: var(--text-xs); }
+  .color-format-section { background: var(--color-bg-alt); border-radius: var(--radius-md); padding: var(--space-4); }
+  .color-format-title { font-weight: 600; margin-bottom: var(--space-3); color: var(--text-secondary); font-size: var(--text-sm); text-transform: uppercase; letter-spacing: 0.05em; }
+  .color-palette { display: grid; gap: var(--space-4); }
+  .palette-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(60px, 1fr)); gap: var(--space-2); }
+  .palette-color { aspect-ratio: 1; border-radius: var(--radius-md); border: 1px solid var(--color-border); cursor: pointer; transition: transform 0.15s, box-shadow 0.15s; position: relative; }
+  .palette-color:hover { transform: scale(1.1); box-shadow: var(--shadow-md); z-index: 1; }
+  .palette-label { text-align: center; font-size: var(--text-xs); color: var(--text-muted); margin-top: var(--space-1); }
+  .complementary-section { margin-top: var(--space-6); }
+</style>
+{% endblock %}
+
+<div class="tool-container">
+  <div class="color-main">
+    <!-- Color Preview & Picker -->
+    <div class="color-preview-section">
+      <div class="color-preview" id="color-preview" style="background-color: #2563eb;">
+        <span id="preview-text" style="color: #ffffff;">#2563EB</span>
+      </div>
+      <input type="color" id="color-picker" class="color-picker-native" value="#2563eb">
+      <button type="button" id="random-color" class="btn btn-secondary">Random Color</button>
+    </div>
+
+    <!-- Color Inputs -->
+    <div class="color-inputs">
+      <!-- HEX -->
+      <div class="color-format-section">
+        <div class="color-format-title">HEX</div>
+        <div class="color-input-row">
+          <label>HEX</label>
+          <input type="text" id="hex-input" class="tool-input" value="#2563EB" spellcheck="false">
+          <button type="button" class="btn btn-secondary copy-btn" data-copy="hex">Copy</button>
+        </div>
+      </div>
+
+      <!-- RGB -->
+      <div class="color-format-section">
+        <div class="color-format-title">RGB</div>
+        <div class="color-input-row">
+          <label>R</label>
+          <input type="number" id="rgb-r" class="tool-input" min="0" max="255" value="37">
+          <input type="range" id="rgb-r-slider" min="0" max="255" value="37">
+        </div>
+        <div class="color-input-row">
+          <label>G</label>
+          <input type="number" id="rgb-g" class="tool-input" min="0" max="255" value="99">
+          <input type="range" id="rgb-g-slider" min="0" max="255" value="99">
+        </div>
+        <div class="color-input-row">
+          <label>B</label>
+          <input type="number" id="rgb-b" class="tool-input" min="0" max="255" value="235">
+          <input type="range" id="rgb-b-slider" min="0" max="255" value="235">
+        </div>
+        <div class="color-input-row" style="margin-top: var(--space-2);">
+          <label>CSS</label>
+          <input type="text" id="rgb-css" class="tool-input" value="rgb(37, 99, 235)" readonly>
+          <button type="button" class="btn btn-secondary copy-btn" data-copy="rgb">Copy</button>
+        </div>
+      </div>
+
+      <!-- HSL -->
+      <div class="color-format-section">
+        <div class="color-format-title">HSL</div>
+        <div class="color-input-row">
+          <label>H</label>
+          <input type="number" id="hsl-h" class="tool-input" min="0" max="360" value="221">
+          <input type="range" id="hsl-h-slider" min="0" max="360" value="221">
+        </div>
+        <div class="color-input-row">
+          <label>S</label>
+          <input type="number" id="hsl-s" class="tool-input" min="0" max="100" value="83">
+          <input type="range" id="hsl-s-slider" min="0" max="100" value="83">
+        </div>
+        <div class="color-input-row">
+          <label>L</label>
+          <input type="number" id="hsl-l" class="tool-input" min="0" max="100" value="53">
+          <input type="range" id="hsl-l-slider" min="0" max="100" value="53">
+        </div>
+        <div class="color-input-row" style="margin-top: var(--space-2);">
+          <label>CSS</label>
+          <input type="text" id="hsl-css" class="tool-input" value="hsl(221, 83%, 53%)" readonly>
+          <button type="button" class="btn btn-secondary copy-btn" data-copy="hsl">Copy</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Color Palette Section -->
+  <div class="complementary-section">
+    <h3 style="margin-bottom: var(--space-4);">Color Palette</h3>
+
+    <div class="color-palette">
+      <div>
+        <div class="palette-label" style="margin-bottom: var(--space-2); font-weight: 500;">Shades</div>
+        <div class="palette-row" id="shades-palette"></div>
+      </div>
+      <div>
+        <div class="palette-label" style="margin-bottom: var(--space-2); font-weight: 500;">Tints</div>
+        <div class="palette-row" id="tints-palette"></div>
+      </div>
+      <div>
+        <div class="palette-label" style="margin-bottom: var(--space-2); font-weight: 500;">Complementary</div>
+        <div class="palette-row" id="complementary-palette"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- How to Use Section -->
+<section class="content-section">
+  <h2>How to Use</h2>
+  <div class="steps">
+    <div class="step"><div class="step-number">1</div><div class="step-content"><h3>Pick a Color</h3><p>Use the color picker, enter a HEX code, or adjust RGB/HSL sliders to select your color.</p></div></div>
+    <div class="step"><div class="step-number">2</div><div class="step-content"><h3>View Conversions</h3><p>See your color converted to HEX, RGB, and HSL formats automatically.</p></div></div>
+    <div class="step"><div class="step-number">3</div><div class="step-content"><h3>Copy Values</h3><p>Click the Copy button next to any format to copy the value to your clipboard.</p></div></div>
+    <div class="step"><div class="step-number">4</div><div class="step-content"><h3>Explore Palettes</h3><p>View shades, tints, and complementary colors. Click any palette color to use it.</p></div></div>
+  </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="content-section">
+  <h2>FAQ</h2>
+  <div class="faq-list">
+    <details class="faq-item">
+      <summary class="faq-question">What's the difference between HEX, RGB, and HSL?</summary>
+      <div class="faq-answer"><p><strong>HEX</strong> uses hexadecimal values (e.g., #FF5733). <strong>RGB</strong> defines colors by Red, Green, Blue values (0-255). <strong>HSL</strong> uses Hue (0-360), Saturation (0-100%), and Lightness (0-100%).</p></div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-question">Which format should I use?</summary>
+      <div class="faq-answer"><p>HEX is compact and widely used in CSS. RGB is intuitive for mixing colors. HSL is best for creating variations (adjusting lightness/saturation while keeping the hue).</p></div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-question">What are shades and tints?</summary>
+      <div class="faq-answer"><p><strong>Shades</strong> are darker variations (adding black). <strong>Tints</strong> are lighter variations (adding white). These help create consistent color hierarchies in your designs.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-question">What's a complementary color?</summary>
+      <div class="faq-answer"><p>Complementary colors are opposite on the color wheel (180 degrees apart in hue). They create strong contrast and visual interest when used together.</p></div>
+    </details>
+  </div>
+</section>
+
+<!-- Related Tools -->
+<section class="content-section">
+  <h2>Related Tools</h2>
+  <div class="related-tools">
+    {% for tool in tools %}
+    {% if tool.id != toolId %}
+    <a href="/tools/{{ tool.id }}/" class="related-tool-link">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16">{{ tool.icon | safe }}</svg>
+      {{ tool.name }}
+    </a>
+    {% endif %}
+    {% endfor %}
+  </div>
+</section>

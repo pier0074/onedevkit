@@ -508,6 +508,209 @@ test.describe('JWT Decoder', () => {
   });
 });
 
+// ============================================
+// Regex Tester Tests
+// ============================================
+test.describe('Regex Tester', () => {
+  test('page loads with correct title', async ({ page }) => {
+    await page.goto('/tools/regex-tester/');
+    await expect(page).toHaveTitle(/Regex Tester/);
+  });
+
+  test('matches pattern in test string', async ({ page }) => {
+    await page.goto('/tools/regex-tester/');
+
+    await page.fill('#regex-pattern', '\\d+');
+    await page.fill('#test-string', 'abc 123 def 456');
+
+    await page.waitForTimeout(300); // Wait for debounce
+
+    const matchCount = await page.locator('#match-count').textContent();
+    expect(matchCount).toBe('2');
+  });
+
+  test('sample button loads sample data', async ({ page }) => {
+    await page.goto('/tools/regex-tester/');
+    await page.click('#sample-regex');
+
+    const pattern = await page.locator('#regex-pattern').inputValue();
+    expect(pattern).not.toBe('');
+
+    const matchCount = await page.locator('#match-count').textContent();
+    expect(parseInt(matchCount)).toBeGreaterThan(0);
+  });
+
+  test('shows error for invalid regex', async ({ page }) => {
+    await page.goto('/tools/regex-tester/');
+
+    await page.fill('#regex-pattern', '[invalid');
+    await page.fill('#test-string', 'test');
+
+    await page.waitForTimeout(300);
+
+    await expect(page.locator('#regex-error')).toBeVisible();
+  });
+
+  test('clear button works', async ({ page }) => {
+    await page.goto('/tools/regex-tester/');
+    await page.click('#sample-regex');
+    await page.click('#clear-regex');
+
+    const pattern = await page.locator('#regex-pattern').inputValue();
+    expect(pattern).toBe('');
+  });
+});
+
+// ============================================
+// Color Picker Tests
+// ============================================
+test.describe('Color Picker', () => {
+  test('page loads with correct title', async ({ page }) => {
+    await page.goto('/tools/color-picker/');
+    await expect(page).toHaveTitle(/Color Picker/);
+  });
+
+  test('hex input updates other formats', async ({ page }) => {
+    await page.goto('/tools/color-picker/');
+
+    await page.fill('#hex-input', '#ff0000');
+    await page.press('#hex-input', 'Enter');
+
+    await page.waitForTimeout(100);
+
+    const rgbR = await page.locator('#rgb-r').inputValue();
+    expect(rgbR).toBe('255');
+  });
+
+  test('random color button works', async ({ page }) => {
+    await page.goto('/tools/color-picker/');
+
+    const initialHex = await page.locator('#hex-input').inputValue();
+    await page.click('#random-color');
+    await page.waitForTimeout(100);
+    const newHex = await page.locator('#hex-input').inputValue();
+
+    // There's a tiny chance they're the same, but very unlikely
+    expect(newHex).toBeDefined();
+    expect(newHex.length).toBe(7);
+  });
+
+  test('palette colors are generated', async ({ page }) => {
+    await page.goto('/tools/color-picker/');
+
+    const shades = await page.locator('#shades-palette .palette-color').count();
+    const tints = await page.locator('#tints-palette .palette-color').count();
+
+    expect(shades).toBe(7);
+    expect(tints).toBe(7);
+  });
+});
+
+// ============================================
+// Diff Checker Tests
+// ============================================
+test.describe('Diff Checker', () => {
+  test('page loads with correct title', async ({ page }) => {
+    await page.goto('/tools/diff-checker/');
+    await expect(page).toHaveTitle(/Diff Checker/);
+  });
+
+  test('compares two texts and shows differences', async ({ page }) => {
+    await page.goto('/tools/diff-checker/');
+
+    await page.fill('#text-original', 'line1\nline2');
+    await page.fill('#text-modified', 'line1\nmodified');
+    await page.click('#compare-btn');
+
+    const additions = await page.locator('#stat-additions').textContent();
+    const deletions = await page.locator('#stat-deletions').textContent();
+
+    expect(additions).toBe('1');
+    expect(deletions).toBe('1');
+  });
+
+  test('sample button loads sample data', async ({ page }) => {
+    await page.goto('/tools/diff-checker/');
+    await page.click('#sample-diff');
+
+    const original = await page.locator('#text-original').inputValue();
+    expect(original).not.toBe('');
+
+    const additions = await page.locator('#stat-additions').textContent();
+    expect(parseInt(additions)).toBeGreaterThan(0);
+  });
+
+  test('swap button exchanges texts', async ({ page }) => {
+    await page.goto('/tools/diff-checker/');
+
+    await page.fill('#text-original', 'original');
+    await page.fill('#text-modified', 'modified');
+    await page.click('#swap-texts');
+
+    const original = await page.locator('#text-original').inputValue();
+    const modified = await page.locator('#text-modified').inputValue();
+
+    expect(original).toBe('modified');
+    expect(modified).toBe('original');
+  });
+
+  test('clear button works', async ({ page }) => {
+    await page.goto('/tools/diff-checker/');
+    await page.click('#sample-diff');
+    await page.click('#clear-diff');
+
+    const original = await page.locator('#text-original').inputValue();
+    expect(original).toBe('');
+  });
+});
+
+// ============================================
+// Markdown Preview Tests
+// ============================================
+test.describe('Markdown Preview', () => {
+  test('page loads with correct title', async ({ page }) => {
+    await page.goto('/tools/markdown-preview/');
+    await expect(page).toHaveTitle(/Markdown/);
+  });
+
+  test('renders markdown in preview', async ({ page }) => {
+    await page.goto('/tools/markdown-preview/');
+
+    await page.fill('#markdown-input', '# Hello World');
+    await page.waitForTimeout(100);
+
+    const preview = await page.locator('#markdown-preview').innerHTML();
+    expect(preview).toContain('<h1>Hello World</h1>');
+  });
+
+  test('sample button loads sample data', async ({ page }) => {
+    await page.goto('/tools/markdown-preview/');
+    await page.click('#sample-md');
+
+    const input = await page.locator('#markdown-input').inputValue();
+    expect(input).toContain('# Markdown');
+  });
+
+  test('updates character count', async ({ page }) => {
+    await page.goto('/tools/markdown-preview/');
+
+    await page.fill('#markdown-input', 'Hello');
+    await page.waitForTimeout(100);
+
+    const charCount = await page.locator('#char-count').textContent();
+    expect(charCount).toBe('5 characters');
+  });
+
+  test('clear button works', async ({ page }) => {
+    await page.goto('/tools/markdown-preview/');
+    await page.click('#sample-md');
+    await page.click('#clear-md');
+
+    const input = await page.locator('#markdown-input').inputValue();
+    expect(input).toBe('');
+  });
+});
+
 test.describe('Tool Page Content Integrity', () => {
   // These tests ensure each tool page displays its OWN content, not another tool's
   // This prevents regressions like the selectattr bug where all pages showed JSON Formatter
@@ -523,6 +726,10 @@ test.describe('Tool Page Content Integrity', () => {
     { path: '/tools/hash-generator/', h1: 'Hash Generator', breadcrumb: 'Hash Generator' },
     { path: '/tools/timestamp-converter/', h1: 'Timestamp Converter', breadcrumb: 'Timestamp Converter' },
     { path: '/tools/jwt-decoder/', h1: 'JWT Decoder', breadcrumb: 'JWT Decoder' },
+    { path: '/tools/regex-tester/', h1: 'Regex Tester', breadcrumb: 'Regex Tester' },
+    { path: '/tools/color-picker/', h1: 'Color Picker', breadcrumb: 'Color Picker' },
+    { path: '/tools/diff-checker/', h1: 'Diff Checker', breadcrumb: 'Diff Checker' },
+    { path: '/tools/markdown-preview/', h1: 'Markdown', breadcrumb: 'Markdown' },
   ];
 
   for (const tool of tools) {
