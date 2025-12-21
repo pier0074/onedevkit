@@ -91,7 +91,7 @@
 
       // Google Analytics 4
       // Replace GA_MEASUREMENT_ID with your actual ID when you have one
-      const GA_MEASUREMENT_ID = 'G-XXXXXXXXXX';
+      const GA_MEASUREMENT_ID = 'G-CL9VJLP0CB';
 
       // Don't load if placeholder ID
       if (GA_MEASUREMENT_ID === 'G-XXXXXXXXXX') return;
