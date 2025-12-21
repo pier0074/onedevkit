@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>JSON Formatter & Validator - Format, Beautify & Minify JSON Online | OneDevKit</title>
+  <meta name="description" content="Free online JSON formatter, validator, and beautifier. Format, minify, and validate JSON with syntax highlighting and error detection. No signup required.">
+  <meta name="keywords" content="JSON formatter, JSON beautifier, JSON validator, JSON minifier, format JSON online, validate JSON, pretty print JSON, JSON syntax highlighter">
+  <meta name="author" content="OneDevKit">
+  <meta name="robots" content="index, follow">
+
+  <link rel="canonical" href="https://onedevkit.com/tools/json-formatter/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://onedevkit.com/tools/json-formatter/">
+  <meta property="og:title" content="JSON Formatter & Validator - Format, Beautify & Minify JSON Online">
+  <meta property="og:description" content="Free online JSON formatter with syntax highlighting. Format, minify, and validate JSON instantly. No signup required.">
+  <meta property="og:image" content="https://onedevkit.com/images/og/json-formatter.png">
+  <meta property="og:site_name" content="OneDevKit">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="JSON Formatter & Validator - Format, Beautify & Minify JSON Online">
+  <meta name="twitter:description" content="Free online JSON formatter with syntax highlighting. Format, minify, and validate JSON instantly.">
+  <meta name="twitter:image" content="https://onedevkit.com/images/og/json-formatter.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#2563eb">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/css/style.css">
+
+  <!-- Preload critical resources -->
+  <link rel="preload" href="/js/common.js" as="script">
+  <link rel="preload" href="/js/json-formatter.js" as="script">
+
+  <!-- Schema.org WebApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "JSON Formatter & Validator",
+    "description": "Free online JSON formatter, validator, and beautifier with syntax highlighting and error detection.",
+    "url": "https://onedevkit.com/tools/json-formatter/",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "browserRequirements": "Requires JavaScript",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "featureList": [
+      "Format/beautify JSON",
+      "Minify JSON",
+      "Validate JSON with error highlighting",
+      "Syntax highlighting",
+      "Customizable indentation",
+      "JSON statistics",
+      "Copy to clipboard",
+      "Sample JSON data"
+    ],
+    "author": {
+      "@type": "Organization",
+      "name": "OneDevKit",
+      "url": "https://onedevkit.com"
+    }
+  }
+  </script>
+
+  <!-- Schema.org BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://onedevkit.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Tools",
+        "item": "https://onedevkit.com/#tools"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "JSON Formatter",
+        "item": "https://onedevkit.com/tools/json-formatter/"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Schema.org FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is JSON formatting?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "JSON formatting (also called beautifying or pretty-printing) is the process of adding proper indentation, line breaks, and spacing to JSON data to make it human-readable. Formatted JSON is easier to read, debug, and understand than minified or compacted JSON."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What's the difference between formatting and minifying JSON?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Formatting JSON adds whitespace, indentation, and line breaks to make it readable. Minifying JSON removes all unnecessary whitespace to reduce file size. Formatted JSON is better for development and debugging, while minified JSON is better for production to reduce bandwidth usage."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I fix invalid JSON?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Common JSON errors include: missing or extra commas, unquoted keys (keys must use double quotes), single quotes instead of double quotes, trailing commas after the last item, and unescaped special characters. Our validator shows the exact line and column where errors occur."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my JSON data secure when using this tool?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, all JSON processing happens entirely in your browser. Your data is never sent to any server. We don't store, log, or have access to any JSON you format or validate. This makes it safe to use with sensitive or confidential data."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What indentation options are available?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Our JSON formatter supports 2 spaces (most common), 4 spaces (popular in many style guides), and tab indentation. Choose the option that matches your project's code style or personal preference."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Additional styles for JSON syntax highlighting -->
+  <style>
+    .json-key { color: #881391; }
+    .json-string { color: #1a1aa6; }
+    .json-number { color: #1c00cf; }
+    .json-boolean { color: #0d22aa; }
+    .json-null { color: #808080; }
+
+    [data-theme="dark"] .json-key { color: #9cdcfe; }
+    [data-theme="dark"] .json-string { color: #ce9178; }
+    [data-theme="dark"] .json-number { color: #b5cea8; }
+    [data-theme="dark"] .json-boolean { color: #569cd6; }
+    [data-theme="dark"] .json-null { color: #808080; }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) .json-key { color: #9cdcfe; }
+      :root:not([data-theme="light"]) .json-string { color: #ce9178; }
+      :root:not([data-theme="light"]) .json-number { color: #b5cea8; }
+      :root:not([data-theme="light"]) .json-boolean { color: #569cd6; }
+      :root:not([data-theme="light"]) .json-null { color: #808080; }
+    }
+
+    #json-highlighted {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+      font-size: 0.875rem;
+      line-height: 1.5;
+    }
+
+    #json-error {
+      background-color: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #b91c1c;
+      padding: 0.75rem 1rem;
+      border-radius: 0.375rem;
+      margin-top: 0.5rem;
+      font-family: monospace;
+      font-size: 0.875rem;
+    }
+
+    [data-theme="dark"] #json-error {
+      background-color: #450a0a;
+      border-color: #7f1d1d;
+      color: #fca5a5;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) #json-error {
+        background-color: #450a0a;
+        border-color: #7f1d1d;
+        color: #fca5a5;
+      }
+    }
+
+    .json-stats {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .json-stats dt {
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .json-stats dd {
+      margin: 0;
+      font-family: monospace;
+    }
+
+    .json-stat-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Skip to main content -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <nav class="nav" aria-label="Main navigation">
+        <a href="/" class="logo" aria-label="OneDevKit Home">
+          <svg class="logo-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect width="32" height="32" rx="8" fill="currentColor"/>
+            <path d="M8 10h4v12H8V10zm6 0h4v12h-4V10zm6 0h4v12h-4V10z" fill="white" opacity="0.9"/>
+          </svg>
+          <span class="logo-text">OneDevKit</span>
+        </a>
+
+        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+          <span class="hamburger"></span>
+        </button>
+
+        <ul class="nav-links">
+          <li><a href="/#tools">Tools</a></li>
+          <li><a href="/about/">About</a></li>
+          <li>
+            <button class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+              <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <circle cx="12" cy="12" r="5"/>
+                <path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+              </svg>
+              <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+              </svg>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main id="main-content">
+    <!-- Breadcrumb -->
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="/">Home</a></li>
+          <li><a href="/#tools">Tools</a></li>
+          <li><span aria-current="page">JSON Formatter</span></li>
+        </ol>
+      </nav>
+    </div>
+
+    <!-- Tool Section -->
+    <section class="tool-section">
+      <div class="container">
+        <header class="tool-header">
+          <h1>JSON Formatter & Validator</h1>
+          <p class="tool-description">Format, beautify, minify, and validate JSON with syntax highlighting. Instant error detection with line numbers.</p>
+        </header>
+
+        <div class="tool-container">
+          <!-- Input Section -->
+          <div class="tool-input-group">
+            <div class="input-header">
+              <label for="json-input" class="input-label">Enter JSON</label>
+              <div class="input-actions">
+                <button type="button" id="sample-json" class="btn btn-text btn-sm">
+                  Load Sample
+                </button>
+              </div>
+            </div>
+            <textarea
+              id="json-input"
+              class="tool-textarea"
+              rows="12"
+              placeholder='{"key": "value", "array": [1, 2, 3]}'
+              spellcheck="false"
+              aria-describedby="json-input-hint"
+            ></textarea>
+            <p id="json-input-hint" class="input-hint">Paste your JSON here or click "Load Sample" to see an example</p>
+          </div>
+
+          <!-- Options -->
+          <div class="tool-options">
+            <div class="option-group">
+              <label for="json-indent" class="option-label">Indentation</label>
+              <select id="json-indent" class="tool-select">
+                <option value="2" selected>2 Spaces</option>
+                <option value="4">4 Spaces</option>
+                <option value="tab">Tab</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="tool-actions">
+            <button type="button" id="format-json" class="btn btn-primary">
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M4 6h16M4 12h16M4 18h16"/>
+              </svg>
+              Format
+            </button>
+            <button type="button" id="minify-json" class="btn btn-secondary">
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M4 12h16"/>
+              </svg>
+              Minify
+            </button>
+            <button type="button" id="validate-json" class="btn btn-secondary">
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+              Validate
+            </button>
+            <button type="button" id="copy-json" class="btn btn-secondary">
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+              </svg>
+              Copy
+            </button>
+            <button type="button" id="clear-json" class="btn btn-ghost">
+              Clear
+            </button>
+          </div>
+
+          <!-- Error Display -->
+          <div id="json-error" class="hidden" role="alert" aria-live="polite"></div>
+
+          <!-- Output Section -->
+          <div class="tool-output-group">
+            <div class="output-header">
+              <span class="output-label">Output</span>
+              <div class="json-stats" aria-label="JSON Statistics">
+                <div class="json-stat-item">
+                  <dt>Size</dt>
+                  <dd id="json-size">-</dd>
+                </div>
+                <div class="json-stat-item">
+                  <dt>Keys</dt>
+                  <dd id="json-keys">-</dd>
+                </div>
+                <div class="json-stat-item">
+                  <dt>Depth</dt>
+                  <dd id="json-depth">-</dd>
+                </div>
+              </div>
+            </div>
+            <div class="tool-output-wrapper">
+              <pre id="json-output" class="tool-output tool-output-placeholder" aria-live="polite">Formatted JSON will appear here</pre>
+              <pre id="json-highlighted" class="tool-output hidden" aria-live="polite"></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How to Use Section -->
+    <section class="content-section">
+      <div class="container container-narrow">
+        <h2>How to Use the JSON Formatter</h2>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h3>Paste Your JSON</h3>
+              <p>Enter or paste your JSON data into the input field. You can also click "Load Sample" to see an example.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h3>Choose an Action</h3>
+              <p><strong>Format</strong> to beautify with proper indentation, <strong>Minify</strong> to compress, or <strong>Validate</strong> to check for errors.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h3>Copy the Result</h3>
+              <p>Click "Copy" to copy the formatted or minified JSON to your clipboard for use in your project.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="content-section bg-muted">
+      <div class="container container-narrow">
+        <h2>Features</h2>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M4 6h16M4 12h16M4 18h16"/>
+              </svg>
+            </div>
+            <h3>Format & Beautify</h3>
+            <p>Transform compact JSON into readable, properly indented format with customizable spacing.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M4 12h16"/>
+              </svg>
+            </div>
+            <h3>Minify & Compress</h3>
+            <p>Remove all whitespace to reduce file size for production use and faster data transfer.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+            </div>
+            <h3>Validate with Errors</h3>
+            <p>Detect JSON syntax errors with precise line and column numbers for easy debugging.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <polyline points="4 17 10 11 4 5"/>
+                <line x1="12" y1="19" x2="20" y2="19"/>
+              </svg>
+            </div>
+            <h3>Syntax Highlighting</h3>
+            <p>Color-coded output distinguishes keys, strings, numbers, booleans, and null values.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <rect x="3" y="3" width="7" height="7"/>
+                <rect x="14" y="3" width="7" height="7"/>
+                <rect x="14" y="14" width="7" height="7"/>
+                <rect x="3" y="14" width="7" height="7"/>
+              </svg>
+            </div>
+            <h3>JSON Statistics</h3>
+            <p>View file size, key count, and nesting depth to understand your JSON structure.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            </div>
+            <h3>Privacy First</h3>
+            <p>All processing happens locally in your browser. Your data never leaves your device.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="content-section">
+      <div class="container container-narrow">
+        <h2>Frequently Asked Questions</h2>
+
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary class="faq-question">What is JSON formatting?</summary>
+            <div class="faq-answer">
+              <p>JSON formatting (also called beautifying or pretty-printing) is the process of adding proper indentation, line breaks, and spacing to JSON data to make it human-readable. Formatted JSON is easier to read, debug, and understand than minified or compacted JSON.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">What's the difference between formatting and minifying JSON?</summary>
+            <div class="faq-answer">
+              <p>Formatting JSON adds whitespace, indentation, and line breaks to make it readable. Minifying JSON removes all unnecessary whitespace to reduce file size. Formatted JSON is better for development and debugging, while minified JSON is better for production to reduce bandwidth usage.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">How do I fix invalid JSON?</summary>
+            <div class="faq-answer">
+              <p>Common JSON errors include:</p>
+              <ul>
+                <li><strong>Missing or extra commas</strong> - Check for trailing commas or missing commas between items</li>
+                <li><strong>Unquoted keys</strong> - All keys must use double quotes: <code>"key"</code></li>
+                <li><strong>Single quotes</strong> - JSON requires double quotes, not single quotes</li>
+                <li><strong>Trailing commas</strong> - Remove commas after the last item in arrays/objects</li>
+                <li><strong>Unescaped characters</strong> - Special characters like quotes and backslashes need escaping</li>
+              </ul>
+              <p>Our validator shows the exact line and column where errors occur to help you fix them quickly.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">Is my JSON data secure when using this tool?</summary>
+            <div class="faq-answer">
+              <p>Yes, all JSON processing happens entirely in your browser using JavaScript. Your data is never sent to any server. We don't store, log, or have access to any JSON you format or validate. This makes it safe to use with sensitive or confidential data.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">What indentation options are available?</summary>
+            <div class="faq-answer">
+              <p>Our JSON formatter supports:</p>
+              <ul>
+                <li><strong>2 spaces</strong> - Most common, recommended by many style guides</li>
+                <li><strong>4 spaces</strong> - Popular in Java and Python communities</li>
+                <li><strong>Tab</strong> - Uses tab characters for indentation</li>
+              </ul>
+              <p>Choose the option that matches your project's code style or personal preference.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Tools Section -->
+    <section class="content-section bg-muted">
+      <div class="container">
+        <h2>Related Tools</h2>
+
+        <div class="tools-grid tools-grid-small">
+          <a href="/tools/uuid-generator/" class="tool-card">
+            <div class="tool-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <rect x="3" y="3" width="7" height="7"/>
+                <rect x="14" y="3" width="7" height="7"/>
+                <rect x="14" y="14" width="7" height="7"/>
+                <rect x="3" y="14" width="7" height="7"/>
+              </svg>
+            </div>
+            <h3 class="tool-card-title">UUID Generator</h3>
+            <p class="tool-card-description">Generate unique identifiers for your applications.</p>
+          </a>
+
+          <a href="/tools/password-generator/" class="tool-card">
+            <div class="tool-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                <circle cx="12" cy="16" r="1"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+            </div>
+            <h3 class="tool-card-title">Password Generator</h3>
+            <p class="tool-card-description">Create strong, secure passwords instantly.</p>
+          </a>
+
+          <a href="/tools/qr-code-generator/" class="tool-card">
+            <div class="tool-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <rect x="3" y="3" width="7" height="7"/>
+                <rect x="14" y="3" width="7" height="7"/>
+                <rect x="3" y="14" width="7" height="7"/>
+                <rect x="14" y="14" width="7" height="7"/>
+              </svg>
+            </div>
+            <h3 class="tool-card-title">QR Code Generator</h3>
+            <p class="tool-card-description">Create QR codes for URLs, text, and more.</p>
+          </a>
+
+          <a href="/tools/lorem-ipsum/" class="tool-card">
+            <div class="tool-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+                <polyline points="10 9 9 9 8 9"/>
+              </svg>
+            </div>
+            <h3 class="tool-card-title">Lorem Ipsum Generator</h3>
+            <p class="tool-card-description">Generate placeholder text for your designs.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <a href="/" class="logo">
+            <svg class="logo-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect width="32" height="32" rx="8" fill="currentColor"/>
+              <path d="M8 10h4v12H8V10zm6 0h4v12h-4V10zm6 0h4v12h-4V10z" fill="white" opacity="0.9"/>
+            </svg>
+            <span class="logo-text">OneDevKit</span>
+          </a>
+          <p class="footer-tagline">Free online tools for developers</p>
+        </div>
+
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <div class="footer-nav-group">
+            <h4>Tools</h4>
+            <ul>
+              <li><a href="/tools/json-formatter/">JSON Formatter</a></li>
+              <li><a href="/tools/uuid-generator/">UUID Generator</a></li>
+              <li><a href="/tools/password-generator/">Password Generator</a></li>
+              <li><a href="/tools/lorem-ipsum/">Lorem Ipsum</a></li>
+              <li><a href="/tools/qr-code-generator/">QR Code Generator</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-nav-group">
+            <h4>Company</h4>
+            <ul>
+              <li><a href="/about/">About</a></li>
+              <li><a href="/contact/">Contact</a></li>
+              <li><a href="/privacy/">Privacy Policy</a></li>
+              <li><a href="/terms/">Terms of Service</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 OneDevKit. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cookie Consent -->
+  <div id="cookie-consent" class="cookie-banner hidden" role="dialog" aria-labelledby="cookie-title" aria-describedby="cookie-description">
+    <div class="cookie-content">
+      <h3 id="cookie-title" class="cookie-title">Cookie Notice</h3>
+      <p id="cookie-description" class="cookie-text">We use cookies to analyze site traffic and improve your experience. No personal data is collected.</p>
+      <div class="cookie-actions">
+        <button type="button" id="cookie-accept" class="btn btn-primary btn-sm">Accept</button>
+        <button type="button" id="cookie-decline" class="btn btn-ghost btn-sm">Decline</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/js/common.js"></script>
+  <script src="/js/cookie-consent.js"></script>
+  <script src="/js/json-formatter.js"></script>
+</body>
+</html>
