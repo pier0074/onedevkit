@@ -16,21 +16,22 @@
     </button>
 
     <nav class="nav" aria-label="Main navigation">
-      <div class="nav-dropdown">
+      <div class="nav-dropdown nav-mega-dropdown">
         <button class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">
           Tools
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
           </svg>
         </button>
-        <div class="nav-dropdown-menu" role="menu">
+        <div class="nav-mega-menu" role="menu">
           {# Group tools by category #}
           {% set categories = tools | groupby("category") %}
           {% for category, categoryTools in categories %}
-          <div class="nav-dropdown-category">
-            <span class="nav-dropdown-category-title">{{ category }}</span>
+          <div class="nav-mega-category">
+            <span class="nav-mega-category-title">{{ category }}</span>
             {% for tool in categoryTools %}
             <a href="/tools/{{ tool.id }}/" role="menuitem"{% if page.url == '/tools/' + tool.id + '/' %} aria-current="page"{% endif %}>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">{{ tool.icon | safe }}</svg>
               {{ tool.name }}
             </a>
             {% endfor %}

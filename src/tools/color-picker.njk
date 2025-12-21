@@ -48,16 +48,25 @@ ogImage: color-picker.jpg
   .color-main { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); }
   @media (max-width: 768px) { .color-main { grid-template-columns: 1fr; } }
   .color-preview-section { display: flex; flex-direction: column; gap: var(--space-4); }
-  .color-preview { width: 100%; aspect-ratio: 1; border-radius: var(--radius-lg); border: 1px solid var(--color-border); display: flex; align-items: center; justify-content: center; font-size: var(--text-2xl); font-weight: 600; transition: background-color 0.2s; }
-  .color-picker-native { width: 100%; height: 50px; border: none; border-radius: var(--radius-md); cursor: pointer; padding: 0; }
-  .color-picker-native::-webkit-color-swatch-wrapper { padding: 0; }
-  .color-picker-native::-webkit-color-swatch { border: 1px solid var(--color-border); border-radius: var(--radius-md); }
+  .color-preview { width: 100%; aspect-ratio: 2/1; border-radius: var(--radius-lg); border: 1px solid var(--color-border); display: flex; align-items: center; justify-content: center; font-size: var(--text-2xl); font-weight: 600; transition: background-color 0.2s; }
+
+  /* Custom Color Picker */
+  .color-picker-area { display: flex; flex-direction: column; gap: var(--space-3); }
+  .color-gradient-box { position: relative; width: 100%; aspect-ratio: 1; border-radius: var(--radius-md); cursor: crosshair; overflow: hidden; border: 1px solid var(--color-border); }
+  .color-gradient-white { position: absolute; inset: 0; background: linear-gradient(to right, #fff, transparent); }
+  .color-gradient-black { position: absolute; inset: 0; background: linear-gradient(to top, #000, transparent); }
+  .color-picker-cursor { position: absolute; width: 16px; height: 16px; border: 2px solid #fff; border-radius: 50%; box-shadow: 0 0 0 1px #000, inset 0 0 0 1px #000; transform: translate(-50%, -50%); pointer-events: none; }
+  .color-hue-slider { position: relative; width: 100%; height: 20px; border-radius: var(--radius-md); background: linear-gradient(to right, #f00 0%, #ff0 17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, #f00 100%); cursor: pointer; border: 1px solid var(--color-border); }
+  .color-hue-cursor { position: absolute; top: -2px; width: 8px; height: 24px; background: #fff; border: 1px solid #333; border-radius: 2px; transform: translateX(-50%); pointer-events: none; box-shadow: var(--shadow-sm); }
+
   .color-inputs { display: flex; flex-direction: column; gap: var(--space-4); }
   .color-input-group { display: grid; gap: var(--space-2); }
   .color-input-row { display: flex; gap: var(--space-2); align-items: center; }
   .color-input-row label { min-width: 45px; font-size: var(--text-sm); font-weight: 500; color: var(--text-secondary); }
   .color-input-row input[type="text"] { flex: 1; font-family: var(--font-mono); }
-  .color-input-row input[type="number"] { width: 70px; font-family: var(--font-mono); text-align: center; }
+  .color-input-row input[type="number"] { width: 80px; font-family: var(--font-mono); text-align: center; -moz-appearance: textfield; }
+  .color-input-row input[type="number"]::-webkit-outer-spin-button,
+  .color-input-row input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
   .color-input-row input[type="range"] { flex: 1; }
   .copy-btn { padding: var(--space-2) var(--space-3); font-size: var(--text-xs); }
   .color-format-section { background: var(--color-bg-alt); border-radius: var(--radius-md); padding: var(--space-4); }
@@ -78,8 +87,19 @@ ogImage: color-picker.jpg
       <div class="color-preview" id="color-preview" style="background-color: #2563eb;">
         <span id="preview-text" style="color: #ffffff;">#2563EB</span>
       </div>
-      <input type="color" id="color-picker" class="color-picker-native" value="#2563eb">
+      <!-- Custom Visual Color Picker -->
+      <div class="color-picker-area">
+        <div class="color-gradient-box" id="color-gradient-box" style="background-color: hsl(221, 100%, 50%);">
+          <div class="color-gradient-white"></div>
+          <div class="color-gradient-black"></div>
+          <div class="color-picker-cursor" id="color-cursor" style="left: 84%; top: 8%;"></div>
+        </div>
+        <div class="color-hue-slider" id="color-hue-slider">
+          <div class="color-hue-cursor" id="hue-cursor" style="left: 61%;"></div>
+        </div>
+      </div>
       <button type="button" id="random-color" class="btn btn-secondary">Random Color</button>
+      <input type="color" id="color-picker" style="display: none;" value="#2563eb">
     </div>
 
     <!-- Color Inputs -->

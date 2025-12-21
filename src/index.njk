@@ -66,29 +66,23 @@ ogDescription: Free, fast, and privacy-focused developer tools. No signup requir
     <p class="hero-description">Fast, privacy-focused tools for everyday development tasks. No signup required.</p>
   </section>
 
-  <!-- Tools by Category -->
+  <!-- All Tools -->
   <section id="tools" aria-labelledby="tools-title">
     <h2 id="tools-title" class="sr-only">Available Tools</h2>
 
-    {% set categories = tools | groupby("category") %}
-    {% for category, categoryTools in categories %}
-    <div class="tool-category">
-      <h2 class="tool-category-title">{{ category }}</h2>
-      <div class="tool-grid">
-        {% for tool in categoryTools %}
-        <a href="/tools/{{ tool.id }}/" class="tool-card">
-          <div class="tool-card-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-              {{ tool.icon | safe }}
-            </svg>
-          </div>
-          <h3>{{ tool.fullName }}</h3>
-          <p>{{ tool.description }}</p>
-        </a>
-        {% endfor %}
-      </div>
+    <div class="tool-grid">
+      {% for tool in tools %}
+      <a href="/tools/{{ tool.id }}/" class="tool-card">
+        <div class="tool-card-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            {{ tool.icon | safe }}
+          </svg>
+        </div>
+        <h3>{{ tool.fullName }}</h3>
+        <p>{{ tool.description }}</p>
+      </a>
+      {% endfor %}
     </div>
-    {% endfor %}
   </section>
 
   <!-- Features Section -->

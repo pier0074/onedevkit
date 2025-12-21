@@ -45,15 +45,15 @@ ogImage: base64-encoder.jpg
 {% block head %}
 <style>
   .mode-toggle { display: flex; gap: var(--space-2); margin-bottom: var(--space-4); }
-  .mode-btn { flex: 1; padding: var(--space-3); border: 2px solid var(--border-color); background: var(--bg-secondary); border-radius: var(--radius-md); cursor: pointer; font-weight: 500; color: var(--text-secondary); transition: all 0.2s; }
-  .mode-btn:hover { border-color: var(--color-primary); color: var(--text-primary); }
+  .mode-btn { flex: 1; padding: var(--space-3); border: 1px solid var(--color-border); background: transparent; border-radius: var(--radius-md); cursor: pointer; font-weight: 500; color: var(--color-text-secondary); transition: all 0.2s; }
+  .mode-btn:hover { border-color: var(--color-border-hover); background: var(--color-bg-alt); color: var(--color-text); }
   .mode-btn.active { border-color: var(--color-primary); background: var(--color-primary); color: white; }
-  .file-upload-area { border: 2px dashed var(--border-color); border-radius: var(--radius-md); padding: var(--space-6); text-align: center; cursor: pointer; background: var(--bg-secondary); }
-  .file-upload-area:hover, .file-upload-area.drag-over { border-color: var(--color-primary); background: var(--bg-tertiary); }
+  .file-upload-area { border: 2px dashed var(--color-border); border-radius: var(--radius-md); padding: var(--space-6); text-align: center; cursor: pointer; background: var(--color-bg-alt); }
+  .file-upload-area:hover, .file-upload-area.drag-over { border-color: var(--color-primary); background: var(--color-bg); }
   .file-upload-area input[type="file"] { display: none; }
-  .base64-stats { display: flex; gap: 1.5rem; flex-wrap: wrap; font-size: 0.875rem; color: var(--text-muted); }
+  .base64-stats { display: flex; gap: 1.5rem; flex-wrap: wrap; font-size: 0.875rem; color: var(--color-text-muted); }
   .base64-stat-item { display: flex; flex-direction: column; gap: 0.25rem; }
-  .base64-stats dt { font-weight: 500; color: var(--text-secondary); }
+  .base64-stats dt { font-weight: 500; color: var(--color-text-secondary); }
   .base64-stats dd { margin: 0; font-family: monospace; }
 </style>
 {% endblock %}
