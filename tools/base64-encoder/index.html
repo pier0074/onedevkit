@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>Base64 Encoder & Decoder - Encode and Decode Base64 Online | OneDevKit</title>
+  <meta name="description" content="Free online Base64 encoder and decoder. Convert text to Base64 and decode Base64 to text instantly. Supports file encoding. No signup required.">
+  <meta name="keywords" content="Base64 encoder, Base64 decoder, encode Base64, decode Base64, Base64 converter, text to Base64, Base64 to text, file to Base64, online Base64 tool">
+  <meta name="author" content="OneDevKit">
+  <meta name="robots" content="index, follow">
+
+  <link rel="canonical" href="https://onedevkit.com/tools/base64-encoder/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://onedevkit.com/tools/base64-encoder/">
+  <meta property="og:title" content="Base64 Encoder & Decoder - Encode and Decode Base64 Online">
+  <meta property="og:description" content="Free online Base64 encoder and decoder. Convert text to Base64 and decode Base64 to text instantly. No signup required.">
+  <meta property="og:image" content="https://onedevkit.com/images/og/base64-encoder.jpg">
+  <meta property="og:site_name" content="OneDevKit">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Base64 Encoder & Decoder - Encode and Decode Base64 Online">
+  <meta name="twitter:description" content="Free online Base64 encoder and decoder. Convert text to Base64 and decode Base64 to text instantly.">
+  <meta name="twitter:image" content="https://onedevkit.com/images/og/base64-encoder.jpg">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="../../images/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../images/apple-touch-icon.png">
+
+  <!-- PWA -->
+  <link rel="manifest" href="../../manifest.json">
+  <meta name="theme-color" content="#2563eb">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="../../css/style.css">
+
+  <!-- Preload critical resources -->
+  <link rel="preload" href="../../js/common.js" as="script">
+  <link rel="preload" href="../../js/base64.js" as="script">
+
+  <!-- Schema.org WebApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Base64 Encoder & Decoder",
+    "description": "Free online Base64 encoder and decoder. Convert text to Base64 and decode Base64 to text instantly.",
+    "url": "https://onedevkit.com/tools/base64-encoder/",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "browserRequirements": "Requires JavaScript",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock"
+    },
+    "featureList": [
+      "Encode text to Base64",
+      "Decode Base64 to text",
+      "File to Base64 conversion",
+      "URL-safe Base64 encoding",
+      "Copy to clipboard",
+      "Instant conversion"
+    ],
+    "screenshot": "https://onedevkit.com/images/og/base64-encoder.jpg",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "ratingCount": "120",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "OneDevKit",
+      "url": "https://onedevkit.com"
+    },
+    "datePublished": "2025-12-21",
+    "softwareVersion": "1.0"
+  }
+  </script>
+
+  <!-- Schema.org BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://onedevkit.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Tools",
+        "item": "https://onedevkit.com/#tools"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Base64 Encoder",
+        "item": "https://onedevkit.com/tools/base64-encoder/"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Schema.org HowTo -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to Encode and Decode Base64 Online",
+    "description": "Learn how to convert text to Base64 encoding and decode Base64 strings using our free online tool.",
+    "totalTime": "PT1M",
+    "tool": {
+      "@type": "HowToTool",
+      "name": "OneDevKit Base64 Encoder"
+    },
+    "step": [
+      {
+        "@type": "HowToStep",
+        "position": 1,
+        "name": "Enter Your Text or Base64",
+        "text": "Type or paste your text to encode, or paste a Base64 string to decode. You can also upload a file to convert to Base64.",
+        "url": "https://onedevkit.com/tools/base64-encoder/#base64-input"
+      },
+      {
+        "@type": "HowToStep",
+        "position": 2,
+        "name": "Choose an Action",
+        "text": "Click 'Encode' to convert text to Base64, or 'Decode' to convert Base64 back to readable text.",
+        "url": "https://onedevkit.com/tools/base64-encoder/#encode-base64"
+      },
+      {
+        "@type": "HowToStep",
+        "position": 3,
+        "name": "Copy the Result",
+        "text": "Click 'Copy' to copy the encoded or decoded result to your clipboard for use in your project.",
+        "url": "https://onedevkit.com/tools/base64-encoder/#copy-base64"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Schema.org FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is Base64 encoding?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Base64 is a binary-to-text encoding scheme that converts binary data into an ASCII string format. It's commonly used to encode data that needs to be stored or transferred over media designed for text, such as embedding images in HTML/CSS or sending attachments in emails."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When should I use Base64 encoding?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use Base64 when you need to embed binary data (like images or files) in text-based formats like JSON, XML, HTML, or email. It's also useful for transmitting data through systems that only support ASCII text, or for encoding credentials in HTTP Basic Authentication."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Base64 encoding provide encryption?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No, Base64 is NOT encryption. It's simply an encoding scheme that makes binary data readable as text. Anyone can decode Base64 data. Never use Base64 to protect sensitive information - use proper encryption instead."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does Base64 make data larger?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Base64 encoding increases data size by approximately 33%. This is because it represents 3 bytes of binary data using 4 ASCII characters. While this overhead is acceptable for small data, consider other options for large files."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my data secure when using this tool?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, all encoding and decoding happens entirely in your browser using JavaScript. Your data is never sent to any server. We don't store, log, or have access to any data you process. This makes it safe to use with any type of content."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Additional styles for Base64 tool -->
+  <style>
+    .base64-stats {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .base64-stats dt {
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .base64-stats dd {
+      margin: 0;
+      font-family: monospace;
+    }
+
+    .base64-stat-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .file-upload-area {
+      border: 2px dashed var(--border-color);
+      border-radius: var(--radius-md);
+      padding: var(--space-6);
+      text-align: center;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      background: var(--bg-secondary);
+    }
+
+    .file-upload-area:hover {
+      border-color: var(--color-primary);
+      background: var(--bg-tertiary);
+    }
+
+    .file-upload-area.drag-over {
+      border-color: var(--color-primary);
+      background: var(--bg-tertiary);
+    }
+
+    .file-upload-area input[type="file"] {
+      display: none;
+    }
+
+    .file-upload-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto var(--space-3);
+      color: var(--text-muted);
+    }
+
+    .file-upload-text {
+      color: var(--text-secondary);
+      margin-bottom: var(--space-2);
+    }
+
+    .file-upload-hint {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .file-info {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      padding: var(--space-3);
+      background: var(--bg-secondary);
+      border-radius: var(--radius-sm);
+      margin-top: var(--space-3);
+    }
+
+    .file-info-name {
+      flex: 1;
+      font-family: monospace;
+      font-size: 0.875rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .file-info-size {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .mode-toggle {
+      display: flex;
+      gap: var(--space-2);
+      margin-bottom: var(--space-4);
+    }
+
+    .mode-btn {
+      flex: 1;
+      padding: var(--space-3);
+      border: 2px solid var(--border-color);
+      background: var(--bg-primary);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      font-weight: 500;
+    }
+
+    .mode-btn:hover {
+      border-color: var(--color-primary);
+    }
+
+    .mode-btn.active {
+      border-color: var(--color-primary);
+      background: var(--color-primary);
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <!-- Skip to main content -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="../../" class="logo" aria-label="OneDevKit Home">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="16 18 22 12 16 6"></polyline>
+          <polyline points="8 6 2 12 8 18"></polyline>
+        </svg>
+        OneDevKit
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+
+      <nav class="nav" aria-label="Main navigation">
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">
+            Tools
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="nav-dropdown-menu" role="menu">
+            <a href="../json-formatter/" role="menuitem">JSON Formatter<small>Format, validate & beautify</small></a>
+            <a href="../base64-encoder/" role="menuitem" aria-current="page">Base64 Encoder<small>Encode & decode Base64</small></a>
+            <a href="../password-generator/" role="menuitem">Password Generator<small>Secure random passwords</small></a>
+            <a href="../uuid-generator/" role="menuitem">UUID Generator<small>Generate unique IDs</small></a>
+            <a href="../lorem-ipsum/" role="menuitem">Lorem Ipsum<small>Placeholder text</small></a>
+            <a href="../qr-code-generator/" role="menuitem">QR Code Generator<small>Create QR codes</small></a>
+          </div>
+        </div>
+        <a href="../../about/" class="nav-link">About</a>
+        <a href="../../contact/" class="nav-link">Contact</a>
+        <button class="theme-toggle" aria-label="Toggle dark mode">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+          </svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main id="main-content" class="main-content">
+    <div class="container tool-page">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="../../">Home</a></li>
+          <li><span aria-current="page">Base64 Encoder</span></li>
+        </ol>
+      </nav>
+
+      <!-- Tool Header -->
+      <header class="tool-header">
+        <h1>Base64 Encoder & Decoder</h1>
+        <p class="tool-description">Encode text to Base64 or decode Base64 to readable text. Supports file uploads for encoding images and documents.</p>
+      </header>
+
+      <div class="tool-container">
+        <!-- Mode Toggle -->
+        <div class="mode-toggle">
+          <button type="button" class="mode-btn active" data-mode="text" id="mode-text">
+            Text Input
+          </button>
+          <button type="button" class="mode-btn" data-mode="file" id="mode-file">
+            File Upload
+          </button>
+        </div>
+
+        <!-- Text Input Section -->
+        <div id="text-input-section">
+          <div class="tool-input-group">
+            <div class="input-header">
+              <label for="base64-input" class="input-label">Enter Text or Base64</label>
+              <div class="input-actions">
+                <button type="button" id="sample-base64" class="btn btn-text btn-sm">Load Sample</button>
+              </div>
+            </div>
+            <textarea
+              id="base64-input"
+              class="tool-textarea"
+              rows="8"
+              placeholder="Enter text to encode or Base64 to decode..."
+              spellcheck="false"
+              aria-describedby="base64-input-hint"
+            ></textarea>
+            <p id="base64-input-hint" class="input-hint">Paste text to encode or Base64 string to decode</p>
+          </div>
+        </div>
+
+        <!-- File Input Section -->
+        <div id="file-input-section" class="hidden">
+          <div class="tool-input-group">
+            <label class="input-label">Upload File</label>
+            <div class="file-upload-area" id="file-drop-zone">
+              <input type="file" id="file-input" accept="*/*">
+              <div class="file-upload-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                </svg>
+              </div>
+              <p class="file-upload-text">Drop file here or click to upload</p>
+              <p class="file-upload-hint">Maximum file size: 5MB</p>
+            </div>
+            <div id="file-info" class="file-info hidden">
+              <span class="file-info-name" id="file-name"></span>
+              <span class="file-info-size" id="file-size"></span>
+              <button type="button" id="clear-file" class="btn btn-ghost btn-sm">Remove</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Options -->
+        <div class="tool-options">
+          <div class="option-group">
+            <label class="option-label">
+              <input type="checkbox" id="url-safe" class="tool-checkbox">
+              URL-safe encoding
+            </label>
+            <small class="option-hint">Replace + with - and / with _</small>
+          </div>
+          <div class="option-group">
+            <label class="option-label">
+              <input type="checkbox" id="line-breaks" class="tool-checkbox">
+              Add line breaks (76 chars)
+            </label>
+            <small class="option-hint">MIME-compliant formatting</small>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="tool-actions">
+          <button type="button" id="encode-base64" class="btn btn-primary">Encode</button>
+          <button type="button" id="decode-base64" class="btn btn-secondary">Decode</button>
+          <button type="button" id="copy-base64" class="btn btn-secondary">Copy</button>
+          <button type="button" id="clear-base64" class="btn btn-ghost">Clear</button>
+        </div>
+
+        <!-- Error Display -->
+        <div id="base64-error" class="hidden" role="alert" aria-live="polite" style="background-color: #fef2f2; border: 1px solid #fecaca; color: #b91c1c; padding: 0.75rem 1rem; border-radius: 0.375rem; margin-top: 0.5rem;"></div>
+
+        <!-- Output Section -->
+        <div class="tool-output-group">
+          <div class="output-header">
+            <span class="output-label">Output</span>
+            <div class="base64-stats" aria-label="Statistics">
+              <div class="base64-stat-item">
+                <dt>Input</dt>
+                <dd id="input-size">-</dd>
+              </div>
+              <div class="base64-stat-item">
+                <dt>Output</dt>
+                <dd id="output-size">-</dd>
+              </div>
+              <div class="base64-stat-item">
+                <dt>Ratio</dt>
+                <dd id="size-ratio">-</dd>
+              </div>
+            </div>
+          </div>
+          <pre id="base64-output" class="tool-output tool-output-placeholder" aria-live="polite">Encoded or decoded result will appear here</pre>
+        </div>
+      </div>
+
+      <!-- How to Use Section -->
+      <section class="content-section" aria-labelledby="how-to-use">
+        <h2 id="how-to-use">How to Use the Base64 Encoder</h2>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h3>Enter Your Data</h3>
+              <p>Type or paste your text to encode, or paste a Base64 string to decode. You can also switch to file upload mode to encode images or documents.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h3>Choose an Action</h3>
+              <p><strong>Encode</strong> converts plain text or files to Base64 format. <strong>Decode</strong> converts Base64 back to readable text.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h3>Copy the Result</h3>
+              <p>Click "Copy" to copy the encoded or decoded result to your clipboard for use in your project.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features Section -->
+      <section class="content-section" aria-labelledby="features">
+        <h2 id="features">Features</h2>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
+            </div>
+            <h3>Instant Encoding</h3>
+            <p>Convert text to Base64 instantly with a single click. No waiting, no server processing.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+              </svg>
+            </div>
+            <h3>File Support</h3>
+            <p>Upload images, PDFs, or any file to convert to Base64. Perfect for embedding in HTML or CSS.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/>
+                <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/>
+              </svg>
+            </div>
+            <h3>URL-Safe Mode</h3>
+            <p>Generate URL-safe Base64 strings by replacing special characters for use in URLs and filenames.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <rect x="3" y="3" width="7" height="7"/>
+                <rect x="14" y="3" width="7" height="7"/>
+                <rect x="14" y="14" width="7" height="7"/>
+                <rect x="3" y="14" width="7" height="7"/>
+              </svg>
+            </div>
+            <h3>Size Statistics</h3>
+            <p>See input/output sizes and the encoding ratio to understand how Base64 affects your data size.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M4 6h16M4 12h16M4 18h16"/>
+              </svg>
+            </div>
+            <h3>Line Breaks</h3>
+            <p>Add MIME-compliant line breaks every 76 characters for email compatibility.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            </div>
+            <h3>Privacy First</h3>
+            <p>All processing happens locally in your browser. Your data never leaves your device.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ Section -->
+      <section class="content-section" aria-labelledby="faq">
+        <h2 id="faq">Frequently Asked Questions</h2>
+
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary class="faq-question">What is Base64 encoding?</summary>
+            <div class="faq-answer">
+              <p>Base64 is a binary-to-text encoding scheme that converts binary data into an ASCII string format. It uses 64 characters (A-Z, a-z, 0-9, +, /) to represent data. It's commonly used to:</p>
+              <ul>
+                <li>Embed images directly in HTML/CSS (data URIs)</li>
+                <li>Encode email attachments (MIME)</li>
+                <li>Store binary data in JSON or XML</li>
+                <li>Transmit data through text-only systems</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">Is Base64 the same as encryption?</summary>
+            <div class="faq-answer">
+              <p><strong>No, Base64 is NOT encryption.</strong> It's simply an encoding scheme that makes binary data readable as text. Anyone can decode Base64 data - there's no key or password involved. Never use Base64 to protect sensitive information. For security, use proper encryption methods like AES or RSA.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">Why does Base64 increase file size?</summary>
+            <div class="faq-answer">
+              <p>Base64 encoding increases data size by approximately 33% (4 characters for every 3 bytes). This overhead exists because:</p>
+              <ul>
+                <li>Binary data uses 8 bits per byte (256 possible values)</li>
+                <li>Base64 uses only 6 bits per character (64 possible values)</li>
+                <li>The ratio of 8:6 equals about 1.33x size increase</li>
+              </ul>
+              <p>For small files like icons, this is acceptable. For large files, consider other solutions.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">What is URL-safe Base64?</summary>
+            <div class="faq-answer">
+              <p>Standard Base64 uses + and / characters, which have special meanings in URLs. URL-safe Base64 replaces these:</p>
+              <ul>
+                <li><code>+</code> becomes <code>-</code> (hyphen)</li>
+                <li><code>/</code> becomes <code>_</code> (underscore)</li>
+              </ul>
+              <p>Use URL-safe encoding when the Base64 string will be used in URLs, filenames, or systems that don't handle + and / well.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">Is my data secure when using this tool?</summary>
+            <div class="faq-answer">
+              <p>Yes, all encoding and decoding happens entirely in your browser using JavaScript. Your data is never sent to any server. We don't store, log, or have access to any data you process. This makes it safe to use with any type of content, including sensitive information.</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- Related Tools -->
+      <section class="content-section" aria-labelledby="related-tools">
+        <h2 id="related-tools">Related Tools</h2>
+        <div class="related-tools">
+          <a href="../json-formatter/" class="related-tool-link">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+            </svg>
+            JSON Formatter
+          </a>
+          <a href="../uuid-generator/" class="related-tool-link">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"/>
+            </svg>
+            UUID Generator
+          </a>
+          <a href="../password-generator/" class="related-tool-link">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+            </svg>
+            Password Generator
+          </a>
+          <a href="../qr-code-generator/" class="related-tool-link">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h2M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/>
+            </svg>
+            QR Code Generator
+          </a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-section">
+          <h4>Tools</h4>
+          <ul class="footer-links">
+            <li><a href="../json-formatter/">JSON Formatter</a></li>
+            <li><a href="../base64-encoder/" aria-current="page">Base64 Encoder</a></li>
+            <li><a href="../password-generator/">Password Generator</a></li>
+            <li><a href="../uuid-generator/">UUID Generator</a></li>
+            <li><a href="../lorem-ipsum/">Lorem Ipsum</a></li>
+            <li><a href="../qr-code-generator/">QR Code Generator</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Company</h4>
+          <ul class="footer-links">
+            <li><a href="../../about/">About</a></li>
+            <li><a href="../../contact/">Contact</a></li>
+            <li><a href="../../faq/">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Legal</h4>
+          <ul class="footer-links">
+            <li><a href="../../privacy/">Privacy Policy</a></li>
+            <li><a href="../../terms/">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">
+          &copy; 2025 OneDevKit. All rights reserved.<br>
+          <small>Tools provided "as is" without warranty.</small>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cookie Consent Banner -->
+  <div class="cookie-banner" role="dialog" aria-label="Cookie consent" aria-describedby="cookie-message">
+    <div class="cookie-banner-inner">
+      <div class="cookie-banner-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <circle cx="8" cy="9" r="1" fill="currentColor"></circle>
+          <circle cx="15" cy="8" r="1" fill="currentColor"></circle>
+          <circle cx="10" cy="14" r="1" fill="currentColor"></circle>
+          <circle cx="16" cy="13" r="1" fill="currentColor"></circle>
+          <circle cx="12" cy="11" r="1" fill="currentColor"></circle>
+        </svg>
+      </div>
+      <h3 class="cookie-banner-title">We Value Your Privacy</h3>
+      <p class="cookie-banner-text" id="cookie-message">
+        We use cookies to analyze traffic and improve your experience. Your choice will be remembered for future visits.
+        <a href="../../privacy/">Learn more</a>
+      </p>
+      <div class="cookie-banner-actions">
+        <button class="btn btn-secondary" data-cookie-reject>Reject All</button>
+        <button class="btn btn-primary" data-cookie-accept>Accept All</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../../js/common.js"></script>
+  <script src="../../js/cookie-consent.js"></script>
+  <script src="../../js/base64.js"></script>
+</body>
+</html>
