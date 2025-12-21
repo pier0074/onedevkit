@@ -24,8 +24,8 @@ onedevkit/
 │   ├── uuid-generator/
 │   └── qr-code-generator/
 ├── about/
-├── privacy-policy/
-├── terms-of-service/
+├── privacy/
+├── terms/
 ├── contact/
 ├── images/
 ├── 404.html
@@ -38,7 +38,7 @@ onedevkit/
 
 - Pure HTML, CSS, JavaScript (no frameworks)
 - Hosted on Cloudflare Pages
-- Zero dependencies (except qrcode.js for QR generation)
+- Zero external dependencies (inline QR code generation)
 
 ## Development
 
