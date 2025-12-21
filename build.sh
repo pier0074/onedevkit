@@ -11,6 +11,7 @@ cp -r index.html dist/
 cp -r 404.html dist/
 cp -r manifest.json dist/
 cp -r robots.txt dist/
+cp -r sitemap.xml dist/
 cp -r css dist/
 cp -r js dist/
 cp -r images dist/
