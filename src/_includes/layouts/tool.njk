@@ -1,6 +1,9 @@
 ---
 layout: layouts/base.njk
 ---
+{# Get tool data from tools.json using toolId from front matter #}
+{% set toolData = tools | selectattr("id", "equalto", toolId) | first %}
+
 <div class="container tool-page">
   <!-- Breadcrumb -->
   <nav class="breadcrumb" aria-label="Breadcrumb">

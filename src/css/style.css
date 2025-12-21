@@ -1214,7 +1214,7 @@ input[type="radio"] {
   color: var(--color-text-secondary);
 }
 
-/* FAQ Section */
+/* FAQ Section - Native details/summary */
 .faq-list {
   list-style: none;
   padding: 0;
@@ -1229,7 +1229,14 @@ input[type="radio"] {
   border-bottom: none;
 }
 
-.faq-question {
+/* Style for details element */
+details.faq-item {
+  margin: 0;
+}
+
+/* Style for summary (clickable header) */
+.faq-question,
+summary.faq-question {
   width: 100%;
   padding: var(--space-4) 0;
   background: none;
@@ -1243,9 +1250,42 @@ input[type="radio"] {
   justify-content: space-between;
   align-items: center;
   gap: var(--space-4);
+  list-style: none;
 }
 
-.faq-question:hover {
+/* Remove default marker */
+.faq-question::-webkit-details-marker,
+summary.faq-question::-webkit-details-marker {
+  display: none;
+}
+
+.faq-question::marker,
+summary.faq-question::marker {
+  display: none;
+  content: "";
+}
+
+/* Add custom arrow */
+.faq-question::after,
+summary.faq-question::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform var(--transition-fast);
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+details.faq-item[open] .faq-question::after,
+details.faq-item[open] summary.faq-question::after {
+  transform: rotate(-135deg);
+}
+
+.faq-question:hover,
+summary.faq-question:hover {
   color: var(--color-primary);
 }
 
@@ -1263,6 +1303,10 @@ input[type="radio"] {
 .faq-answer {
   padding: 0 0 var(--space-4) 0;
   color: var(--color-text-secondary);
+}
+
+/* For JS-based FAQ (legacy support) */
+.faq-answer:not(details .faq-answer) {
   display: none;
 }
 
