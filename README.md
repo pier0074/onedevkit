@@ -44,6 +44,7 @@ A collection of free, privacy-focused developer tools that run entirely in your 
 | Tool | Description | URL |
 |------|-------------|-----|
 | **JSON Formatter** | Format, validate, beautify, and minify JSON | `/tools/json-formatter/` |
+| **Base64 Encoder** | Encode/decode Base64, file upload support | `/tools/base64-encoder/` |
 | **Password Generator** | Generate secure random passwords | `/tools/password-generator/` |
 | **UUID Generator** | Generate UUID v4 with bulk support | `/tools/uuid-generator/` |
 | **Lorem Ipsum** | Generate placeholder text | `/tools/lorem-ipsum/` |
@@ -53,7 +54,9 @@ A collection of free, privacy-focused developer tools that run entirely in your 
 
 ## Tech Stack
 
+- **Static Site Generator:** Eleventy (11ty) with Nunjucks templates
 - **Frontend:** Pure HTML5, CSS3, Vanilla JavaScript (ES6+)
+- **Testing:** Jest (unit tests) + Playwright (E2E tests)
 - **Hosting:** Cloudflare Pages (free tier)
 - **Analytics:** Google Analytics 4 (optional, consent-based)
 - **PWA:** Web App Manifest + Service Worker ready
@@ -65,53 +68,44 @@ A collection of free, privacy-focused developer tools that run entirely in your 
 
 ```
 onedevkit/
-├── index.html                 # Homepage
-├── 404.html                   # Custom error page
-├── manifest.json              # PWA manifest
-├── robots.txt                 # Search engine directives
-├── sitemap.xml                # XML sitemap
+├── .eleventy.js               # Eleventy configuration
+├── package.json               # Node.js dependencies & scripts
 │
-├── css/
-│   └── style.css              # Complete design system (1200+ lines)
+├── src/                       # Source files (Eleventy input)
+│   ├── _data/
+│   │   ├── tools.json         # Tool definitions (single source of truth)
+│   │   └── site.json          # Site metadata
+│   │
+│   ├── _includes/
+│   │   ├── layouts/           # Nunjucks layouts (base, tool, page)
+│   │   └── partials/          # Reusable components (header, footer, nav)
+│   │
+│   ├── css/
+│   │   └── style.css          # Complete design system
+│   │
+│   ├── js/
+│   │   ├── common.js          # Shared utilities
+│   │   ├── cookie-consent.js  # GDPR/CCPA compliance
+│   │   ├── json-formatter.js  # JSON tool logic
+│   │   ├── base64.js          # Base64 tool logic
+│   │   ├── password-generator.js
+│   │   ├── uuid-generator.js
+│   │   ├── lorem-ipsum.js
+│   │   └── qr-generator.js
+│   │
+│   ├── images/
+│   │   └── og/                # Open Graph images (1200x630)
+│   │
+│   ├── tools/                 # Tool page templates
+│   ├── pages/                 # Static pages (about, contact, etc.)
+│   ├── index.njk              # Homepage template
+│   └── sitemap.njk            # Auto-generated sitemap
 │
-├── js/
-│   ├── common.js              # Shared utilities
-│   ├── cookie-consent.js      # GDPR/CCPA compliance
-│   ├── json-formatter.js      # JSON tool logic
-│   ├── password-generator.js  # Password tool logic
-│   ├── uuid-generator.js      # UUID tool logic
-│   ├── lorem-ipsum.js         # Lorem tool logic
-│   └── qr-generator.js        # QR code tool logic
+├── dist/                      # Build output (Eleventy output)
 │
-├── images/
-│   ├── favicon.svg            # Vector favicon
-│   ├── favicon.ico            # Legacy favicon
-│   ├── favicon-16x16.png
-│   ├── favicon-32x32.png
-│   ├── apple-touch-icon.png   # iOS icon (180x180)
-│   ├── icon-192.png           # PWA icon
-│   ├── icon-512.png           # PWA icon (large)
-│   └── og/                    # Open Graph images (1200x630)
-│
-├── tools/
-│   ├── json-formatter/
-│   ├── password-generator/
-│   ├── uuid-generator/
-│   ├── lorem-ipsum/
-│   └── qr-code-generator/
-│
-├── about/                     # About page
-├── contact/                   # Contact page
-├── faq/                       # FAQ page
-├── privacy/                   # Privacy policy
-├── terms/                     # Terms of service
-│
-├── tests/
-│   ├── seo-checklist.md       # SEO compliance checklist
-│   └── test-tools.html        # Browser-based test suite
-│
-└── scripts/
-    └── generate-favicons.sh   # Favicon generation script
+└── tests/
+    ├── unit/                  # Jest unit tests
+    └── e2e/                   # Playwright E2E tests
 ```
 
 ---
@@ -120,37 +114,33 @@ onedevkit/
 
 ### Prerequisites
 
-- Any static file server (Python, Node.js, or browser extension)
+- Node.js 18+ (LTS recommended)
+- npm
 
 ### Quick Start
 
-**Option 1: Python (recommended)**
 ```bash
-cd onedevkit
-python3 -m http.server 8000
-# Open http://localhost:8000
+# Install dependencies
+npm install
+
+# Start development server with hot reload
+npm run dev
+# Open http://localhost:8080
+
+# Build for production
+npm run build
 ```
 
-**Option 2: Node.js**
+### Available Scripts
+
 ```bash
-npx serve .
-# Open http://localhost:3000
+npm run dev          # Start Eleventy dev server with hot reload
+npm run build        # Build static site to dist/
+npm run clean        # Remove dist/ folder
+npm run test         # Run all tests (unit + e2e)
+npm run test:unit    # Run Jest unit tests only
+npm run test:e2e     # Run Playwright E2E tests only
 ```
-
-**Option 3: PHP**
-```bash
-php -S localhost:8000
-```
-
-**Option 4: VS Code Live Server**
-- Install "Live Server" extension
-- Right-click `index.html` → "Open with Live Server"
-
-### Testing Locally
-
-1. Open `http://localhost:8000/tests/test-tools.html`
-2. Click "Run All Tests"
-3. All tests should pass (green)
 
 ---
 
@@ -172,8 +162,8 @@ Cloudflare Pages offers free hosting with global CDN, SSL, and unlimited bandwid
 | Setting | Value |
 |---------|-------|
 | Production branch | `main` |
-| Build command | *(leave empty)* |
-| Build output directory | `/` |
+| Build command | `npm run build` |
+| Build output directory | `dist` |
 
 #### Step 3: Deploy
 
@@ -317,20 +307,28 @@ Potential upsells (keep core free):
 
 ## Testing
 
-### Automated Tests
+### Unit Tests (Jest)
 
-Open `tests/test-tools.html` in browser:
-- Tests all tool functionality
-- Validates utilities and helpers
-- 40+ test cases
+```bash
+npm run test:unit        # Run all unit tests
+npm run test:unit:watch  # Watch mode
+```
 
-### SEO Checklist
+**Coverage:** 101 tests across 5 test suites
+- JSON Formatter (30 tests)
+- Base64 Encoder (24 tests)
+- Password Generator (17 tests)
+- UUID Generator (15 tests)
+- Lorem Ipsum (15 tests)
 
-See `tests/seo-checklist.md` for:
-- Meta tag verification
-- Schema.org validation
-- Performance benchmarks
-- Accessibility checks
+### E2E Tests (Playwright)
+
+```bash
+npm run test:e2e     # Run headless
+npm run test:e2e:ui  # Interactive UI mode
+```
+
+**Coverage:** 35 tests covering all tools and UI interactions
 
 ### Manual Testing
 
@@ -339,7 +337,7 @@ See `tests/seo-checklist.md` for:
 npx lighthouse https://onedevkit.com --view
 
 # HTML validation
-npx html-validate "**/*.html"
+npx html-validate "dist/**/*.html"
 
 # Broken link check
 npx broken-link-checker https://onedevkit.com -r
@@ -361,16 +359,16 @@ npx broken-link-checker https://onedevkit.com -r
 
 Before going live, verify:
 
-- [ ] Update `GA_MEASUREMENT_ID` in `cookie-consent.js`
-- [ ] Test all tools function correctly
-- [ ] Verify OG images display properly
-- [ ] Submit sitemap to Google/Bing
-- [ ] Set up Google Search Console
-- [ ] Test cookie consent flow
-- [ ] Verify dark mode works
-- [ ] Test mobile responsiveness
-- [ ] Check all internal links work
-- [ ] Run Lighthouse audit
+- [x] Update `GA_MEASUREMENT_ID` in `cookie-consent.js`
+- [x] Test all tools function correctly
+- [x] Verify OG images display properly
+- [x] Submit sitemap to Google/Bing
+- [x] Set up Google Search Console
+- [x] Test cookie consent flow
+- [x] Verify dark mode works
+- [x] Test mobile responsiveness
+- [x] Check all internal links work
+- [x] Run Lighthouse audit
 
 ---
 

@@ -15,7 +15,7 @@ Run these checks before each deployment to ensure 100% SEO compliance.
 - [ ] `<link rel="canonical">` points to correct URL
 
 ### Each Tool Page
-Run for: json-formatter, password-generator, uuid-generator, lorem-ipsum, qr-code-generator
+Run for: json-formatter, base64-encoder, password-generator, uuid-generator, lorem-ipsum, qr-code-generator
 
 - [ ] Unique `<title>` (not duplicate of other pages)
 - [ ] Unique `<meta description>` under 160 chars
@@ -49,7 +49,7 @@ Run for: json-formatter, password-generator, uuid-generator, lorem-ipsum, qr-cod
 ### Homepage
 - [ ] Organization schema with name, url, logo
 - [ ] WebSite schema with SearchAction
-- [ ] ItemList schema with all 5 tools
+- [ ] ItemList schema with all 6 tools
 
 ### Tool Pages
 - [ ] WebApplication schema with:
@@ -78,7 +78,7 @@ Run for: json-formatter, password-generator, uuid-generator, lorem-ipsum, qr-cod
 - [ ] No accidental blocks
 
 ### sitemap.xml
-- [ ] All pages listed (11 total)
+- [ ] All pages listed (12 total)
 - [ ] Correct URLs (absolute, with trailing slashes)
 - [ ] Priority values set (1.0 for home, 0.9 for tools, etc.)
 - [ ] lastmod dates present
@@ -135,6 +135,7 @@ Run for: json-formatter, password-generator, uuid-generator, lorem-ipsum, qr-cod
 ### OG Images (/images/og/)
 - [ ] og-default.jpg exists (1200x630)
 - [ ] json-formatter.jpg exists (1200x630)
+- [ ] base64-encoder.jpg exists (1200x630)
 - [ ] password-generator.jpg exists (1200x630)
 - [ ] uuid-generator.jpg exists (1200x630)
 - [ ] lorem-ipsum.jpg exists (1200x630)
