@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Primary Meta Tags -->
+  <title>QR Code Generator - Free Online QR Code Maker | OneDevKit</title>
+  <meta name="title" content="QR Code Generator - Free Online QR Code Maker | OneDevKit">
+  <meta name="description" content="Generate QR codes for URLs, text, WiFi, and more. Free online QR code generator with customizable size. Download as PNG or copy to clipboard.">
+  <meta name="keywords" content="qr code generator, qr code maker, free qr code, qr code online, create qr code, url qr code, text qr code">
+  <meta name="author" content="OneDevKit">
+  <meta name="robots" content="index, follow">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://onedevkit.com/tools/qr-code-generator/">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://onedevkit.com/tools/qr-code-generator/">
+  <meta property="og:title" content="QR Code Generator - Free Online QR Code Maker">
+  <meta property="og:description" content="Generate QR codes for URLs, text, and more. Free online tool with instant download.">
+  <meta property="og:image" content="https://onedevkit.com/images/og-qr-code-generator.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="OneDevKit">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://onedevkit.com/tools/qr-code-generator/">
+  <meta name="twitter:title" content="QR Code Generator - Free Online QR Code Maker">
+  <meta name="twitter:description" content="Generate QR codes for URLs, text, and more. Free online tool with instant download.">
+  <meta name="twitter:image" content="https://onedevkit.com/images/og-qr-code-generator.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#2563eb">
+
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/css/style.css">
+
+  <!-- Additional styles -->
+  <style>
+    .qr-preview {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 280px;
+      background: var(--color-bg-alt);
+      border: 2px dashed var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+    }
+
+    .qr-preview canvas {
+      max-width: 100%;
+      height: auto;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-md);
+    }
+
+    .qr-placeholder {
+      text-align: center;
+      color: var(--color-text-muted);
+    }
+
+    .qr-placeholder svg {
+      width: 64px;
+      height: 64px;
+      margin-bottom: var(--space-4);
+      opacity: 0.5;
+    }
+
+    .options-row {
+      display: flex;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+    }
+
+    .options-row .tool-input-group {
+      flex: 1;
+      min-width: 150px;
+    }
+  </style>
+
+  <!-- Schema.org - WebApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "QR Code Generator",
+    "url": "https://onedevkit.com/tools/qr-code-generator/",
+    "description": "Generate QR codes for URLs, text, WiFi credentials, and more. Free online QR code generator with customizable options.",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "browserRequirements": "Requires JavaScript",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "featureList": [
+      "Generate QR codes for any text or URL",
+      "Multiple size options (128x128 to 512x512)",
+      "Adjustable error correction levels",
+      "Download as PNG image",
+      "Copy to clipboard",
+      "Works entirely in browser"
+    ],
+    "author": {
+      "@type": "Organization",
+      "name": "OneDevKit",
+      "url": "https://onedevkit.com"
+    }
+  }
+  </script>
+
+  <!-- Schema.org - BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://onedevkit.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "QR Code Generator",
+        "item": "https://onedevkit.com/tools/qr-code-generator/"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Schema.org - FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a QR code?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A QR (Quick Response) code is a two-dimensional barcode that can store various types of data including URLs, text, contact information, WiFi credentials, and more. QR codes can be scanned by smartphones and QR readers to quickly access the encoded information."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What can I encode in a QR code?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You can encode various types of data in a QR code including: website URLs, plain text, phone numbers, email addresses, WiFi network credentials, geographic coordinates, calendar events, and contact information (vCards). Our generator supports all text-based data types."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is error correction level?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Error correction allows QR codes to be read even if they are partially damaged or obscured. Level L recovers 7% of data, M recovers 15%, Q recovers 25%, and H recovers up to 30%. Higher error correction means more redundant data and larger QR codes, but better reliability."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What size QR code should I use?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The optimal size depends on how the QR code will be used. For screen display, 256x256 pixels is usually sufficient. For printing, use 512x512 or larger to ensure clarity. The minimum scannable size is typically about 2x2 cm (0.8x0.8 inches) when printed."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are the QR codes I generate stored or tracked?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No, the QR codes are generated entirely in your browser. No data is sent to any server, and we don't store or track the content of your QR codes. Your privacy is fully protected."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <!-- Skip to content link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="/" class="logo" aria-label="OneDevKit Home">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="16 18 22 12 16 6"></polyline>
+          <polyline points="8 6 2 12 8 18"></polyline>
+        </svg>
+        OneDevKit
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+
+      <nav class="nav" aria-label="Main navigation">
+        <a href="/" class="nav-link">Tools</a>
+        <a href="/about/" class="nav-link">About</a>
+        <a href="/contact/" class="nav-link">Contact</a>
+        <button class="theme-toggle" aria-label="Toggle dark mode">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+          </svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main id="main-content" class="main-content">
+    <div class="container tool-page">
+      <!-- Breadcrumbs -->
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="breadcrumbs-separator" aria-hidden="true">/</span>
+        <span aria-current="page">QR Code Generator</span>
+      </nav>
+
+      <!-- Tool Header -->
+      <header class="tool-header">
+        <h1>QR Code Generator</h1>
+        <p class="tool-description">
+          Generate QR codes for URLs, text, and other data. This free QR code maker creates scannable codes that work with any smartphone camera.
+        </p>
+      </header>
+
+      <!-- Tool Container -->
+      <div class="tool-container">
+        <!-- Text Input -->
+        <div class="tool-input-group">
+          <label for="qr-text">Enter URL or Text</label>
+          <input type="text" id="qr-text" placeholder="https://example.com or any text..." aria-describedby="qr-text-hint">
+          <small id="qr-text-hint" style="color: var(--color-text-muted); font-size: var(--text-xs);">Enter the content you want to encode in the QR code</small>
+        </div>
+
+        <!-- Options -->
+        <div class="options-row" style="margin-top: var(--space-4);">
+          <div class="tool-input-group">
+            <label for="qr-size">Size</label>
+            <select id="qr-size">
+              <option value="128">Small (128x128)</option>
+              <option value="256" selected>Medium (256x256)</option>
+              <option value="384">Large (384x384)</option>
+              <option value="512">Extra Large (512x512)</option>
+            </select>
+          </div>
+          <div class="tool-input-group">
+            <label for="qr-ec-level">Error Correction</label>
+            <select id="qr-ec-level">
+              <option value="L">Low (7%)</option>
+              <option value="M" selected>Medium (15%)</option>
+              <option value="Q">Quartile (25%)</option>
+              <option value="H">High (30%)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="tool-actions" style="margin-top: var(--space-4);">
+          <button id="generate-qr" class="btn btn-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="18" height="18" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h2M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/>
+            </svg>
+            Generate QR Code
+          </button>
+          <button id="clear-qr" class="btn btn-ghost">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="18" height="18" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+            </svg>
+            Clear
+          </button>
+        </div>
+
+        <!-- QR Code Output -->
+        <div id="qr-output" class="qr-preview" style="margin-top: var(--space-6);" aria-live="polite">
+          <div id="qr-placeholder" class="qr-placeholder">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h2M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/>
+            </svg>
+            <p>Enter text or URL above to generate a QR code</p>
+          </div>
+          <canvas id="qr-canvas" class="hidden" aria-label="Generated QR code"></canvas>
+        </div>
+
+        <!-- Download Actions -->
+        <div class="tool-actions" style="margin-top: var(--space-4); justify-content: center;">
+          <button id="download-qr" class="btn btn-secondary">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="18" height="18" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+            </svg>
+            Download PNG
+          </button>
+          <button id="copy-qr" class="btn btn-secondary">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="18" height="18" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+            </svg>
+            Copy to Clipboard
+          </button>
+        </div>
+      </div>
+
+      <!-- How to Use Section -->
+      <section class="content-section" aria-labelledby="how-to-use">
+        <h2 id="how-to-use">How to Use</h2>
+        <ol>
+          <li><strong>Enter your content:</strong> Type or paste a URL, text message, phone number, or any other data you want to encode.</li>
+          <li><strong>Choose size:</strong> Select the QR code size based on your needs. Larger sizes are better for printing.</li>
+          <li><strong>Set error correction:</strong> Higher levels make the QR code more resilient to damage but also larger.</li>
+          <li><strong>Generate:</strong> Click "Generate QR Code" or just start typing - the QR code updates automatically.</li>
+          <li><strong>Download or Copy:</strong> Save the QR code as a PNG image or copy it directly to your clipboard.</li>
+        </ol>
+      </section>
+
+      <!-- What is a QR Code Section -->
+      <section class="content-section" aria-labelledby="what-is-qr">
+        <h2 id="what-is-qr">What is a QR Code?</h2>
+        <p>
+          A <strong>QR code (Quick Response code)</strong> is a two-dimensional barcode invented in 1994 by Japanese company Denso Wave. Unlike traditional barcodes that can only store data horizontally, QR codes store data in both horizontal and vertical directions, allowing them to hold significantly more information.
+        </p>
+        <p>
+          QR codes have become ubiquitous in modern life, used for everything from website links and digital payments to restaurant menus and product information. They can be scanned instantly by any smartphone camera, making them an efficient way to share information.
+        </p>
+      </section>
+
+      <!-- Use Cases Section -->
+      <section class="content-section" aria-labelledby="use-cases">
+        <h2 id="use-cases">Common QR Code Use Cases</h2>
+        <ul class="features-list">
+          <li class="feature-item">
+            <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span class="feature-text"><strong>Website Links</strong> - Direct users to your website, landing page, or social media profile</span>
+          </li>
+          <li class="feature-item">
+            <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span class="feature-text"><strong>Business Cards</strong> - Share contact information that can be instantly saved</span>
+          </li>
+          <li class="feature-item">
+            <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span class="feature-text"><strong>WiFi Access</strong> - Let guests connect to WiFi without typing passwords</span>
+          </li>
+          <li class="feature-item">
+            <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span class="feature-text"><strong>Product Information</strong> - Link to manuals, specifications, or support pages</span>
+          </li>
+          <li class="feature-item">
+            <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span class="feature-text"><strong>Event Tickets</strong> - Create scannable tickets for events and venues</span>
+          </li>
+          <li class="feature-item">
+            <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span class="feature-text"><strong>Payments</strong> - Enable mobile payments and cryptocurrency transactions</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- FAQ Section -->
+      <section class="content-section" aria-labelledby="faq">
+        <h2 id="faq">Frequently Asked Questions</h2>
+        <ul class="faq-list">
+          <li class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              What is a QR code?
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <p>A QR (Quick Response) code is a two-dimensional barcode that can store various types of data including URLs, text, contact information, WiFi credentials, and more. QR codes can be scanned by smartphones and QR readers to quickly access the encoded information.</p>
+            </div>
+          </li>
+          <li class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              What can I encode in a QR code?
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <p>You can encode various types of data in a QR code including: website URLs, plain text, phone numbers, email addresses, WiFi network credentials, geographic coordinates, calendar events, and contact information (vCards). Our generator supports all text-based data types.</p>
+            </div>
+          </li>
+          <li class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              What is error correction level?
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <p>Error correction allows QR codes to be read even if they are partially damaged or obscured. Level L recovers 7% of data, M recovers 15%, Q recovers 25%, and H recovers up to 30%. Higher error correction means more redundant data and larger QR codes, but better reliability.</p>
+            </div>
+          </li>
+          <li class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              What size QR code should I use?
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <p>The optimal size depends on how the QR code will be used. For screen display, 256x256 pixels is usually sufficient. For printing, use 512x512 or larger to ensure clarity. The minimum scannable size is typically about 2x2 cm (0.8x0.8 inches) when printed.</p>
+            </div>
+          </li>
+          <li class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              Are the QR codes I generate stored or tracked?
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <p>No, the QR codes are generated entirely in your browser. No data is sent to any server, and we don't store or track the content of your QR codes. Your privacy is fully protected.</p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Related Tools -->
+      <section class="content-section" aria-labelledby="related-tools">
+        <h2 id="related-tools">Related Tools</h2>
+        <div class="related-tools">
+          <a href="/tools/uuid-generator/" class="related-tool-link">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"/>
+            </svg>
+            UUID Generator
+          </a>
+          <a href="/tools/password-generator/" class="related-tool-link">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+            </svg>
+            Password Generator
+          </a>
+          <a href="/tools/json-formatter/" class="related-tool-link">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+            </svg>
+            JSON Formatter
+          </a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-section">
+          <h4>Tools</h4>
+          <ul class="footer-links">
+            <li><a href="/tools/json-formatter/">JSON Formatter</a></li>
+            <li><a href="/tools/password-generator/">Password Generator</a></li>
+            <li><a href="/tools/uuid-generator/">UUID Generator</a></li>
+            <li><a href="/tools/lorem-ipsum/">Lorem Ipsum</a></li>
+            <li><a href="/tools/qr-code-generator/" aria-current="page">QR Code Generator</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Company</h4>
+          <ul class="footer-links">
+            <li><a href="/about/">About</a></li>
+            <li><a href="/contact/">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Legal</h4>
+          <ul class="footer-links">
+            <li><a href="/privacy-policy/">Privacy Policy</a></li>
+            <li><a href="/terms-of-service/">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">
+          &copy; 2025 OneDevKit. All rights reserved.<br>
+          <small>Tools provided "as is" without warranty.</small>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cookie Consent Banner -->
+  <div class="cookie-banner" role="dialog" aria-label="Cookie consent" aria-describedby="cookie-message">
+    <div class="cookie-banner-inner">
+      <p class="cookie-banner-text" id="cookie-message">
+        We use cookies to analyze traffic and improve your experience.
+        <a href="/privacy-policy/">Learn more</a>
+      </p>
+      <div class="cookie-banner-actions">
+        <button class="btn btn-secondary" data-cookie-reject>Reject</button>
+        <button class="btn btn-primary" data-cookie-accept>Accept</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/js/common.js"></script>
+  <script src="/js/cookie-consent.js"></script>
+  <script src="/js/qr-generator.js"></script>
+</body>
+</html>
