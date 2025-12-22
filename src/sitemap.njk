@@ -3,54 +3,122 @@ permalink: /sitemap.xml
 eleventyExcludeFromCollections: true
 ---
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Homepage -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+{%- set enabledLangs = enabledLanguages | selectattr("enabled", "equalto", true) | list -%}
+{%- set defaultLang = defaultLang -%}
+
+  <!-- Homepage - All Languages -->
+{%- for langItem in enabledLangs %}
   <url>
-    <loc>{{ site.url }}/</loc>
+    <loc>{{ site.url }}{{ "/" | langUrl(langItem.code) }}</loc>
     <lastmod>{% currentDate %}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+{%- if enabledLangs.length > 1 %}
+{%- for altLang in enabledLangs %}
+    <xhtml:link rel="alternate" hreflang="{{ altLang.hreflang }}" href="{{ site.url }}{{ "/" | langUrl(altLang.code) }}"/>
+{%- endfor %}
+    <xhtml:link rel="alternate" hreflang="x-default" href="{{ site.url }}/"/>
+{%- endif %}
   </url>
+{%- endfor %}
 
-  <!-- Tools -->
-  {% for tool in tools %}
+  <!-- Tools - All Languages -->
+{%- for tool in tools %}
+{%- for langItem in enabledLangs %}
   <url>
-    <loc>{{ site.url }}/tools/{{ tool.id }}/</loc>
+    <loc>{{ site.url }}{{ ("/tools/" + tool.id + "/") | langUrl(langItem.code) }}</loc>
     <lastmod>{% currentDate %}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>{{ tool.priority }}</priority>
+{%- if enabledLangs.length > 1 %}
+{%- for altLang in enabledLangs %}
+    <xhtml:link rel="alternate" hreflang="{{ altLang.hreflang }}" href="{{ site.url }}{{ ("/tools/" + tool.id + "/") | langUrl(altLang.code) }}"/>
+{%- endfor %}
+    <xhtml:link rel="alternate" hreflang="x-default" href="{{ site.url }}/tools/{{ tool.id }}/"/>
+{%- endif %}
   </url>
-  {% endfor %}
+{%- endfor %}
+{%- endfor %}
 
-  <!-- Static Pages -->
+  <!-- About - All Languages -->
+{%- for langItem in enabledLangs %}
   <url>
-    <loc>{{ site.url }}/about/</loc>
+    <loc>{{ site.url }}{{ "/about/" | langUrl(langItem.code) }}</loc>
     <lastmod>{% currentDate %}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+{%- if enabledLangs.length > 1 %}
+{%- for altLang in enabledLangs %}
+    <xhtml:link rel="alternate" hreflang="{{ altLang.hreflang }}" href="{{ site.url }}{{ "/about/" | langUrl(altLang.code) }}"/>
+{%- endfor %}
+    <xhtml:link rel="alternate" hreflang="x-default" href="{{ site.url }}/about/"/>
+{%- endif %}
   </url>
+{%- endfor %}
+
+  <!-- FAQ - All Languages -->
+{%- for langItem in enabledLangs %}
   <url>
-    <loc>{{ site.url }}/faq/</loc>
+    <loc>{{ site.url }}{{ "/faq/" | langUrl(langItem.code) }}</loc>
     <lastmod>{% currentDate %}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+{%- if enabledLangs.length > 1 %}
+{%- for altLang in enabledLangs %}
+    <xhtml:link rel="alternate" hreflang="{{ altLang.hreflang }}" href="{{ site.url }}{{ "/faq/" | langUrl(altLang.code) }}"/>
+{%- endfor %}
+    <xhtml:link rel="alternate" hreflang="x-default" href="{{ site.url }}/faq/"/>
+{%- endif %}
   </url>
+{%- endfor %}
+
+  <!-- Contact - All Languages -->
+{%- for langItem in enabledLangs %}
   <url>
-    <loc>{{ site.url }}/contact/</loc>
+    <loc>{{ site.url }}{{ "/contact/" | langUrl(langItem.code) }}</loc>
     <lastmod>{% currentDate %}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+{%- if enabledLangs.length > 1 %}
+{%- for altLang in enabledLangs %}
+    <xhtml:link rel="alternate" hreflang="{{ altLang.hreflang }}" href="{{ site.url }}{{ "/contact/" | langUrl(altLang.code) }}"/>
+{%- endfor %}
+    <xhtml:link rel="alternate" hreflang="x-default" href="{{ site.url }}/contact/"/>
+{%- endif %}
   </url>
+{%- endfor %}
+
+  <!-- Privacy - All Languages -->
+{%- for langItem in enabledLangs %}
   <url>
-    <loc>{{ site.url }}/privacy/</loc>
+    <loc>{{ site.url }}{{ "/privacy/" | langUrl(langItem.code) }}</loc>
     <lastmod>{% currentDate %}</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
+{%- if enabledLangs.length > 1 %}
+{%- for altLang in enabledLangs %}
+    <xhtml:link rel="alternate" hreflang="{{ altLang.hreflang }}" href="{{ site.url }}{{ "/privacy/" | langUrl(altLang.code) }}"/>
+{%- endfor %}
+    <xhtml:link rel="alternate" hreflang="x-default" href="{{ site.url }}/privacy/"/>
+{%- endif %}
   </url>
+{%- endfor %}
+
+  <!-- Terms - All Languages -->
+{%- for langItem in enabledLangs %}
   <url>
-    <loc>{{ site.url }}/terms/</loc>
+    <loc>{{ site.url }}{{ "/terms/" | langUrl(langItem.code) }}</loc>
     <lastmod>{% currentDate %}</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
+{%- if enabledLangs.length > 1 %}
+{%- for altLang in enabledLangs %}
+    <xhtml:link rel="alternate" hreflang="{{ altLang.hreflang }}" href="{{ site.url }}{{ "/terms/" | langUrl(altLang.code) }}"/>
+{%- endfor %}
+    <xhtml:link rel="alternate" hreflang="x-default" href="{{ site.url }}/terms/"/>
+{%- endif %}
   </url>
+{%- endfor %}
 </urlset>
