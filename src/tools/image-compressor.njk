@@ -1,0 +1,326 @@
+---
+layout: layouts/tool.njk
+title: Compress Image to Specific KB Size - Free Online Tool
+description: Compress images to exact KB size (20KB, 50KB, 100KB, 200KB). Free online image compressor for passport photos, job applications, and government forms. No signup required.
+keywords: compress image to 20kb, compress image to 50kb, compress image to 100kb, resize image to 20kb, image compressor, reduce image size, compress photo online, passport photo size
+permalink: /tools/image-compressor/
+toolId: image-compressor
+toolJs: image-compressor.js
+ogImage: image-compressor.jpg
+---
+{% set toolData = tools | findById(toolId) %}
+
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "{{ site.url }}/"},
+    {"@type": "ListItem", "position": 2, "name": "Tools", "item": "{{ site.url }}/#tools"},
+    {"@type": "ListItem", "position": 3, "name": "{{ toolData.name }}", "item": "{{ site.url }}{{ page.url }}"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "{{ toolData.fullName }}",
+  "description": "{{ description }}",
+  "url": "{{ site.url }}{{ page.url }}",
+  "applicationCategory": "MultimediaApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+  "featureList": ["Compress to exact KB size", "Preset sizes: 20KB, 50KB, 100KB, 200KB", "Custom KB target", "Batch processing", "Preview before/after", "100% client-side processing"],
+  "author": {"@type": "Organization", "name": "{{ site.name }}", "url": "{{ site.url }}"}
+}
+</script>
+{% endblock %}
+
+{% block head %}
+<style>
+  .upload-zone {
+    border: 2px dashed var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-10);
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    background: var(--color-bg-alt);
+  }
+  .upload-zone:hover, .upload-zone.dragover {
+    border-color: var(--color-primary);
+    background: var(--color-primary-light);
+  }
+  .upload-zone input {
+    display: none;
+  }
+  .upload-icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto var(--space-4);
+    color: var(--color-text-secondary);
+  }
+  .upload-text {
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-2);
+  }
+  .upload-hint {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  .size-presets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin: var(--space-4) 0;
+  }
+  .size-btn {
+    border-radius: var(--radius-full);
+  }
+
+  .custom-size {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin: var(--space-4) 0;
+  }
+  .custom-size input {
+    width: 100px;
+    padding: var(--space-2) var(--space-3);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+  }
+  .custom-size input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+  }
+
+  .image-preview {
+    display: none;
+    margin-top: var(--space-6);
+  }
+  .image-preview.show {
+    display: block;
+  }
+  .preview-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+  }
+  @media (max-width: 640px) {
+    .preview-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  .preview-card {
+    background: var(--color-bg-alt);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
+  }
+  .preview-label {
+    font-weight: 600;
+    margin-bottom: var(--space-2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .preview-size {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    font-weight: normal;
+  }
+  .preview-size.success {
+    color: var(--color-success);
+    font-weight: 600;
+  }
+  .preview-img {
+    width: 100%;
+    max-height: 300px;
+    object-fit: contain;
+    border-radius: var(--radius-md);
+    background: var(--color-bg);
+  }
+
+  .compression-status {
+    margin-top: var(--space-4);
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    display: none;
+  }
+  .compression-status.show {
+    display: block;
+  }
+  .compression-status.processing {
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+  }
+  .compression-status.success {
+    background: #dcfce7;
+    color: #16a34a;
+  }
+  .compression-status.error {
+    background: #fee2e2;
+    color: #dc2626;
+  }
+
+  .result-stats {
+    display: flex;
+    gap: var(--space-6);
+    margin-top: var(--space-4);
+    padding: var(--space-3) var(--space-4);
+    background: var(--color-bg-alt);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+  }
+  .stat-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--color-text-secondary);
+  }
+  .stat-value {
+    font-weight: 600;
+    color: var(--color-text);
+  }
+  .stat-value.reduction {
+    color: var(--color-success);
+  }
+</style>
+{% endblock %}
+
+<div class="tool-container">
+  <!-- Upload Zone -->
+  <div class="upload-zone" id="upload-zone">
+    <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp" multiple>
+    <div class="upload-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+      </svg>
+    </div>
+    <div class="upload-text">Click to upload or drag and drop</div>
+    <div class="upload-hint">JPG, PNG, or WebP (Max 10MB)</div>
+  </div>
+
+  <!-- Size Presets -->
+  <div style="margin-top: var(--space-6);">
+    <label class="text-area-label">Target Size</label>
+    <div class="size-presets" role="group" aria-label="Preset file sizes">
+      <button class="btn-option size-btn" data-size="20">20 KB</button>
+      <button class="btn-option size-btn" data-size="50">50 KB</button>
+      <button class="btn-option size-btn active" data-size="100">100 KB</button>
+      <button class="btn-option size-btn" data-size="200">200 KB</button>
+      <button class="btn-option size-btn" data-size="500">500 KB</button>
+      <button class="btn-option size-btn" data-size="custom">Custom</button>
+    </div>
+    <div class="custom-size" id="custom-size" style="display: none;">
+      <input type="number" id="custom-kb" min="5" max="5000" value="150" placeholder="KB">
+      <span>KB</span>
+    </div>
+  </div>
+
+  <!-- Status -->
+  <div class="compression-status" id="status"></div>
+
+  <!-- Preview -->
+  <div class="image-preview" id="preview-section">
+    <div class="preview-grid">
+      <div class="preview-card">
+        <div class="preview-label">
+          Original
+          <span class="preview-size" id="original-size">-</span>
+        </div>
+        <img id="original-preview" class="preview-img" alt="Original image">
+      </div>
+      <div class="preview-card">
+        <div class="preview-label">
+          Compressed
+          <span class="preview-size" id="compressed-size">-</span>
+        </div>
+        <img id="compressed-preview" class="preview-img" alt="Compressed image">
+      </div>
+    </div>
+
+    <div class="result-stats" id="result-stats" style="display: none;">
+      <div class="stat-item">
+        <span>Reduction:</span>
+        <span class="stat-value reduction" id="reduction-percent">-</span>
+      </div>
+      <div class="stat-item">
+        <span>Dimensions:</span>
+        <span class="stat-value" id="dimensions">-</span>
+      </div>
+      <div class="stat-item">
+        <span>Quality:</span>
+        <span class="stat-value" id="quality-used">-</span>
+      </div>
+    </div>
+
+    <div class="tool-actions" style="margin-top: var(--space-4);">
+      <button id="download-btn" class="btn btn-primary" disabled>Download Compressed Image</button>
+      <button id="reset-btn" class="btn btn-ghost">Compress Another</button>
+    </div>
+  </div>
+</div>
+
+<section class="content-section">
+  <h2>How to Use</h2>
+  <div class="steps">
+    <div class="step"><div class="step-number">1</div><div class="step-content"><h3>Upload Your Image</h3><p>Click the upload area or drag and drop your JPG, PNG, or WebP image.</p></div></div>
+    <div class="step"><div class="step-number">2</div><div class="step-content"><h3>Select Target Size</h3><p>Choose a preset (20KB, 50KB, 100KB, 200KB) or enter a custom size.</p></div></div>
+    <div class="step"><div class="step-number">3</div><div class="step-content"><h3>Download Result</h3><p>Preview the compressed image and download when satisfied.</p></div></div>
+  </div>
+</section>
+
+<section class="content-section">
+  <h2>Common Use Cases</h2>
+  <ul>
+    <li><strong>Government Forms</strong> - Many require photos under 100KB or 200KB</li>
+    <li><strong>Job Applications</strong> - Upload limits often require small file sizes</li>
+    <li><strong>Passport/Visa Photos</strong> - Specific size requirements (10KB-300KB)</li>
+    <li><strong>Email Attachments</strong> - Reduce file sizes for faster sending</li>
+    <li><strong>Website Optimization</strong> - Compress images for faster page loads</li>
+  </ul>
+</section>
+
+<section class="content-section">
+  <h2>FAQ</h2>
+  <div class="faq-list">
+    <details class="faq-item">
+      <summary class="faq-question">How does this tool compress images?</summary>
+      <div class="faq-answer"><p>We use smart compression that adjusts quality and dimensions to hit your target file size. The algorithm uses binary search to find the optimal quality setting.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-question">Is my image uploaded to a server?</summary>
+      <div class="faq-answer"><p>No! All compression happens in your browser using JavaScript. Your images never leave your device, ensuring complete privacy.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-question">What if the target size is too small?</summary>
+      <div class="faq-answer"><p>For very small targets, we may need to reduce image dimensions. The tool will find the best balance between size and quality.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-question">What image formats are supported?</summary>
+      <div class="faq-answer"><p>JPG, PNG, and WebP. Output is always JPG for best compression results.</p></div>
+    </details>
+  </div>
+</section>
+
+<section class="content-section">
+  <h2>Related Tools</h2>
+  <div class="related-tools">
+    {% for tool in tools %}
+    {% if tool.id != toolId %}
+    <a href="/tools/{{ tool.id }}/" class="related-tool-link">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16">{{ tool.icon | safe }}</svg>
+      {{ tool.name }}
+    </a>
+    {% endif %}
+    {% endfor %}
+  </div>
+</section>

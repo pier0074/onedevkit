@@ -67,6 +67,11 @@ This is a **passive income project** designed to generate revenue through advert
 | **Color Picker** | Pick colors and convert between HEX, RGB, HSL | `/tools/color-picker/` |
 | **Diff Checker** | Compare two texts and highlight differences | `/tools/diff-checker/` |
 | **Markdown Preview** | Write Markdown with live preview | `/tools/markdown-preview/` |
+| **Word Counter** | Count words, characters, sentences with reading time | `/tools/word-counter/` |
+| **Case Converter** | Convert between UPPERCASE, lowercase, camelCase, etc. | `/tools/case-converter/` |
+| **Image Compressor** | Compress images to exact KB size (20KB, 50KB, 100KB) | `/tools/image-compressor/` |
+| **Passport Photo** | Create passport/visa photos for any country | `/tools/passport-photo/` |
+| **Social Media Resizer** | Resize images for Instagram, LinkedIn, Twitter, etc. | `/tools/social-media-resizer/` |
 
 ---
 
@@ -117,7 +122,12 @@ onedevkit/
 │   │   ├── regex-tester.js    # Regex tester
 │   │   ├── color-picker.js    # Color picker/converter
 │   │   ├── diff-checker.js    # Text diff checker
-│   │   └── markdown-preview.js # Markdown editor
+│   │   ├── markdown-preview.js # Markdown editor
+│   │   ├── word-counter.js    # Word/character counter
+│   │   ├── case-converter.js  # Text case converter
+│   │   ├── image-compressor.js # Image compression to KB
+│   │   ├── passport-photo.js  # Passport photo tool
+│   │   └── social-media-resizer.js # Social media image resizer
 │   │
 │   ├── images/
 │   │   └── og/                # Open Graph images (1200x630)
@@ -340,7 +350,7 @@ npm run test:unit        # Run all unit tests
 npm run test:unit:watch  # Watch mode
 ```
 
-**Coverage:** 359 tests across 16 test suites
+**Coverage:** 479 tests across 21 test suites
 - JSON Formatter (30 tests)
 - Base64 Encoder (24 tests)
 - URL Encoder (17 tests)
@@ -355,6 +365,11 @@ npm run test:unit:watch  # Watch mode
 - Color Picker (16 tests)
 - Diff Checker (14 tests)
 - Markdown Preview (26 tests)
+- Word Counter (18 tests)
+- Case Converter (22 tests)
+- Image Compressor (28 tests)
+- Passport Photo (30 tests)
+- Social Media Resizer (50 tests)
 - Common Utilities (33 tests)
 - Cookie Consent (25 tests)
 
@@ -365,7 +380,7 @@ npm run test:e2e     # Run headless
 npm run test:e2e:ui  # Interactive UI mode
 ```
 
-**Coverage:** 88 tests covering all 14 tools, UI interactions, and content integrity
+**Coverage:** 88 tests covering all 19 tools, UI interactions, and content integrity
 
 ### Manual Testing
 
