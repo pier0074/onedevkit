@@ -71,6 +71,7 @@ This is a **passive income project** designed to generate revenue through advert
 | **Case Converter** | Convert between UPPERCASE, lowercase, camelCase, etc. | `/tools/case-converter/` |
 | **Image Compressor** | Compress images to exact KB size (20KB, 50KB, 100KB) | `/tools/image-compressor/` |
 | **Passport Photo** | Create passport/visa photos for any country | `/tools/passport-photo/` |
+| **Social Media Resizer** | Resize images for Instagram, LinkedIn, Twitter, etc. | `/tools/social-media-resizer/` |
 
 ---
 
@@ -369,7 +370,7 @@ npm run test:e2e     # Run headless
 npm run test:e2e:ui  # Interactive UI mode
 ```
 
-**Coverage:** 422 tests covering all 18 tools, UI interactions, and content integrity
+**Coverage:** 449 tests covering all 19 tools, UI interactions, and content integrity
 
 ### Manual Testing
 

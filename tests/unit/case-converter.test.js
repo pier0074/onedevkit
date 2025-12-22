@@ -20,6 +20,7 @@ document.body.innerHTML = `
   <button class="case-btn" data-case="alternating">AlTeRnAtInG</button>
   <button id="copy-output"></button>
   <button id="swap-text"></button>
+  <button id="load-sample"></button>
   <button id="clear-all"></button>
 `;
 
@@ -167,6 +168,34 @@ describe('CaseConverter', () => {
       expect(CaseConverter.convert('hello world', 'upper')).toBe('HELLO WORLD');
       expect(CaseConverter.convert('HELLO WORLD', 'lower')).toBe('hello world');
       expect(CaseConverter.convert('hello world', 'camel')).toBe('helloWorld');
+    });
+  });
+
+  describe('getSampleText', () => {
+    test('returns sample text', () => {
+      const sample = CaseConverter.getSampleText();
+      expect(typeof sample).toBe('string');
+      expect(sample.length).toBeGreaterThan(10);
+    });
+  });
+
+  describe('loadSample', () => {
+    test('loads sample text into input', () => {
+      const input = document.getElementById('input-text');
+      input.value = '';
+      CaseConverter.currentCase = null;
+
+      CaseConverter.loadSample();
+
+      expect(input.value).toBe(CaseConverter.getSampleText());
+    });
+
+    test('auto-selects title case when no case selected', () => {
+      CaseConverter.currentCase = null;
+
+      CaseConverter.loadSample();
+
+      expect(CaseConverter.currentCase).toBe('title');
     });
   });
 });

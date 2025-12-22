@@ -172,6 +172,34 @@
     },
 
     /**
+     * Get sample text for demonstration
+     */
+    getSampleText() {
+      return `The quick brown fox jumps over the lazy dog. This pangram contains every letter of the English alphabet at least once.
+
+Writing is an essential skill in today's digital world. Whether you're crafting a blog post, composing an email, or working on an academic paper, knowing your word count matters. Many platforms have specific requirements: Twitter limits you to 280 characters, while college essays often require 500-1000 words.
+
+Here are some interesting word count facts:
+- The average novel contains 80,000 to 100,000 words
+- A typical blog post is between 1,000 and 2,000 words
+- Academic abstracts are usually 150-300 words
+- The longest novel ever written has over 1 million words
+
+This sample text demonstrates how the word counter handles multiple paragraphs, punctuation, and various sentence structures. Try editing it to see the statistics update in real-time!`;
+    },
+
+    /**
+     * Load sample text
+     */
+    loadSample() {
+      const input = document.getElementById('text-input');
+      if (input) {
+        input.value = this.getSampleText();
+        this.handleInput();
+      }
+    },
+
+    /**
      * Bind event listeners
      */
     bindEvents() {
@@ -189,6 +217,11 @@
       const clearBtn = document.getElementById('clear-text');
       if (clearBtn) {
         clearBtn.addEventListener('click', () => this.clear());
+      }
+
+      const sampleBtn = document.getElementById('load-sample');
+      if (sampleBtn) {
+        sampleBtn.addEventListener('click', () => this.loadSample());
       }
     },
 

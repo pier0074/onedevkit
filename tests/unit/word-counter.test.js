@@ -14,6 +14,7 @@ document.body.innerHTML = `
   <div id="reading-time">0 min</div>
   <div id="speaking-time">0 min</div>
   <button id="copy-text"></button>
+  <button id="load-sample"></button>
   <button id="clear-text"></button>
 `;
 
@@ -153,6 +154,30 @@ describe('WordCounter', () => {
 
       expect(result.words).toBe(6);
       expect(result.sentences).toBe(2);
+    });
+  });
+
+  describe('getSampleText', () => {
+    test('returns sample text', () => {
+      const sample = WordCounter.getSampleText();
+      expect(typeof sample).toBe('string');
+      expect(sample.length).toBeGreaterThan(100);
+    });
+
+    test('sample text contains multiple paragraphs', () => {
+      const sample = WordCounter.getSampleText();
+      expect(sample).toContain('\n\n');
+    });
+  });
+
+  describe('loadSample', () => {
+    test('loads sample text into input', () => {
+      const input = document.getElementById('text-input');
+      input.value = '';
+
+      WordCounter.loadSample();
+
+      expect(input.value).toBe(WordCounter.getSampleText());
     });
   });
 });

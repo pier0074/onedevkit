@@ -238,6 +238,32 @@
     },
 
     /**
+     * Get sample text for demonstration
+     */
+    getSampleText() {
+      return `the quick brown fox jumps over the lazy dog
+convert this text to different case styles
+try clicking on camelCase or snake_case buttons
+hello world from onedevkit`;
+    },
+
+    /**
+     * Load sample text
+     */
+    loadSample() {
+      const input = document.getElementById('input-text');
+      if (input) {
+        input.value = this.getSampleText();
+        // Auto-select title case if no case is selected
+        if (!this.currentCase) {
+          this.handleCaseClick('title');
+        } else {
+          this.updateOutput();
+        }
+      }
+    },
+
+    /**
      * Bind event listeners
      */
     bindEvents() {
@@ -270,6 +296,12 @@
       const clearBtn = document.getElementById('clear-all');
       if (clearBtn) {
         clearBtn.addEventListener('click', () => this.clear());
+      }
+
+      // Sample button
+      const sampleBtn = document.getElementById('load-sample');
+      if (sampleBtn) {
+        sampleBtn.addEventListener('click', () => this.loadSample());
       }
     },
 
