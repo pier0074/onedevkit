@@ -234,6 +234,32 @@ ogImage: passport-photo.jpg
   .crop-container.panning {
     cursor: grabbing;
   }
+
+  /* Crop overlay to show selected area */
+  .crop-overlay {
+    position: absolute;
+    border: 3px solid var(--color-primary);
+    background: transparent;
+    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+    transition: none;
+  }
+  .crop-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px dashed rgba(255, 255, 255, 0.5);
+  }
+  /* Rule of thirds grid */
+  .crop-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to right, rgba(255,255,255,0.3) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.3) 1px, transparent 1px);
+    background-size: 33.33% 33.33%;
+  }
 </style>
 {% endblock %}
 
@@ -325,6 +351,7 @@ ogImage: passport-photo.jpg
       <div>
         <div class="crop-container" id="crop-container">
           <img id="source-image" class="crop-image" alt="Source photo">
+          <div id="crop-overlay" class="crop-overlay" style="display: none;"></div>
         </div>
         <div class="controls-section">
           <div class="control-group">

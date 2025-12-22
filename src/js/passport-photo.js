@@ -215,8 +215,50 @@
         spec.width, spec.height
       );
 
-      // Compress and get result
+      // Update crop overlay and compress
+      this.updateCropOverlay();
       await this.compressResult();
+    },
+
+    /**
+     * Update the crop overlay position on source image
+     */
+    updateCropOverlay() {
+      const overlay = document.getElementById('crop-overlay');
+      const sourceImg = document.getElementById('source-image');
+      const container = document.getElementById('crop-container');
+
+      if (!overlay || !sourceImg || !container || !this.originalImage || !this.currentSpec) return;
+
+      const spec = this.currentSpec;
+      const img = this.originalImage;
+      const scale = this.zoom / 100;
+
+      // Get displayed image dimensions
+      const imgRect = sourceImg.getBoundingClientRect();
+      const containerRect = container.getBoundingClientRect();
+
+      // Calculate scale factor between displayed image and original
+      const displayScale = imgRect.width / img.width;
+
+      // Calculate source crop area (in original image coordinates)
+      const sourceWidth = spec.width / scale;
+      const sourceHeight = spec.height / scale;
+      const sourceX = (img.width - sourceWidth) / 2 + this.offsetX;
+      const sourceY = (img.height - sourceHeight) / 2 + this.offsetY;
+
+      // Convert to displayed coordinates
+      const overlayWidth = sourceWidth * displayScale;
+      const overlayHeight = sourceHeight * displayScale;
+      const overlayX = (imgRect.left - containerRect.left) + sourceX * displayScale;
+      const overlayY = (imgRect.top - containerRect.top) + sourceY * displayScale;
+
+      // Update overlay position
+      overlay.style.display = 'block';
+      overlay.style.width = overlayWidth + 'px';
+      overlay.style.height = overlayHeight + 'px';
+      overlay.style.left = overlayX + 'px';
+      overlay.style.top = overlayY + 'px';
     },
 
     /**
