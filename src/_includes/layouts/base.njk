@@ -1,5 +1,8 @@
+{%- set currentLang = lang | default("en") -%}
+{%- set langInfo = currentLang | langData -%}
+{%- set basePath = page.url | stripLangPrefix(currentLang) -%}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ langInfo.hreflang | default(currentLang) }}" dir="{{ langInfo.dir | default('ltr') }}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,6 +16,9 @@
 
   <link rel="canonical" href="{{ site.url }}{{ page.url }}">
 
+  <!-- hreflang for SEO -->
+  {% hreflang basePath | default(page.url) %}
+
   <!-- Open Graph -->
   <meta property="og:type" content="{{ ogType | default('website') }}">
   <meta property="og:url" content="{{ site.url }}{{ page.url }}">
@@ -20,7 +26,8 @@
   <meta property="og:description" content="{{ ogDescription | default(description) }}">
   <meta property="og:image" content="{{ site.url }}/images/og/{{ ogImage | default('og-default.jpg') }}">
   <meta property="og:site_name" content="{{ site.name }}">
-  <meta property="og:locale" content="en_US">
+  <meta property="og:locale" content="{{ langInfo.locale | default('en_US') }}">
+  {% ogAlternates basePath | default(page.url) %}
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
