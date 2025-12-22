@@ -1,0 +1,71 @@
+{# JSON Formatter Tool UI Partial #}
+<style>
+  .json-key { color: #881391; }
+  .json-string { color: #1a1aa6; }
+  .json-number { color: #1c00cf; }
+  .json-boolean { color: #0d22aa; }
+  .json-null { color: #808080; }
+  [data-theme="dark"] .json-key { color: #9cdcfe; }
+  [data-theme="dark"] .json-string { color: #ce9178; }
+  [data-theme="dark"] .json-number { color: #b5cea8; }
+  [data-theme="dark"] .json-boolean { color: #569cd6; }
+  [data-theme="dark"] .json-null { color: #808080; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .json-key { color: #9cdcfe; }
+    :root:not([data-theme="light"]) .json-string { color: #ce9178; }
+    :root:not([data-theme="light"]) .json-number { color: #b5cea8; }
+    :root:not([data-theme="light"]) .json-boolean { color: #569cd6; }
+    :root:not([data-theme="light"]) .json-null { color: #808080; }
+  }
+  #json-highlighted { white-space: pre-wrap; word-wrap: break-word; font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace; font-size: 0.875rem; line-height: 1.5; }
+  #json-error { background-color: #fef2f2; border: 1px solid #fecaca; color: #b91c1c; padding: 0.75rem 1rem; border-radius: 0.375rem; margin-top: 0.5rem; font-family: monospace; font-size: 0.875rem; }
+  [data-theme="dark"] #json-error { background-color: #450a0a; border-color: #7f1d1d; color: #fca5a5; }
+  .json-stats { display: flex; gap: 1.5rem; flex-wrap: wrap; font-size: 0.875rem; color: var(--text-muted); }
+  .json-stats dt { font-weight: 500; color: var(--text-secondary); }
+  .json-stats dd { margin: 0; font-family: monospace; }
+  .json-stat-item { display: flex; flex-direction: column; gap: 0.25rem; }
+</style>
+
+<div class="tool-input-group">
+  <div class="input-header">
+    <label for="json-input" class="input-label">{{ "common.enterJson" | t(lang) }}</label>
+    <button type="button" id="sample-json" class="btn btn-text btn-sm">{{ "common.loadSample" | t(lang) }}</button>
+  </div>
+  <textarea id="json-input" class="tool-textarea" rows="10" placeholder='{"key": "value", "array": [1, 2, 3]}' spellcheck="false"></textarea>
+</div>
+
+<div class="tool-options">
+  <div class="option-group">
+    <label for="json-indent" class="option-label">{{ "common.indentation" | t(lang) }}</label>
+    <select id="json-indent" class="tool-select">
+      <option value="2" selected>2 {{ "common.spaces" | t(lang) }}</option>
+      <option value="4">4 {{ "common.spaces" | t(lang) }}</option>
+      <option value="tab">Tab</option>
+    </select>
+  </div>
+</div>
+
+<div class="tool-actions">
+  <button type="button" id="format-json" class="btn btn-primary">{{ "common.format" | t(lang) }}</button>
+  <button type="button" id="minify-json" class="btn btn-secondary">{{ "common.minify" | t(lang) }}</button>
+  <button type="button" id="validate-json" class="btn btn-secondary">{{ "common.validate" | t(lang) }}</button>
+  <button type="button" id="copy-json" class="btn btn-secondary">{{ "common.copy" | t(lang) }}</button>
+  <button type="button" id="clear-json" class="btn btn-ghost">{{ "common.clear" | t(lang) }}</button>
+</div>
+
+<div id="json-error" class="hidden" role="alert"></div>
+
+<div class="tool-output-group">
+  <div class="output-header">
+    <span class="output-label">{{ "common.output" | t(lang) }}</span>
+    <div class="json-stats">
+      <div class="json-stat-item"><dt>{{ "common.size" | t(lang) }}</dt><dd id="json-size">-</dd></div>
+      <div class="json-stat-item"><dt>{{ "common.keys" | t(lang) }}</dt><dd id="json-keys">-</dd></div>
+      <div class="json-stat-item"><dt>{{ "common.depth" | t(lang) }}</dt><dd id="json-depth">-</dd></div>
+    </div>
+  </div>
+  <div class="tool-output-wrapper">
+    <pre id="json-output" class="tool-output tool-output-placeholder">{{ "common.formattedJsonPlaceholder" | t(lang) }}</pre>
+    <pre id="json-highlighted" class="tool-output hidden"></pre>
+  </div>
+</div>

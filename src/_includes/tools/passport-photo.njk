@@ -1,45 +1,4 @@
----
-layout: layouts/tool.njk
-title: Passport Photo Maker - Resize & Crop for Any Country
-description: Free passport photo maker for USA, India, UK, Schengen & more. Resize photos to exact dimensions, compress to required size. Works offline, 100% private.
-keywords: passport photo maker, passport photo size, visa photo, passport photo India, passport photo USA, 2x2 photo, 35x45mm photo, passport photo resize, visa photo maker
-permalink: /tools/passport-photo/
-toolId: passport-photo
-toolJs: passport-photo.js
-ogImage: passport-photo.jpg
----
-{% set toolData = tools | findById(toolId) %}
-
-{% block schema %}
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {"@type": "ListItem", "position": 1, "name": "Home", "item": "{{ site.url }}/"},
-    {"@type": "ListItem", "position": 2, "name": "Tools", "item": "{{ site.url }}/#tools"},
-    {"@type": "ListItem", "position": 3, "name": "{{ toolData.name }}", "item": "{{ site.url }}{{ page.url }}"}
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "{{ toolData.fullName }}",
-  "description": "{{ description }}",
-  "url": "{{ site.url }}{{ page.url }}",
-  "applicationCategory": "MultimediaApplication",
-  "operatingSystem": "Any",
-  "browserRequirements": "Requires JavaScript",
-  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
-  "featureList": ["Country-specific presets", "Exact dimension resize", "File size compression", "Print layout generation", "Crop tool", "Background options"],
-  "author": {"@type": "Organization", "name": "{{ site.name }}", "url": "{{ site.url }}"}
-}
-</script>
-{% endblock %}
-
-{% block head %}
+{# Passport Photo Maker Tool UI Partial #}
 <style>
   .upload-zone {
     border: 2px dashed var(--color-border);
@@ -266,7 +225,6 @@ ogImage: passport-photo.jpg
     background-size: 33.33% 33.33%;
   }
 </style>
-{% endblock %}
 
 <div class="tool-container">
   <!-- Country Selection -->
@@ -296,7 +254,7 @@ ogImage: passport-photo.jpg
   <div class="spec-info" id="spec-info">
     <div class="spec-grid">
       <div class="spec-item">
-        <span class="spec-label">Size:</span>
+        <span class="spec-label">{{ "common.size" | t(lang) }}:</span>
         <span class="spec-value" id="spec-size">2×2 inches</span>
       </div>
       <div class="spec-item">
@@ -318,11 +276,11 @@ ogImage: passport-photo.jpg
   <div id="custom-options" style="display: none; margin-bottom: var(--space-4);">
     <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--space-3);">
       <div>
-        <label class="control-label">Width (px)</label>
+        <label class="control-label">{{ "common.width" | t(lang) }} (px)</label>
         <input type="number" id="custom-width" value="600" min="100" max="2000" class="tool-input">
       </div>
       <div>
-        <label class="control-label">Height (px)</label>
+        <label class="control-label">{{ "common.height" | t(lang) }} (px)</label>
         <input type="number" id="custom-height" value="600" min="100" max="2000" class="tool-input">
       </div>
       <div>
@@ -367,7 +325,7 @@ ogImage: passport-photo.jpg
             <label class="control-label">Position <span style="font-weight: normal; font-size: var(--text-xs); color: var(--color-text-muted);">(drag preview or use buttons)</span></label>
             <div class="pan-controls">
               <button id="center-btn" class="btn btn-secondary btn-sm">Center</button>
-              <button id="reset-position" class="btn btn-secondary btn-sm">Reset All</button>
+              <button id="reset-position" class="btn btn-secondary btn-sm">{{ "common.reset" | t(lang) }} All</button>
             </div>
           </div>
         </div>
@@ -375,7 +333,7 @@ ogImage: passport-photo.jpg
 
       <!-- Preview Panel -->
       <div class="preview-panel">
-        <div class="preview-title">Preview</div>
+        <div class="preview-title">{{ "common.preview" | t(lang) }}</div>
         <canvas id="preview-canvas" class="preview-image"></canvas>
         <div class="preview-stats">
           <div><span>Dimensions:</span><span class="value" id="preview-dimensions">-</span></div>
@@ -384,70 +342,11 @@ ogImage: passport-photo.jpg
         </div>
 
         <div class="tool-actions" style="margin-top: var(--space-4);">
-          <button id="download-btn" class="btn btn-primary" style="width: 100%;" disabled>Download Photo</button>
+          <button id="download-btn" class="btn btn-primary" style="width: 100%;" disabled>{{ "common.download" | t(lang) }} Photo</button>
         </div>
-        <button id="download-print" class="btn btn-secondary" style="width: 100%; margin-top: var(--space-2);" disabled>Download Print Layout (4×6)</button>
+        <button id="download-print" class="btn btn-secondary" style="width: 100%; margin-top: var(--space-2);" disabled>{{ "common.download" | t(lang) }} Print Layout (4×6)</button>
         <button id="reset-btn" class="btn btn-ghost" style="width: 100%; margin-top: var(--space-2);">Start Over</button>
       </div>
     </div>
   </div>
 </div>
-
-<section class="content-section">
-  <h2>How to Use</h2>
-  <div class="steps">
-    <div class="step"><div class="step-number">1</div><div class="step-content"><h3>Select Country</h3><p>Choose your country or document type to get the correct specifications.</p></div></div>
-    <div class="step"><div class="step-number">2</div><div class="step-content"><h3>Upload Photo</h3><p>Upload a clear, front-facing photo with good lighting.</p></div></div>
-    <div class="step"><div class="step-number">3</div><div class="step-content"><h3>Adjust & Download</h3><p>Use zoom to adjust framing, then download your passport photo.</p></div></div>
-  </div>
-</section>
-
-<section class="content-section">
-  <h2>Passport Photo Requirements by Country</h2>
-  <div class="table-responsive">
-    <table class="data-table">
-      <thead>
-        <tr><th>Country</th><th>Size</th><th>Pixels</th><th>Max File Size</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>USA</td><td>2×2 inches</td><td>600×600px</td><td>240KB</td></tr>
-        <tr><td>India</td><td>2×2 inches</td><td>600×600px</td><td>20-300KB (varies)</td></tr>
-        <tr><td>UK</td><td>35×45mm</td><td>413×531px</td><td>10MB</td></tr>
-        <tr><td>Schengen</td><td>35×45mm</td><td>413×531px</td><td>2MB</td></tr>
-        <tr><td>Canada</td><td>50×70mm</td><td>590×826px</td><td>4MB</td></tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-
-<section class="content-section">
-  <h2>FAQ</h2>
-  <div class="faq-list">
-    <details class="faq-item">
-      <summary class="faq-question">Is this tool free?</summary>
-      <div class="faq-answer"><p>Yes! This passport photo maker is completely free. No signup, no watermarks, no hidden fees.</p></div>
-    </details>
-    <details class="faq-item">
-      <summary class="faq-question">Is my photo uploaded to a server?</summary>
-      <div class="faq-answer"><p>No. All processing happens in your browser. Your photos never leave your device.</p></div>
-    </details>
-    <details class="faq-item">
-      <summary class="faq-question">Will my photo be accepted by officials?</summary>
-      <div class="faq-answer"><p>This tool helps with sizing and compression. For official acceptance, ensure your original photo meets all requirements (lighting, expression, background, etc.).</p></div>
-    </details>
-  </div>
-</section>
-
-<section class="content-section">
-  <h2>Related Tools</h2>
-  <div class="related-tools">
-    {% for tool in tools %}
-    {% if tool.id != toolId %}
-    <a href="/tools/{{ tool.id }}/" class="related-tool-link">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16">{{ tool.icon | safe }}</svg>
-      {{ tool.name }}
-    </a>
-    {% endif %}
-    {% endfor %}
-  </div>
-</section>

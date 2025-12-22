@@ -1,0 +1,36 @@
+{# UUID Generator Tool UI Partial #}
+<div class="tool-container">
+  <div class="tool-output" aria-live="polite">
+    <div id="uuid-output" class="tool-output-text tool-output-placeholder">{{ "common.outputPlaceholder" | t(lang) }}</div>
+  </div>
+
+  <div class="tool-actions">
+    <button id="generate-uuid" class="btn btn-primary">{{ "common.generate" | t(lang) }} UUID</button>
+    <button id="copy-uuid" class="btn btn-secondary">{{ "common.copy" | t(lang) }}</button>
+  </div>
+
+  <div style="margin-top: var(--space-6); padding-top: var(--space-6); border-top: 1px solid var(--color-border);">
+    <h3 style="margin-top: 0; margin-bottom: var(--space-4); font-size: var(--text-base);">{{ "common.bulkGenerate" | t(lang) }}</h3>
+    <div class="tool-input-group" style="max-width: 150px;">
+      <label for="bulk-count">{{ "common.count" | t(lang) }} (1-100)</label>
+      <input type="number" id="bulk-count" min="1" max="100" value="10">
+    </div>
+    <div class="tool-actions" style="margin-top: var(--space-3);">
+      <button id="bulk-generate" class="btn btn-secondary">{{ "common.bulkGenerate" | t(lang) }}</button>
+      <button id="copy-all" class="btn btn-secondary">{{ "common.copyAll" | t(lang) }}</button>
+    </div>
+    <pre id="bulk-output" class="tool-output hidden" style="margin-top: var(--space-4); max-height: 300px; overflow-y: auto;"></pre>
+  </div>
+
+  <div style="margin-top: var(--space-6); padding-top: var(--space-6); border-top: 1px solid var(--color-border);">
+    <h3 style="margin-top: 0; margin-bottom: var(--space-4); font-size: var(--text-base);">{{ "common.validate" | t(lang) }} UUID</h3>
+    <div class="tool-input-group">
+      <label for="validate-input">Enter UUID to {{ "common.validate" | t(lang) | lower }}</label>
+      <input type="text" id="validate-input" placeholder="e.g., 550e8400-e29b-41d4-a716-446655440000">
+    </div>
+    <div class="tool-actions" style="margin-top: var(--space-3);">
+      <button id="validate-btn" class="btn btn-secondary">{{ "common.validate" | t(lang) }}</button>
+    </div>
+    <div id="validate-result" style="margin-top: var(--space-4);"></div>
+  </div>
+</div>

@@ -1,0 +1,142 @@
+---
+pagination:
+  data: toolPages
+  size: 1
+  alias: pageData
+permalink: "{{ pageData.permalink }}"
+eleventyComputed:
+  lang: "{{ pageData.lang }}"
+  toolId: "{{ pageData.tool.id }}"
+  toolJs: "{{ pageData.tool.js }}"
+  ogImage: "{{ pageData.tool.id }}.jpg"
+  title: "{{ pageData.tool.id | toolT(pageData.lang, 'name') | default(pageData.tool.name) }}"
+  description: "{{ pageData.tool.id | toolT(pageData.lang, 'metaDescription') | default(pageData.tool.description) }}"
+  keywords: "{{ pageData.tool.id | toolT(pageData.lang, 'keywords') | default(pageData.tool.keywords) }}"
+layout: layouts/tool.njk
+---
+{%- set tool = pageData.tool -%}
+{%- set currentLang = pageData.lang -%}
+{%- set toolId = tool.id -%}
+{%- set toolData = tool -%}
+{%- set toolJs = tool.js -%}
+
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "{{ 'nav.home' | t(currentLang) }}", "item": "{{ site.url }}{{ '/' | langUrl(currentLang) }}"},
+    {"@type": "ListItem", "position": 2, "name": "{{ 'nav.tools' | t(currentLang) }}", "item": "{{ site.url }}{{ '/' | langUrl(currentLang) }}#tools"},
+    {"@type": "ListItem", "position": 3, "name": "{{ tool.id | toolT(currentLang, 'name') | default(tool.name) }}", "item": "{{ site.url }}{{ page.url }}"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "{{ tool.id | toolT(currentLang, 'fullName') | default(tool.fullName) }}",
+  "description": "{{ tool.id | toolT(currentLang, 'metaDescription') | default(tool.description) }}",
+  "url": "{{ site.url }}{{ page.url }}",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+  "inLanguage": "{{ currentLang }}",
+  "author": {"@type": "Organization", "name": "{{ site.name }}", "url": "{{ site.url }}"}
+}
+</script>
+{% endblock %}
+
+{% block head %}
+{# Tool-specific styles are included in the partial #}
+{% endblock %}
+
+<div class="tool-container">
+  {# Include the tool-specific UI partial #}
+  {% include "tools/" + tool.id + ".njk" %}
+</div>
+
+{# How to Use Section #}
+<section class="content-section">
+  <h2>{{ tool.id | toolTNested(currentLang, "howTo.title") | default("common.howToUse" | t(currentLang)) }}</h2>
+  <div class="steps">
+    {%- set howToSteps = tool.id | toolTNested(currentLang, "howTo.steps") -%}
+    {%- if howToSteps and howToSteps.length -%}
+      {%- for step in howToSteps -%}
+      <div class="step">
+        <div class="step-number">{{ loop.index }}</div>
+        <div class="step-content">
+          <h3>{{ step.title }}</h3>
+          <p>{{ step.description }}</p>
+        </div>
+      </div>
+      {%- endfor -%}
+    {%- else -%}
+      {# Fallback for tools without translated howTo #}
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h3>{{ "common.input" | t(currentLang) }}</h3>
+          <p>Enter your data in the input field above.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h3>{{ "common.options" | t(currentLang) }}</h3>
+          <p>Adjust options as needed.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h3>{{ "common.output" | t(currentLang) }}</h3>
+          <p>Click the action button and copy the result.</p>
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{# FAQ Section #}
+<section class="content-section">
+  <h2>{{ "common.faq" | t(currentLang) }}</h2>
+  <div class="faq-list">
+    {%- set faqItems = tool.id | toolTNested(currentLang, "faq") -%}
+    {%- if faqItems and faqItems.length -%}
+      {%- for faq in faqItems -%}
+      <details class="faq-item">
+        <summary class="faq-question">{{ faq.question }}</summary>
+        <div class="faq-answer"><p>{{ faq.answer }}</p></div>
+      </details>
+      {%- endfor -%}
+    {%- else -%}
+      {# Fallback FAQ #}
+      <details class="faq-item">
+        <summary class="faq-question">Is this tool free?</summary>
+        <div class="faq-answer"><p>Yes, completely free with no signup required.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-question">Is my data secure?</summary>
+        <div class="faq-answer"><p>Yes. All processing happens in your browser. Your data never leaves your device.</p></div>
+      </details>
+    {%- endif -%}
+  </div>
+</section>
+
+{# Related Tools Section #}
+<section class="content-section">
+  <h2>{{ "common.relatedTools" | t(currentLang) }}</h2>
+  <div class="related-tools">
+    {% for relatedTool in tools %}
+    {% if relatedTool.id != tool.id %}
+    <a href="{{ '/tools/' + relatedTool.id + '/' | langUrl(currentLang) }}" class="related-tool-link">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16">{{ relatedTool.icon | safe }}</svg>
+      {{ relatedTool.id | toolT(currentLang, "name") | default(relatedTool.name) }}
+    </a>
+    {% endif %}
+    {% endfor %}
+  </div>
+</section>

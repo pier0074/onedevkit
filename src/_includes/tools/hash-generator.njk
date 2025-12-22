@@ -1,0 +1,62 @@
+{# Hash Generator Tool UI Partial #}
+<style>
+  .hash-results { display: flex; flex-direction: column; gap: var(--space-4); }
+  .hash-result-item { background: var(--bg-secondary); border-radius: var(--radius-md); padding: var(--space-4); }
+  .hash-result-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-2); }
+  .hash-result-label { font-weight: 600; font-size: var(--text-sm); color: var(--text-secondary); }
+  .hash-result-value { font-family: monospace; font-size: var(--text-sm); word-break: break-all; background: var(--bg-primary); padding: var(--space-3); border-radius: var(--radius-sm); border: 1px solid var(--border-color); }
+  .hash-copy-btn { padding: var(--space-1) var(--space-2); font-size: var(--text-xs); }
+  .hash-length { font-size: var(--text-xs); color: var(--text-muted); }
+</style>
+
+<div class="tool-container">
+  <!-- Input Section -->
+  <div class="tool-input-group">
+    <div class="input-header">
+      <label for="hash-input" class="input-label">{{ "common.enterText" | t(lang) }}</label>
+      <button type="button" id="sample-hash" class="btn btn-text btn-sm">{{ "common.loadSample" | t(lang) }}</button>
+    </div>
+    <textarea id="hash-input" class="tool-textarea" rows="6" placeholder="{{ 'common.pasteHere' | t(lang) }}..." spellcheck="false"></textarea>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="tool-actions">
+    <button type="button" id="generate-hash" class="btn btn-primary">{{ "common.generate" | t(lang) }} Hashes</button>
+    <button type="button" id="clear-hash" class="btn btn-ghost">{{ "common.clear" | t(lang) }}</button>
+  </div>
+
+  <!-- Hash Results -->
+  <div class="hash-results">
+    <div class="hash-result-item">
+      <div class="hash-result-header">
+        <span class="hash-result-label">{{ "common.md5" | t(lang) }} <span class="hash-length">(128-bit / 32 chars)</span></span>
+        <button type="button" class="btn btn-secondary hash-copy-btn" data-hash="md5">{{ "common.copy" | t(lang) }}</button>
+      </div>
+      <div class="hash-result-value" id="hash-md5">-</div>
+    </div>
+
+    <div class="hash-result-item">
+      <div class="hash-result-header">
+        <span class="hash-result-label">{{ "common.sha1" | t(lang) }} <span class="hash-length">(160-bit / 40 chars)</span></span>
+        <button type="button" class="btn btn-secondary hash-copy-btn" data-hash="sha1">{{ "common.copy" | t(lang) }}</button>
+      </div>
+      <div class="hash-result-value" id="hash-sha1">-</div>
+    </div>
+
+    <div class="hash-result-item">
+      <div class="hash-result-header">
+        <span class="hash-result-label">{{ "common.sha256" | t(lang) }} <span class="hash-length">(256-bit / 64 chars)</span></span>
+        <button type="button" class="btn btn-secondary hash-copy-btn" data-hash="sha256">{{ "common.copy" | t(lang) }}</button>
+      </div>
+      <div class="hash-result-value" id="hash-sha256">-</div>
+    </div>
+
+    <div class="hash-result-item">
+      <div class="hash-result-header">
+        <span class="hash-result-label">{{ "common.sha512" | t(lang) }} <span class="hash-length">(512-bit / 128 chars)</span></span>
+        <button type="button" class="btn btn-secondary hash-copy-btn" data-hash="sha512">{{ "common.copy" | t(lang) }}</button>
+      </div>
+      <div class="hash-result-value" id="hash-sha512">-</div>
+    </div>
+  </div>
+</div>

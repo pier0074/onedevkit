@@ -1,0 +1,74 @@
+{# Markdown Editor & Preview Tool UI Partial #}
+<style>
+  .markdown-container { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); min-height: 500px; }
+  @media (max-width: 900px) { .markdown-container { grid-template-columns: 1fr; } }
+  .markdown-panel { display: flex; flex-direction: column; border: 1px solid var(--color-border); border-radius: var(--radius-md); overflow: hidden; }
+  .markdown-panel-header { display: flex; justify-content: space-between; align-items: center; padding: var(--space-2) var(--space-3); background: var(--color-bg-alt); border-bottom: 1px solid var(--color-border); }
+  .markdown-panel-title { font-weight: 600; font-size: var(--text-sm); color: var(--text-secondary); }
+  .markdown-editor { flex: 1; border: none; padding: var(--space-4); font-family: var(--font-mono); font-size: var(--text-sm); line-height: 1.6; resize: none; background: var(--color-bg); }
+  .markdown-editor:focus { outline: none; }
+  .markdown-preview { flex: 1; padding: var(--space-4); overflow-y: auto; background: var(--color-bg); }
+  .markdown-preview h1 { font-size: var(--text-2xl); font-weight: 700; margin: 0 0 var(--space-4) 0; padding-bottom: var(--space-2); border-bottom: 1px solid var(--color-border); }
+  .markdown-preview h2 { font-size: var(--text-xl); font-weight: 600; margin: var(--space-6) 0 var(--space-3) 0; padding-bottom: var(--space-1); border-bottom: 1px solid var(--color-border); }
+  .markdown-preview h3 { font-size: var(--text-lg); font-weight: 600; margin: var(--space-5) 0 var(--space-2) 0; }
+  .markdown-preview h4, .markdown-preview h5, .markdown-preview h6 { font-size: var(--text-base); font-weight: 600; margin: var(--space-4) 0 var(--space-2) 0; }
+  .markdown-preview p { margin: 0 0 var(--space-4) 0; line-height: 1.7; }
+  .markdown-preview a { color: var(--color-primary); text-decoration: none; }
+  .markdown-preview a:hover { text-decoration: underline; }
+  .markdown-preview code { font-family: var(--font-mono); font-size: 0.9em; background: var(--color-bg-alt); padding: 2px 6px; border-radius: var(--radius-sm); }
+  .markdown-preview pre { background: var(--color-bg-alt); padding: var(--space-4); border-radius: var(--radius-md); overflow-x: auto; margin: 0 0 var(--space-4) 0; }
+  .markdown-preview pre code { background: none; padding: 0; font-size: var(--text-sm); }
+  .markdown-preview blockquote { border-left: 4px solid var(--color-primary); margin: 0 0 var(--space-4) 0; padding: var(--space-2) var(--space-4); background: var(--color-bg-alt); color: var(--text-secondary); }
+  .markdown-preview blockquote p:last-child { margin-bottom: 0; }
+  .markdown-preview ul, .markdown-preview ol { margin: 0 0 var(--space-4) 0; padding-left: var(--space-6); }
+  .markdown-preview li { margin-bottom: var(--space-1); line-height: 1.6; }
+  .markdown-preview hr { border: none; border-top: 1px solid var(--color-border); margin: var(--space-6) 0; }
+  .markdown-preview img { max-width: 100%; height: auto; border-radius: var(--radius-md); }
+  .markdown-preview table { width: 100%; border-collapse: collapse; margin: 0 0 var(--space-4) 0; }
+  .markdown-preview th, .markdown-preview td { border: 1px solid var(--color-border); padding: var(--space-2) var(--space-3); text-align: left; }
+  .markdown-preview th { background: var(--color-bg-alt); font-weight: 600; }
+  .markdown-preview .task-list-item { list-style: none; margin-left: calc(-1 * var(--space-6)); }
+  .markdown-preview .task-list-item input { margin-right: var(--space-2); }
+  .markdown-stats { display: flex; gap: var(--space-4); padding: var(--space-2) var(--space-3); background: var(--color-bg-alt); border-top: 1px solid var(--color-border); font-size: var(--text-xs); color: var(--text-muted); }
+</style>
+
+<!-- Action Buttons -->
+<div class="tool-actions" style="margin-bottom: var(--space-4);">
+  <button type="button" id="sample-md" class="btn btn-secondary">{{ "common.loadSample" | t(lang) }}</button>
+  <button type="button" id="copy-html" class="btn btn-secondary">{{ "common.copy" | t(lang) }} HTML</button>
+  <button type="button" id="clear-md" class="btn btn-ghost">{{ "common.clear" | t(lang) }}</button>
+</div>
+
+<!-- Editor and Preview -->
+<div class="markdown-container">
+  <div class="markdown-panel">
+    <div class="markdown-panel-header">
+      <span class="markdown-panel-title">Markdown</span>
+    </div>
+    <textarea id="markdown-input" class="markdown-editor" placeholder="{{ 'common.typeHere' | t(lang) }}" spellcheck="false"># Hello, Markdown!
+
+Start typing to see the **live preview** on the right.
+
+## Features Supported
+
+- **Bold** and *italic* text
+- [Links](https://onedevkit.com)
+- `Inline code` and code blocks
+- Lists (ordered and unordered)
+- Blockquotes
+- Tables
+- And more!</textarea>
+    <div class="markdown-stats">
+      <span id="char-count">0 {{ "common.characters" | t(lang) }}</span>
+      <span id="word-count">0 {{ "common.words" | t(lang) }}</span>
+      <span id="line-count">0 {{ "common.lines" | t(lang) }}</span>
+    </div>
+  </div>
+
+  <div class="markdown-panel">
+    <div class="markdown-panel-header">
+      <span class="markdown-panel-title">{{ "common.preview" | t(lang) }}</span>
+    </div>
+    <div id="markdown-preview" class="markdown-preview"></div>
+  </div>
+</div>

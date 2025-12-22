@@ -1,6 +1,7 @@
 ---
 layout: layouts/base.njk
 ---
+{%- set currentLang = lang | default("en") -%}
 {# Get tool data from tools.json using toolId from front matter #}
 {% set toolData = tools | findById(toolId) %}
 
@@ -8,15 +9,15 @@ layout: layouts/base.njk
   <!-- Breadcrumb -->
   <nav class="breadcrumb" aria-label="Breadcrumb">
     <ol>
-      <li><a href="/">Home</a></li>
-      <li><span aria-current="page">{{ toolData.name }}</span></li>
+      <li><a href="{{ '/' | langUrl(currentLang) }}">{{ "nav.home" | t(currentLang) }}</a></li>
+      <li><span aria-current="page">{{ toolId | toolT(currentLang, "name") | default(toolData.name) }}</span></li>
     </ol>
   </nav>
 
   <!-- Tool Header -->
   <header class="tool-header">
-    <h1>{{ toolData.fullName }}</h1>
-    <p class="tool-description">{{ toolData.description }}</p>
+    <h1>{{ toolId | toolT(currentLang, "fullName") | default(toolData.fullName) }}</h1>
+    <p class="tool-description">{{ toolId | toolT(currentLang, "description") | default(toolData.description) }}</p>
   </header>
 
   {{ content | safe }}
