@@ -889,29 +889,63 @@
   "pages": {
     "home": {
       "title": "Free Online Developer Tools",
-      "subtitle": "Privacy-focused tools that work in your browser",
-      "description": "All tools run 100% client-side. Your data never leaves your device.",
-      "cta": "Explore Tools"
+      "metaDescription": "A collection of free, privacy-focused developer tools. All processing happens in your browser - no data is sent to servers.",
+      "keywords": "developer tools, online tools, JSON formatter, Base64 encoder, URL encoder, JWT decoder, hash generator, password generator, UUID generator, free tools",
+      "heroTitle": "Free Online Developer Tools",
+      "heroDescription": "Fast, privacy-focused tools for everyday development tasks. No signup required.",
+      "availableTools": "Available Tools",
+      "whyChoose": "Why Choose OneDevKit?",
+      "features": {
+        "privacy": {
+          "title": "Privacy First",
+          "description": "All tools run entirely in your browser. Your data never leaves your device."
+        },
+        "fast": {
+          "title": "Lightning Fast",
+          "description": "No server requests needed. Get instant results with every action."
+        },
+        "free": {
+          "title": "100% Free",
+          "description": "No subscriptions, no signups, no hidden costs. Just free tools."
+        },
+        "responsive": {
+          "title": "Works Everywhere",
+          "description": "Responsive design works on desktop, tablet, and mobile devices."
+        }
+      }
+    },
+    "404": {
+      "title": "Page Not Found",
+      "metaDescription": "The page you're looking for doesn't exist. Return to OneDevKit's free online developer tools.",
+      "keywords": "404, page not found, error",
+      "description": "Sorry, the page you're looking for doesn't exist or has been moved.",
+      "goHome": "Go Home",
+      "reportIssue": "Report Issue"
     },
     "about": {
       "title": "About OneDevKit",
-      "metaDescription": "Learn about OneDevKit - free, privacy-focused developer tools that run entirely in your browser."
+      "metaDescription": "Learn about OneDevKit - free, privacy-focused developer tools that run entirely in your browser.",
+      "keywords": "about onedevkit, developer tools, free online tools, privacy-focused tools"
     },
     "contact": {
       "title": "Contact Us",
-      "metaDescription": "Get in touch with the OneDevKit team. We'd love to hear your feedback and suggestions."
+      "metaDescription": "Get in touch with the OneDevKit team. We'd love to hear your feedback and suggestions.",
+      "keywords": "contact onedevkit, feedback, support, suggestions"
     },
     "privacy": {
       "title": "Privacy Policy",
-      "metaDescription": "OneDevKit privacy policy. Learn how we protect your privacy - all tools run in your browser."
+      "metaDescription": "OneDevKit privacy policy. Learn how we protect your privacy - all tools run in your browser.",
+      "keywords": "privacy policy, data protection, GDPR, CCPA"
     },
     "terms": {
       "title": "Terms of Service",
-      "metaDescription": "OneDevKit terms of service. Read the terms for using our free developer tools."
+      "metaDescription": "OneDevKit terms of service. Read the terms for using our free developer tools.",
+      "keywords": "terms of service, terms and conditions, legal"
     },
     "faq": {
       "title": "Frequently Asked Questions",
-      "metaDescription": "Common questions about OneDevKit tools. Learn how our privacy-focused developer tools work."
+      "metaDescription": "Common questions about OneDevKit tools. Learn how our privacy-focused developer tools work.",
+      "keywords": "faq, help, questions, support"
     }
   },
 

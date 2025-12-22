@@ -123,6 +123,22 @@ module.exports = function(eleventyConfig) {
   });
 
   /**
+   * Get page-specific translation
+   * Usage: {{ "home" | pageT(lang, "title") }}
+   * Usage: {{ "404" | pageT(lang, "description") }}
+   */
+  eleventyConfig.addFilter("pageT", function(pageId, lang, field) {
+    const i18n = loadI18n(lang);
+    const pageI18n = i18n.pages?.[pageId];
+    if (pageI18n && pageI18n[field] !== undefined) {
+      return pageI18n[field];
+    }
+    // Fallback to English
+    const enI18n = loadI18n('en');
+    return enI18n.pages?.[pageId]?.[field] || '';
+  });
+
+  /**
    * Get language-aware URL
    * Usage: {{ "/tools/json-formatter/" | langUrl(lang) }}
    */

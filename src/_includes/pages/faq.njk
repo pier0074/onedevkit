@@ -1,0 +1,56 @@
+{# FAQ Page Partial #}
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "{{ 'nav.home' | t(currentLang) }}", "item": "{{ site.url }}{{ '/' | langUrl(currentLang) }}"},
+    {"@type": "ListItem", "position": 2, "name": "{{ 'nav.faq' | t(currentLang) }}", "item": "{{ site.url }}{{ '/faq/' | langUrl(currentLang) }}"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {%- set faqItems = "pages.faq.items" | t(currentLang) -%}
+    {%- if faqItems and faqItems.length -%}
+      {%- for item in faqItems -%}
+    {
+      "@type": "Question",
+      "name": "{{ item.question }}",
+      "acceptedAnswer": {"@type": "Answer", "text": "{{ item.answer }}"}
+    }{% if not loop.last %},{% endif %}
+      {%- endfor -%}
+    {%- endif -%}
+  ]
+}
+</script>
+{% endblock %}
+
+<h1>{{ "pages.faq.heading" | t(currentLang) }}</h1>
+
+<section class="content-section">
+  <p class="lead">{{ "pages.faq.intro" | t(currentLang) }}</p>
+</section>
+
+<section class="content-section">
+  <div class="faq-list">
+    {%- set faqItems = "pages.faq.items" | t(currentLang) -%}
+    {%- if faqItems and faqItems.length -%}
+      {%- for item in faqItems -%}
+      <details class="faq-item">
+        <summary class="faq-question">{{ item.question }}</summary>
+        <div class="faq-answer"><p>{{ item.answer | safe }}</p></div>
+      </details>
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+</section>
+
+<section class="content-section">
+  <h2>{{ "pages.faq.moreQuestions.title" | t(currentLang) }}</h2>
+  <p>{{ "pages.faq.moreQuestions.text" | t(currentLang) }} <a href="{{ '/contact/' | langUrl(currentLang) }}">{{ "pages.faq.moreQuestions.contactUs" | t(currentLang) }}</a>.</p>
+</section>

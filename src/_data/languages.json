@@ -17,7 +17,7 @@
     "locale": "es_ES",
     "hreflang": "es",
     "default": false,
-    "enabled": false
+    "enabled": true
   },
   {
     "code": "hi",

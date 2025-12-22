@@ -1,0 +1,19 @@
+---
+pagination:
+  data: sitePages
+  size: 1
+  alias: pageData
+permalink: "{{ pageData.permalink }}"
+eleventyComputed:
+  lang: "{{ pageData.lang }}"
+  pageId: "{{ pageData.pageId }}"
+  layout: "{% if pageData.template == 'home' %}layouts/base.njk{% elif pageData.template == '404' %}layouts/base.njk{% else %}layouts/page.njk{% endif %}"
+  robots: "{% if pageData.pageId == '404' %}noindex, nofollow{% else %}index, follow{% endif %}"
+  title: "{{ pageData.pageId | pageT(pageData.lang, 'title') }}"
+  description: "{{ pageData.pageId | pageT(pageData.lang, 'metaDescription') }}"
+  keywords: "{{ pageData.pageId | pageT(pageData.lang, 'keywords') }}"
+---
+{%- set currentLang = pageData.lang -%}
+{%- set template = pageData.template -%}
+
+{% include "pages/" + template + ".njk" %}

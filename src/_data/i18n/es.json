@@ -113,5 +113,68 @@
       "description": "Formatea, valida y embellece datos JSON al instante.",
       "metaDescription": "Formateador y validador JSON online gratuito."
     }
+  },
+
+  "pages": {
+    "home": {
+      "title": "Herramientas de Desarrollador Gratis",
+      "metaDescription": "Colección de herramientas de desarrollo gratuitas y enfocadas en la privacidad. Todo el procesamiento ocurre en tu navegador.",
+      "keywords": "herramientas de desarrollador, herramientas online, formateador JSON, codificador Base64, herramientas gratis",
+      "heroTitle": "Herramientas de Desarrollador Gratis",
+      "heroDescription": "Herramientas rápidas y enfocadas en la privacidad para tareas de desarrollo. Sin registro.",
+      "availableTools": "Herramientas Disponibles",
+      "whyChoose": "¿Por qué elegir OneDevKit?",
+      "features": {
+        "privacy": {
+          "title": "Privacidad Primero",
+          "description": "Todas las herramientas funcionan en tu navegador. Tus datos nunca salen de tu dispositivo."
+        },
+        "fast": {
+          "title": "Ultra Rápido",
+          "description": "Sin solicitudes al servidor. Obtén resultados instantáneos."
+        },
+        "free": {
+          "title": "100% Gratis",
+          "description": "Sin suscripciones, sin registros, sin costos ocultos. Solo herramientas gratis."
+        },
+        "responsive": {
+          "title": "Funciona en Todos Lados",
+          "description": "Diseño responsivo para escritorio, tablet y móvil."
+        }
+      }
+    },
+    "404": {
+      "title": "Página No Encontrada",
+      "metaDescription": "La página que buscas no existe. Vuelve a las herramientas de desarrollador de OneDevKit.",
+      "keywords": "404, página no encontrada, error",
+      "description": "Lo sentimos, la página que buscas no existe o ha sido movida.",
+      "goHome": "Ir al Inicio",
+      "reportIssue": "Reportar Problema"
+    },
+    "about": {
+      "title": "Acerca de OneDevKit",
+      "metaDescription": "Conoce OneDevKit - herramientas de desarrollo gratuitas y enfocadas en la privacidad.",
+      "keywords": "acerca de onedevkit, herramientas de desarrollador, herramientas gratis"
+    },
+    "contact": {
+      "title": "Contáctanos",
+      "metaDescription": "Ponte en contacto con el equipo de OneDevKit. Nos encantaría escuchar tus comentarios.",
+      "keywords": "contacto onedevkit, comentarios, soporte"
+    },
+    "privacy": {
+      "title": "Política de Privacidad",
+      "metaDescription": "Política de privacidad de OneDevKit. Todas las herramientas funcionan en tu navegador.",
+      "keywords": "política de privacidad, protección de datos"
+    },
+    "terms": {
+      "title": "Términos de Servicio",
+      "metaDescription": "Términos de servicio de OneDevKit para usar nuestras herramientas gratuitas.",
+      "keywords": "términos de servicio, condiciones legales"
+    },
+    "faq": {
+      "title": "Preguntas Frecuentes",
+      "metaDescription": "Preguntas comunes sobre las herramientas de OneDevKit.",
+      "keywords": "faq, ayuda, preguntas, soporte"
+    }
   }
 }
