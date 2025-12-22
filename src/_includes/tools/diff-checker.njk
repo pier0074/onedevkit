@@ -1,0 +1,85 @@
+{# Text Diff Checker Tool UI Partial #}
+<style>
+  .diff-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+  @media (max-width: 768px) { .diff-inputs { grid-template-columns: 1fr; } }
+  .diff-input-group { display: flex; flex-direction: column; gap: var(--space-2); }
+  .diff-input-header { display: flex; justify-content: space-between; align-items: center; }
+  .diff-textarea { min-height: 200px; font-family: var(--font-mono); font-size: var(--text-sm); resize: vertical; }
+  .diff-stats { display: flex; gap: var(--space-6); padding: var(--space-4); background: var(--color-bg-alt); border-radius: var(--radius-md); flex-wrap: wrap; }
+  .diff-stat { text-align: center; }
+  .diff-stat-value { font-size: var(--text-xl); font-weight: 600; }
+  .diff-stat-value.additions { color: #16a34a; }
+  .diff-stat-value.deletions { color: #dc2626; }
+  .diff-stat-value.unchanged { color: var(--text-muted); }
+  .diff-stat-label { font-size: var(--text-xs); color: var(--text-muted); }
+  .diff-output { margin-top: var(--space-4); }
+  .diff-view-toggle { display: flex; gap: var(--space-2); margin-bottom: var(--space-4); }
+  .diff-result { font-family: var(--font-mono); font-size: var(--text-sm); line-height: 1.6; background: var(--color-bg-alt); border: 1px solid var(--color-border); border-radius: var(--radius-md); overflow: hidden; }
+  .diff-line { display: flex; border-bottom: 1px solid var(--color-border); }
+  .diff-line:last-child { border-bottom: none; }
+  .diff-line-number { min-width: 40px; padding: var(--space-1) var(--space-2); background: var(--color-bg); color: var(--text-muted); text-align: right; font-size: var(--text-xs); border-right: 1px solid var(--color-border); user-select: none; }
+  .diff-line-content { flex: 1; padding: var(--space-1) var(--space-2); white-space: pre-wrap; word-break: break-all; }
+  .diff-line.addition { background: #dcfce7; }
+  .diff-line.addition .diff-line-content { color: #166534; }
+  .diff-line.deletion { background: #fee2e2; }
+  .diff-line.deletion .diff-line-content { color: #991b1b; }
+  .diff-line.modification { background: #fef9c3; }
+  .diff-line.modification .diff-line-content { color: #854d0e; }
+  .diff-char-add { background: #86efac; padding: 0 1px; border-radius: 2px; }
+  .diff-char-del { background: #fca5a5; padding: 0 1px; border-radius: 2px; text-decoration: line-through; }
+  .diff-side-by-side { display: grid; grid-template-columns: 1fr 1fr; }
+  .diff-side { overflow-x: auto; }
+  .diff-side-header { padding: var(--space-2) var(--space-3); background: var(--color-bg); border-bottom: 1px solid var(--color-border); font-weight: 600; font-size: var(--text-sm); }
+  .diff-empty { padding: var(--space-8); text-align: center; color: var(--text-muted); }
+</style>
+
+<!-- Input Section -->
+<div class="diff-inputs">
+  <div class="diff-input-group">
+    <div class="diff-input-header">
+      <label for="text-original" class="input-label">{{ "common.originalText" | t(lang) }}</label>
+      <button type="button" id="sample-diff" class="btn btn-text btn-sm">{{ "common.loadSample" | t(lang) }}</button>
+    </div>
+    <textarea id="text-original" class="tool-textarea diff-textarea" placeholder="{{ 'common.pasteHere' | t(lang) }}" spellcheck="false"></textarea>
+  </div>
+  <div class="diff-input-group">
+    <div class="diff-input-header">
+      <label for="text-modified" class="input-label">{{ "common.modifiedText" | t(lang) }}</label>
+      <button type="button" id="swap-texts" class="btn btn-text btn-sm">{{ "common.swap" | t(lang) }}</button>
+    </div>
+    <textarea id="text-modified" class="tool-textarea diff-textarea" placeholder="{{ 'common.pasteHere' | t(lang) }}" spellcheck="false"></textarea>
+  </div>
+</div>
+
+<!-- Action Buttons -->
+<div class="tool-actions">
+  <button type="button" id="compare-btn" class="btn btn-primary">{{ "common.compare" | t(lang) }}</button>
+  <button type="button" id="clear-diff" class="btn btn-ghost">{{ "common.clear" | t(lang) }}</button>
+</div>
+
+<!-- Stats -->
+<div class="diff-stats" id="diff-stats">
+  <div class="diff-stat">
+    <div class="diff-stat-value additions" id="stat-additions">0</div>
+    <div class="diff-stat-label">{{ "common.additions" | t(lang) }}</div>
+  </div>
+  <div class="diff-stat">
+    <div class="diff-stat-value deletions" id="stat-deletions">0</div>
+    <div class="diff-stat-label">{{ "common.deletions" | t(lang) }}</div>
+  </div>
+  <div class="diff-stat">
+    <div class="diff-stat-value unchanged" id="stat-unchanged">0</div>
+    <div class="diff-stat-label">{{ "common.unchanged" | t(lang) }}</div>
+  </div>
+</div>
+
+<!-- Output Section -->
+<div class="diff-output">
+  <div class="diff-view-toggle">
+    <button type="button" class="btn-option diff-view-btn active" data-view="unified">{{ "common.unifiedView" | t(lang) }}</button>
+    <button type="button" class="btn-option diff-view-btn" data-view="split">{{ "common.splitView" | t(lang) }}</button>
+  </div>
+  <div class="diff-result" id="diff-result">
+    <div class="diff-empty">{{ "common.enterText" | t(lang) }}</div>
+  </div>
+</div>

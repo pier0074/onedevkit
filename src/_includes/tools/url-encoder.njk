@@ -1,0 +1,55 @@
+{# URL Encoder Tool UI Partial #}
+<style>
+  .encoding-mode { display: flex; gap: var(--space-2); margin-bottom: var(--space-4); }
+  .encoding-mode-btn { flex: 1; }
+  .url-stats { display: flex; gap: 1.5rem; flex-wrap: wrap; font-size: 0.875rem; color: var(--color-text-muted); }
+  .url-stat-item { display: flex; flex-direction: column; gap: 0.25rem; }
+  .url-stats dt { font-weight: 500; color: var(--color-text-secondary); }
+  .url-stats dd { margin: 0; font-family: monospace; }
+</style>
+
+<div class="tool-container">
+  <!-- Encoding Mode Toggle -->
+  <div class="encoding-mode">
+    <button type="button" class="btn-option encoding-mode-btn active" data-mode="component" id="mode-component">
+      {{ "common.component" | t(lang) }}
+      <small style="display: block; font-size: 0.75rem; font-weight: normal; opacity: 0.8;">encodeURIComponent</small>
+    </button>
+    <button type="button" class="btn-option encoding-mode-btn" data-mode="full" id="mode-full">
+      {{ "common.fullUrl" | t(lang) }}
+      <small style="display: block; font-size: 0.75rem; font-weight: normal; opacity: 0.8;">encodeURI</small>
+    </button>
+  </div>
+
+  <!-- Input Section -->
+  <div class="tool-input-group">
+    <div class="input-header">
+      <label for="url-input" class="input-label">{{ "common.enterText" | t(lang) }}</label>
+      <button type="button" id="sample-url" class="btn btn-text btn-sm">{{ "common.loadSample" | t(lang) }}</button>
+    </div>
+    <textarea id="url-input" class="tool-textarea" rows="6" placeholder="{{ 'common.pasteHere' | t(lang) }}..." spellcheck="false"></textarea>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="tool-actions">
+    <button type="button" id="encode-url" class="btn btn-primary">{{ "common.encode" | t(lang) }}</button>
+    <button type="button" id="decode-url" class="btn btn-secondary">{{ "common.decode" | t(lang) }}</button>
+    <button type="button" id="copy-url" class="btn btn-secondary">{{ "common.copy" | t(lang) }}</button>
+    <button type="button" id="clear-url" class="btn btn-ghost">{{ "common.clear" | t(lang) }}</button>
+  </div>
+
+  <!-- Error Display -->
+  <div id="url-error" class="hidden" role="alert" style="background: #fef2f2; border: 1px solid #fecaca; color: #b91c1c; padding: 0.75rem; border-radius: 0.375rem; margin-top: 0.5rem;"></div>
+
+  <!-- Output Section -->
+  <div class="tool-output-group">
+    <div class="output-header">
+      <span class="output-label">{{ "common.output" | t(lang) }}</span>
+      <div class="url-stats">
+        <div class="url-stat-item"><dt>Input {{ "common.length" | t(lang) }}</dt><dd id="input-length">-</dd></div>
+        <div class="url-stat-item"><dt>Output {{ "common.length" | t(lang) }}</dt><dd id="output-length">-</dd></div>
+      </div>
+    </div>
+    <pre id="url-output" class="tool-output tool-output-placeholder">{{ "common.encodedPlaceholder" | t(lang) }}</pre>
+  </div>
+</div>

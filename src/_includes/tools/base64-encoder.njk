@@ -1,0 +1,79 @@
+{# Base64 Encoder Tool UI Partial #}
+<style>
+  .mode-toggle { display: flex; gap: var(--space-2); margin-bottom: var(--space-4); }
+  .mode-btn { flex: 1; }
+  .file-upload-area { border: 2px dashed var(--color-border); border-radius: var(--radius-md); padding: var(--space-6); text-align: center; cursor: pointer; background: var(--color-bg-alt); }
+  .file-upload-area:hover, .file-upload-area.drag-over { border-color: var(--color-primary); background: var(--color-bg); }
+  .file-upload-area input[type="file"] { display: none; }
+  .base64-stats { display: flex; gap: 1.5rem; flex-wrap: wrap; font-size: 0.875rem; color: var(--color-text-muted); }
+  .base64-stat-item { display: flex; flex-direction: column; gap: 0.25rem; }
+  .base64-stats dt { font-weight: 500; color: var(--color-text-secondary); }
+  .base64-stats dd { margin: 0; font-family: monospace; }
+</style>
+
+<!-- Mode Toggle -->
+<div class="mode-toggle">
+  <button type="button" class="btn-option mode-btn active" data-mode="text" id="mode-text">{{ "common.text" | t(lang) }} {{ "common.input" | t(lang) }}</button>
+  <button type="button" class="btn-option mode-btn" data-mode="file" id="mode-file">{{ "common.upload" | t(lang) }}</button>
+</div>
+
+<!-- Text Input Section -->
+<div id="text-input-section">
+  <div class="tool-input-group">
+    <div class="input-header">
+      <label for="base64-input" class="input-label">{{ "common.enterText" | t(lang) }}</label>
+      <button type="button" id="sample-base64" class="btn btn-text btn-sm">{{ "common.loadSample" | t(lang) }}</button>
+    </div>
+    <textarea id="base64-input" class="tool-textarea" rows="8" placeholder="{{ 'common.pasteHere' | t(lang) }}" spellcheck="false"></textarea>
+  </div>
+</div>
+
+<!-- File Input Section -->
+<div id="file-input-section" class="hidden">
+  <div class="tool-input-group">
+    <label class="input-label">{{ "common.selectFile" | t(lang) }}</label>
+    <div class="file-upload-area" id="file-drop-zone">
+      <input type="file" id="file-input" accept="*/*">
+      <p>{{ "common.dragDrop" | t(lang) }}</p>
+      <small>Maximum file size: 5MB</small>
+    </div>
+    <div id="file-info" class="hidden" style="margin-top: var(--space-3); padding: var(--space-3); background: var(--bg-secondary); border-radius: var(--radius-sm);">
+      <span id="file-name"></span> <span id="file-size"></span>
+      <button type="button" id="clear-file" class="btn btn-ghost btn-sm">{{ "common.delete" | t(lang) }}</button>
+    </div>
+  </div>
+</div>
+
+<!-- Options -->
+<div class="tool-options">
+  <label class="option-label">
+    <input type="checkbox" id="url-safe" class="tool-checkbox"> {{ "common.urlSafe" | t(lang) }}
+  </label>
+  <label class="option-label">
+    <input type="checkbox" id="line-breaks" class="tool-checkbox"> {{ "common.lineBreaks" | t(lang) }} (76 chars)
+  </label>
+</div>
+
+<!-- Action Buttons -->
+<div class="tool-actions">
+  <button type="button" id="encode-base64" class="btn btn-primary">{{ "common.encode" | t(lang) }}</button>
+  <button type="button" id="decode-base64" class="btn btn-secondary">{{ "common.decode" | t(lang) }}</button>
+  <button type="button" id="copy-base64" class="btn btn-secondary">{{ "common.copy" | t(lang) }}</button>
+  <button type="button" id="clear-base64" class="btn btn-ghost">{{ "common.clear" | t(lang) }}</button>
+</div>
+
+<!-- Error Display -->
+<div id="base64-error" class="hidden" role="alert" style="background: #fef2f2; border: 1px solid #fecaca; color: #b91c1c; padding: 0.75rem; border-radius: 0.375rem; margin-top: 0.5rem;"></div>
+
+<!-- Output Section -->
+<div class="tool-output-group">
+  <div class="output-header">
+    <span class="output-label">{{ "common.output" | t(lang) }}</span>
+    <div class="base64-stats">
+      <div class="base64-stat-item"><dt>{{ "common.input" | t(lang) }}</dt><dd id="input-size">-</dd></div>
+      <div class="base64-stat-item"><dt>{{ "common.output" | t(lang) }}</dt><dd id="output-size">-</dd></div>
+      <div class="base64-stat-item"><dt>Ratio</dt><dd id="size-ratio">-</dd></div>
+    </div>
+  </div>
+  <pre id="base64-output" class="tool-output tool-output-placeholder">{{ "common.outputPlaceholder" | t(lang) }}</pre>
+</div>

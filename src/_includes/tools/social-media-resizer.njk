@@ -1,45 +1,4 @@
----
-layout: layouts/tool.njk
-title: Social Media Image Resizer - Instagram, LinkedIn, Twitter Sizes
-description: Resize images for social media platforms. Get perfect dimensions for Instagram posts, LinkedIn banners, Twitter headers, YouTube thumbnails, and more. Free online tool.
-keywords: social media image resizer, instagram image size, linkedin banner size, twitter header size, youtube thumbnail size, facebook cover photo size, resize image for social media
-permalink: /tools/social-media-resizer/
-toolId: social-media-resizer
-toolJs: social-media-resizer.js
-ogImage: social-media-resizer.jpg
----
-{% set toolData = tools | findById(toolId) %}
-
-{% block schema %}
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {"@type": "ListItem", "position": 1, "name": "Home", "item": "{{ site.url }}/"},
-    {"@type": "ListItem", "position": 2, "name": "Tools", "item": "{{ site.url }}/#tools"},
-    {"@type": "ListItem", "position": 3, "name": "{{ toolData.name }}", "item": "{{ site.url }}{{ page.url }}"}
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "{{ toolData.fullName }}",
-  "description": "{{ description }}",
-  "url": "{{ site.url }}{{ page.url }}",
-  "applicationCategory": "MultimediaApplication",
-  "operatingSystem": "Any",
-  "browserRequirements": "Requires JavaScript",
-  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
-  "featureList": ["Instagram image sizes", "LinkedIn banner dimensions", "Twitter header size", "YouTube thumbnail", "Facebook cover photo", "Pinterest pin size", "TikTok video size"],
-  "author": {"@type": "Organization", "name": "{{ site.name }}", "url": "{{ site.url }}"}
-}
-</script>
-{% endblock %}
-
-{% block head %}
+{# Social Media Image Resizer Tool UI Partial #}
 <style>
   .platform-selector {
     margin-bottom: var(--space-4);
@@ -233,7 +192,6 @@ ogImage: social-media-resizer.jpg
     color: var(--color-warning);
   }
 </style>
-{% endblock %}
 
 <div class="tool-container">
   <!-- Platform Selector -->
@@ -261,11 +219,11 @@ ogImage: social-media-resizer.jpg
   <div id="custom-options" style="display: none; margin-bottom: var(--space-4); padding: var(--space-3); background: var(--color-bg-alt); border-radius: var(--radius-md);">
     <div style="display: flex; gap: var(--space-4); flex-wrap: wrap; align-items: center;">
       <div>
-        <label for="custom-width" style="font-size: var(--text-sm); margin-right: var(--space-2);">Width:</label>
+        <label for="custom-width" style="font-size: var(--text-sm); margin-right: var(--space-2);">{{ "common.width" | t(lang) }}:</label>
         <input type="number" id="custom-width" value="1080" min="10" max="4096" style="width: 80px; padding: var(--space-2); border: 1px solid var(--color-border); border-radius: var(--radius-sm);">
       </div>
       <div>
-        <label for="custom-height" style="font-size: var(--text-sm); margin-right: var(--space-2);">Height:</label>
+        <label for="custom-height" style="font-size: var(--text-sm); margin-right: var(--space-2);">{{ "common.height" | t(lang) }}:</label>
         <input type="number" id="custom-height" value="1080" min="10" max="4096" style="width: 80px; padding: var(--space-2); border: 1px solid var(--color-border); border-radius: var(--radius-sm);">
       </div>
     </div>
@@ -311,11 +269,11 @@ ogImage: social-media-resizer.jpg
     <div class="editor-grid">
       <!-- Preview -->
       <div class="preview-container">
-        <div class="preview-title">Preview <span style="font-weight: normal; font-size: var(--text-xs); color: var(--color-text-muted);">(drag to pan)</span></div>
+        <div class="preview-title">{{ "common.preview" | t(lang) }} <span style="font-weight: normal; font-size: var(--text-xs); color: var(--color-text-muted);">(drag to pan)</span></div>
         <canvas id="preview-canvas"></canvas>
         <div class="preview-stats">
           <div class="stat-item">
-            <span class="stat-label">Size:</span>
+            <span class="stat-label">{{ "common.size" | t(lang) }}:</span>
             <span class="stat-value" id="preview-dimensions">-</span>
           </div>
           <div class="stat-item">
@@ -343,7 +301,7 @@ ogImage: social-media-resizer.jpg
           <div class="control-label"><span>Position</span></div>
           <div class="transform-buttons">
             <button id="center-btn" class="btn btn-secondary btn-sm" title="Center Image (C)">⊙ Center</button>
-            <button id="reset-transforms" class="btn btn-secondary btn-sm" title="Reset All (Ctrl+0)">↺ Reset All</button>
+            <button id="reset-transforms" class="btn btn-secondary btn-sm" title="Reset All (Ctrl+0)">↺ {{ "common.reset" | t(lang) }} All</button>
           </div>
         </div>
 
@@ -401,7 +359,7 @@ ogImage: social-media-resizer.jpg
 
         <!-- Background & Options -->
         <div class="control-group">
-          <div class="control-label"><span>Background Color</span></div>
+          <div class="control-label"><span>{{ "common.backgroundColor" | t(lang) }}</span></div>
           <input type="color" id="bg-color" value="#ffffff" style="width: 100%; height: 36px; border: 1px solid var(--color-border); border-radius: var(--radius-sm); cursor: pointer;">
         </div>
 
@@ -415,10 +373,10 @@ ogImage: social-media-resizer.jpg
 
         <!-- Download -->
         <div class="download-buttons">
-          <button id="download-btn" class="btn btn-primary" disabled>Download JPG</button>
-          <button id="download-png" class="btn btn-secondary">Download PNG</button>
-          <button id="download-batch" class="btn btn-secondary" disabled>Download All (Batch)</button>
-          <button id="reset-btn" class="btn btn-ghost">Reset</button>
+          <button id="download-btn" class="btn btn-primary" disabled>{{ "common.downloadJpg" | t(lang) }}</button>
+          <button id="download-png" class="btn btn-secondary">{{ "common.downloadPng" | t(lang) }}</button>
+          <button id="download-batch" class="btn btn-secondary" disabled>{{ "common.download" | t(lang) }} All (Batch)</button>
+          <button id="reset-btn" class="btn btn-ghost">{{ "common.reset" | t(lang) }}</button>
         </div>
 
         <!-- Keyboard Shortcuts -->
@@ -443,83 +401,3 @@ ogImage: social-media-resizer.jpg
     </div>
   </div>
 </div>
-
-<section class="content-section">
-  <h2>How to Use</h2>
-  <div class="steps">
-    <div class="step"><div class="step-number">1</div><div class="step-content"><h3>Choose Platform</h3><p>Select the social media platform you need the image for (Instagram, LinkedIn, Twitter, etc.).</p></div></div>
-    <div class="step"><div class="step-number">2</div><div class="step-content"><h3>Select Size Preset</h3><p>Choose the specific image type (post, story, cover photo, profile picture, etc.).</p></div></div>
-    <div class="step"><div class="step-number">3</div><div class="step-content"><h3>Upload & Adjust</h3><p>Upload your image and use zoom to adjust framing. Download in JPG or PNG format.</p></div></div>
-  </div>
-</section>
-
-<section class="content-section">
-  <h2>Social Media Image Sizes Guide</h2>
-
-  <h3>Instagram Image Sizes</h3>
-  <ul>
-    <li><strong>Square Post:</strong> 1080×1080px (1:1 ratio)</li>
-    <li><strong>Portrait Post:</strong> 1080×1350px (4:5 ratio)</li>
-    <li><strong>Landscape Post:</strong> 1080×566px (1.91:1 ratio)</li>
-    <li><strong>Story/Reel:</strong> 1080×1920px (9:16 ratio)</li>
-    <li><strong>Profile Photo:</strong> 320×320px</li>
-  </ul>
-
-  <h3>LinkedIn Image Sizes</h3>
-  <ul>
-    <li><strong>Post Image:</strong> 1200×627px</li>
-    <li><strong>Cover Photo:</strong> 1584×396px</li>
-    <li><strong>Profile Photo:</strong> 400×400px</li>
-    <li><strong>Company Logo:</strong> 300×300px</li>
-  </ul>
-
-  <h3>Twitter/X Image Sizes</h3>
-  <ul>
-    <li><strong>Post Image:</strong> 1600×900px (16:9 ratio)</li>
-    <li><strong>Header Photo:</strong> 1500×500px</li>
-    <li><strong>Profile Photo:</strong> 400×400px</li>
-  </ul>
-
-  <h3>YouTube Image Sizes</h3>
-  <ul>
-    <li><strong>Video Thumbnail:</strong> 1280×720px (16:9 ratio)</li>
-    <li><strong>Channel Art:</strong> 2560×1440px</li>
-    <li><strong>Profile Photo:</strong> 800×800px</li>
-  </ul>
-</section>
-
-<section class="content-section">
-  <h2>FAQ</h2>
-  <div class="faq-list">
-    <details class="faq-item">
-      <summary class="faq-question">Why do social media image sizes matter?</summary>
-      <div class="faq-answer"><p>Using the correct dimensions ensures your images display properly without cropping or quality loss. Each platform has optimal sizes for different content types.</p></div>
-    </details>
-    <details class="faq-item">
-      <summary class="faq-question">Should I use JPG or PNG?</summary>
-      <div class="faq-answer"><p>JPG is best for photos (smaller file size). PNG is better for graphics with text or transparency (higher quality but larger files).</p></div>
-    </details>
-    <details class="faq-item">
-      <summary class="faq-question">Is my image uploaded to a server?</summary>
-      <div class="faq-answer"><p>No. All processing happens in your browser. Your images never leave your device.</p></div>
-    </details>
-    <details class="faq-item">
-      <summary class="faq-question">What's the maximum file size?</summary>
-      <div class="faq-answer"><p>This tool accepts images up to 20MB. Most social platforms have their own limits (usually 5-10MB for uploads).</p></div>
-    </details>
-  </div>
-</section>
-
-<section class="content-section">
-  <h2>Related Tools</h2>
-  <div class="related-tools">
-    {% for tool in tools %}
-    {% if tool.id != toolId %}
-    <a href="/tools/{{ tool.id }}/" class="related-tool-link">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16">{{ tool.icon | safe }}</svg>
-      {{ tool.name }}
-    </a>
-    {% endif %}
-    {% endfor %}
-  </div>
-</section>
