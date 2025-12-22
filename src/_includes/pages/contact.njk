@@ -1,0 +1,103 @@
+{# Contact Page Partial #}
+<style>
+  .lead { font-size: 1.125rem; color: var(--text-secondary); line-height: 1.7; }
+  .contact-methods { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
+  .contact-card { background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1.5rem; text-align: center; }
+  .contact-icon { width: 48px; height: 48px; margin: 0 auto 1rem; color: var(--primary); }
+  .contact-icon svg { width: 100%; height: 100%; }
+  .contact-card h3 { margin-bottom: 0.5rem; font-size: 1.25rem; }
+  .contact-card p { color: var(--text-secondary); margin-bottom: 0.75rem; }
+  .contact-link { color: var(--primary); font-weight: 500; text-decoration: none; font-size: 1.125rem; }
+  .contact-link:hover { text-decoration: underline; }
+  .contact-topics { list-style: none; padding: 0; }
+  .contact-topics li { padding: 0.75rem 0; border-bottom: 1px solid var(--border-color); }
+  .contact-topics li:last-child { border-bottom: none; }
+  .contact-topics strong { color: var(--text-primary); }
+</style>
+
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "{{ 'nav.home' | t(currentLang) }}", "item": "{{ site.url }}{{ '/' | langUrl(currentLang) }}"},
+    {"@type": "ListItem", "position": 2, "name": "{{ 'nav.contact' | t(currentLang) }}", "item": "{{ site.url }}{{ '/contact/' | langUrl(currentLang) }}"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "name": "{{ 'pages.contact.title' | t(currentLang) }}",
+  "description": "{{ 'pages.contact.metaDescription' | t(currentLang) }}",
+  "url": "{{ site.url }}{{ '/contact/' | langUrl(currentLang) }}",
+  "inLanguage": "{{ currentLang }}",
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "{{ site.name }}",
+    "url": "{{ site.url }}",
+    "contactPoint": {"@type": "ContactPoint", "contactType": "customer support", "email": "{{ site.email }}"}
+  }
+}
+</script>
+{% endblock %}
+
+<h1>{{ "pages.contact.heading" | t(currentLang) }}</h1>
+
+<section class="content-section">
+  <p class="lead">{{ "pages.contact.intro" | t(currentLang) }}</p>
+</section>
+
+<section class="content-section">
+  <h2>{{ "pages.contact.getInTouch" | t(currentLang) }}</h2>
+  <div class="contact-methods">
+    <div class="contact-card">
+      <div class="contact-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+        </svg>
+      </div>
+      <h3>{{ "pages.contact.email.title" | t(currentLang) }}</h3>
+      <p>{{ "pages.contact.email.description" | t(currentLang) }}</p>
+      <a href="mailto:{{ site.email }}" class="contact-link">{{ site.email }}</a>
+    </div>
+    <div class="contact-card">
+      <div class="contact-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+      </div>
+      <h3>X (Twitter)</h3>
+      <p>{{ "pages.contact.twitter.description" | t(currentLang) }}</p>
+      <a href="https://x.com/{{ site.twitter | replace('@', '') }}" target="_blank" rel="noopener noreferrer" class="contact-link">{{ site.twitter }}</a>
+    </div>
+  </div>
+</section>
+
+<section class="content-section">
+  <h2>{{ "pages.contact.topics.title" | t(currentLang) }}</h2>
+  <ul class="contact-topics">
+    <li><strong>{{ "pages.contact.topics.suggestions.title" | t(currentLang) }}</strong> {{ "pages.contact.topics.suggestions.desc" | t(currentLang) }}</li>
+    <li><strong>{{ "pages.contact.topics.bugs.title" | t(currentLang) }}</strong> {{ "pages.contact.topics.bugs.desc" | t(currentLang) }}</li>
+    <li><strong>{{ "pages.contact.topics.features.title" | t(currentLang) }}</strong> {{ "pages.contact.topics.features.desc" | t(currentLang) }}</li>
+    <li><strong>{{ "pages.contact.topics.feedback.title" | t(currentLang) }}</strong> {{ "pages.contact.topics.feedback.desc" | t(currentLang) }}</li>
+    <li><strong>{{ "pages.contact.topics.partnership.title" | t(currentLang) }}</strong> {{ "pages.contact.topics.partnership.desc" | t(currentLang) }}</li>
+  </ul>
+</section>
+
+<section class="content-section">
+  <h2>{{ "pages.contact.response.title" | t(currentLang) }}</h2>
+  <p>{{ "pages.contact.response.text" | t(currentLang) }}</p>
+</section>
+
+<section class="content-section">
+  <h2>{{ "pages.contact.beforeReach.title" | t(currentLang) }}</h2>
+  <p>{{ "pages.contact.beforeReach.text" | t(currentLang) }}</p>
+  <ul>
+    <li><a href="{{ '/about/' | langUrl(currentLang) }}">{{ "nav.about" | t(currentLang) }}</a> - {{ "pages.contact.beforeReach.about" | t(currentLang) }}</li>
+    <li><a href="{{ '/privacy/' | langUrl(currentLang) }}">{{ "nav.privacy" | t(currentLang) }}</a> - {{ "pages.contact.beforeReach.privacy" | t(currentLang) }}</li>
+    <li><a href="{{ '/terms/' | langUrl(currentLang) }}">{{ "nav.terms" | t(currentLang) }}</a> - {{ "pages.contact.beforeReach.terms" | t(currentLang) }}</li>
+  </ul>
+</section>

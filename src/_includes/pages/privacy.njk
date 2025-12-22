@@ -1,0 +1,81 @@
+{# Privacy Policy Page Partial #}
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "{{ 'nav.home' | t(currentLang) }}", "item": "{{ site.url }}{{ '/' | langUrl(currentLang) }}"},
+    {"@type": "ListItem", "position": 2, "name": "{{ 'nav.privacy' | t(currentLang) }}", "item": "{{ site.url }}{{ '/privacy/' | langUrl(currentLang) }}"}
+  ]
+}
+</script>
+{% endblock %}
+
+<h1>{{ "pages.privacy.heading" | t(currentLang) }}</h1>
+<p class="last-updated">{{ "pages.privacy.lastUpdated" | t(currentLang) }}: {{ "pages.privacy.date" | t(currentLang) }}</p>
+
+<section class="content-section">
+  <h2>{{ "pages.privacy.overview.title" | t(currentLang) }}</h2>
+  <p>{{ "pages.privacy.overview.text" | t(currentLang) }}</p>
+</section>
+
+<section class="content-section">
+  <h2>{{ "pages.privacy.dataCollection.title" | t(currentLang) }}</h2>
+  <h3>{{ "pages.privacy.dataCollection.notCollected.title" | t(currentLang) }}</h3>
+  <ul>
+    <li>{{ "pages.privacy.dataCollection.notCollected.items.personal" | t(currentLang) }}</li>
+    <li>{{ "pages.privacy.dataCollection.notCollected.items.toolData" | t(currentLang) }}</li>
+    <li>{{ "pages.privacy.dataCollection.notCollected.items.files" | t(currentLang) }}</li>
+    <li>{{ "pages.privacy.dataCollection.notCollected.items.passwords" | t(currentLang) }}</li>
+  </ul>
+  <h3>{{ "pages.privacy.dataCollection.collected.title" | t(currentLang) }}</h3>
+  <p>{{ "pages.privacy.dataCollection.collected.text" | t(currentLang) }}</p>
+  <ul>
+    <li>{{ "pages.privacy.dataCollection.collected.items.pages" | t(currentLang) }}</li>
+    <li>{{ "pages.privacy.dataCollection.collected.items.referrer" | t(currentLang) }}</li>
+    <li>{{ "pages.privacy.dataCollection.collected.items.device" | t(currentLang) }}</li>
+    <li>{{ "pages.privacy.dataCollection.collected.items.country" | t(currentLang) }}</li>
+  </ul>
+</section>
+
+<section class="content-section">
+  <h2>{{ "pages.privacy.howToolsWork.title" | t(currentLang) }}</h2>
+  <p>{{ "pages.privacy.howToolsWork.text" | t(currentLang) }}</p>
+  <ul>
+    <li>{{ "pages.privacy.howToolsWork.items.browser" | t(currentLang) }}</li>
+    <li>{{ "pages.privacy.howToolsWork.items.noServer" | t(currentLang) }}</li>
+    <li>{{ "pages.privacy.howToolsWork.items.noStorage" | t(currentLang) }}</li>
+    <li>{{ "pages.privacy.howToolsWork.items.inspect" | t(currentLang) }}</li>
+  </ul>
+</section>
+
+<section class="content-section">
+  <h2>{{ "pages.privacy.cookies.title" | t(currentLang) }}</h2>
+  <p>{{ "pages.privacy.cookies.text" | t(currentLang) }}</p>
+  <ul>
+    <li><strong>{{ "pages.privacy.cookies.items.theme.title" | t(currentLang) }}</strong> {{ "pages.privacy.cookies.items.theme.desc" | t(currentLang) }}</li>
+    <li><strong>{{ "pages.privacy.cookies.items.consent.title" | t(currentLang) }}</strong> {{ "pages.privacy.cookies.items.consent.desc" | t(currentLang) }}</li>
+    <li><strong>{{ "pages.privacy.cookies.items.analytics.title" | t(currentLang) }}</strong> {{ "pages.privacy.cookies.items.analytics.desc" | t(currentLang) }}</li>
+  </ul>
+</section>
+
+<section class="content-section">
+  <h2>{{ "pages.privacy.thirdParty.title" | t(currentLang) }}</h2>
+  <p>{{ "pages.privacy.thirdParty.text" | t(currentLang) }}</p>
+</section>
+
+<section class="content-section">
+  <h2>{{ "pages.privacy.children.title" | t(currentLang) }}</h2>
+  <p>{{ "pages.privacy.children.text" | t(currentLang) }}</p>
+</section>
+
+<section class="content-section">
+  <h2>{{ "pages.privacy.changes.title" | t(currentLang) }}</h2>
+  <p>{{ "pages.privacy.changes.text" | t(currentLang) }}</p>
+</section>
+
+<section class="content-section">
+  <h2>{{ "pages.privacy.contact.title" | t(currentLang) }}</h2>
+  <p>{{ "pages.privacy.contact.text" | t(currentLang) }} <a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+</section>

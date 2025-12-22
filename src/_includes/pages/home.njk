@@ -1,13 +1,5 @@
----
-layout: layouts/base.njk
-title: Free Online Developer Tools
-description: Free online developer tools for everyday tasks. JSON formatter, Base64 encoder, URL encoder, JWT decoder, hash generator, timestamp converter, password generator, UUID generator, and more.
-keywords: developer tools, online tools, JSON formatter, Base64 encoder, URL encoder, JWT decoder, hash generator, MD5, SHA256, timestamp converter, password generator, UUID generator, Lorem Ipsum, QR code generator, free tools
-ogTitle: OneDevKit - Free Online Developer Tools
-ogDescription: Free, fast, and privacy-focused developer tools. No signup required. 10+ tools for encoding, formatting, generating, and converting.
----
+{# Home Page Content #}
 {% block schema %}
-<!-- Schema.org Organization -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -15,19 +7,17 @@ ogDescription: Free, fast, and privacy-focused developer tools. No signup requir
   "name": "{{ site.name }}",
   "url": "{{ site.url }}",
   "logo": "{{ site.url }}/images/logo.png",
-  "description": "{{ site.description }}",
+  "description": "{{ 'site.description' | t(currentLang) }}",
   "sameAs": []
 }
 </script>
-
-<!-- Schema.org WebSite -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "{{ site.name }}",
   "url": "{{ site.url }}",
-  "description": "{{ site.description }}",
+  "description": "{{ 'site.description' | t(currentLang) }}",
   "potentialAction": {
     "@type": "SearchAction",
     "target": "{{ site.url }}/?q={search_term_string}",
@@ -35,22 +25,20 @@ ogDescription: Free, fast, and privacy-focused developer tools. No signup requir
   }
 }
 </script>
-
-<!-- Schema.org ItemList -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "ItemList",
-  "name": "Developer Tools",
-  "description": "Collection of free online developer tools",
+  "name": "{{ 'nav.tools' | t(currentLang) }}",
+  "description": "{{ 'site.description' | t(currentLang) }}",
   "numberOfItems": {{ tools | length }},
   "itemListElement": [
     {% for tool in tools %}
     {
       "@type": "ListItem",
       "position": {{ loop.index }},
-      "name": "{{ tool.fullName }}",
-      "url": "{{ site.url }}/tools/{{ tool.id }}/"
+      "name": "{{ tool.id | toolT(currentLang, 'fullName') | default(tool.fullName) }}",
+      "url": "{{ site.url }}{{ '/tools/' + tool.id + '/' | langUrl(currentLang) }}"
     }{% if not loop.last %},{% endif %}
     {% endfor %}
   ]
@@ -60,35 +48,30 @@ ogDescription: Free, fast, and privacy-focused developer tools. No signup requir
 
 {% block content %}
 <div class="container">
-  <!-- Hero Section -->
   <section class="hero" aria-labelledby="hero-title">
-    <h1 id="hero-title">Free Online Developer Tools</h1>
-    <p class="hero-description">Fast, privacy-focused tools for everyday development tasks. No signup required.</p>
+    <h1 id="hero-title">{{ "pages.home.heroTitle" | t(currentLang) }}</h1>
+    <p class="hero-description">{{ "pages.home.heroDescription" | t(currentLang) }}</p>
   </section>
 
-  <!-- All Tools -->
   <section id="tools" aria-labelledby="tools-title">
-    <h2 id="tools-title" class="sr-only">Available Tools</h2>
-
+    <h2 id="tools-title" class="sr-only">{{ "pages.home.availableTools" | t(currentLang) }}</h2>
     <div class="tool-grid">
       {% for tool in tools %}
-      <a href="/tools/{{ tool.id }}/" class="tool-card">
+      <a href="{{ ('/tools/' + tool.id + '/') | langUrl(currentLang) }}" class="tool-card">
         <div class="tool-card-icon">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
             {{ tool.icon | safe }}
           </svg>
         </div>
-        <h3>{{ tool.fullName }}</h3>
-        <p>{{ tool.description }}</p>
+        <h3>{{ tool.id | toolT(currentLang, 'fullName') | default(tool.fullName) }}</h3>
+        <p>{{ tool.id | toolT(currentLang, 'description') | default(tool.description) }}</p>
       </a>
       {% endfor %}
     </div>
   </section>
 
-  <!-- Features Section -->
   <section class="features" aria-labelledby="features-title">
-    <h2 id="features-title">Why Choose OneDevKit?</h2>
-
+    <h2 id="features-title">{{ "pages.home.whyChoose" | t(currentLang) }}</h2>
     <div class="features-grid">
       <div class="feature">
         <div class="feature-icon">
@@ -96,38 +79,35 @@ ogDescription: Free, fast, and privacy-focused developer tools. No signup requir
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
           </svg>
         </div>
-        <h3>Privacy First</h3>
-        <p>All tools run entirely in your browser. Your data never leaves your device.</p>
+        <h3>{{ "pages.home.features.privacy.title" | t(currentLang) }}</h3>
+        <p>{{ "pages.home.features.privacy.description" | t(currentLang) }}</p>
       </div>
-
       <div class="feature">
         <div class="feature-icon">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
           </svg>
         </div>
-        <h3>Lightning Fast</h3>
-        <p>No server requests needed. Get instant results with every action.</p>
+        <h3>{{ "pages.home.features.fast.title" | t(currentLang) }}</h3>
+        <p>{{ "pages.home.features.fast.description" | t(currentLang) }}</p>
       </div>
-
       <div class="feature">
         <div class="feature-icon">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
           </svg>
         </div>
-        <h3>100% Free</h3>
-        <p>No subscriptions, no signups, no hidden costs. Just free tools.</p>
+        <h3>{{ "pages.home.features.free.title" | t(currentLang) }}</h3>
+        <p>{{ "pages.home.features.free.description" | t(currentLang) }}</p>
       </div>
-
       <div class="feature">
         <div class="feature-icon">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
           </svg>
         </div>
-        <h3>Works Everywhere</h3>
-        <p>Responsive design works on desktop, tablet, and mobile devices.</p>
+        <h3>{{ "pages.home.features.responsive.title" | t(currentLang) }}</h3>
+        <p>{{ "pages.home.features.responsive.description" | t(currentLang) }}</p>
       </div>
     </div>
   </section>

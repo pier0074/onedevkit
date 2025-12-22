@@ -785,3 +785,64 @@ test.describe('Navigation & Layout', () => {
     await expect(page.locator('.breadcrumb a[href="/"]')).toBeVisible();
   });
 });
+
+// Spanish (i18n) Tests
+test.describe('Spanish Language Support', () => {
+  test('Spanish homepage loads with correct content', async ({ page }) => {
+    await page.goto('/es/');
+
+    // Check HTML lang attribute
+    await expect(page.locator('html')).toHaveAttribute('lang', 'es');
+
+    // Check translated title
+    await expect(page).toHaveTitle(/Herramientas de Desarrollador Gratis/);
+
+    // Check translated hero
+    await expect(page.locator('.hero h1')).toContainText('Herramientas de Desarrollador Gratis');
+  });
+
+  test('Spanish 404 page loads with correct content', async ({ page }) => {
+    await page.goto('/es/404.html');
+
+    await expect(page.locator('html')).toHaveAttribute('lang', 'es');
+    await expect(page).toHaveTitle(/Página No Encontrada/);
+    await expect(page.locator('.error-title')).toContainText('Página No Encontrada');
+  });
+
+  test('Spanish tool page loads with hreflang tags', async ({ page }) => {
+    await page.goto('/es/tools/json-formatter/');
+
+    await expect(page.locator('html')).toHaveAttribute('lang', 'es');
+
+    // Check hreflang tags
+    await expect(page.locator('link[hreflang="en"]')).toHaveAttribute('href', /\/tools\/json-formatter\//);
+    await expect(page.locator('link[hreflang="es"]')).toHaveAttribute('href', /\/es\/tools\/json-formatter\//);
+    await expect(page.locator('link[hreflang="x-default"]')).toBeAttached();
+  });
+
+  test('Spanish tool page has translated UI elements', async ({ page }) => {
+    await page.goto('/es/tools/json-formatter/');
+
+    // Check translated button labels
+    await expect(page.locator('#format-json')).toContainText('Formatear');
+    await expect(page.locator('#minify-json')).toContainText('Minificar');
+    await expect(page.locator('#copy-json')).toContainText('Copiar');
+    await expect(page.locator('#clear-json')).toContainText('Limpiar');
+  });
+
+  test('Spanish breadcrumb uses correct language', async ({ page }) => {
+    await page.goto('/es/tools/json-formatter/');
+
+    // Breadcrumb home link should point to Spanish homepage
+    await expect(page.locator('.breadcrumb a').first()).toHaveAttribute('href', '/es/');
+  });
+
+  test('Spanish tool links navigate to Spanish pages', async ({ page }) => {
+    await page.goto('/es/');
+
+    // Click on first tool and verify it stays in Spanish
+    await page.locator('.tool-card').first().click();
+    await expect(page).toHaveURL(/\/es\/tools\//);
+    await expect(page.locator('html')).toHaveAttribute('lang', 'es');
+  });
+});

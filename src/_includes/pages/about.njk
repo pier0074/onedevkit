@@ -1,0 +1,79 @@
+{# About Page Partial #}
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "{{ 'nav.home' | t(currentLang) }}", "item": "{{ site.url }}{{ '/' | langUrl(currentLang) }}"},
+    {"@type": "ListItem", "position": 2, "name": "{{ 'nav.about' | t(currentLang) }}", "item": "{{ site.url }}{{ '/about/' | langUrl(currentLang) }}"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "name": "{{ 'pages.about.title' | t(currentLang) }}",
+  "description": "{{ 'pages.about.metaDescription' | t(currentLang) }}",
+  "url": "{{ site.url }}{{ '/about/' | langUrl(currentLang) }}",
+  "inLanguage": "{{ currentLang }}",
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "{{ site.name }}",
+    "url": "{{ site.url }}",
+    "description": "{{ 'site.description' | t(currentLang) }}"
+  }
+}
+</script>
+{% endblock %}
+
+<h1>{{ "pages.about.heading" | t(currentLang) }}</h1>
+
+<section class="content-section">
+  <h2>{{ "pages.about.mission.title" | t(currentLang) }}</h2>
+  <p>{{ "pages.about.mission.p1" | t(currentLang) }}</p>
+  <p>{{ "pages.about.mission.p2" | t(currentLang) }}</p>
+</section>
+
+<section class="content-section">
+  <h2>{{ "pages.about.why.title" | t(currentLang) }}</h2>
+  <p>{{ "pages.about.why.intro" | t(currentLang) }}</p>
+  <ul>
+    <li>{{ "pages.about.why.points.signups" | t(currentLang) }}</li>
+    <li>{{ "pages.about.why.points.servers" | t(currentLang) }}</li>
+    <li>{{ "pages.about.why.points.ads" | t(currentLang) }}</li>
+    <li>{{ "pages.about.why.points.slow" | t(currentLang) }}</li>
+    <li>{{ "pages.about.why.points.mobile" | t(currentLang) }}</li>
+  </ul>
+  <p>{{ "pages.about.why.conclusion" | t(currentLang) }}</p>
+</section>
+
+<section class="content-section">
+  <h2>{{ "pages.about.tools.title" | t(currentLang) }}</h2>
+  <p>{{ "pages.about.tools.intro" | t(currentLang) }}</p>
+  <ul>
+    {% for tool in tools %}
+    <li><strong><a href="{{ '/tools/' + tool.id + '/' | langUrl(currentLang) }}">{{ tool.id | toolT(currentLang, 'fullName') | default(tool.fullName) }}</a></strong> - {{ tool.id | toolT(currentLang, 'description') | default(tool.description) }}</li>
+    {% endfor %}
+  </ul>
+  <p>{{ "pages.about.tools.more" | t(currentLang) }} <a href="{{ '/contact/' | langUrl(currentLang) }}">{{ "pages.about.tools.letUsKnow" | t(currentLang) }}</a></p>
+</section>
+
+<section class="content-section">
+  <h2>{{ "pages.about.privacy.title" | t(currentLang) }}</h2>
+  <p>{{ "pages.about.privacy.intro" | t(currentLang) }}</p>
+  <ul>
+    <li><strong>{{ "pages.about.privacy.points.clientSide.title" | t(currentLang) }}</strong> {{ "pages.about.privacy.points.clientSide.desc" | t(currentLang) }}</li>
+    <li><strong>{{ "pages.about.privacy.points.noData.title" | t(currentLang) }}</strong> {{ "pages.about.privacy.points.noData.desc" | t(currentLang) }}</li>
+    <li><strong>{{ "pages.about.privacy.points.analytics.title" | t(currentLang) }}</strong> {{ "pages.about.privacy.points.analytics.desc" | t(currentLang) }}</li>
+    <li><strong>{{ "pages.about.privacy.points.noTrackers.title" | t(currentLang) }}</strong> {{ "pages.about.privacy.points.noTrackers.desc" | t(currentLang) }}</li>
+    <li><strong>{{ "pages.about.privacy.points.openSource.title" | t(currentLang) }}</strong> {{ "pages.about.privacy.points.openSource.desc" | t(currentLang) }}</li>
+  </ul>
+  <p>{{ "pages.about.privacy.readMore" | t(currentLang) }} <a href="{{ '/privacy/' | langUrl(currentLang) }}">{{ "nav.privacy" | t(currentLang) }}</a></p>
+</section>
+
+<section class="content-section">
+  <h2>{{ "pages.about.contact.title" | t(currentLang) }}</h2>
+  <p>{{ "pages.about.contact.text" | t(currentLang) }} <a href="{{ '/contact/' | langUrl(currentLang) }}">{{ "pages.about.contact.getInTouch" | t(currentLang) }}</a>.</p>
+</section>
