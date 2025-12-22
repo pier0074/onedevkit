@@ -154,6 +154,23 @@ module.exports = function(eleventyConfig) {
   });
 
   /**
+   * Strip language prefix from URL to get base path
+   * Usage: {{ page.url | stripLangPrefix(lang) }}
+   */
+  eleventyConfig.addFilter("stripLangPrefix", function(url, lang) {
+    const defaultLang = getDefaultLanguage();
+    if (!lang || lang === defaultLang.code) {
+      return url;
+    }
+    // Remove /{lang}/ prefix from URL
+    const prefix = `/${lang}/`;
+    if (url.startsWith(prefix)) {
+      return url.slice(lang.length + 1); // Returns /rest/of/path
+    }
+    return url;
+  });
+
+  /**
    * Get category translation
    * Usage: {{ tool.category | categoryT(lang) }}
    */
