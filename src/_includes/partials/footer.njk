@@ -2,14 +2,17 @@
 <footer class="footer">
   <div class="container">
     <div class="footer-inner">
+      {% set categories = tools | groupby("category") %}
+      {% for category, categoryTools in categories %}
       <div class="footer-section">
-        <h4>Tools</h4>
+        <h4>{{ category }}</h4>
         <ul class="footer-links">
-          {% for tool in tools %}
+          {% for tool in categoryTools %}
           <li><a href="/tools/{{ tool.id }}/"{% if page.url == '/tools/' + tool.id + '/' %} aria-current="page"{% endif %}>{{ tool.name }}</a></li>
           {% endfor %}
         </ul>
       </div>
+      {% endfor %}
       <div class="footer-section">
         <h4>Company</h4>
         <ul class="footer-links">
