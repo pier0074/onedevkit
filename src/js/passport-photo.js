@@ -540,10 +540,10 @@
       const deltaX = point.clientX - this.panStartX;
       const deltaY = point.clientY - this.panStartY;
 
-      // Scale movement based on zoom level
+      // Scale movement based on zoom level (+ for natural drag direction)
       const scale = this.zoom / 100;
-      this.offsetX = this.panInitialOffsetX - deltaX / scale;
-      this.offsetY = this.panInitialOffsetY - deltaY / scale;
+      this.offsetX = this.panInitialOffsetX + deltaX / scale;
+      this.offsetY = this.panInitialOffsetY + deltaY / scale;
 
       this.renderPreview();
       e.preventDefault();
