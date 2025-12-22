@@ -1,0 +1,372 @@
+---
+layout: layouts/tool.njk
+title: Passport Photo Maker - Resize & Crop for Any Country
+description: Free passport photo maker for USA, India, UK, Schengen & more. Resize photos to exact dimensions, compress to required size. Works offline, 100% private.
+keywords: passport photo maker, passport photo size, visa photo, passport photo India, passport photo USA, 2x2 photo, 35x45mm photo, passport photo resize, visa photo maker
+permalink: /tools/passport-photo/
+toolId: passport-photo
+toolJs: passport-photo.js
+ogImage: passport-photo.jpg
+---
+{% set toolData = tools | findById(toolId) %}
+
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "{{ site.url }}/"},
+    {"@type": "ListItem", "position": 2, "name": "Tools", "item": "{{ site.url }}/#tools"},
+    {"@type": "ListItem", "position": 3, "name": "{{ toolData.name }}", "item": "{{ site.url }}{{ page.url }}"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "{{ toolData.fullName }}",
+  "description": "{{ description }}",
+  "url": "{{ site.url }}{{ page.url }}",
+  "applicationCategory": "MultimediaApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+  "featureList": ["Country-specific presets", "Exact dimension resize", "File size compression", "Print layout generation", "Crop tool", "Background options"],
+  "author": {"@type": "Organization", "name": "{{ site.name }}", "url": "{{ site.url }}"}
+}
+</script>
+{% endblock %}
+
+{% block head %}
+<style>
+  .upload-zone {
+    border: 2px dashed var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-8);
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    background: var(--color-bg-alt);
+  }
+  .upload-zone:hover, .upload-zone.dragover {
+    border-color: var(--color-primary);
+    background: var(--color-primary-light);
+  }
+  .upload-zone input { display: none; }
+  .upload-icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto var(--space-3);
+    color: var(--color-text-secondary);
+  }
+
+  .country-select {
+    margin: var(--space-4) 0;
+  }
+  .country-select select {
+    width: 100%;
+    padding: var(--space-3);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-size: var(--text-base);
+    background: var(--color-bg);
+    color: var(--color-text);
+  }
+
+  .spec-info {
+    background: var(--color-bg-alt);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
+    margin: var(--space-4) 0;
+  }
+  .spec-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--space-3);
+  }
+  .spec-item {
+    font-size: var(--text-sm);
+  }
+  .spec-label {
+    color: var(--color-text-secondary);
+  }
+  .spec-value {
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .editor-section {
+    display: none;
+    margin-top: var(--space-6);
+  }
+  .editor-section.show { display: block; }
+
+  .editor-grid {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: var(--space-6);
+  }
+  @media (max-width: 768px) {
+    .editor-grid { grid-template-columns: 1fr; }
+  }
+
+  .crop-container {
+    position: relative;
+    background: #f0f0f0;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+  }
+  .crop-image {
+    max-width: 100%;
+    max-height: 400px;
+    display: block;
+  }
+  .crop-overlay {
+    position: absolute;
+    border: 2px dashed var(--color-primary);
+    background: rgba(37, 99, 235, 0.1);
+    cursor: move;
+  }
+
+  .preview-panel {
+    background: var(--color-bg-alt);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
+  }
+  .preview-title {
+    font-weight: 600;
+    margin-bottom: var(--space-3);
+  }
+  .preview-image {
+    width: 100%;
+    background: white;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-3);
+  }
+  .preview-stats {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+  }
+  .preview-stats div {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--space-1);
+  }
+  .preview-stats .value {
+    font-weight: 500;
+    color: var(--color-text);
+  }
+  .preview-stats .success { color: var(--color-success); }
+
+  .controls-section {
+    margin-top: var(--space-4);
+  }
+  .control-group {
+    margin-bottom: var(--space-4);
+  }
+  .control-label {
+    display: block;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    margin-bottom: var(--space-2);
+  }
+  .control-slider {
+    width: 100%;
+  }
+
+  .status-message {
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-md);
+    margin-top: var(--space-4);
+    font-size: var(--text-sm);
+    display: none;
+  }
+  .status-message.show { display: block; }
+  .status-message.processing { background: var(--color-primary-light); color: var(--color-primary); }
+  .status-message.success { background: #dcfce7; color: #16a34a; }
+  .status-message.error { background: #fee2e2; color: #dc2626; }
+</style>
+{% endblock %}
+
+<div class="tool-container">
+  <!-- Country Selection -->
+  <div class="country-select">
+    <label for="country" class="control-label">Select Country / Document Type</label>
+    <select id="country">
+      <optgroup label="Popular">
+        <option value="usa" selected>USA - Passport (2×2 inches)</option>
+        <option value="india">India - Passport/Visa (2×2 inches, 20-300KB)</option>
+        <option value="uk">UK - Passport (35×45mm)</option>
+        <option value="schengen">Schengen Visa (35×45mm)</option>
+        <option value="canada">Canada - Passport (50×70mm)</option>
+        <option value="australia">Australia - Passport (35×45mm)</option>
+      </optgroup>
+      <optgroup label="Asia">
+        <option value="china">China - Visa (33×48mm)</option>
+        <option value="japan">Japan - Passport (35×45mm)</option>
+        <option value="singapore">Singapore - Passport (35×45mm)</option>
+      </optgroup>
+      <optgroup label="Other">
+        <option value="custom">Custom Size</option>
+      </optgroup>
+    </select>
+  </div>
+
+  <!-- Specifications Display -->
+  <div class="spec-info" id="spec-info">
+    <div class="spec-grid">
+      <div class="spec-item">
+        <span class="spec-label">Size:</span>
+        <span class="spec-value" id="spec-size">2×2 inches</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-label">Pixels:</span>
+        <span class="spec-value" id="spec-pixels">600×600px</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-label">Max File Size:</span>
+        <span class="spec-value" id="spec-filesize">240KB</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-label">Background:</span>
+        <span class="spec-value" id="spec-background">White</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom Size Options (hidden by default) -->
+  <div id="custom-options" style="display: none; margin-bottom: var(--space-4);">
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--space-3);">
+      <div>
+        <label class="control-label">Width (px)</label>
+        <input type="number" id="custom-width" value="600" min="100" max="2000" class="tool-input">
+      </div>
+      <div>
+        <label class="control-label">Height (px)</label>
+        <input type="number" id="custom-height" value="600" min="100" max="2000" class="tool-input">
+      </div>
+      <div>
+        <label class="control-label">Max KB</label>
+        <input type="number" id="custom-maxkb" value="200" min="10" max="5000" class="tool-input">
+      </div>
+    </div>
+  </div>
+
+  <!-- Upload Zone -->
+  <div class="upload-zone" id="upload-zone">
+    <input type="file" id="file-input" accept="image/*">
+    <div class="upload-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+      </svg>
+    </div>
+    <div>Click to upload your photo</div>
+    <div style="font-size: var(--text-sm); color: var(--color-text-muted); margin-top: var(--space-2);">
+      JPG, PNG (Max 10MB)
+    </div>
+  </div>
+
+  <!-- Status -->
+  <div class="status-message" id="status"></div>
+
+  <!-- Editor Section -->
+  <div class="editor-section" id="editor-section">
+    <div class="editor-grid">
+      <!-- Crop Area -->
+      <div>
+        <div class="crop-container" id="crop-container">
+          <img id="source-image" class="crop-image" alt="Source photo">
+        </div>
+        <div class="controls-section">
+          <div class="control-group">
+            <label class="control-label">Zoom: <span id="zoom-value">100%</span></label>
+            <input type="range" id="zoom-slider" class="control-slider" min="50" max="200" value="100">
+          </div>
+        </div>
+      </div>
+
+      <!-- Preview Panel -->
+      <div class="preview-panel">
+        <div class="preview-title">Preview</div>
+        <canvas id="preview-canvas" class="preview-image"></canvas>
+        <div class="preview-stats">
+          <div><span>Dimensions:</span><span class="value" id="preview-dimensions">-</span></div>
+          <div><span>File Size:</span><span class="value" id="preview-filesize">-</span></div>
+          <div><span>Status:</span><span class="value" id="preview-status">-</span></div>
+        </div>
+
+        <div class="tool-actions" style="margin-top: var(--space-4);">
+          <button id="download-btn" class="btn btn-primary" style="width: 100%;" disabled>Download Photo</button>
+        </div>
+        <button id="download-print" class="btn btn-secondary" style="width: 100%; margin-top: var(--space-2);" disabled>Download Print Layout (4×6)</button>
+        <button id="reset-btn" class="btn btn-ghost" style="width: 100%; margin-top: var(--space-2);">Start Over</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="content-section">
+  <h2>How to Use</h2>
+  <div class="steps">
+    <div class="step"><div class="step-number">1</div><div class="step-content"><h3>Select Country</h3><p>Choose your country or document type to get the correct specifications.</p></div></div>
+    <div class="step"><div class="step-number">2</div><div class="step-content"><h3>Upload Photo</h3><p>Upload a clear, front-facing photo with good lighting.</p></div></div>
+    <div class="step"><div class="step-number">3</div><div class="step-content"><h3>Adjust & Download</h3><p>Use zoom to adjust framing, then download your passport photo.</p></div></div>
+  </div>
+</section>
+
+<section class="content-section">
+  <h2>Passport Photo Requirements by Country</h2>
+  <table style="width: 100%; font-size: var(--text-sm);">
+    <thead>
+      <tr><th>Country</th><th>Size</th><th>Pixels</th><th>Max File Size</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>USA</td><td>2×2 inches</td><td>600×600px</td><td>240KB</td></tr>
+      <tr><td>India</td><td>2×2 inches</td><td>600×600px</td><td>20-300KB (varies)</td></tr>
+      <tr><td>UK</td><td>35×45mm</td><td>413×531px</td><td>10MB</td></tr>
+      <tr><td>Schengen</td><td>35×45mm</td><td>413×531px</td><td>2MB</td></tr>
+      <tr><td>Canada</td><td>50×70mm</td><td>590×826px</td><td>4MB</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="content-section">
+  <h2>FAQ</h2>
+  <div class="faq-list">
+    <details class="faq-item">
+      <summary class="faq-question">Is this tool free?</summary>
+      <div class="faq-answer"><p>Yes! This passport photo maker is completely free. No signup, no watermarks, no hidden fees.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-question">Is my photo uploaded to a server?</summary>
+      <div class="faq-answer"><p>No. All processing happens in your browser. Your photos never leave your device.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-question">Will my photo be accepted by officials?</summary>
+      <div class="faq-answer"><p>This tool helps with sizing and compression. For official acceptance, ensure your original photo meets all requirements (lighting, expression, background, etc.).</p></div>
+    </details>
+  </div>
+</section>
+
+<section class="content-section">
+  <h2>Related Tools</h2>
+  <div class="related-tools">
+    {% for tool in tools %}
+    {% if tool.id != toolId %}
+    <a href="/tools/{{ tool.id }}/" class="related-tool-link">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16">{{ tool.icon | safe }}</svg>
+      {{ tool.name }}
+    </a>
+    {% endif %}
+    {% endfor %}
+  </div>
+</section>

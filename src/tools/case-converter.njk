@@ -1,0 +1,246 @@
+---
+layout: layouts/tool.njk
+title: Case Converter - Change Text Case Online (Upper, Lower, Title)
+description: Free online case converter. Convert text to UPPERCASE, lowercase, Title Case, Sentence case, camelCase, snake_case, kebab-case and more. Instant conversion.
+keywords: case converter, uppercase to lowercase, lowercase to uppercase, title case converter, sentence case, camelCase, snake_case, kebab-case, text case changer
+permalink: /tools/case-converter/
+toolId: case-converter
+toolJs: case-converter.js
+ogImage: case-converter.jpg
+---
+{% set toolData = tools | findById(toolId) %}
+
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "{{ site.url }}/"},
+    {"@type": "ListItem", "position": 2, "name": "Tools", "item": "{{ site.url }}/#tools"},
+    {"@type": "ListItem", "position": 3, "name": "{{ toolData.name }}", "item": "{{ site.url }}{{ page.url }}"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "{{ toolData.fullName }}",
+  "description": "{{ description }}",
+  "url": "{{ site.url }}{{ page.url }}",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+  "featureList": ["UPPERCASE conversion", "lowercase conversion", "Title Case", "Sentence case", "camelCase", "snake_case", "kebab-case", "CONSTANT_CASE"],
+  "author": {"@type": "Organization", "name": "{{ site.name }}", "url": "{{ site.url }}"}
+}
+</script>
+{% endblock %}
+
+{% block head %}
+<style>
+  .case-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+  }
+  .case-btn {
+    padding: var(--space-3) var(--space-4);
+    background: var(--color-bg-alt);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-text);
+    transition: all var(--transition-fast);
+    text-align: center;
+  }
+  .case-btn:hover {
+    border-color: var(--color-primary);
+    background: var(--color-primary-light);
+  }
+  .case-btn.active {
+    border-color: var(--color-primary);
+    background: var(--color-primary);
+    color: white;
+  }
+  .case-example {
+    font-size: var(--text-xs);
+    color: var(--color-text-secondary);
+    margin-top: var(--space-1);
+    font-family: var(--font-mono);
+  }
+  .text-area {
+    width: 100%;
+    min-height: 180px;
+    padding: var(--space-4);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: var(--line-height-relaxed);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-bg);
+    color: var(--color-text);
+    resize: vertical;
+  }
+  .text-area:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-primary-light);
+  }
+  .text-area-label {
+    font-weight: 600;
+    margin-bottom: var(--space-2);
+    display: block;
+    color: var(--color-text);
+  }
+  .text-section {
+    margin-bottom: var(--space-4);
+  }
+</style>
+{% endblock %}
+
+<div class="tool-container">
+  <!-- Case Conversion Buttons -->
+  <div class="case-buttons" role="group" aria-label="Case conversion options">
+    <button class="case-btn" data-case="upper">
+      UPPERCASE
+      <div class="case-example">HELLO WORLD</div>
+    </button>
+    <button class="case-btn" data-case="lower">
+      lowercase
+      <div class="case-example">hello world</div>
+    </button>
+    <button class="case-btn" data-case="title">
+      Title Case
+      <div class="case-example">Hello World</div>
+    </button>
+    <button class="case-btn" data-case="sentence">
+      Sentence case
+      <div class="case-example">Hello world. New sentence.</div>
+    </button>
+    <button class="case-btn" data-case="camel">
+      camelCase
+      <div class="case-example">helloWorld</div>
+    </button>
+    <button class="case-btn" data-case="pascal">
+      PascalCase
+      <div class="case-example">HelloWorld</div>
+    </button>
+    <button class="case-btn" data-case="snake">
+      snake_case
+      <div class="case-example">hello_world</div>
+    </button>
+    <button class="case-btn" data-case="kebab">
+      kebab-case
+      <div class="case-example">hello-world</div>
+    </button>
+    <button class="case-btn" data-case="constant">
+      CONSTANT_CASE
+      <div class="case-example">HELLO_WORLD</div>
+    </button>
+    <button class="case-btn" data-case="dot">
+      dot.case
+      <div class="case-example">hello.world</div>
+    </button>
+    <button class="case-btn" data-case="toggle">
+      tOGGLE cASE
+      <div class="case-example">hELLO wORLD</div>
+    </button>
+    <button class="case-btn" data-case="alternating">
+      AlTeRnAtInG
+      <div class="case-example">HeLlO wOrLd</div>
+    </button>
+  </div>
+
+  <!-- Input Text -->
+  <div class="text-section">
+    <label for="input-text" class="text-area-label">Input Text</label>
+    <textarea
+      id="input-text"
+      class="text-area"
+      placeholder="Type or paste your text here..."
+      aria-label="Input text to convert"
+    ></textarea>
+  </div>
+
+  <!-- Output Text -->
+  <div class="text-section">
+    <label for="output-text" class="text-area-label">Converted Text</label>
+    <textarea
+      id="output-text"
+      class="text-area"
+      readonly
+      placeholder="Converted text will appear here..."
+      aria-label="Converted output text"
+    ></textarea>
+  </div>
+
+  <!-- Actions -->
+  <div class="tool-actions">
+    <button id="copy-output" class="btn btn-primary">Copy Result</button>
+    <button id="swap-text" class="btn btn-secondary">Swap Input/Output</button>
+    <button id="clear-all" class="btn btn-ghost">Clear</button>
+  </div>
+</div>
+
+<section class="content-section">
+  <h2>How to Use</h2>
+  <div class="steps">
+    <div class="step"><div class="step-number">1</div><div class="step-content"><h3>Enter Your Text</h3><p>Type or paste the text you want to convert into the input field.</p></div></div>
+    <div class="step"><div class="step-number">2</div><div class="step-content"><h3>Choose a Case Style</h3><p>Click on any case conversion button to transform your text.</p></div></div>
+    <div class="step"><div class="step-number">3</div><div class="step-content"><h3>Copy the Result</h3><p>Click "Copy Result" to copy the converted text to your clipboard.</p></div></div>
+  </div>
+</section>
+
+<section class="content-section">
+  <h2>Case Styles Explained</h2>
+  <ul>
+    <li><strong>UPPERCASE</strong> - All letters become capital letters</li>
+    <li><strong>lowercase</strong> - All letters become small letters</li>
+    <li><strong>Title Case</strong> - First letter of each word is capitalized</li>
+    <li><strong>Sentence case</strong> - First letter of each sentence is capitalized</li>
+    <li><strong>camelCase</strong> - No spaces, first word lowercase, subsequent words capitalized</li>
+    <li><strong>PascalCase</strong> - No spaces, all words start with capital letter</li>
+    <li><strong>snake_case</strong> - Words separated by underscores, all lowercase</li>
+    <li><strong>kebab-case</strong> - Words separated by hyphens, all lowercase</li>
+    <li><strong>CONSTANT_CASE</strong> - Words separated by underscores, all uppercase</li>
+    <li><strong>dot.case</strong> - Words separated by dots, all lowercase</li>
+  </ul>
+</section>
+
+<section class="content-section">
+  <h2>FAQ</h2>
+  <div class="faq-list">
+    <details class="faq-item">
+      <summary class="faq-question">What is case conversion?</summary>
+      <div class="faq-answer"><p>Case conversion changes the capitalization of text. For example, converting "Hello World" to "HELLO WORLD" is an uppercase conversion.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-question">When should I use camelCase vs snake_case?</summary>
+      <div class="faq-answer"><p>camelCase is commonly used in JavaScript and Java. snake_case is preferred in Python and Ruby. kebab-case is used for URLs and CSS class names.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-question">Is my text stored anywhere?</summary>
+      <div class="faq-answer"><p>No. All conversion happens in your browser. Your text never leaves your device.</p></div>
+    </details>
+  </div>
+</section>
+
+<section class="content-section">
+  <h2>Related Tools</h2>
+  <div class="related-tools">
+    {% for tool in tools %}
+    {% if tool.id != toolId %}
+    <a href="/tools/{{ tool.id }}/" class="related-tool-link">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16">{{ tool.icon | safe }}</svg>
+      {{ tool.name }}
+    </a>
+    {% endif %}
+    {% endfor %}
+  </div>
+</section>

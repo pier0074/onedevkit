@@ -67,6 +67,10 @@ This is a **passive income project** designed to generate revenue through advert
 | **Color Picker** | Pick colors and convert between HEX, RGB, HSL | `/tools/color-picker/` |
 | **Diff Checker** | Compare two texts and highlight differences | `/tools/diff-checker/` |
 | **Markdown Preview** | Write Markdown with live preview | `/tools/markdown-preview/` |
+| **Word Counter** | Count words, characters, sentences with reading time | `/tools/word-counter/` |
+| **Case Converter** | Convert between UPPERCASE, lowercase, camelCase, etc. | `/tools/case-converter/` |
+| **Image Compressor** | Compress images to exact KB size (20KB, 50KB, 100KB) | `/tools/image-compressor/` |
+| **Passport Photo** | Create passport/visa photos for any country | `/tools/passport-photo/` |
 
 ---
 
@@ -365,7 +369,7 @@ npm run test:e2e     # Run headless
 npm run test:e2e:ui  # Interactive UI mode
 ```
 
-**Coverage:** 88 tests covering all 14 tools, UI interactions, and content integrity
+**Coverage:** 422 tests covering all 18 tools, UI interactions, and content integrity
 
 ### Manual Testing
 
