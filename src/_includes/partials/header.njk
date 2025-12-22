@@ -1,7 +1,8 @@
+{%- set currentLang = lang | default("en") -%}
 <!-- Header -->
 <header class="header">
   <div class="container header-inner">
-    <a href="/" class="logo" aria-label="{{ site.name }} Home">
+    <a href="{{ "/" | langUrl(currentLang) }}" class="logo" aria-label="{{ site.name }} Home">
       <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <polyline points="16 18 22 12 16 6"></polyline>
         <polyline points="8 6 2 12 8 18"></polyline>
@@ -18,7 +19,7 @@
     <nav class="nav" aria-label="Main navigation">
       <div class="nav-dropdown nav-mega-dropdown">
         <button class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">
-          Tools
+          {{ "nav.tools" | t(currentLang) }}
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
           </svg>
@@ -28,20 +29,21 @@
           {% set categories = tools | groupby("category") %}
           {% for category, categoryTools in categories %}
           <div class="nav-mega-category">
-            <span class="nav-mega-category-title">{{ category }}</span>
+            <span class="nav-mega-category-title">{{ category | categoryT(currentLang) }}</span>
             {% for tool in categoryTools %}
-            <a href="/tools/{{ tool.id }}/" role="menuitem"{% if page.url == '/tools/' + tool.id + '/' %} aria-current="page"{% endif %}>
+            <a href="{{ '/tools/' + tool.id + '/' | langUrl(currentLang) }}" role="menuitem"{% if page.url == '/tools/' + tool.id + '/' or page.url == '/' + currentLang + '/tools/' + tool.id + '/' %} aria-current="page"{% endif %}>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">{{ tool.icon | safe }}</svg>
-              {{ tool.name }}
+              {{ tool.id | toolT(currentLang, "name") | default(tool.name) }}
             </a>
             {% endfor %}
           </div>
           {% endfor %}
         </div>
       </div>
-      <a href="/about/" class="nav-link"{% if page.url == '/about/' %} aria-current="page"{% endif %}>About</a>
-      <a href="/contact/" class="nav-link"{% if page.url == '/contact/' %} aria-current="page"{% endif %}>Contact</a>
-      <button class="theme-toggle" aria-label="Toggle dark mode">
+      <a href="{{ '/about/' | langUrl(currentLang) }}" class="nav-link"{% if page.url == '/about/' or page.url == '/' + currentLang + '/about/' %} aria-current="page"{% endif %}>{{ "nav.about" | t(currentLang) }}</a>
+      <a href="{{ '/contact/' | langUrl(currentLang) }}" class="nav-link"{% if page.url == '/contact/' or page.url == '/' + currentLang + '/contact/' %} aria-current="page"{% endif %}>{{ "nav.contact" | t(currentLang) }}</a>
+      {% include "partials/language-switcher.njk" %}
+      <button class="theme-toggle" aria-label="{{ 'common.toggleDarkMode' | t(currentLang) }}">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
         </svg>

@@ -549,6 +549,110 @@ li {
   display: block;
 }
 
+/* Language Switcher */
+.lang-switcher {
+  position: relative;
+  margin-right: var(--space-2);
+}
+
+.lang-switcher-toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  background: none;
+  border: 1px solid var(--color-border);
+  padding: var(--space-1) var(--space-2);
+  cursor: pointer;
+  color: var(--color-text-secondary);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  transition: all var(--transition-fast);
+}
+
+.lang-switcher-toggle:hover {
+  background: var(--color-bg-alt);
+  border-color: var(--color-border-hover);
+  color: var(--color-text);
+}
+
+.lang-switcher-toggle svg {
+  width: 16px;
+  height: 16px;
+}
+
+.lang-switcher-toggle .lang-arrow {
+  width: 12px;
+  height: 12px;
+  transition: transform var(--transition-fast);
+}
+
+.lang-switcher[aria-expanded="true"] .lang-arrow {
+  transform: rotate(180deg);
+}
+
+.lang-current {
+  font-weight: 500;
+}
+
+.lang-menu {
+  position: absolute;
+  top: calc(100% + var(--space-2));
+  right: 0;
+  min-width: 160px;
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  list-style: none;
+  padding: var(--space-1);
+  margin: 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: all var(--transition-fast);
+  z-index: 1001;
+}
+
+.lang-switcher.open .lang-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.lang-menu li {
+  margin: 0;
+}
+
+.lang-menu a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-2) var(--space-3);
+  color: var(--color-text);
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  transition: background-color var(--transition-fast);
+}
+
+.lang-menu a:hover {
+  background: var(--color-bg-alt);
+}
+
+.lang-menu [aria-selected="true"] a {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.lang-name {
+  font-size: var(--text-sm);
+}
+
+.lang-code {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
 /* Footer */
 .footer {
   background: var(--color-bg-alt);

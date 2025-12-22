@@ -100,6 +100,60 @@
   };
 
   // ============================================
+  // Language Switcher
+  // ============================================
+
+  const LanguageSwitcher = {
+    init() {
+      const switcher = document.querySelector('.lang-switcher');
+      if (!switcher) return;
+
+      const toggle = switcher.querySelector('.lang-switcher-toggle');
+      const menu = switcher.querySelector('.lang-menu');
+
+      if (!toggle || !menu) return;
+
+      // Toggle menu
+      toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = switcher.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', isOpen);
+      });
+
+      // Close on click outside
+      document.addEventListener('click', (e) => {
+        if (!switcher.contains(e.target)) {
+          switcher.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      // Close on escape
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && switcher.classList.contains('open')) {
+          switcher.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+          toggle.focus();
+        }
+      });
+
+      // Keyboard navigation within menu
+      menu.addEventListener('keydown', (e) => {
+        const links = menu.querySelectorAll('a');
+        const currentIndex = Array.from(links).indexOf(document.activeElement);
+
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          links[(currentIndex + 1) % links.length]?.focus();
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          links[(currentIndex - 1 + links.length) % links.length]?.focus();
+        }
+      });
+    }
+  };
+
+  // ============================================
   // Copy to Clipboard
   // ============================================
 
@@ -343,6 +397,7 @@
   function init() {
     ThemeManager.init();
     MobileNav.init();
+    LanguageSwitcher.init();
     FAQ.init();
   }
 
