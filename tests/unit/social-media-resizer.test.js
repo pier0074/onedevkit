@@ -6,19 +6,29 @@
 
 // Mock DOM elements
 document.body.innerHTML = `
-  <button class="platform-btn active" data-platform="instagram">Instagram</button>
-  <button class="platform-btn" data-platform="linkedin">LinkedIn</button>
-  <button class="platform-btn" data-platform="twitter">Twitter/X</button>
-  <button class="platform-btn" data-platform="facebook">Facebook</button>
-  <button class="platform-btn" data-platform="youtube">YouTube</button>
-  <button class="platform-btn" data-platform="pinterest">Pinterest</button>
-  <button class="platform-btn" data-platform="tiktok">TikTok</button>
+  <button class="btn-option platform-btn active" data-platform="instagram">Instagram</button>
+  <button class="btn-option platform-btn" data-platform="facebook">Facebook</button>
+  <button class="btn-option platform-btn" data-platform="twitter">Twitter/X</button>
+  <button class="btn-option platform-btn" data-platform="linkedin">LinkedIn</button>
+  <button class="btn-option platform-btn" data-platform="youtube">YouTube</button>
+  <button class="btn-option platform-btn" data-platform="tiktok">TikTok</button>
+  <button class="btn-option platform-btn" data-platform="pinterest">Pinterest</button>
+  <button class="btn-option platform-btn" data-platform="snapchat">Snapchat</button>
+  <button class="btn-option platform-btn" data-platform="whatsapp">WhatsApp</button>
+  <button class="btn-option platform-btn" data-platform="discord">Discord</button>
+  <button class="btn-option platform-btn" data-platform="twitch">Twitch</button>
+  <button class="btn-option platform-btn" data-platform="threads">Threads</button>
+  <button class="btn-option platform-btn" data-platform="custom">Custom</button>
+  <div id="custom-options" style="display: none;"></div>
+  <input type="number" id="custom-width" value="1080">
+  <input type="number" id="custom-height" value="1080">
   <div id="preset-buttons"></div>
   <div id="spec-name"></div>
   <div id="spec-dimensions"></div>
   <div id="spec-ratio"></div>
   <div id="upload-zone"></div>
   <input type="file" id="file-input">
+  <input type="file" id="batch-input" multiple>
   <div id="status"></div>
   <div id="editor-section"></div>
   <canvas id="preview-canvas"></canvas>
@@ -26,8 +36,12 @@ document.body.innerHTML = `
   <div id="preview-filesize"></div>
   <input type="range" id="zoom-slider" value="100">
   <span id="zoom-value">100%</span>
+  <input type="color" id="bg-color" value="#ffffff">
+  <button id="fit-mode">Crop to Fill</button>
+  <button id="toggle-grid">Show Grid</button>
   <button id="download-btn" disabled></button>
   <button id="download-png"></button>
+  <button id="download-batch" disabled></button>
   <button id="reset-btn"></button>
 `;
 
@@ -39,8 +53,20 @@ describe('SocialMediaResizer', () => {
     SocialMediaResizer.originalImage = null;
     SocialMediaResizer.resultBlob = null;
     SocialMediaResizer.zoom = 100;
+    SocialMediaResizer.panX = 0;
+    SocialMediaResizer.panY = 0;
+    SocialMediaResizer.rotation = 0;
+    SocialMediaResizer.flipH = false;
+    SocialMediaResizer.flipV = false;
+    SocialMediaResizer.brightness = 100;
+    SocialMediaResizer.contrast = 100;
+    SocialMediaResizer.saturation = 100;
+    SocialMediaResizer.borderSize = 0;
+    SocialMediaResizer.circleCrop = false;
     SocialMediaResizer.currentPlatform = 'instagram';
     SocialMediaResizer.currentPreset = 'post-square';
+    SocialMediaResizer.history = [];
+    SocialMediaResizer.historyIndex = -1;
   });
 
   describe('PLATFORMS', () => {
@@ -96,10 +122,49 @@ describe('SocialMediaResizer', () => {
     });
 
     test('has all expected platforms', () => {
-      const expectedPlatforms = ['instagram', 'linkedin', 'twitter', 'facebook', 'youtube', 'pinterest', 'tiktok'];
+      const expectedPlatforms = ['instagram', 'linkedin', 'twitter', 'facebook', 'youtube', 'pinterest', 'tiktok', 'snapchat', 'discord', 'twitch', 'threads', 'whatsapp', 'custom'];
       expectedPlatforms.forEach(platform => {
         expect(SocialMediaResizer.PLATFORMS[platform]).toBeDefined();
       });
+    });
+
+    test('has Snapchat platform', () => {
+      const snapchat = SocialMediaResizer.PLATFORMS.snapchat;
+      expect(snapchat).toBeDefined();
+      expect(snapchat.presets.story.width).toBe(1080);
+      expect(snapchat.presets.story.height).toBe(1920);
+    });
+
+    test('has Discord platform', () => {
+      const discord = SocialMediaResizer.PLATFORMS.discord;
+      expect(discord).toBeDefined();
+      expect(discord.presets['server-icon'].width).toBe(512);
+      expect(discord.presets['server-icon'].height).toBe(512);
+    });
+
+    test('has Twitch platform', () => {
+      const twitch = SocialMediaResizer.PLATFORMS.twitch;
+      expect(twitch).toBeDefined();
+      expect(twitch.presets['offline-banner'].width).toBe(1920);
+    });
+
+    test('has Threads platform', () => {
+      const threads = SocialMediaResizer.PLATFORMS.threads;
+      expect(threads).toBeDefined();
+      expect(threads.presets.post.width).toBe(1080);
+    });
+
+    test('has WhatsApp platform', () => {
+      const whatsapp = SocialMediaResizer.PLATFORMS.whatsapp;
+      expect(whatsapp).toBeDefined();
+      expect(whatsapp.presets.status.width).toBe(1080);
+      expect(whatsapp.presets.status.height).toBe(1920);
+    });
+
+    test('has Custom platform', () => {
+      const custom = SocialMediaResizer.PLATFORMS.custom;
+      expect(custom).toBeDefined();
+      expect(custom.presets.custom).toBeDefined();
     });
   });
 
@@ -200,12 +265,227 @@ describe('SocialMediaResizer', () => {
     });
   });
 
+  describe('setCustomDimensions', () => {
+    test('sets custom width and height', () => {
+      SocialMediaResizer.currentPlatform = 'custom';
+      SocialMediaResizer.setCustomDimensions(800, 600);
+      expect(SocialMediaResizer.customWidth).toBe(800);
+      expect(SocialMediaResizer.customHeight).toBe(600);
+    });
+
+    test('clamps values to valid range', () => {
+      SocialMediaResizer.setCustomDimensions(5, 5000);
+      expect(SocialMediaResizer.customWidth).toBe(10);
+      expect(SocialMediaResizer.customHeight).toBe(4096);
+    });
+  });
+
+  describe('setBackgroundColor', () => {
+    test('sets background color', () => {
+      SocialMediaResizer.setBackgroundColor('#ff0000');
+      expect(SocialMediaResizer.backgroundColor).toBe('#ff0000');
+    });
+  });
+
+  describe('toggleGrid', () => {
+    test('toggles grid state', () => {
+      SocialMediaResizer.showGrid = false;
+      SocialMediaResizer.toggleGrid();
+      expect(SocialMediaResizer.showGrid).toBe(true);
+      SocialMediaResizer.toggleGrid();
+      expect(SocialMediaResizer.showGrid).toBe(false);
+    });
+  });
+
+  describe('setFitMode', () => {
+    test('sets fit mode', () => {
+      SocialMediaResizer.setFitMode('contain');
+      expect(SocialMediaResizer.fitMode).toBe('contain');
+      SocialMediaResizer.setFitMode('cover');
+      expect(SocialMediaResizer.fitMode).toBe('cover');
+    });
+  });
+
   describe('initialization', () => {
     test('module is initialized', () => {
       expect(SocialMediaResizer).toBeDefined();
       expect(typeof SocialMediaResizer.handleFile).toBe('function');
       expect(typeof SocialMediaResizer.renderPreview).toBe('function');
       expect(typeof SocialMediaResizer.download).toBe('function');
+      expect(typeof SocialMediaResizer.handleBatchFiles).toBe('function');
+      expect(typeof SocialMediaResizer.downloadBatch).toBe('function');
+    });
+  });
+
+  describe('rotate', () => {
+    test('rotates 90 degrees clockwise', () => {
+      SocialMediaResizer.rotation = 0;
+      SocialMediaResizer.rotate(90);
+      expect(SocialMediaResizer.rotation).toBe(90);
+    });
+
+    test('rotates 90 degrees counter-clockwise', () => {
+      SocialMediaResizer.rotation = 0;
+      SocialMediaResizer.rotate(-90);
+      expect(SocialMediaResizer.rotation).toBe(270);
+    });
+
+    test('wraps around at 360', () => {
+      SocialMediaResizer.rotation = 270;
+      SocialMediaResizer.rotate(90);
+      expect(SocialMediaResizer.rotation).toBe(0);
+    });
+  });
+
+  describe('flip', () => {
+    test('flips horizontal', () => {
+      SocialMediaResizer.flipH = false;
+      SocialMediaResizer.flipHorizontal();
+      expect(SocialMediaResizer.flipH).toBe(true);
+      SocialMediaResizer.flipHorizontal();
+      expect(SocialMediaResizer.flipH).toBe(false);
+    });
+
+    test('flips vertical', () => {
+      SocialMediaResizer.flipV = false;
+      SocialMediaResizer.flipVertical();
+      expect(SocialMediaResizer.flipV).toBe(true);
+      SocialMediaResizer.flipVertical();
+      expect(SocialMediaResizer.flipV).toBe(false);
+    });
+  });
+
+  describe('centerImage', () => {
+    test('resets pan to center', () => {
+      SocialMediaResizer.panX = 100;
+      SocialMediaResizer.panY = -50;
+      SocialMediaResizer.centerImage();
+      expect(SocialMediaResizer.panX).toBe(0);
+      expect(SocialMediaResizer.panY).toBe(0);
+    });
+  });
+
+  describe('resetTransforms', () => {
+    test('resets all transform properties', () => {
+      SocialMediaResizer.zoom = 150;
+      SocialMediaResizer.panX = 100;
+      SocialMediaResizer.rotation = 90;
+      SocialMediaResizer.flipH = true;
+      SocialMediaResizer.brightness = 120;
+      SocialMediaResizer.borderSize = 20;
+      SocialMediaResizer.circleCrop = true;
+
+      SocialMediaResizer.resetTransforms();
+
+      expect(SocialMediaResizer.zoom).toBe(100);
+      expect(SocialMediaResizer.panX).toBe(0);
+      expect(SocialMediaResizer.rotation).toBe(0);
+      expect(SocialMediaResizer.flipH).toBe(false);
+      expect(SocialMediaResizer.brightness).toBe(100);
+      expect(SocialMediaResizer.borderSize).toBe(0);
+      expect(SocialMediaResizer.circleCrop).toBe(false);
+    });
+  });
+
+  describe('toggleCircleCrop', () => {
+    test('toggles circle crop state', () => {
+      SocialMediaResizer.circleCrop = false;
+      SocialMediaResizer.toggleCircleCrop();
+      expect(SocialMediaResizer.circleCrop).toBe(true);
+      SocialMediaResizer.toggleCircleCrop();
+      expect(SocialMediaResizer.circleCrop).toBe(false);
+    });
+  });
+
+  describe('setBorderSize', () => {
+    test('sets border size within range', () => {
+      SocialMediaResizer.setBorderSize(50);
+      expect(SocialMediaResizer.borderSize).toBe(50);
+    });
+
+    test('clamps border size to valid range', () => {
+      SocialMediaResizer.setBorderSize(-10);
+      expect(SocialMediaResizer.borderSize).toBe(0);
+      SocialMediaResizer.setBorderSize(200);
+      expect(SocialMediaResizer.borderSize).toBe(100);
+    });
+  });
+
+  describe('setFilter', () => {
+    test('sets brightness', () => {
+      SocialMediaResizer.setFilter('brightness', 150);
+      expect(SocialMediaResizer.brightness).toBe(150);
+    });
+
+    test('sets contrast', () => {
+      SocialMediaResizer.setFilter('contrast', 80);
+      expect(SocialMediaResizer.contrast).toBe(80);
+    });
+
+    test('sets saturation', () => {
+      SocialMediaResizer.setFilter('saturation', 120);
+      expect(SocialMediaResizer.saturation).toBe(120);
+    });
+
+    test('clamps filter values', () => {
+      SocialMediaResizer.setFilter('brightness', -50);
+      expect(SocialMediaResizer.brightness).toBe(0);
+      SocialMediaResizer.setFilter('brightness', 300);
+      expect(SocialMediaResizer.brightness).toBe(200);
+    });
+  });
+
+  describe('history (undo/redo)', () => {
+    test('saves state to history', () => {
+      SocialMediaResizer.history = [];
+      SocialMediaResizer.historyIndex = -1;
+      SocialMediaResizer.saveState();
+      expect(SocialMediaResizer.history.length).toBe(1);
+      expect(SocialMediaResizer.historyIndex).toBe(0);
+    });
+
+    test('undo reverts to previous state', () => {
+      SocialMediaResizer.history = [];
+      SocialMediaResizer.historyIndex = -1;
+      SocialMediaResizer.zoom = 100;
+      SocialMediaResizer.saveState();
+      SocialMediaResizer.zoom = 150;
+      SocialMediaResizer.saveState();
+
+      expect(SocialMediaResizer.historyIndex).toBe(1);
+      SocialMediaResizer.undo();
+      expect(SocialMediaResizer.historyIndex).toBe(0);
+      expect(SocialMediaResizer.zoom).toBe(100);
+    });
+
+    test('redo restores undone state', () => {
+      SocialMediaResizer.history = [];
+      SocialMediaResizer.historyIndex = -1;
+      SocialMediaResizer.zoom = 100;
+      SocialMediaResizer.saveState();
+      SocialMediaResizer.zoom = 150;
+      SocialMediaResizer.saveState();
+      SocialMediaResizer.undo();
+
+      SocialMediaResizer.redo();
+      expect(SocialMediaResizer.historyIndex).toBe(1);
+      expect(SocialMediaResizer.zoom).toBe(150);
+    });
+
+    test('undo does nothing at start of history', () => {
+      SocialMediaResizer.history = [];
+      SocialMediaResizer.historyIndex = -1;
+      SocialMediaResizer.saveState();
+      SocialMediaResizer.undo();
+      expect(SocialMediaResizer.historyIndex).toBe(0);
+    });
+
+    test('redo does nothing at end of history', () => {
+      SocialMediaResizer.history = [];
+      SocialMediaResizer.historyIndex = -1;
+      SocialMediaResizer.saveState();
+      SocialMediaResizer.redo();
+      expect(SocialMediaResizer.historyIndex).toBe(0);
     });
   });
 });

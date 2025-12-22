@@ -45,9 +45,7 @@ ogImage: base64-encoder.jpg
 {% block head %}
 <style>
   .mode-toggle { display: flex; gap: var(--space-2); margin-bottom: var(--space-4); }
-  .mode-btn { flex: 1; padding: var(--space-3); border: 1px solid var(--color-border); background: transparent; border-radius: var(--radius-md); cursor: pointer; font-weight: 500; color: var(--color-text-secondary); transition: all 0.2s; }
-  .mode-btn:hover { border-color: var(--color-border-hover); background: var(--color-bg-alt); color: var(--color-text); }
-  .mode-btn.active { border-color: var(--color-primary); background: var(--color-primary); color: white; }
+  .mode-btn { flex: 1; }
   .file-upload-area { border: 2px dashed var(--color-border); border-radius: var(--radius-md); padding: var(--space-6); text-align: center; cursor: pointer; background: var(--color-bg-alt); }
   .file-upload-area:hover, .file-upload-area.drag-over { border-color: var(--color-primary); background: var(--color-bg); }
   .file-upload-area input[type="file"] { display: none; }
@@ -61,8 +59,8 @@ ogImage: base64-encoder.jpg
 <div class="tool-container">
   <!-- Mode Toggle -->
   <div class="mode-toggle">
-    <button type="button" class="mode-btn active" data-mode="text" id="mode-text">Text Input</button>
-    <button type="button" class="mode-btn" data-mode="file" id="mode-file">File Upload</button>
+    <button type="button" class="btn-option mode-btn active" data-mode="text" id="mode-text">Text Input</button>
+    <button type="button" class="btn-option mode-btn" data-mode="file" id="mode-file">File Upload</button>
   </div>
 
   <!-- Text Input Section -->

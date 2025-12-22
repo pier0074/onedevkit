@@ -45,9 +45,7 @@ ogImage: url-encoder.jpg
 {% block head %}
 <style>
   .encoding-mode { display: flex; gap: var(--space-2); margin-bottom: var(--space-4); }
-  .encoding-mode-btn { flex: 1; padding: var(--space-3); border: 1px solid var(--color-border); background: transparent; border-radius: var(--radius-md); cursor: pointer; font-weight: 500; color: var(--color-text-secondary); transition: all 0.2s; }
-  .encoding-mode-btn:hover { border-color: var(--color-border-hover); background: var(--color-bg-alt); color: var(--color-text); }
-  .encoding-mode-btn.active { border-color: var(--color-primary); background: var(--color-primary); color: white; }
+  .encoding-mode-btn { flex: 1; }
   .url-stats { display: flex; gap: 1.5rem; flex-wrap: wrap; font-size: 0.875rem; color: var(--color-text-muted); }
   .url-stat-item { display: flex; flex-direction: column; gap: 0.25rem; }
   .url-stats dt { font-weight: 500; color: var(--color-text-secondary); }
@@ -58,11 +56,11 @@ ogImage: url-encoder.jpg
 <div class="tool-container">
   <!-- Encoding Mode Toggle -->
   <div class="encoding-mode">
-    <button type="button" class="encoding-mode-btn active" data-mode="component" id="mode-component">
+    <button type="button" class="btn-option encoding-mode-btn active" data-mode="component" id="mode-component">
       Component
       <small style="display: block; font-size: 0.75rem; font-weight: normal; opacity: 0.8;">encodeURIComponent</small>
     </button>
-    <button type="button" class="encoding-mode-btn" data-mode="full" id="mode-full">
+    <button type="button" class="btn-option encoding-mode-btn" data-mode="full" id="mode-full">
       Full URL
       <small style="display: block; font-size: 0.75rem; font-weight: normal; opacity: 0.8;">encodeURI</small>
     </button>

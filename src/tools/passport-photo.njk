@@ -194,6 +194,46 @@ ogImage: passport-photo.jpg
   .status-message.processing { background: var(--color-primary-light); color: var(--color-primary); }
   .status-message.success { background: #dcfce7; color: #16a34a; }
   .status-message.error { background: #fee2e2; color: #dc2626; }
+
+  /* Table styling */
+  .table-responsive {
+    overflow-x: auto;
+  }
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--text-sm);
+  }
+  .data-table th,
+  .data-table td {
+    padding: var(--space-3) var(--space-4);
+    text-align: center;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .data-table th {
+    background: var(--color-bg-alt);
+    font-weight: 600;
+    text-align: center;
+  }
+  .data-table tbody tr:hover {
+    background: var(--color-bg-alt);
+  }
+
+  /* Pan controls */
+  .pan-controls {
+    display: flex;
+    gap: var(--space-2);
+    margin-top: var(--space-3);
+  }
+  .pan-controls .btn {
+    flex: 1;
+  }
+  .crop-container {
+    cursor: grab;
+  }
+  .crop-container.panning {
+    cursor: grabbing;
+  }
 </style>
 {% endblock %}
 
@@ -289,7 +329,14 @@ ogImage: passport-photo.jpg
         <div class="controls-section">
           <div class="control-group">
             <label class="control-label">Zoom: <span id="zoom-value">100%</span></label>
-            <input type="range" id="zoom-slider" class="control-slider" min="50" max="200" value="100">
+            <input type="range" id="zoom-slider" class="control-slider" min="10" max="400" value="100">
+          </div>
+          <div class="control-group">
+            <label class="control-label">Position <span style="font-weight: normal; font-size: var(--text-xs); color: var(--color-text-muted);">(drag preview or use buttons)</span></label>
+            <div class="pan-controls">
+              <button id="center-btn" class="btn btn-secondary btn-sm">Center</button>
+              <button id="reset-position" class="btn btn-secondary btn-sm">Reset All</button>
+            </div>
           </div>
         </div>
       </div>
@@ -325,18 +372,20 @@ ogImage: passport-photo.jpg
 
 <section class="content-section">
   <h2>Passport Photo Requirements by Country</h2>
-  <table style="width: 100%; font-size: var(--text-sm);">
-    <thead>
-      <tr><th>Country</th><th>Size</th><th>Pixels</th><th>Max File Size</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>USA</td><td>2×2 inches</td><td>600×600px</td><td>240KB</td></tr>
-      <tr><td>India</td><td>2×2 inches</td><td>600×600px</td><td>20-300KB (varies)</td></tr>
-      <tr><td>UK</td><td>35×45mm</td><td>413×531px</td><td>10MB</td></tr>
-      <tr><td>Schengen</td><td>35×45mm</td><td>413×531px</td><td>2MB</td></tr>
-      <tr><td>Canada</td><td>50×70mm</td><td>590×826px</td><td>4MB</td></tr>
-    </tbody>
-  </table>
+  <div class="table-responsive">
+    <table class="data-table">
+      <thead>
+        <tr><th>Country</th><th>Size</th><th>Pixels</th><th>Max File Size</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>USA</td><td>2×2 inches</td><td>600×600px</td><td>240KB</td></tr>
+        <tr><td>India</td><td>2×2 inches</td><td>600×600px</td><td>20-300KB (varies)</td></tr>
+        <tr><td>UK</td><td>35×45mm</td><td>413×531px</td><td>10MB</td></tr>
+        <tr><td>Schengen</td><td>35×45mm</td><td>413×531px</td><td>2MB</td></tr>
+        <tr><td>Canada</td><td>50×70mm</td><td>590×826px</td><td>4MB</td></tr>
+      </tbody>
+    </table>
+  </div>
 </section>
 
 <section class="content-section">

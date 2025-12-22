@@ -100,6 +100,13 @@
     offsetY: 0,
     resultBlob: null,
 
+    // Pan dragging state
+    isPanning: false,
+    panStartX: 0,
+    panStartY: 0,
+    panInitialOffsetX: 0,
+    panInitialOffsetY: 0,
+
     /**
      * Format file size
      */
@@ -355,6 +362,7 @@
       // 4x6 inch at 300 DPI
       const printWidth = 1800;
       const printHeight = 1200;
+      const dpi = 300;
 
       const canvas = document.createElement('canvas');
       canvas.width = printWidth;
@@ -372,19 +380,55 @@
         img.src = URL.createObjectURL(this.resultBlob);
       });
 
-      // Calculate photo size for print (approximately)
-      const photoWidth = 300; // ~1 inch at 300 DPI
-      const photoHeight = 300;
-      const padding = 50;
+      // Calculate photo size for print based on actual spec dimensions
+      // Convert spec pixels to print pixels maintaining aspect ratio
+      // Most passport photos are at ~300 DPI originally
+      const aspectRatio = spec.width / spec.height;
 
-      // Draw grid of photos
+      // Use the spec's physical size if available, otherwise estimate
+      let photoWidthInches, photoHeightInches;
+
+      if (spec.size.includes('inches')) {
+        // Parse "2×2 inches" format
+        const match = spec.size.match(/(\d+(?:\.\d+)?)\s*[×x]\s*(\d+(?:\.\d+)?)/);
+        if (match) {
+          photoWidthInches = parseFloat(match[1]);
+          photoHeightInches = parseFloat(match[2]);
+        }
+      } else if (spec.size.includes('mm')) {
+        // Parse "35×45mm" format
+        const match = spec.size.match(/(\d+(?:\.\d+)?)\s*[×x]\s*(\d+(?:\.\d+)?)/);
+        if (match) {
+          photoWidthInches = parseFloat(match[1]) / 25.4;
+          photoHeightInches = parseFloat(match[2]) / 25.4;
+        }
+      }
+
+      // Default fallback
+      if (!photoWidthInches || !photoHeightInches) {
+        photoWidthInches = spec.width / dpi;
+        photoHeightInches = spec.height / dpi;
+      }
+
+      const photoWidth = Math.round(photoWidthInches * dpi);
+      const photoHeight = Math.round(photoHeightInches * dpi);
+      const padding = 30; // Small margin between photos
+
+      // Calculate how many photos fit
       const cols = Math.floor((printWidth - padding) / (photoWidth + padding));
       const rows = Math.floor((printHeight - padding) / (photoHeight + padding));
 
+      // Center the grid
+      const totalGridWidth = cols * photoWidth + (cols - 1) * padding;
+      const totalGridHeight = rows * photoHeight + (rows - 1) * padding;
+      const startX = (printWidth - totalGridWidth) / 2;
+      const startY = (printHeight - totalGridHeight) / 2;
+
+      // Draw grid of photos
       for (let row = 0; row < rows; row++) {
         for (let col = 0; col < cols; col++) {
-          const x = padding + col * (photoWidth + padding);
-          const y = padding + row * (photoHeight + padding);
+          const x = startX + col * (photoWidth + padding);
+          const y = startY + row * (photoHeight + padding);
           ctx.drawImage(img, x, y, photoWidth, photoHeight);
         }
       }
@@ -392,10 +436,86 @@
       // Download
       canvas.toBlob(blob => {
         const link = document.createElement('a');
-        link.download = 'passport_print_layout.jpg';
+        const countrySelect = document.getElementById('country');
+        const country = countrySelect?.value || 'passport';
+        link.download = `${country}_print_layout_4x6.jpg`;
         link.href = URL.createObjectURL(blob);
         link.click();
       }, 'image/jpeg', 0.95);
+    },
+
+    /**
+     * Center the image
+     */
+    centerImage() {
+      this.offsetX = 0;
+      this.offsetY = 0;
+      this.renderPreview();
+    },
+
+    /**
+     * Reset zoom and position
+     */
+    resetPosition() {
+      this.zoom = 100;
+      this.offsetX = 0;
+      this.offsetY = 0;
+
+      const zoomSlider = document.getElementById('zoom-slider');
+      const zoomValue = document.getElementById('zoom-value');
+      if (zoomSlider) zoomSlider.value = 100;
+      if (zoomValue) zoomValue.textContent = '100%';
+
+      this.renderPreview();
+    },
+
+    /**
+     * Handle pan start (mouse/touch down)
+     */
+    startPan(e) {
+      if (!this.originalImage) return;
+
+      this.isPanning = true;
+      const container = document.getElementById('crop-container');
+      if (container) container.classList.add('panning');
+
+      const point = e.touches ? e.touches[0] : e;
+      this.panStartX = point.clientX;
+      this.panStartY = point.clientY;
+      this.panInitialOffsetX = this.offsetX;
+      this.panInitialOffsetY = this.offsetY;
+
+      e.preventDefault();
+    },
+
+    /**
+     * Handle pan move (mouse/touch move)
+     */
+    doPan(e) {
+      if (!this.isPanning) return;
+
+      const point = e.touches ? e.touches[0] : e;
+      const deltaX = point.clientX - this.panStartX;
+      const deltaY = point.clientY - this.panStartY;
+
+      // Scale movement based on zoom level
+      const scale = this.zoom / 100;
+      this.offsetX = this.panInitialOffsetX - deltaX / scale;
+      this.offsetY = this.panInitialOffsetY - deltaY / scale;
+
+      this.renderPreview();
+      e.preventDefault();
+    },
+
+    /**
+     * Handle pan end (mouse/touch up)
+     */
+    endPan() {
+      if (this.isPanning) {
+        this.isPanning = false;
+        const container = document.getElementById('crop-container');
+        if (container) container.classList.remove('panning');
+      }
     },
 
     /**
@@ -488,6 +608,31 @@
           if (zoomValue) zoomValue.textContent = this.zoom + '%';
           this.renderPreview();
         });
+      }
+
+      // Pan/drag on crop container
+      const cropContainer = document.getElementById('crop-container');
+      if (cropContainer) {
+        cropContainer.addEventListener('mousedown', e => this.startPan(e));
+        cropContainer.addEventListener('touchstart', e => this.startPan(e), { passive: false });
+
+        document.addEventListener('mousemove', e => this.doPan(e));
+        document.addEventListener('touchmove', e => this.doPan(e), { passive: false });
+
+        document.addEventListener('mouseup', () => this.endPan());
+        document.addEventListener('touchend', () => this.endPan());
+      }
+
+      // Center button
+      const centerBtn = document.getElementById('center-btn');
+      if (centerBtn) {
+        centerBtn.addEventListener('click', () => this.centerImage());
+      }
+
+      // Reset position button
+      const resetPositionBtn = document.getElementById('reset-position');
+      if (resetPositionBtn) {
+        resetPositionBtn.addEventListener('click', () => this.resetPosition());
       }
 
       // Download buttons

@@ -79,23 +79,7 @@ ogImage: image-compressor.jpg
     margin: var(--space-4) 0;
   }
   .size-btn {
-    padding: var(--space-2) var(--space-4);
-    background: var(--color-bg-alt);
-    border: 1px solid var(--color-border);
     border-radius: var(--radius-full);
-    cursor: pointer;
-    font-size: var(--text-sm);
-    font-weight: 500;
-    color: var(--color-text);
-    transition: all var(--transition-fast);
-  }
-  .size-btn:hover {
-    border-color: var(--color-primary);
-  }
-  .size-btn.active {
-    background: var(--color-primary);
-    border-color: var(--color-primary);
-    color: white;
   }
 
   .custom-size {
@@ -228,12 +212,12 @@ ogImage: image-compressor.jpg
   <div style="margin-top: var(--space-6);">
     <label class="text-area-label">Target Size</label>
     <div class="size-presets" role="group" aria-label="Preset file sizes">
-      <button class="size-btn" data-size="20">20 KB</button>
-      <button class="size-btn" data-size="50">50 KB</button>
-      <button class="size-btn active" data-size="100">100 KB</button>
-      <button class="size-btn" data-size="200">200 KB</button>
-      <button class="size-btn" data-size="500">500 KB</button>
-      <button class="size-btn" data-size="custom">Custom</button>
+      <button class="btn-option size-btn" data-size="20">20 KB</button>
+      <button class="btn-option size-btn" data-size="50">50 KB</button>
+      <button class="btn-option size-btn active" data-size="100">100 KB</button>
+      <button class="btn-option size-btn" data-size="200">200 KB</button>
+      <button class="btn-option size-btn" data-size="500">500 KB</button>
+      <button class="btn-option size-btn" data-size="custom">Custom</button>
     </div>
     <div class="custom-size" id="custom-size" style="display: none;">
       <input type="number" id="custom-kb" min="5" max="5000" value="150" placeholder="KB">

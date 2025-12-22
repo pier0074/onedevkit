@@ -42,68 +42,21 @@ ogImage: social-media-resizer.jpg
 {% block head %}
 <style>
   .platform-selector {
+    margin-bottom: var(--space-4);
+  }
+  .platform-buttons {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-2);
-    margin-bottom: var(--space-4);
   }
   .platform-btn {
-    padding: var(--space-2) var(--space-4);
-    background: var(--color-bg-alt);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    cursor: pointer;
     font-size: var(--text-sm);
-    font-weight: 500;
-    color: var(--color-text);
-    transition: all var(--transition-fast);
-  }
-  .platform-btn:hover {
-    border-color: var(--color-primary);
-  }
-  .platform-btn.active {
-    background: var(--color-primary);
-    border-color: var(--color-primary);
-    color: white;
   }
   .preset-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     gap: var(--space-2);
     margin-bottom: var(--space-4);
-  }
-  .preset-btn {
-    padding: var(--space-3);
-    background: var(--color-bg-alt);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    cursor: pointer;
-    text-align: left;
-    transition: all var(--transition-fast);
-  }
-  .preset-btn:hover {
-    border-color: var(--color-primary);
-    background: var(--color-primary-light);
-  }
-  .preset-btn.active {
-    border-color: var(--color-primary);
-    background: var(--color-primary);
-    color: white;
-  }
-  .preset-btn.active .preset-size {
-    color: rgba(255,255,255,0.8);
-  }
-  .preset-name {
-    display: block;
-    font-weight: 500;
-    font-size: var(--text-sm);
-  }
-  .preset-size {
-    display: block;
-    font-size: var(--text-xs);
-    color: var(--color-text-secondary);
-    font-family: var(--font-mono);
-    margin-top: var(--space-1);
   }
   .spec-display {
     display: flex;
@@ -238,10 +191,24 @@ ogImage: social-media-resizer.jpg
     border-radius: var(--radius-full);
     cursor: pointer;
   }
+  .transform-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+  .transform-buttons .btn {
+    flex: 1;
+    min-width: 70px;
+  }
   .download-buttons {
     display: flex;
     flex-direction: column;
     gap: var(--space-2);
+  }
+  .shortcuts-hint {
+    margin-top: var(--space-3);
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--color-border);
   }
   .status-message {
     padding: var(--space-2) var(--space-3);
@@ -271,14 +238,37 @@ ogImage: social-media-resizer.jpg
 <div class="tool-container">
   <!-- Platform Selector -->
   <h3 style="margin-bottom: var(--space-3); font-size: var(--text-base);">Select Platform</h3>
-  <div class="platform-selector" role="group" aria-label="Social media platforms">
-    <button class="platform-btn active" data-platform="instagram">Instagram</button>
-    <button class="platform-btn" data-platform="linkedin">LinkedIn</button>
-    <button class="platform-btn" data-platform="twitter">Twitter/X</button>
-    <button class="platform-btn" data-platform="facebook">Facebook</button>
-    <button class="platform-btn" data-platform="youtube">YouTube</button>
-    <button class="platform-btn" data-platform="pinterest">Pinterest</button>
-    <button class="platform-btn" data-platform="tiktok">TikTok</button>
+
+  <div class="platform-selector">
+    <div class="platform-buttons" role="group" aria-label="Social media platforms">
+      <button class="btn-option platform-btn active" data-platform="instagram">Instagram</button>
+      <button class="btn-option platform-btn" data-platform="facebook">Facebook</button>
+      <button class="btn-option platform-btn" data-platform="twitter">Twitter/X</button>
+      <button class="btn-option platform-btn" data-platform="linkedin">LinkedIn</button>
+      <button class="btn-option platform-btn" data-platform="youtube">YouTube</button>
+      <button class="btn-option platform-btn" data-platform="tiktok">TikTok</button>
+      <button class="btn-option platform-btn" data-platform="pinterest">Pinterest</button>
+      <button class="btn-option platform-btn" data-platform="snapchat">Snapchat</button>
+      <button class="btn-option platform-btn" data-platform="whatsapp">WhatsApp</button>
+      <button class="btn-option platform-btn" data-platform="discord">Discord</button>
+      <button class="btn-option platform-btn" data-platform="twitch">Twitch</button>
+      <button class="btn-option platform-btn" data-platform="threads">Threads</button>
+      <button class="btn-option platform-btn" data-platform="custom">Custom</button>
+    </div>
+  </div>
+
+  <!-- Custom Dimensions (shown when Custom is selected) -->
+  <div id="custom-options" style="display: none; margin-bottom: var(--space-4); padding: var(--space-3); background: var(--color-bg-alt); border-radius: var(--radius-md);">
+    <div style="display: flex; gap: var(--space-4); flex-wrap: wrap; align-items: center;">
+      <div>
+        <label for="custom-width" style="font-size: var(--text-sm); margin-right: var(--space-2);">Width:</label>
+        <input type="number" id="custom-width" value="1080" min="10" max="4096" style="width: 80px; padding: var(--space-2); border: 1px solid var(--color-border); border-radius: var(--radius-sm);">
+      </div>
+      <div>
+        <label for="custom-height" style="font-size: var(--text-sm); margin-right: var(--space-2);">Height:</label>
+        <input type="number" id="custom-height" value="1080" min="10" max="4096" style="width: 80px; padding: var(--space-2); border: 1px solid var(--color-border); border-radius: var(--radius-sm);">
+      </div>
+    </div>
   </div>
 
   <!-- Size Presets -->
@@ -308,10 +298,11 @@ ogImage: social-media-resizer.jpg
     <svg class="upload-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
     </svg>
-    <div class="upload-text">Drop image here or click to upload</div>
-    <div class="upload-hint">Supports JPG, PNG, WebP (max 20MB)</div>
+    <div class="upload-text">Drop image(s) here or click to upload</div>
+    <div class="upload-hint">Supports JPG, PNG, WebP (max 20MB) - Drop multiple files for batch processing</div>
   </div>
   <input type="file" id="file-input" accept="image/*" style="display: none;">
+  <input type="file" id="batch-input" accept="image/*" multiple style="display: none;">
 
   <div id="status" class="status-message"></div>
 
@@ -320,7 +311,7 @@ ogImage: social-media-resizer.jpg
     <div class="editor-grid">
       <!-- Preview -->
       <div class="preview-container">
-        <div class="preview-title">Preview</div>
+        <div class="preview-title">Preview <span style="font-weight: normal; font-size: var(--text-xs); color: var(--color-text-muted);">(drag to pan)</span></div>
         <canvas id="preview-canvas"></canvas>
         <div class="preview-stats">
           <div class="stat-item">
@@ -336,18 +327,117 @@ ogImage: social-media-resizer.jpg
 
       <!-- Controls -->
       <div class="controls-container">
+        <!-- Transform Controls -->
+        <div class="control-group">
+          <div class="control-label"><span>Transform</span></div>
+          <div class="transform-buttons">
+            <button id="rotate-ccw" class="btn btn-secondary btn-sm" title="Rotate Left (Shift+R)">↺ 90°</button>
+            <button id="rotate-cw" class="btn btn-secondary btn-sm" title="Rotate Right (R)">↻ 90°</button>
+            <button id="flip-h" class="btn btn-secondary btn-sm" title="Flip Horizontal (H)">↔ Flip</button>
+            <button id="flip-v" class="btn btn-secondary btn-sm" title="Flip Vertical (V)">↕ Flip</button>
+          </div>
+        </div>
+
+        <!-- Position Controls -->
+        <div class="control-group">
+          <div class="control-label"><span>Position</span></div>
+          <div class="transform-buttons">
+            <button id="center-btn" class="btn btn-secondary btn-sm" title="Center Image (C)">⊙ Center</button>
+            <button id="reset-transforms" class="btn btn-secondary btn-sm" title="Reset All (Ctrl+0)">↺ Reset All</button>
+          </div>
+        </div>
+
+        <!-- Undo/Redo -->
+        <div class="control-group">
+          <div class="control-label"><span>History</span></div>
+          <div class="transform-buttons">
+            <button id="undo-btn" class="btn btn-secondary btn-sm" disabled title="Undo (Ctrl+Z)">↶ Undo</button>
+            <button id="redo-btn" class="btn btn-secondary btn-sm" disabled title="Redo (Ctrl+Y)">↷ Redo</button>
+          </div>
+        </div>
+
+        <!-- Zoom -->
         <div class="control-group">
           <div class="control-label">
             <span>Zoom</span>
             <span id="zoom-value">100%</span>
           </div>
-          <input type="range" id="zoom-slider" class="zoom-slider" min="50" max="200" value="100">
+          <input type="range" id="zoom-slider" class="zoom-slider" min="10" max="400" value="100">
         </div>
 
+        <!-- Filters -->
+        <div class="control-group">
+          <div class="control-label">
+            <span>Brightness</span>
+            <span id="brightness-value">100%</span>
+          </div>
+          <input type="range" id="brightness-slider" class="zoom-slider" min="0" max="200" value="100">
+        </div>
+
+        <div class="control-group">
+          <div class="control-label">
+            <span>Contrast</span>
+            <span id="contrast-value">100%</span>
+          </div>
+          <input type="range" id="contrast-slider" class="zoom-slider" min="0" max="200" value="100">
+        </div>
+
+        <div class="control-group">
+          <div class="control-label">
+            <span>Saturation</span>
+            <span id="saturation-value">100%</span>
+          </div>
+          <input type="range" id="saturation-slider" class="zoom-slider" min="0" max="200" value="100">
+        </div>
+
+        <!-- Border -->
+        <div class="control-group">
+          <div class="control-label">
+            <span>Border/Padding</span>
+            <span id="border-value">0px</span>
+          </div>
+          <input type="range" id="border-slider" class="zoom-slider" min="0" max="100" value="0">
+        </div>
+
+        <!-- Background & Options -->
+        <div class="control-group">
+          <div class="control-label"><span>Background Color</span></div>
+          <input type="color" id="bg-color" value="#ffffff" style="width: 100%; height: 36px; border: 1px solid var(--color-border); border-radius: var(--radius-sm); cursor: pointer;">
+        </div>
+
+        <div class="control-group">
+          <div class="transform-buttons">
+            <button id="fit-mode" class="btn btn-secondary btn-sm" style="flex: 1;">Crop to Fill</button>
+            <button id="toggle-grid" class="btn btn-secondary btn-sm" style="flex: 1;">Show Grid</button>
+            <button id="circle-crop" class="btn btn-secondary btn-sm" style="flex: 1;" title="Circle crop for profile pictures">Circle</button>
+          </div>
+        </div>
+
+        <!-- Download -->
         <div class="download-buttons">
           <button id="download-btn" class="btn btn-primary" disabled>Download JPG</button>
           <button id="download-png" class="btn btn-secondary">Download PNG</button>
+          <button id="download-batch" class="btn btn-secondary" disabled>Download All (Batch)</button>
           <button id="reset-btn" class="btn btn-ghost">Reset</button>
+        </div>
+
+        <!-- Keyboard Shortcuts -->
+        <div class="shortcuts-hint">
+          <details>
+            <summary style="cursor: pointer; font-size: var(--text-xs); color: var(--color-text-muted);">Keyboard Shortcuts</summary>
+            <div style="font-size: var(--text-xs); color: var(--color-text-muted); margin-top: var(--space-2); line-height: 1.6;">
+              <strong>Arrow keys</strong>: Pan image (Shift for faster)<br>
+              <strong>+/-</strong>: Zoom in/out<br>
+              <strong>R</strong>: Rotate 90° (Shift for CCW)<br>
+              <strong>H</strong>: Flip horizontal<br>
+              <strong>V</strong>: Flip vertical<br>
+              <strong>C</strong>: Center image<br>
+              <strong>G</strong>: Toggle grid<br>
+              <strong>Ctrl+Z</strong>: Undo<br>
+              <strong>Ctrl+Y</strong>: Redo<br>
+              <strong>Ctrl+0</strong>: Reset all
+            </div>
+          </details>
         </div>
       </div>
     </div>

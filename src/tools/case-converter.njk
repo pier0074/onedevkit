@@ -49,24 +49,10 @@ ogImage: case-converter.jpg
   }
   .case-btn {
     padding: var(--space-3) var(--space-4);
-    background: var(--color-bg-alt);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    cursor: pointer;
-    font-size: var(--text-sm);
-    font-weight: 500;
-    color: var(--color-text);
-    transition: all var(--transition-fast);
     text-align: center;
   }
-  .case-btn:hover {
-    border-color: var(--color-primary);
-    background: var(--color-primary-light);
-  }
-  .case-btn.active {
-    border-color: var(--color-primary);
-    background: var(--color-primary);
-    color: white;
+  .case-btn.active .case-example {
+    color: rgba(255,255,255,0.8);
   }
   .case-example {
     font-size: var(--text-xs);
@@ -107,51 +93,51 @@ ogImage: case-converter.jpg
 <div class="tool-container">
   <!-- Case Conversion Buttons -->
   <div class="case-buttons" role="group" aria-label="Case conversion options">
-    <button class="case-btn" data-case="upper">
+    <button class="btn-option case-btn" data-case="upper">
       UPPERCASE
       <div class="case-example">HELLO WORLD</div>
     </button>
-    <button class="case-btn" data-case="lower">
+    <button class="btn-option case-btn" data-case="lower">
       lowercase
       <div class="case-example">hello world</div>
     </button>
-    <button class="case-btn" data-case="title">
+    <button class="btn-option case-btn" data-case="title">
       Title Case
       <div class="case-example">Hello World</div>
     </button>
-    <button class="case-btn" data-case="sentence">
+    <button class="btn-option case-btn" data-case="sentence">
       Sentence case
       <div class="case-example">Hello world. New sentence.</div>
     </button>
-    <button class="case-btn" data-case="camel">
+    <button class="btn-option case-btn" data-case="camel">
       camelCase
       <div class="case-example">helloWorld</div>
     </button>
-    <button class="case-btn" data-case="pascal">
+    <button class="btn-option case-btn" data-case="pascal">
       PascalCase
       <div class="case-example">HelloWorld</div>
     </button>
-    <button class="case-btn" data-case="snake">
+    <button class="btn-option case-btn" data-case="snake">
       snake_case
       <div class="case-example">hello_world</div>
     </button>
-    <button class="case-btn" data-case="kebab">
+    <button class="btn-option case-btn" data-case="kebab">
       kebab-case
       <div class="case-example">hello-world</div>
     </button>
-    <button class="case-btn" data-case="constant">
+    <button class="btn-option case-btn" data-case="constant">
       CONSTANT_CASE
       <div class="case-example">HELLO_WORLD</div>
     </button>
-    <button class="case-btn" data-case="dot">
+    <button class="btn-option case-btn" data-case="dot">
       dot.case
       <div class="case-example">hello.world</div>
     </button>
-    <button class="case-btn" data-case="toggle">
+    <button class="btn-option case-btn" data-case="toggle">
       tOGGLE cASE
       <div class="case-example">hELLO wORLD</div>
     </button>
-    <button class="case-btn" data-case="alternating">
+    <button class="btn-option case-btn" data-case="alternating">
       AlTeRnAtInG
       <div class="case-example">HeLlO wOrLd</div>
     </button>
@@ -159,7 +145,10 @@ ogImage: case-converter.jpg
 
   <!-- Input Text -->
   <div class="text-section">
-    <label for="input-text" class="text-area-label">Input Text</label>
+    <div class="input-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-2);">
+      <label for="input-text" class="text-area-label" style="margin-bottom: 0;">Input Text</label>
+      <button id="load-sample" class="btn btn-text btn-sm">Load Sample</button>
+    </div>
     <textarea
       id="input-text"
       class="text-area"
@@ -184,7 +173,6 @@ ogImage: case-converter.jpg
   <div class="tool-actions">
     <button id="copy-output" class="btn btn-primary">Copy Result</button>
     <button id="swap-text" class="btn btn-secondary">Swap Input/Output</button>
-    <button id="load-sample" class="btn btn-text btn-sm">Load Sample</button>
     <button id="clear-all" class="btn btn-ghost">Clear</button>
   </div>
 </div>

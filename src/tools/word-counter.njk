@@ -135,6 +135,10 @@ ogImage: word-counter.jpg
   </div>
 
   <!-- Text Input -->
+  <div class="input-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-2);">
+    <label for="text-input" class="input-label" style="font-weight: 600;">Enter Text</label>
+    <button id="load-sample" class="btn btn-text btn-sm">Load Sample</button>
+  </div>
   <textarea
     id="text-input"
     class="word-input"
@@ -163,7 +167,6 @@ ogImage: word-counter.jpg
   <!-- Actions -->
   <div class="tool-actions" style="margin-top: var(--space-4);">
     <button id="copy-text" class="btn btn-secondary">Copy Text</button>
-    <button id="load-sample" class="btn btn-text btn-sm">Load Sample</button>
     <button id="clear-text" class="btn btn-ghost">Clear</button>
   </div>
 </div>
