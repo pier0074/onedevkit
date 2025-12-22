@@ -1,0 +1,805 @@
+{
+  "site": {
+    "name": "OneDevKit",
+    "tagline": "Free Online Developer Tools",
+    "description": "Free online developer tools for everyday tasks. JSON formatter, Base64 encoder, URL encoder, JWT decoder, hash generator, timestamp converter, password generator, UUID generator, and more.",
+    "metaTitle": "OneDevKit - Free Online Developer Tools",
+    "metaDescription": "A collection of free, privacy-focused developer tools. All processing happens in your browser - no data is sent to servers."
+  },
+
+  "nav": {
+    "tools": "Tools",
+    "about": "About",
+    "contact": "Contact",
+    "faq": "FAQ",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "language": "Language"
+  },
+
+  "common": {
+    "copy": "Copy",
+    "copied": "Copied!",
+    "download": "Download",
+    "clear": "Clear",
+    "reset": "Reset",
+    "upload": "Upload",
+    "dragDrop": "Drag & drop or click to upload",
+    "processing": "Processing...",
+    "error": "Error",
+    "success": "Success",
+    "loading": "Loading...",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close",
+    "apply": "Apply",
+    "generate": "Generate",
+    "convert": "Convert",
+    "format": "Format",
+    "validate": "Validate",
+    "encode": "Encode",
+    "decode": "Decode",
+    "input": "Input",
+    "output": "Output",
+    "result": "Result",
+    "preview": "Preview",
+    "options": "Options",
+    "settings": "Settings",
+    "selectAll": "Select All",
+    "loadSample": "Load Sample",
+    "howToUse": "How to Use",
+    "faq": "FAQ",
+    "relatedTools": "Related Tools",
+    "shareThisTool": "Share this tool",
+    "reportIssue": "Report an issue",
+    "madeWith": "Made with",
+    "privacy": "Your data never leaves your browser"
+  },
+
+  "categories": {
+    "Code Tools": "Code Tools",
+    "Generators": "Generators",
+    "Text & Data": "Text & Data",
+    "Image Tools": "Image Tools"
+  },
+
+  "tools": {
+    "json-formatter": {
+      "name": "JSON Formatter",
+      "fullName": "JSON Formatter & Validator",
+      "description": "Format, validate, and beautify JSON data instantly. Supports minification and syntax highlighting.",
+      "shortDescription": "Format, validate & beautify",
+      "metaTitle": "JSON Formatter & Validator - Free Online Tool | OneDevKit",
+      "metaDescription": "Free online JSON formatter and validator. Beautify, minify, and validate JSON with syntax highlighting. No signup required, works offline.",
+      "keywords": "json formatter, json validator, json beautifier, format json online, json lint, json parser, beautify json, minify json",
+      "howTo": {
+        "title": "How to Use",
+        "steps": [
+          {
+            "title": "Paste Your JSON",
+            "description": "Paste your JSON data into the input area on the left."
+          },
+          {
+            "title": "Format or Validate",
+            "description": "Click 'Format' to beautify your JSON, or 'Minify' to compress it."
+          },
+          {
+            "title": "Copy the Result",
+            "description": "Copy the formatted JSON using the copy button."
+          }
+        ]
+      },
+      "faq": [
+        {
+          "question": "Is this JSON formatter free?",
+          "answer": "Yes, completely free with no signup required. Use it as many times as you want."
+        },
+        {
+          "question": "Is my JSON data secure?",
+          "answer": "Yes, all processing happens in your browser. Your data is never sent to any server."
+        },
+        {
+          "question": "What's the difference between format and minify?",
+          "answer": "Format adds indentation and line breaks for readability. Minify removes all whitespace to reduce file size."
+        }
+      ]
+    },
+
+    "base64-encoder": {
+      "name": "Base64 Encoder",
+      "fullName": "Base64 Encoder & Decoder",
+      "description": "Encode text to Base64 or decode Base64 to readable text. Supports file uploads and URL-safe encoding.",
+      "shortDescription": "Encode & decode Base64",
+      "metaTitle": "Base64 Encoder & Decoder - Free Online Tool | OneDevKit",
+      "metaDescription": "Free Base64 encoder and decoder. Convert text to Base64 or decode Base64 strings. Supports file uploads and URL-safe encoding.",
+      "keywords": "base64 encoder, base64 decoder, base64 converter, encode base64, decode base64 online",
+      "howTo": {
+        "title": "How to Use",
+        "steps": [
+          {
+            "title": "Enter Text or Upload File",
+            "description": "Type or paste your text, or upload a file to encode."
+          },
+          {
+            "title": "Choose Operation",
+            "description": "Select 'Encode' to convert to Base64, or 'Decode' to convert from Base64."
+          },
+          {
+            "title": "Copy Result",
+            "description": "Copy the result using the copy button."
+          }
+        ]
+      },
+      "faq": [
+        {
+          "question": "What is Base64 encoding?",
+          "answer": "Base64 is a way to encode binary data as ASCII text. It's commonly used for embedding images in HTML/CSS or transmitting data in APIs."
+        },
+        {
+          "question": "Can I encode files?",
+          "answer": "Yes, you can upload files and encode them to Base64 format."
+        }
+      ]
+    },
+
+    "url-encoder": {
+      "name": "URL Encoder",
+      "fullName": "URL Encoder & Decoder",
+      "description": "Encode special characters for URLs or decode URL-encoded strings. Essential for web development and API work.",
+      "shortDescription": "Encode & decode URLs",
+      "metaTitle": "URL Encoder & Decoder - Free Online Tool | OneDevKit",
+      "metaDescription": "Free URL encoder and decoder. Encode special characters for URLs or decode URL-encoded strings. Essential for web development.",
+      "keywords": "url encoder, url decoder, percent encoding, urlencode online, url escape, encode url parameters",
+      "howTo": {
+        "title": "How to Use",
+        "steps": [
+          {
+            "title": "Enter Your URL or Text",
+            "description": "Paste the URL or text you want to encode or decode."
+          },
+          {
+            "title": "Encode or Decode",
+            "description": "Click 'Encode' to percent-encode special characters, or 'Decode' to convert back."
+          },
+          {
+            "title": "Copy Result",
+            "description": "Copy the encoded or decoded result."
+          }
+        ]
+      },
+      "faq": [
+        {
+          "question": "Why do I need to URL encode?",
+          "answer": "URLs can only contain certain characters. Special characters like spaces, &, and = must be encoded to be safely transmitted in URLs."
+        }
+      ]
+    },
+
+    "jwt-decoder": {
+      "name": "JWT Decoder",
+      "fullName": "JWT Decoder & Inspector",
+      "description": "Decode and inspect JSON Web Tokens (JWT). View header, payload, and verify token structure instantly.",
+      "shortDescription": "Decode & inspect JWTs",
+      "metaTitle": "JWT Decoder & Inspector - Free Online Tool | OneDevKit",
+      "metaDescription": "Free JWT decoder and inspector. Decode JSON Web Tokens to view header, payload, and signature. Debug authentication issues easily.",
+      "keywords": "jwt decoder, jwt debugger, json web token decoder, jwt parser, decode jwt online, jwt inspector",
+      "howTo": {
+        "title": "How to Use",
+        "steps": [
+          {
+            "title": "Paste Your JWT",
+            "description": "Paste the JSON Web Token you want to decode."
+          },
+          {
+            "title": "View Decoded Parts",
+            "description": "See the header, payload, and signature sections decoded."
+          },
+          {
+            "title": "Analyze Claims",
+            "description": "Review the token claims, expiration time, and other data."
+          }
+        ]
+      },
+      "faq": [
+        {
+          "question": "Is it safe to decode my JWT here?",
+          "answer": "Yes, the JWT is decoded entirely in your browser. Nothing is sent to any server."
+        },
+        {
+          "question": "Can this tool verify JWT signatures?",
+          "answer": "This tool decodes and displays JWT contents. For signature verification, you need the secret key which should never be shared."
+        }
+      ]
+    },
+
+    "password-generator": {
+      "name": "Password Generator",
+      "fullName": "Password Generator",
+      "description": "Generate secure, random passwords for your accounts. Cryptographically secure with customizable options.",
+      "shortDescription": "Secure random passwords",
+      "metaTitle": "Password Generator - Create Strong Passwords | OneDevKit",
+      "metaDescription": "Generate secure, random passwords instantly. Customize length and character types. Cryptographically secure random generation.",
+      "keywords": "password generator, random password, secure password generator, strong password creator, generate password online",
+      "howTo": {
+        "title": "How to Use",
+        "steps": [
+          {
+            "title": "Set Password Length",
+            "description": "Choose how long you want your password to be (recommended: 16+ characters)."
+          },
+          {
+            "title": "Select Character Types",
+            "description": "Include uppercase, lowercase, numbers, and symbols for stronger passwords."
+          },
+          {
+            "title": "Generate and Copy",
+            "description": "Click generate and copy your new secure password."
+          }
+        ]
+      },
+      "faq": [
+        {
+          "question": "How secure are the generated passwords?",
+          "answer": "Passwords are generated using cryptographically secure random number generation in your browser."
+        },
+        {
+          "question": "What makes a strong password?",
+          "answer": "A strong password is at least 12 characters long and includes a mix of uppercase, lowercase, numbers, and symbols."
+        }
+      ]
+    },
+
+    "uuid-generator": {
+      "name": "UUID Generator",
+      "fullName": "UUID Generator",
+      "description": "Generate random UUIDs (v4) instantly. Create unique identifiers for databases, APIs, and applications.",
+      "shortDescription": "Generate unique IDs",
+      "metaTitle": "UUID Generator - Generate Random UUIDs | OneDevKit",
+      "metaDescription": "Generate random UUID v4 identifiers instantly. Create unique IDs for databases, APIs, and applications. Bulk generation supported.",
+      "keywords": "uuid generator, guid generator, random uuid, uuid v4, unique id generator, generate uuid online",
+      "howTo": {
+        "title": "How to Use",
+        "steps": [
+          {
+            "title": "Generate UUID",
+            "description": "Click the generate button to create a new random UUID."
+          },
+          {
+            "title": "Bulk Generate",
+            "description": "Enter a quantity to generate multiple UUIDs at once."
+          },
+          {
+            "title": "Copy UUIDs",
+            "description": "Copy individual UUIDs or all generated UUIDs."
+          }
+        ]
+      },
+      "faq": [
+        {
+          "question": "What is a UUID?",
+          "answer": "A UUID (Universally Unique Identifier) is a 128-bit identifier that's virtually guaranteed to be unique across all systems."
+        },
+        {
+          "question": "What is UUID v4?",
+          "answer": "UUID v4 is randomly generated, making it ideal for most use cases where you need a unique identifier."
+        }
+      ]
+    },
+
+    "hash-generator": {
+      "name": "Hash Generator",
+      "fullName": "Hash Generator",
+      "description": "Generate MD5, SHA-1, SHA-256, and SHA-512 hashes from text. Useful for checksums and data integrity verification.",
+      "shortDescription": "MD5, SHA-1, SHA-256 hashes",
+      "metaTitle": "Hash Generator - MD5, SHA-1, SHA-256, SHA-512 | OneDevKit",
+      "metaDescription": "Generate MD5, SHA-1, SHA-256, and SHA-512 hashes from text. Free online hash generator for checksums and data integrity.",
+      "keywords": "hash generator, md5 generator, sha256 generator, sha1 hash, sha512 online, checksum generator, hash calculator",
+      "howTo": {
+        "title": "How to Use",
+        "steps": [
+          {
+            "title": "Enter Text",
+            "description": "Type or paste the text you want to hash."
+          },
+          {
+            "title": "View Hashes",
+            "description": "See MD5, SHA-1, SHA-256, and SHA-512 hashes generated instantly."
+          },
+          {
+            "title": "Copy Hash",
+            "description": "Copy the hash you need using the copy button."
+          }
+        ]
+      },
+      "faq": [
+        {
+          "question": "Which hash algorithm should I use?",
+          "answer": "For security purposes, use SHA-256 or SHA-512. MD5 and SHA-1 are considered weak for security but fine for checksums."
+        },
+        {
+          "question": "Can I reverse a hash?",
+          "answer": "No, hashes are one-way functions. You cannot reverse a hash to get the original input."
+        }
+      ]
+    },
+
+    "lorem-ipsum": {
+      "name": "Lorem Ipsum",
+      "fullName": "Lorem Ipsum Generator",
+      "description": "Generate placeholder text for your designs, mockups, and prototypes in paragraphs, sentences, or words.",
+      "shortDescription": "Placeholder text",
+      "metaTitle": "Lorem Ipsum Generator - Placeholder Text | OneDevKit",
+      "metaDescription": "Generate Lorem Ipsum placeholder text for designs and mockups. Choose paragraphs, sentences, or words.",
+      "keywords": "lorem ipsum generator, placeholder text, dummy text generator, lipsum, sample text generator",
+      "howTo": {
+        "title": "How to Use",
+        "steps": [
+          {
+            "title": "Choose Type",
+            "description": "Select paragraphs, sentences, or words."
+          },
+          {
+            "title": "Set Amount",
+            "description": "Enter how many units of text you need."
+          },
+          {
+            "title": "Generate and Copy",
+            "description": "Generate the text and copy it to your clipboard."
+          }
+        ]
+      },
+      "faq": [
+        {
+          "question": "What is Lorem Ipsum?",
+          "answer": "Lorem Ipsum is placeholder text used in design and publishing to fill space before final content is available."
+        }
+      ]
+    },
+
+    "qr-code-generator": {
+      "name": "QR Code Generator",
+      "fullName": "QR Code Generator",
+      "description": "Generate QR codes for URLs, text, and other data. Create scannable codes that work with any smartphone.",
+      "shortDescription": "Create QR codes",
+      "metaTitle": "QR Code Generator - Create Free QR Codes | OneDevKit",
+      "metaDescription": "Generate QR codes for URLs, text, WiFi, and more. Free QR code generator with customizable colors and sizes.",
+      "keywords": "qr code generator, create qr code, qr code maker, free qr code, generate qr code online, qr code creator",
+      "howTo": {
+        "title": "How to Use",
+        "steps": [
+          {
+            "title": "Enter Content",
+            "description": "Enter a URL, text, or other data for your QR code."
+          },
+          {
+            "title": "Customize",
+            "description": "Adjust size and colors if desired."
+          },
+          {
+            "title": "Download",
+            "description": "Download your QR code as an image."
+          }
+        ]
+      },
+      "faq": [
+        {
+          "question": "What can I encode in a QR code?",
+          "answer": "You can encode URLs, plain text, contact information, WiFi credentials, and more."
+        },
+        {
+          "question": "What size QR code should I use?",
+          "answer": "For print, use at least 300x300 pixels. For screens, 200x200 is usually sufficient."
+        }
+      ]
+    },
+
+    "timestamp-converter": {
+      "name": "Timestamp Converter",
+      "fullName": "Unix Timestamp Converter",
+      "description": "Convert Unix timestamps to human-readable dates and vice versa. Supports multiple date formats and timezones.",
+      "shortDescription": "Unix time ↔ Date",
+      "metaTitle": "Unix Timestamp Converter - Date to Timestamp | OneDevKit",
+      "metaDescription": "Convert Unix timestamps to human-readable dates and vice versa. Support for multiple date formats and timezones.",
+      "keywords": "unix timestamp converter, epoch converter, timestamp to date, date to timestamp, unix time converter",
+      "howTo": {
+        "title": "How to Use",
+        "steps": [
+          {
+            "title": "Enter Timestamp or Date",
+            "description": "Enter a Unix timestamp or select a date and time."
+          },
+          {
+            "title": "Convert",
+            "description": "See the conversion between timestamp and human-readable date."
+          },
+          {
+            "title": "Copy Result",
+            "description": "Copy the converted value."
+          }
+        ]
+      },
+      "faq": [
+        {
+          "question": "What is a Unix timestamp?",
+          "answer": "A Unix timestamp is the number of seconds that have elapsed since January 1, 1970 (UTC)."
+        }
+      ]
+    },
+
+    "regex-tester": {
+      "name": "Regex Tester",
+      "fullName": "Regex Tester & Debugger",
+      "description": "Test and debug regular expressions in real-time. See matches highlighted, capture groups, and detailed explanations.",
+      "shortDescription": "Test regex patterns",
+      "metaTitle": "Regex Tester & Debugger - Test Regular Expressions | OneDevKit",
+      "metaDescription": "Test and debug regular expressions in real-time. See matches highlighted with capture groups. Free online regex tester.",
+      "keywords": "regex tester, regular expression tester, regex debugger, regex validator, test regex online, regex checker",
+      "howTo": {
+        "title": "How to Use",
+        "steps": [
+          {
+            "title": "Enter Pattern",
+            "description": "Type your regular expression pattern."
+          },
+          {
+            "title": "Add Test String",
+            "description": "Enter the text you want to test against."
+          },
+          {
+            "title": "See Matches",
+            "description": "View highlighted matches and capture groups in real-time."
+          }
+        ]
+      },
+      "faq": [
+        {
+          "question": "What regex flavor is used?",
+          "answer": "This tool uses JavaScript's built-in regex engine, which follows ECMAScript standards."
+        }
+      ]
+    },
+
+    "color-picker": {
+      "name": "Color Picker",
+      "fullName": "Color Picker & Converter",
+      "description": "Pick colors and convert between HEX, RGB, HSL, and HSV formats. Generate color palettes and copy values instantly.",
+      "shortDescription": "HEX, RGB, HSL converter",
+      "metaTitle": "Color Picker & Converter - HEX, RGB, HSL | OneDevKit",
+      "metaDescription": "Pick colors and convert between HEX, RGB, HSL, and HSV formats. Generate color palettes for your designs.",
+      "keywords": "color picker, hex to rgb, rgb to hex, color converter, hsl converter, color palette generator",
+      "howTo": {
+        "title": "How to Use",
+        "steps": [
+          {
+            "title": "Pick a Color",
+            "description": "Use the color picker or enter a color value."
+          },
+          {
+            "title": "View Conversions",
+            "description": "See the color in HEX, RGB, HSL, and HSV formats."
+          },
+          {
+            "title": "Copy Values",
+            "description": "Copy any color format to use in your projects."
+          }
+        ]
+      },
+      "faq": [
+        {
+          "question": "What's the difference between RGB and HSL?",
+          "answer": "RGB (Red, Green, Blue) defines colors by mixing light. HSL (Hue, Saturation, Lightness) is more intuitive for adjusting colors."
+        }
+      ]
+    },
+
+    "diff-checker": {
+      "name": "Diff Checker",
+      "fullName": "Text Diff Checker",
+      "description": "Compare two texts and see the differences highlighted. Find additions, deletions, and modifications instantly.",
+      "shortDescription": "Compare text differences",
+      "metaTitle": "Diff Checker - Compare Text Online | OneDevKit",
+      "metaDescription": "Compare two texts and see differences highlighted. Find additions, deletions, and changes. Free online diff tool.",
+      "keywords": "diff checker, text compare, compare text online, diff tool, text difference, compare files online",
+      "howTo": {
+        "title": "How to Use",
+        "steps": [
+          {
+            "title": "Enter Original Text",
+            "description": "Paste your original text in the left panel."
+          },
+          {
+            "title": "Enter Changed Text",
+            "description": "Paste the modified text in the right panel."
+          },
+          {
+            "title": "View Differences",
+            "description": "See additions in green and deletions in red."
+          }
+        ]
+      },
+      "faq": [
+        {
+          "question": "Can I compare code?",
+          "answer": "Yes, this tool works great for comparing code, configuration files, or any text content."
+        }
+      ]
+    },
+
+    "markdown-preview": {
+      "name": "Markdown Preview",
+      "fullName": "Markdown Editor & Preview",
+      "description": "Write Markdown and see live preview. Supports GitHub Flavored Markdown with syntax highlighting and export options.",
+      "shortDescription": "Live Markdown preview",
+      "metaTitle": "Markdown Editor & Preview - Live Preview | OneDevKit",
+      "metaDescription": "Write Markdown with live preview. Supports GitHub Flavored Markdown, tables, code blocks, and more.",
+      "keywords": "markdown editor, markdown preview, markdown online, github markdown, markdown to html, md editor",
+      "howTo": {
+        "title": "How to Use",
+        "steps": [
+          {
+            "title": "Write Markdown",
+            "description": "Type or paste Markdown in the editor."
+          },
+          {
+            "title": "See Preview",
+            "description": "Watch the live preview update as you type."
+          },
+          {
+            "title": "Export",
+            "description": "Copy the HTML or download your document."
+          }
+        ]
+      },
+      "faq": [
+        {
+          "question": "What Markdown features are supported?",
+          "answer": "We support GitHub Flavored Markdown including tables, task lists, code blocks with syntax highlighting, and more."
+        }
+      ]
+    },
+
+    "word-counter": {
+      "name": "Word Counter",
+      "fullName": "Word Counter",
+      "description": "Count words, characters, sentences, and paragraphs instantly. Get reading time and speaking time estimates.",
+      "shortDescription": "Count words & characters",
+      "metaTitle": "Word Counter - Count Words & Characters | OneDevKit",
+      "metaDescription": "Count words, characters, sentences, and paragraphs instantly. Get reading and speaking time estimates. Free online word counter.",
+      "keywords": "word counter, character count, word count online, letter counter, text counter, count words in text",
+      "howTo": {
+        "title": "How to Use",
+        "steps": [
+          {
+            "title": "Enter Your Text",
+            "description": "Type or paste your text into the input area."
+          },
+          {
+            "title": "View Statistics",
+            "description": "See word count, character count, sentences, and paragraphs."
+          },
+          {
+            "title": "Check Time Estimates",
+            "description": "View estimated reading and speaking time."
+          }
+        ]
+      },
+      "faq": [
+        {
+          "question": "How is reading time calculated?",
+          "answer": "Reading time is based on an average reading speed of 200 words per minute."
+        },
+        {
+          "question": "Does it count spaces?",
+          "answer": "Character count shows both with and without spaces."
+        }
+      ]
+    },
+
+    "case-converter": {
+      "name": "Case Converter",
+      "fullName": "Text Case Converter",
+      "description": "Convert text between UPPERCASE, lowercase, Title Case, camelCase, snake_case, kebab-case, and more.",
+      "shortDescription": "Change text case",
+      "metaTitle": "Case Converter - Change Text Case | OneDevKit",
+      "metaDescription": "Convert text between UPPERCASE, lowercase, Title Case, camelCase, snake_case, and more. Free online case converter.",
+      "keywords": "case converter, uppercase to lowercase, title case converter, camelcase converter, snake case, text case changer",
+      "howTo": {
+        "title": "How to Use",
+        "steps": [
+          {
+            "title": "Enter Your Text",
+            "description": "Type or paste the text you want to convert."
+          },
+          {
+            "title": "Choose Case",
+            "description": "Select the case format you want."
+          },
+          {
+            "title": "Copy Result",
+            "description": "Copy the converted text."
+          }
+        ]
+      },
+      "faq": [
+        {
+          "question": "What case formats are available?",
+          "answer": "UPPERCASE, lowercase, Title Case, Sentence case, camelCase, PascalCase, snake_case, kebab-case, and more."
+        }
+      ]
+    },
+
+    "image-compressor": {
+      "name": "Image Compressor",
+      "fullName": "Image Compressor to Specific KB",
+      "description": "Compress images to exact file size (20KB, 50KB, 100KB). Perfect for passport photos, job applications, and government forms.",
+      "shortDescription": "Compress to exact KB",
+      "metaTitle": "Image Compressor to Specific KB Size | OneDevKit",
+      "metaDescription": "Compress images to exact file size - 20KB, 50KB, 100KB. Perfect for passport photos, job applications, and government forms. Free, private.",
+      "keywords": "image compressor, compress image to 20kb, compress image to 50kb, reduce image size, image size reducer, compress photo online",
+      "howTo": {
+        "title": "How to Use",
+        "steps": [
+          {
+            "title": "Upload Image",
+            "description": "Click or drag to upload your image (JPG, PNG)."
+          },
+          {
+            "title": "Select Target Size",
+            "description": "Choose 20KB, 50KB, 100KB, or enter a custom size."
+          },
+          {
+            "title": "Download",
+            "description": "Download your compressed image."
+          }
+        ]
+      },
+      "faq": [
+        {
+          "question": "Why compress to specific KB?",
+          "answer": "Many government forms, job applications, and online services have strict file size limits like 20KB or 50KB."
+        },
+        {
+          "question": "Will quality be affected?",
+          "answer": "The tool finds the best balance between file size and quality. For very small sizes, some quality loss is unavoidable."
+        },
+        {
+          "question": "Is my image uploaded to a server?",
+          "answer": "No, all processing happens in your browser. Your images never leave your device."
+        }
+      ]
+    },
+
+    "passport-photo": {
+      "name": "Passport Photo",
+      "fullName": "Passport Photo Maker",
+      "description": "Create passport and visa photos for any country. Resize to exact dimensions and compress to required file size.",
+      "shortDescription": "Passport & visa photos",
+      "metaTitle": "Passport Photo Maker - Create Passport Photos | OneDevKit",
+      "metaDescription": "Create passport and visa photos for any country. Resize to exact dimensions (2x2 inches, 35x45mm). Free passport photo maker.",
+      "keywords": "passport photo maker, passport photo size, visa photo, 2x2 passport photo, 35x45mm photo, passport photo online",
+      "howTo": {
+        "title": "How to Use",
+        "steps": [
+          {
+            "title": "Select Country",
+            "description": "Choose your country or document type for correct specifications."
+          },
+          {
+            "title": "Upload Photo",
+            "description": "Upload a clear, front-facing photo with good lighting."
+          },
+          {
+            "title": "Adjust and Download",
+            "description": "Use zoom and position controls, then download your passport photo."
+          }
+        ]
+      },
+      "faq": [
+        {
+          "question": "What countries are supported?",
+          "answer": "We support USA, India, UK, Schengen, Canada, Australia, China, Japan, Singapore, and custom sizes."
+        },
+        {
+          "question": "Will my photo be accepted officially?",
+          "answer": "This tool helps with sizing and compression. Ensure your original photo meets all official requirements."
+        },
+        {
+          "question": "What is the print layout feature?",
+          "answer": "Download a 4x6 inch layout with multiple passport photos for printing at home or a photo shop."
+        }
+      ]
+    },
+
+    "social-media-resizer": {
+      "name": "Social Media Resizer",
+      "fullName": "Social Media Image Resizer",
+      "description": "Resize images for Instagram, LinkedIn, Twitter, Facebook, YouTube, Pinterest, TikTok, Snapchat, Discord, Twitch, Threads, WhatsApp. Batch processing, custom sizes, background fill.",
+      "shortDescription": "Instagram, LinkedIn, Twitter sizes",
+      "metaTitle": "Social Media Image Resizer - Instagram, Facebook, Twitter | OneDevKit",
+      "metaDescription": "Resize images for all social media platforms. Instagram, Facebook, LinkedIn, Twitter, YouTube, TikTok, and more. Free with batch processing.",
+      "keywords": "social media image resizer, instagram photo size, linkedin image size, twitter image dimensions, facebook cover photo size, resize image for social media",
+      "howTo": {
+        "title": "How to Use",
+        "steps": [
+          {
+            "title": "Upload Image",
+            "description": "Upload the image you want to resize."
+          },
+          {
+            "title": "Select Platform & Size",
+            "description": "Choose the social media platform and specific size preset."
+          },
+          {
+            "title": "Adjust and Download",
+            "description": "Use zoom, pan, rotate, and filters, then download your resized image."
+          }
+        ]
+      },
+      "faq": [
+        {
+          "question": "What platforms are supported?",
+          "answer": "Instagram, Facebook, LinkedIn, Twitter/X, YouTube, Pinterest, TikTok, Snapchat, Discord, Twitch, Threads, WhatsApp, and custom sizes."
+        },
+        {
+          "question": "Can I resize multiple images?",
+          "answer": "Yes, batch processing is supported. Upload multiple images and resize them all at once."
+        },
+        {
+          "question": "What editing features are available?",
+          "answer": "Zoom, pan, rotate, flip, brightness, contrast, saturation, border, circle crop, and background color."
+        }
+      ]
+    }
+  },
+
+  "pages": {
+    "home": {
+      "title": "Free Online Developer Tools",
+      "subtitle": "Privacy-focused tools that work in your browser",
+      "description": "All tools run 100% client-side. Your data never leaves your device.",
+      "cta": "Explore Tools"
+    },
+    "about": {
+      "title": "About OneDevKit",
+      "metaDescription": "Learn about OneDevKit - free, privacy-focused developer tools that run entirely in your browser."
+    },
+    "contact": {
+      "title": "Contact Us",
+      "metaDescription": "Get in touch with the OneDevKit team. We'd love to hear your feedback and suggestions."
+    },
+    "privacy": {
+      "title": "Privacy Policy",
+      "metaDescription": "OneDevKit privacy policy. Learn how we protect your privacy - all tools run in your browser."
+    },
+    "terms": {
+      "title": "Terms of Service",
+      "metaDescription": "OneDevKit terms of service. Read the terms for using our free developer tools."
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "metaDescription": "Common questions about OneDevKit tools. Learn how our privacy-focused developer tools work."
+    }
+  },
+
+  "footer": {
+    "company": "Company",
+    "legal": "Legal",
+    "followUs": "Follow Us",
+    "copyright": "© {year} OneDevKit. All rights reserved.",
+    "disclaimer": "Tools provided \"as is\" without warranty."
+  },
+
+  "errors": {
+    "404": {
+      "title": "Page Not Found",
+      "message": "The page you're looking for doesn't exist.",
+      "cta": "Go Home"
+    },
+    "generic": {
+      "title": "Something went wrong",
+      "message": "Please try again later."
+    }
+  }
+}
