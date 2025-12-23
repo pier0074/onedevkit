@@ -1,12 +1,11 @@
 {
   "site": {
     "name": "OneDevKit",
-    "tagline": "Herramientas de Desarrollador Gratis",
-    "description": "Herramientas de desarrollo online gratuitas para tareas cotidianas.",
-    "metaTitle": "OneDevKit - Herramientas de Desarrollador Gratis",
+    "tagline": "Herramientas gratuitas para desarrolladores",
+    "description": "Herramientas de desarrollo online gratuitas para tareas cotidianas: formateador JSON, codificador Base64, decodificador JWT, generador de hashes y más.",
+    "metaTitle": "OneDevKit - Herramientas gratuitas para desarrolladores",
     "metaDescription": "Colección de herramientas de desarrollo gratuitas y enfocadas en la privacidad."
   },
-
   "nav": {
     "home": "Inicio",
     "tools": "Herramientas",
@@ -17,7 +16,6 @@
     "terms": "Términos de Servicio",
     "language": "Idioma"
   },
-
   "common": {
     "copy": "Copiar",
     "copied": "¡Copiado!",
@@ -25,7 +23,7 @@
     "clear": "Limpiar",
     "reset": "Restablecer",
     "upload": "Subir",
-    "dragDrop": "Arrastrar y soltar o clic para subir",
+    "dragDrop": "Arrastra y suelta o haz clic para subir",
     "processing": "Procesando...",
     "error": "Error",
     "success": "Éxito",
@@ -88,7 +86,7 @@
     "paragraphs": "Párrafos",
     "sentences": "Oraciones",
     "readingTime": "Tiempo de lectura",
-    "speakingTime": "Tiempo de habla",
+    "speakingTime": "Tiempo de lectura en voz alta",
     "minutes": "min",
     "seconds": "seg",
     "bytes": "bytes",
@@ -104,7 +102,7 @@
     "lineBreaks": "Saltos de línea",
     "formattedJsonPlaceholder": "El JSON formateado aparecerá aquí",
     "outputPlaceholder": "El resultado aparecerá aquí",
-    "caseSensitive": "Sensible a mayúsculas",
+    "caseSensitive": "Distinguir mayúsculas y minúsculas",
     "globalSearch": "Búsqueda global",
     "multiline": "Multilínea",
     "originalText": "Texto Original",
@@ -147,11 +145,11 @@
     "iso": "ISO 8601",
     "relative": "Relativo",
     "header": "Encabezado",
-    "payload": "Carga Útil",
+    "payload": "Payload",
     "signature": "Firma",
     "expired": "Expirado",
     "notExpired": "No Expirado",
-    "issuedAt": "Emitido en",
+    "issuedAt": "Fecha de emisión",
     "expiresAt": "Expira en",
     "algorithm": "Algoritmo",
     "hash": "Hash",
@@ -190,14 +188,12 @@
     "hashPlaceholder": "Los valores hash aparecerán aquí",
     "previewPlaceholder": "La vista previa aparecerá aquí"
   },
-
   "categories": {
     "Code Tools": "Herramientas de Código",
     "Generators": "Generadores",
     "Text & Data": "Texto y Datos",
     "Image Tools": "Herramientas de Imagen"
   },
-
   "footer": {
     "company": "Empresa",
     "legal": "Legal",
@@ -206,7 +202,6 @@
     "disclaimer": "Herramientas proporcionadas \"tal cual\" sin garantía.",
     "copyright": "© {year} OneDevKit. Todos los derechos reservados."
   },
-
   "errors": {
     "404": {
       "title": "Página No Encontrada",
@@ -218,12 +213,11 @@
       "message": "Por favor, inténtalo de nuevo más tarde."
     }
   },
-
   "tools": {
     "json-formatter": {
       "name": "Formateador JSON",
       "fullName": "Formateador y Validador JSON",
-      "description": "Formatea, valida y embellece datos JSON al instante. Soporta minificación y resaltado de sintaxis.",
+      "description": "Formatea, valida y embellece datos JSON al instante. Permite minificar y resaltar sintaxis.",
       "shortDescription": "Formatea, valida y embellece",
       "metaTitle": "Formateador y Validador JSON - Herramienta Online Gratis | OneDevKit",
       "metaDescription": "Formateador y validador JSON online gratuito. Embellece, minifica y valida JSON con resaltado de sintaxis.",
@@ -331,7 +325,7 @@
     "jwt-decoder": {
       "name": "Decodificador JWT",
       "fullName": "Decodificador e Inspector JWT",
-      "description": "Decodifica e inspecciona JSON Web Tokens (JWT). Visualiza header, payload y verifica la estructura del token al instante.",
+      "description": "Visualiza el encabezado (header), el payload y verifica la estructura del token al instante.",
       "shortDescription": "Decodifica e inspecciona JWTs",
       "metaTitle": "Decodificador e Inspector JWT - Herramienta Online Gratis | OneDevKit",
       "metaDescription": "Decodificador e inspector JWT gratuito. Decodifica JSON Web Tokens para ver header, payload y firma.",
@@ -371,7 +365,7 @@
       "shortDescription": "Contraseñas aleatorias seguras",
       "metaTitle": "Generador de Contraseñas - Crea Contraseñas Seguras | OneDevKit",
       "metaDescription": "Genera contraseñas seguras y aleatorias al instante. Personaliza longitud y tipos de caracteres.",
-      "keywords": "generador de contraseñas, contraseña aleatoria, generador de contraseñas seguras, creador de contraseñas fuertes, generar contraseña online",
+      "keywords": "generador de contraseñas, contraseña aleatoria, contraseñas seguras, crear contraseñas, generar contraseñas online",
       "howTo": {
         "title": "Cómo Usar",
         "steps": [
@@ -770,7 +764,7 @@
     },
     "image-compressor": {
       "name": "Compresor de Imágenes",
-      "fullName": "Compresor de Imágenes a KB Específico",
+      "fullName": "Compresor de imágenes a un tamaño específico (KB)",
       "description": "Comprime imágenes a tamaño exacto (20KB, 50KB, 100KB). Perfecto para fotos de pasaporte, solicitudes de empleo y formularios gubernamentales.",
       "shortDescription": "Comprime a KB exactos",
       "metaTitle": "Compresor de Imágenes a KB Específico | OneDevKit",
@@ -809,7 +803,7 @@
       ]
     },
     "passport-photo": {
-      "name": "Foto Pasaporte",
+      "name": "Foto tipo Pasaporte",
       "fullName": "Creador de Fotos de Pasaporte",
       "description": "Crea fotos de pasaporte y visa para cualquier país. Redimensiona a dimensiones exactas y comprime al tamaño requerido.",
       "shortDescription": "Fotos pasaporte y visa",
@@ -889,13 +883,20 @@
       ]
     }
   },
-
   "pages": {
+    "404": {
+      "title": "Página No Encontrada",
+      "metaDescription": "La página que buscas no existe. Vuelve a las herramientas de desarrollador de OneDevKit.",
+      "keywords": "404, página no encontrada, error",
+      "description": "Lo sentimos, la página que buscas no existe o ha sido movida.",
+      "goHome": "Ir al Inicio",
+      "reportIssue": "Reportar Problema"
+    },
     "home": {
-      "title": "Herramientas de Desarrollador Gratis",
+      "title": "Herramientas Gratuitas para Desarrolladores",
       "metaDescription": "Colección de herramientas de desarrollo gratuitas y enfocadas en la privacidad. Todo el procesamiento ocurre en tu navegador.",
       "keywords": "herramientas de desarrollador, herramientas online, formateador JSON, codificador Base64, herramientas gratis",
-      "heroTitle": "Herramientas de Desarrollador Gratis",
+      "heroTitle": "Herramientas Gratuitas para Desarrolladores",
       "heroDescription": "Herramientas rápidas y enfocadas en la privacidad para tareas de desarrollo. Sin registro.",
       "availableTools": "Herramientas Disponibles",
       "whyChoose": "¿Por qué elegir OneDevKit?",
@@ -917,14 +918,6 @@
           "description": "Diseño responsivo para escritorio, tablet y móvil."
         }
       }
-    },
-    "404": {
-      "title": "Página No Encontrada",
-      "metaDescription": "La página que buscas no existe. Vuelve a las herramientas de desarrollador de OneDevKit.",
-      "keywords": "404, página no encontrada, error",
-      "description": "Lo sentimos, la página que buscas no existe o ha sido movida.",
-      "goHome": "Ir al Inicio",
-      "reportIssue": "Reportar Problema"
     },
     "about": {
       "title": "Acerca de OneDevKit",
@@ -957,11 +950,26 @@
         "title": "Compromiso de Privacidad",
         "intro": "La privacidad no es solo una característica para nosotros - es un principio fundamental. Esto es lo que significa:",
         "items": [
-          { "title": "Procesamiento en el cliente:", "text": "Todas las herramientas se ejecutan completamente en tu navegador usando JavaScript" },
-          { "title": "Sin recolección de datos:", "text": "No recolectamos, almacenamos ni transmitimos ningún dato que ingreses" },
-          { "title": "Analíticas mínimas:", "text": "Solo usamos analíticas que respetan la privacidad para estadísticas básicas de tráfico" },
-          { "title": "Sin rastreadores de terceros:", "text": "Sin widgets de redes sociales ni rastreadores publicitarios" },
-          { "title": "Código abierto:", "text": "Puedes inspeccionar nuestro código en las herramientas de desarrollador de tu navegador" }
+          {
+            "title": "Procesamiento en el cliente:",
+            "text": "Todas las herramientas se ejecutan completamente en tu navegador usando JavaScript"
+          },
+          {
+            "title": "Sin recolección de datos:",
+            "text": "No recolectamos, almacenamos ni transmitimos ningún dato que ingreses"
+          },
+          {
+            "title": "Analíticas mínimas:",
+            "text": "Solo usamos analíticas que respetan la privacidad para estadísticas básicas de tráfico"
+          },
+          {
+            "title": "Sin rastreadores de terceros:",
+            "text": "Sin widgets de redes sociales ni rastreadores publicitarios"
+          },
+          {
+            "title": "Código abierto:",
+            "text": "Puedes inspeccionar nuestro código en las herramientas de desarrollador de tu navegador"
+          }
         ],
         "readMore": "Lee nuestra"
       },
@@ -969,7 +977,7 @@
         "title": "Contáctanos",
         "text": "¡Nos encantaría saber de ti! Ya sea que tengas comentarios, sugerencias o simplemente quieras saludar, no dudes en"
       },
-      "letUsKnow": "Háznoslo saber",
+      "letUsKnow": "hacérnoslo saber",
       "getInTouch": "ponerte en contacto"
     },
     "contact": {
@@ -988,11 +996,26 @@
       },
       "topics": {
         "title": "¿En Qué Podemos Ayudarte?",
-        "suggestions": { "title": "Sugerencias de Herramientas:", "text": "¿Tienes una idea para una nueva herramienta? Siempre buscamos expandir nuestro kit." },
-        "bugs": { "title": "Reportes de Errores:", "text": "¿Encontraste algo que no funciona correctamente? Avísanos y lo arreglaremos." },
-        "features": { "title": "Solicitudes de Funciones:", "text": "¿Quieres ver mejoras en las herramientas existentes? Comparte tus ideas." },
-        "feedback": { "title": "Comentarios Generales:", "text": "Cualquier opinión sobre tu experiencia usando OneDevKit." },
-        "partnership": { "title": "Consultas de Asociación:", "text": "¿Interesado en colaborar o integrar con OneDevKit?" }
+        "suggestions": {
+          "title": "Sugerencias de Herramientas:",
+          "text": "¿Tienes una idea para una nueva herramienta? Siempre buscamos expandir nuestro kit."
+        },
+        "bugs": {
+          "title": "Reportes de Errores:",
+          "text": "¿Encontraste algo que no funciona correctamente? Avísanos y lo arreglaremos."
+        },
+        "features": {
+          "title": "Solicitudes de Funciones:",
+          "text": "¿Quieres ver mejoras en las herramientas existentes? Comparte tus ideas."
+        },
+        "feedback": {
+          "title": "Comentarios Generales:",
+          "text": "Cualquier opinión sobre tu experiencia usando OneDevKit."
+        },
+        "partnership": {
+          "title": "Consultas de Asociación:",
+          "text": "¿Interesado en colaborar o integrar con OneDevKit?"
+        }
       },
       "response": {
         "title": "Tiempo de Respuesta",
@@ -1013,16 +1036,46 @@
       "heading": "Preguntas Frecuentes",
       "intro": "Encuentra respuestas a preguntas comunes sobre OneDevKit y nuestras herramientas para desarrolladores.",
       "items": [
-        { "question": "¿OneDevKit es realmente gratis?", "answer": "¡Sí! Todas las herramientas en OneDevKit son completamente gratuitas sin costos ocultos, suscripciones ni niveles premium. Creemos que las herramientas esenciales para desarrolladores deben ser accesibles para todos." },
-        { "question": "¿Mis datos están seguros?", "answer": "Absolutamente. Todas las herramientas se ejecutan completamente en tu navegador usando JavaScript. Tus datos nunca salen de tu dispositivo y nunca se envían a nuestros servidores. Puedes verificar esto revisando la pestaña de red de tu navegador mientras usas cualquier herramienta." },
-        { "question": "¿Necesito crear una cuenta?", "answer": "No se requiere cuenta ni registro. Solo visita cualquier página de herramienta y comienza a usarla inmediatamente. No recolectamos información personal ni requerimos registros." },
-        { "question": "¿Puedo usar estas herramientas sin conexión?", "answer": "Una vez que la página está cargada, la mayoría de las herramientas seguirán funcionando sin conexión ya que se ejecutan completamente en tu navegador. Sin embargo, necesitarás conexión a internet para cargar la página inicialmente." },
-        { "question": "¿Cómo ganan dinero?", "answer": "OneDevKit es actualmente un proyecto de pasión. Podríamos agregar publicidad no intrusiva y respetuosa con la privacidad en el futuro, pero tu privacidad y experiencia de usuario siempre serán lo primero." },
-        { "question": "¿Puedo sugerir una nueva herramienta?", "answer": "¡Por supuesto! Nos encanta escuchar a nuestros usuarios. Visita nuestra página de contacto para enviarnos tus sugerencias." },
-        { "question": "¿Por qué algunas herramientas requieren subir archivos?", "answer": "Algunas herramientas trabajan con archivos (como convertidores de imágenes). Cuando seleccionas un archivo, se procesa completamente en tu navegador - el archivo nunca se sube a ningún servidor. Esto se hace usando la API de archivos del navegador." },
-        { "question": "¿Usan cookies?", "answer": "Usamos cookies mínimas solo para funcionalidad esencial como recordar tu preferencia de tema (modo claro/oscuro). No usamos cookies de rastreo ni vendemos tus datos." },
-        { "question": "¿OneDevKit es de código abierto?", "answer": "Aunque nuestro código fuente no está disponible públicamente, puedes inspeccionar todo el código del lado del cliente en las herramientas de desarrollador de tu navegador. Todo lo que se ejecuta es visible y verificable." },
-        { "question": "¿Qué navegadores son compatibles?", "answer": "OneDevKit funciona en todos los navegadores modernos incluyendo Chrome, Firefox, Safari y Edge. Recomendamos usar la última versión para la mejor experiencia." }
+        {
+          "question": "¿OneDevKit es realmente gratis?",
+          "answer": "¡Sí! Todas las herramientas en OneDevKit son completamente gratuitas sin costos ocultos, suscripciones ni niveles premium. Creemos que las herramientas esenciales para desarrolladores deben ser accesibles para todos."
+        },
+        {
+          "question": "¿Mis datos están seguros?",
+          "answer": "Absolutamente. Todas las herramientas se ejecutan completamente en tu navegador usando JavaScript. Tus datos nunca salen de tu dispositivo y nunca se envían a nuestros servidores. Puedes verificar esto revisando la pestaña de red de tu navegador mientras usas cualquier herramienta."
+        },
+        {
+          "question": "¿Necesito crear una cuenta?",
+          "answer": "No se requiere cuenta ni registro. Solo visita cualquier página de herramienta y comienza a usarla inmediatamente. No recolectamos información personal ni requerimos registros."
+        },
+        {
+          "question": "¿Puedo usar estas herramientas sin conexión?",
+          "answer": "Una vez que la página está cargada, la mayoría de las herramientas seguirán funcionando sin conexión ya que se ejecutan completamente en tu navegador. Sin embargo, necesitarás conexión a internet para cargar la página inicialmente."
+        },
+        {
+          "question": "¿Cómo ganan dinero?",
+          "answer": "OneDevKit es actualmente un proyecto de pasión. Podríamos agregar publicidad no intrusiva y respetuosa con la privacidad en el futuro, pero tu privacidad y experiencia de usuario siempre serán lo primero."
+        },
+        {
+          "question": "¿Puedo sugerir una nueva herramienta?",
+          "answer": "¡Por supuesto! Nos encanta escuchar a nuestros usuarios. Visita nuestra página de contacto para enviarnos tus sugerencias."
+        },
+        {
+          "question": "¿Por qué algunas herramientas requieren subir archivos?",
+          "answer": "Algunas herramientas trabajan con archivos (como convertidores de imágenes). Cuando seleccionas un archivo, se procesa completamente en tu navegador - el archivo nunca se sube a ningún servidor. Esto se hace usando la API de archivos del navegador."
+        },
+        {
+          "question": "¿Usan cookies?",
+          "answer": "Usamos cookies mínimas solo para funcionalidad esencial como recordar tu preferencia de tema (modo claro/oscuro). No usamos cookies de rastreo ni vendemos tus datos."
+        },
+        {
+          "question": "¿OneDevKit es de código abierto?",
+          "answer": "Aunque nuestro código fuente no está disponible públicamente, puedes inspeccionar todo el código del lado del cliente en las herramientas de desarrollador de tu navegador. Todo lo que se ejecuta es visible y verificable."
+        },
+        {
+          "question": "¿Qué navegadores son compatibles?",
+          "answer": "OneDevKit funciona en todos los navegadores modernos incluyendo Chrome, Firefox, Safari y Edge. Recomendamos usar la última versión para la mejor experiencia."
+        }
       ],
       "moreQuestions": {
         "title": "¿Aún Tienes Preguntas?",
@@ -1044,42 +1097,96 @@
       "notCollected": {
         "title": "Información Que No Recolectamos",
         "intro": "Queremos ser absolutamente claros sobre lo que no recolectamos:",
-        "personal": { "title": "Información Personal:", "text": "No pedimos ni almacenamos tu nombre, correo electrónico ni ninguna información identificable" },
-        "toolData": { "title": "Datos de Herramientas:", "text": "Cualquier dato que ingreses en nuestras herramientas (JSON, texto, contraseñas, etc.) se procesa completamente en tu navegador y nunca se envía a nuestros servidores" },
-        "files": { "title": "Archivos:", "text": "Los archivos que subes a nuestras herramientas nunca se transfieren a nuestros servidores" },
-        "passwords": { "title": "Contraseñas o Datos Sensibles:", "text": "Nunca vemos, almacenamos ni tenemos acceso a ningún dato sensible que proceses usando nuestras herramientas" }
+        "personal": {
+          "title": "Información Personal:",
+          "text": "No pedimos ni almacenamos tu nombre, correo electrónico ni ninguna información de identificación personal"
+        },
+        "toolData": {
+          "title": "Datos de Herramientas:",
+          "text": "Cualquier dato que ingreses en nuestras herramientas (JSON, texto, contraseñas, etc.) se procesa completamente en tu navegador y nunca se envía a nuestros servidores"
+        },
+        "files": {
+          "title": "Archivos:",
+          "text": "Los archivos que subes a nuestras herramientas nunca se transfieren a nuestros servidores"
+        },
+        "passwords": {
+          "title": "Contraseñas o Datos Sensibles:",
+          "text": "Nunca vemos, almacenamos ni tenemos acceso a ningún dato sensible que proceses usando nuestras herramientas"
+        }
       },
       "collected": {
         "title": "Información Que Podemos Recolectar",
         "intro": "Usamos analíticas que respetan la privacidad para entender patrones básicos de tráfico. Esto puede incluir:",
-        "pageViews": { "title": "Vistas de Página:", "text": "Qué páginas se visitan (sin identificar quién las visitó)" },
-        "referrer": { "title": "Referente:", "text": "Cómo encontraste nuestro sitio (ej. motor de búsqueda, enlace directo)" },
-        "device": { "title": "Tipo de Dispositivo:", "text": "Categoría general del dispositivo (escritorio, móvil, tablet)" },
-        "country": { "title": "País:", "text": "Ubicación geográfica aproximada a nivel de país" },
+        "pageViews": {
+          "title": "Vistas de Página:",
+          "text": "Qué páginas se visitan (sin identificar quién las visitó)"
+        },
+        "referrer": {
+          "title": "Referente:",
+          "text": "Cómo encontraste nuestro sitio (ej. motor de búsqueda, enlace directo)"
+        },
+        "device": {
+          "title": "Tipo de Dispositivo:",
+          "text": "Categoría general del dispositivo (escritorio, móvil, tablet)"
+        },
+        "country": {
+          "title": "País:",
+          "text": "Ubicación geográfica aproximada a nivel de país"
+        },
         "note": "Estos datos son agregados y anónimos - no podemos identificar usuarios individuales."
       },
       "howToolsWork": {
         "title": "Cómo Funcionan Nuestras Herramientas",
         "intro": "Todas las herramientas de OneDevKit están diseñadas con la privacidad en mente:",
-        "browser": { "title": "Procesamiento en el Cliente:", "text": "Todas las herramientas se ejecutan completamente en tu navegador usando JavaScript" },
-        "noServer": { "title": "Sin Comunicación con Servidor:", "text": "Los datos que ingresas nunca se envían a nuestros servidores ni a terceros" },
-        "noStorage": { "title": "Sin Almacenamiento:", "text": "No almacenamos tus datos de entrada en ningún lugar - cuando cierras la página, desaparecen" },
-        "inspect": { "title": "Verificable:", "text": "Puedes inspeccionar nuestro código usando las herramientas de desarrollador de tu navegador para verificar esto" }
+        "browser": {
+          "title": "Procesamiento en el Cliente:",
+          "text": "Todas las herramientas se ejecutan completamente en tu navegador usando JavaScript"
+        },
+        "noServer": {
+          "title": "Sin Comunicación con Servidor:",
+          "text": "Los datos que ingresas nunca se envían a nuestros servidores ni a terceros"
+        },
+        "noStorage": {
+          "title": "Sin Almacenamiento:",
+          "text": "No almacenamos tus datos de entrada en ningún lugar - cuando cierras la página, desaparecen"
+        },
+        "inspect": {
+          "title": "Verificable:",
+          "text": "Puedes inspeccionar nuestro código usando las herramientas de desarrollador de tu navegador para verificar esto"
+        }
       },
       "cookies": {
         "title": "Cookies",
         "intro": "Usamos cookies mínimas solo para funcionalidad esencial:",
-        "theme": { "title": "Preferencia de Tema:", "text": "Recuerda tu elección de modo claro/oscuro" },
-        "language": { "title": "Preferencia de Idioma:", "text": "Recuerda tu idioma preferido" },
-        "analytics": { "title": "Analíticas (si están habilitadas):", "text": "Cookies de analíticas anónimas que no rastrean información personal" },
+        "theme": {
+          "title": "Preferencia de Tema:",
+          "text": "Recuerda tu elección de modo claro/oscuro"
+        },
+        "language": {
+          "title": "Preferencia de Idioma:",
+          "text": "Recuerda tu idioma preferido"
+        },
+        "analytics": {
+          "title": "Analíticas (si están habilitadas):",
+          "text": "Cookies de analíticas anónimas que no rastrean información personal"
+        },
         "note": "No usamos cookies publicitarias, píxeles de rastreo ni herramientas de marketing de terceros."
       },
       "thirdParty": {
         "title": "Servicios de Terceros",
         "intro": "Minimizamos el uso de servicios de terceros. Cuando los usamos, elegimos opciones que respetan la privacidad:",
-        "hosting": { "title": "Alojamiento:", "text": "Nuestro sitio está alojado en infraestructura segura y de buena reputación" },
-        "analyticsService": { "title": "Analíticas:", "text": "Usamos analíticas enfocadas en la privacidad que no rastrean usuarios individuales" },
-        "cdn": { "title": "CDN:", "text": "Podemos usar redes de distribución de contenido para servir activos estáticos rápidamente" },
+        "hosting": {
+          "title": "Alojamiento:",
+          "text": "Nuestro sitio está alojado en infraestructura segura y de buena reputación"
+        },
+        "analyticsService": {
+          "title": "Analíticas:",
+          "text": "Usamos analíticas enfocadas en la privacidad que no rastrean usuarios individuales"
+        },
+        "cdn": {
+          "title": "CDN:",
+          "text": "Podemos usar redes de distribución de contenido para servir activos estáticos rápidamente"
+        },
         "note": "No usamos widgets de redes sociales, redes publicitarias ni otros servicios de terceros con mucho rastreo."
       },
       "children": {
