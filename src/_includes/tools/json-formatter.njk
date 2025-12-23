@@ -1,4 +1,6 @@
 {# JSON Formatter Tool UI Partial #}
+{%- set toolId = "json-formatter" -%}
+{%- set currentLang = lang | default("en") -%}
 <style>
   .json-key { color: #881391; }
   .json-string { color: #1a1aa6; }
@@ -28,44 +30,44 @@
 
 <div class="tool-input-group">
   <div class="input-header">
-    <label for="json-input" class="input-label">{{ "common.enterJson" | t(lang) }}</label>
-    <button type="button" id="sample-json" class="btn btn-text btn-sm">{{ "common.loadSample" | t(lang) }}</button>
+    <label for="json-input" class="input-label">{{ "common.enterJson" | t(currentLang) }}</label>
+    <button type="button" id="sample-json" class="btn btn-text btn-sm">{{ "common.loadSample" | t(currentLang) }}</button>
   </div>
-  <textarea id="json-input" class="tool-textarea" rows="10" placeholder='{"key": "value", "array": [1, 2, 3]}' spellcheck="false"></textarea>
+  <textarea id="json-input" class="tool-textarea" rows="10" placeholder='{{ toolId | toolTNested(currentLang, "ui.placeholder") }}' spellcheck="false"></textarea>
 </div>
 
 <div class="tool-options">
   <div class="option-group">
-    <label for="json-indent" class="option-label">{{ "common.indentation" | t(lang) }}</label>
+    <label for="json-indent" class="option-label">{{ "common.indentation" | t(currentLang) }}</label>
     <select id="json-indent" class="tool-select">
-      <option value="2" selected>2 {{ "common.spaces" | t(lang) }}</option>
-      <option value="4">4 {{ "common.spaces" | t(lang) }}</option>
-      <option value="tab">Tab</option>
+      <option value="2" selected>2 {{ "common.spaces" | t(currentLang) }}</option>
+      <option value="4">4 {{ "common.spaces" | t(currentLang) }}</option>
+      <option value="tab">{{ "common.tab" | t(currentLang) }}</option>
     </select>
   </div>
 </div>
 
 <div class="tool-actions">
-  <button type="button" id="format-json" class="btn btn-primary">{{ "common.format" | t(lang) }}</button>
-  <button type="button" id="minify-json" class="btn btn-secondary">{{ "common.minify" | t(lang) }}</button>
-  <button type="button" id="validate-json" class="btn btn-secondary">{{ "common.validate" | t(lang) }}</button>
-  <button type="button" id="copy-json" class="btn btn-secondary">{{ "common.copy" | t(lang) }}</button>
-  <button type="button" id="clear-json" class="btn btn-ghost">{{ "common.clear" | t(lang) }}</button>
+  <button type="button" id="format-json" class="btn btn-primary">{{ "common.format" | t(currentLang) }}</button>
+  <button type="button" id="minify-json" class="btn btn-secondary">{{ "common.minify" | t(currentLang) }}</button>
+  <button type="button" id="validate-json" class="btn btn-secondary">{{ "common.validate" | t(currentLang) }}</button>
+  <button type="button" id="copy-json" class="btn btn-secondary">{{ "common.copy" | t(currentLang) }}</button>
+  <button type="button" id="clear-json" class="btn btn-ghost">{{ "common.clear" | t(currentLang) }}</button>
 </div>
 
 <div id="json-error" class="hidden" role="alert"></div>
 
 <div class="tool-output-group">
   <div class="output-header">
-    <span class="output-label">{{ "common.output" | t(lang) }}</span>
+    <span class="output-label">{{ "common.output" | t(currentLang) }}</span>
     <div class="json-stats">
-      <div class="json-stat-item"><dt>{{ "common.size" | t(lang) }}</dt><dd id="json-size">-</dd></div>
-      <div class="json-stat-item"><dt>{{ "common.keys" | t(lang) }}</dt><dd id="json-keys">-</dd></div>
-      <div class="json-stat-item"><dt>{{ "common.depth" | t(lang) }}</dt><dd id="json-depth">-</dd></div>
+      <div class="json-stat-item"><dt>{{ "common.size" | t(currentLang) }}</dt><dd id="json-size">-</dd></div>
+      <div class="json-stat-item"><dt>{{ "common.keys" | t(currentLang) }}</dt><dd id="json-keys">-</dd></div>
+      <div class="json-stat-item"><dt>{{ "common.depth" | t(currentLang) }}</dt><dd id="json-depth">-</dd></div>
     </div>
   </div>
   <div class="tool-output-wrapper">
-    <pre id="json-output" class="tool-output tool-output-placeholder">{{ "common.formattedJsonPlaceholder" | t(lang) }}</pre>
+    <pre id="json-output" class="tool-output tool-output-placeholder">{{ "common.formattedJsonPlaceholder" | t(currentLang) }}</pre>
     <pre id="json-highlighted" class="tool-output hidden"></pre>
   </div>
 </div>

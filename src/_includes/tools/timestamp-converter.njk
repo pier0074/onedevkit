@@ -1,4 +1,6 @@
 {# Timestamp Converter Tool UI Partial #}
+{%- set toolId = "timestamp-converter" -%}
+{%- set currentLang = lang | default("en") -%}
 <style>
   .timestamp-sections { display: grid; gap: var(--space-6); }
   .timestamp-section { background: var(--bg-secondary); border-radius: var(--radius-lg); padding: var(--space-5); }
@@ -18,38 +20,38 @@
 <div class="tool-container">
   <!-- Current Time Display -->
   <div class="current-time">
-    <div class="current-time-label">Current Unix {{ "common.timestamp" | t(lang) }}</div>
+    <div class="current-time-label">{{ toolId | toolTNested(currentLang, "ui.currentUnixTimestamp") }}</div>
     <div class="current-time-value" id="current-timestamp">-</div>
   </div>
 
   <div class="timestamp-sections">
     <!-- Timestamp to Date -->
     <div class="timestamp-section">
-      <h3>Unix {{ "common.timestamp" | t(lang) }} → {{ "common.date" | t(lang) }}</h3>
+      <h3>{{ toolId | toolTNested(currentLang, "ui.timestampToDate") }}</h3>
       <div class="input-row">
         <div class="tool-input-group">
-          <label for="timestamp-input" class="input-label">Enter Unix {{ "common.timestamp" | t(lang) }}</label>
-          <input type="text" id="timestamp-input" class="tool-input" placeholder="e.g., 1703001600">
+          <label for="timestamp-input" class="input-label">{{ toolId | toolTNested(currentLang, "ui.enterTimestamp") }}</label>
+          <input type="text" id="timestamp-input" class="tool-input" placeholder="{{ toolId | toolTNested(currentLang, 'ui.timestampPlaceholder') }}">
         </div>
-        <button type="button" id="convert-to-date" class="btn btn-primary">{{ "common.convert" | t(lang) }}</button>
-        <button type="button" id="use-current" class="btn btn-secondary">{{ "common.useCurrent" | t(lang) }}</button>
+        <button type="button" id="convert-to-date" class="btn btn-primary">{{ "common.convert" | t(currentLang) }}</button>
+        <button type="button" id="use-current" class="btn btn-secondary">{{ "common.useCurrent" | t(currentLang) }}</button>
       </div>
 
       <div class="result-grid" id="date-results">
         <div class="result-item">
-          <div class="result-item-label">{{ "common.local" | t(lang) }} {{ "common.time" | t(lang) }}</div>
+          <div class="result-item-label">{{ "common.local" | t(currentLang) }} {{ "common.time" | t(currentLang) }}</div>
           <div class="result-item-value" id="result-local">-</div>
         </div>
         <div class="result-item">
-          <div class="result-item-label">{{ "common.utc" | t(lang) }} {{ "common.time" | t(lang) }}</div>
+          <div class="result-item-label">{{ "common.utc" | t(currentLang) }} {{ "common.time" | t(currentLang) }}</div>
           <div class="result-item-value" id="result-utc">-</div>
         </div>
         <div class="result-item">
-          <div class="result-item-label">{{ "common.iso" | t(lang) }}</div>
+          <div class="result-item-label">{{ "common.iso" | t(currentLang) }}</div>
           <div class="result-item-value" id="result-iso">-</div>
         </div>
         <div class="result-item">
-          <div class="result-item-label">{{ "common.relative" | t(lang) }} {{ "common.time" | t(lang) }}</div>
+          <div class="result-item-label">{{ "common.relative" | t(currentLang) }} {{ "common.time" | t(currentLang) }}</div>
           <div class="result-item-value" id="result-relative">-</div>
         </div>
       </div>
@@ -57,23 +59,23 @@
 
     <!-- Date to Timestamp -->
     <div class="timestamp-section">
-      <h3>{{ "common.date" | t(lang) }} → Unix {{ "common.timestamp" | t(lang) }}</h3>
+      <h3>{{ toolId | toolTNested(currentLang, "ui.dateToTimestamp") }}</h3>
       <div class="input-row">
         <div class="tool-input-group">
-          <label for="date-input" class="input-label">Enter {{ "common.date" | t(lang) }} & {{ "common.time" | t(lang) }}</label>
+          <label for="date-input" class="input-label">{{ toolId | toolTNested(currentLang, "ui.enterDateTime") }}</label>
           <input type="datetime-local" id="date-input" class="tool-input">
         </div>
-        <button type="button" id="convert-to-timestamp" class="btn btn-primary">{{ "common.convert" | t(lang) }}</button>
-        <button type="button" id="use-now" class="btn btn-secondary">Use Now</button>
+        <button type="button" id="convert-to-timestamp" class="btn btn-primary">{{ "common.convert" | t(currentLang) }}</button>
+        <button type="button" id="use-now" class="btn btn-secondary">{{ "common.useNow" | t(currentLang) }}</button>
       </div>
 
       <div class="result-grid">
         <div class="result-item">
-          <div class="result-item-label">Unix {{ "common.timestamp" | t(lang) }} ({{ "common.seconds" | t(lang) }})</div>
+          <div class="result-item-label">Unix {{ "common.timestamp" | t(currentLang) }} ({{ "common.seconds" | t(currentLang) }})</div>
           <div class="result-item-value" id="result-timestamp">-</div>
         </div>
         <div class="result-item">
-          <div class="result-item-label">Unix {{ "common.timestamp" | t(lang) }} (milliseconds)</div>
+          <div class="result-item-label">Unix {{ "common.timestamp" | t(currentLang) }} ({{ "common.milliseconds" | t(currentLang) }})</div>
           <div class="result-item-value" id="result-timestamp-ms">-</div>
         </div>
       </div>

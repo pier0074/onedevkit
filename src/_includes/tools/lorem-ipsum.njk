@@ -1,4 +1,6 @@
 {# Lorem Ipsum Generator Tool UI Partial #}
+{%- set toolId = "lorem-ipsum" -%}
+{%- set currentLang = lang | default("en") -%}
 <style>
   .stats-bar { display: flex; gap: var(--space-6); margin-top: var(--space-4); padding: var(--space-3) var(--space-4); background: var(--color-bg-alt); border-radius: var(--radius-md); font-size: var(--text-sm); color: var(--color-text-secondary); }
   .stat-item { display: flex; align-items: center; gap: var(--space-2); }
@@ -9,38 +11,38 @@
 <div class="tool-container">
   <div class="tool-controls">
     <div class="tool-input-group">
-      <label for="lorem-type">{{ "common.outputType" | t(lang) }}</label>
+      <label for="lorem-type">{{ "common.outputType" | t(currentLang) }}</label>
       <select id="lorem-type">
-        <option value="paragraphs">{{ "common.paragraphs" | t(lang) }}</option>
-        <option value="sentences">{{ "common.sentences" | t(lang) }}</option>
-        <option value="words">{{ "common.words" | t(lang) }}</option>
-        <option value="list">{{ "common.listItems" | t(lang) }}</option>
+        <option value="paragraphs">{{ "common.paragraphs" | t(currentLang) }}</option>
+        <option value="sentences">{{ "common.sentences" | t(currentLang) }}</option>
+        <option value="words">{{ "common.words" | t(currentLang) }}</option>
+        <option value="list">{{ "common.listItems" | t(currentLang) }}</option>
       </select>
     </div>
     <div class="tool-input-group" style="max-width: 150px;">
-      <label for="lorem-count" id="count-label">Number of Paragraphs</label>
+      <label for="lorem-count" id="count-label">{{ toolId | toolTNested(currentLang, "ui.numberOfParagraphs") }}</label>
       <input type="number" id="lorem-count" min="1" max="50" value="3">
     </div>
   </div>
 
   <div style="margin-top: var(--space-4);">
     <label class="checkbox-label">
-      <input type="checkbox" id="start-with-lorem" checked> {{ "common.startWithLorem" | t(lang) }}
+      <input type="checkbox" id="start-with-lorem" checked> {{ "common.startWithLorem" | t(currentLang) }}
     </label>
   </div>
 
   <div class="tool-actions" style="margin-top: var(--space-4);">
-    <button id="generate-lorem" class="btn btn-primary">{{ "common.generate" | t(lang) }}</button>
-    <button id="copy-lorem" class="btn btn-secondary">{{ "common.copy" | t(lang) }}</button>
-    <button id="clear-lorem" class="btn btn-ghost">{{ "common.clear" | t(lang) }}</button>
+    <button id="generate-lorem" class="btn btn-primary">{{ "common.generate" | t(currentLang) }}</button>
+    <button id="copy-lorem" class="btn btn-secondary">{{ "common.copy" | t(currentLang) }}</button>
+    <button id="clear-lorem" class="btn btn-ghost">{{ "common.clear" | t(currentLang) }}</button>
   </div>
 
   <div class="tool-output" style="margin-top: var(--space-6);" aria-live="polite">
-    <div id="lorem-output" class="tool-output-text lorem-output tool-output-placeholder">Click "{{ "common.generate" | t(lang) }}" to create Lorem Ipsum text</div>
+    <div id="lorem-output" class="tool-output-text lorem-output tool-output-placeholder">{{ toolId | toolTNested(currentLang, "ui.placeholder") }}</div>
   </div>
 
   <div class="stats-bar">
-    <div class="stat-item"><span>{{ "common.words" | t(lang) }}:</span><span id="word-count" class="stat-value">0</span></div>
-    <div class="stat-item"><span>{{ "common.characters" | t(lang) }}:</span><span id="char-count" class="stat-value">0</span></div>
+    <div class="stat-item"><span>{{ "common.words" | t(currentLang) }}:</span><span id="word-count" class="stat-value">0</span></div>
+    <div class="stat-item"><span>{{ "common.characters" | t(currentLang) }}:</span><span id="char-count" class="stat-value">0</span></div>
   </div>
 </div>

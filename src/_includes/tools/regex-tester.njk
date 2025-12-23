@@ -1,4 +1,6 @@
 {# Regex Tester Tool UI Partial #}
+{%- set toolId = "regex-tester" -%}
+{%- set currentLang = lang | default("en") -%}
 <style>
   .regex-container { display: grid; gap: var(--space-4); }
   .regex-input-group { display: grid; gap: var(--space-2); }
@@ -32,12 +34,12 @@
   <!-- Pattern Input -->
   <div class="tool-input-group">
     <div class="input-header">
-      <label for="regex-pattern" class="input-label">Regular Expression</label>
-      <button type="button" id="sample-regex" class="btn btn-text btn-sm">{{ "common.loadSample" | t(lang) }}</button>
+      <label for="regex-pattern" class="input-label">{{ "common.regularExpression" | t(currentLang) }}</label>
+      <button type="button" id="sample-regex" class="btn btn-text btn-sm">{{ "common.loadSample" | t(currentLang) }}</button>
     </div>
     <div class="regex-input-row">
       <span style="font-size: var(--text-lg); color: var(--text-muted);">/</span>
-      <input type="text" id="regex-pattern" class="tool-input" placeholder="Enter regex pattern (e.g., \d+)" spellcheck="false">
+      <input type="text" id="regex-pattern" class="tool-input" placeholder="{{ toolId | toolTNested(currentLang, 'ui.patternPlaceholder') }}" spellcheck="false">
       <span style="font-size: var(--text-lg); color: var(--text-muted);">/</span>
       <input type="text" id="regex-flags-input" class="tool-input" style="width: 60px;" placeholder="gi" value="g" spellcheck="false">
     </div>
@@ -48,64 +50,64 @@
   <div class="regex-flags">
     <div class="regex-flag">
       <input type="checkbox" id="flag-g" checked>
-      <label for="flag-g">Global (g)</label>
+      <label for="flag-g">{{ toolId | toolTNested(currentLang, "ui.flags.global") }}</label>
     </div>
     <div class="regex-flag">
       <input type="checkbox" id="flag-i">
-      <label for="flag-i">Case Insensitive (i)</label>
+      <label for="flag-i">{{ toolId | toolTNested(currentLang, "ui.flags.caseInsensitive") }}</label>
     </div>
     <div class="regex-flag">
       <input type="checkbox" id="flag-m">
-      <label for="flag-m">{{ "common.multiline" | t(lang) }} (m)</label>
+      <label for="flag-m">{{ toolId | toolTNested(currentLang, "ui.flags.multiline") }}</label>
     </div>
     <div class="regex-flag">
       <input type="checkbox" id="flag-s">
-      <label for="flag-s">Dot All (s)</label>
+      <label for="flag-s">{{ toolId | toolTNested(currentLang, "ui.flags.dotAll") }}</label>
     </div>
     <div class="regex-flag">
       <input type="checkbox" id="flag-u">
-      <label for="flag-u">Unicode (u)</label>
+      <label for="flag-u">{{ toolId | toolTNested(currentLang, "ui.flags.unicode") }}</label>
     </div>
   </div>
 
   <!-- Test String Input -->
   <div class="tool-input-group">
-    <label for="test-string" class="input-label">Test String</label>
-    <textarea id="test-string" class="tool-textarea" rows="5" placeholder="Enter text to test against the regex pattern..." spellcheck="false"></textarea>
+    <label for="test-string" class="input-label">{{ "common.testString" | t(currentLang) }}</label>
+    <textarea id="test-string" class="tool-textarea" rows="5" placeholder="{{ toolId | toolTNested(currentLang, 'ui.testStringPlaceholder') }}" spellcheck="false"></textarea>
   </div>
 
   <!-- Action Buttons -->
   <div class="tool-actions">
-    <button type="button" id="clear-regex" class="btn btn-ghost">{{ "common.clear" | t(lang) }} All</button>
+    <button type="button" id="clear-regex" class="btn btn-ghost">{{ "common.clear" | t(currentLang) }} {{ "common.all" | t(currentLang) }}</button>
   </div>
 
   <!-- Stats -->
   <div class="regex-stats" id="regex-stats">
     <div class="regex-stat">
       <div class="regex-stat-value" id="match-count">0</div>
-      <div class="regex-stat-label">{{ "common.matches" | t(lang) }}</div>
+      <div class="regex-stat-label">{{ "common.matches" | t(currentLang) }}</div>
     </div>
     <div class="regex-stat">
       <div class="regex-stat-value" id="group-count">0</div>
-      <div class="regex-stat-label">Groups</div>
+      <div class="regex-stat-label">{{ "common.groups" | t(currentLang) }}</div>
     </div>
     <div class="regex-stat">
       <div class="regex-stat-value" id="exec-time">0ms</div>
-      <div class="regex-stat-label">Exec Time</div>
+      <div class="regex-stat-label">{{ "common.execTime" | t(currentLang) }}</div>
     </div>
   </div>
 
   <!-- Highlighted Output -->
   <div class="tool-input-group">
-    <label class="input-label">{{ "common.matches" | t(lang) }} Highlighted</label>
-    <div class="test-string-output" id="highlighted-output">Enter a pattern and test string to see matches highlighted.</div>
+    <label class="input-label">{{ toolId | toolTNested(currentLang, "ui.matchesHighlighted") }}</label>
+    <div class="test-string-output" id="highlighted-output">{{ toolId | toolTNested(currentLang, "ui.matchesInstruction") }}</div>
   </div>
 
   <!-- Match Details -->
   <div class="tool-input-group">
-    <label class="input-label">Match Details</label>
+    <label class="input-label">{{ "common.matchDetails" | t(currentLang) }}</label>
     <div class="matches-info" id="matches-info">
-      <p style="color: var(--text-muted); font-size: var(--text-sm);">Match details will appear here.</p>
+      <p style="color: var(--text-muted); font-size: var(--text-sm);">{{ toolId | toolTNested(currentLang, "ui.matchDetailsPlaceholder") }}</p>
     </div>
   </div>
 </div>

@@ -1,4 +1,6 @@
 {# JWT Decoder Tool UI Partial #}
+{%- set toolId = "jwt-decoder" -%}
+{%- set currentLang = lang | default("en") -%}
 <style>
   .jwt-parts { display: grid; gap: var(--space-4); margin-top: var(--space-4); }
   .jwt-part { background: var(--bg-secondary); border-radius: var(--radius-md); padding: var(--space-4); border-left: 4px solid var(--color-primary); }
@@ -29,16 +31,16 @@
   <!-- Input Section -->
   <div class="tool-input-group">
     <div class="input-header">
-      <label for="jwt-input" class="input-label">Enter JWT Token</label>
-      <button type="button" id="sample-jwt" class="btn btn-text btn-sm">{{ "common.loadSample" | t(lang) }}</button>
+      <label for="jwt-input" class="input-label">{{ toolId | toolTNested(currentLang, "ui.enterToken") }}</label>
+      <button type="button" id="sample-jwt" class="btn btn-text btn-sm">{{ "common.loadSample" | t(currentLang) }}</button>
     </div>
-    <textarea id="jwt-input" class="tool-textarea" rows="4" placeholder="Paste your JWT token here (eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...)" spellcheck="false"></textarea>
+    <textarea id="jwt-input" class="tool-textarea" rows="4" placeholder="{{ toolId | toolTNested(currentLang, 'ui.placeholder') }}" spellcheck="false"></textarea>
   </div>
 
   <!-- Action Buttons -->
   <div class="tool-actions">
-    <button type="button" id="decode-jwt" class="btn btn-primary">{{ "common.decode" | t(lang) }} JWT</button>
-    <button type="button" id="clear-jwt" class="btn btn-ghost">{{ "common.clear" | t(lang) }}</button>
+    <button type="button" id="decode-jwt" class="btn btn-primary">{{ toolId | toolTNested(currentLang, "ui.decodeButton") }}</button>
+    <button type="button" id="clear-jwt" class="btn btn-ghost">{{ "common.clear" | t(currentLang) }}</button>
   </div>
 
   <!-- Status -->
@@ -48,32 +50,32 @@
   <div class="jwt-parts" id="jwt-results">
     <div class="jwt-part jwt-part--header">
       <div class="jwt-part-header">
-        <span class="jwt-part-title jwt-part-title--header">{{ "common.header" | t(lang) | upper }}</span>
-        <button type="button" class="btn btn-secondary btn-sm jwt-copy-btn" data-part="header">{{ "common.copy" | t(lang) }}</button>
+        <span class="jwt-part-title jwt-part-title--header">{{ "common.header" | t(currentLang) | upper }}</span>
+        <button type="button" class="btn btn-secondary btn-sm jwt-copy-btn" data-part="header">{{ "common.copy" | t(currentLang) }}</button>
       </div>
       <div class="jwt-part-content" id="jwt-header">-</div>
       <div class="jwt-raw">
-        <div class="jwt-raw-label">Encoded</div>
+        <div class="jwt-raw-label">{{ "common.encoded" | t(currentLang) }}</div>
         <div class="jwt-raw-value" id="jwt-header-raw">-</div>
       </div>
     </div>
 
     <div class="jwt-part jwt-part--payload">
       <div class="jwt-part-header">
-        <span class="jwt-part-title jwt-part-title--payload">{{ "common.payload" | t(lang) | upper }}</span>
-        <button type="button" class="btn btn-secondary btn-sm jwt-copy-btn" data-part="payload">{{ "common.copy" | t(lang) }}</button>
+        <span class="jwt-part-title jwt-part-title--payload">{{ "common.payload" | t(currentLang) | upper }}</span>
+        <button type="button" class="btn btn-secondary btn-sm jwt-copy-btn" data-part="payload">{{ "common.copy" | t(currentLang) }}</button>
       </div>
       <div class="jwt-part-content" id="jwt-payload">-</div>
       <div class="jwt-raw">
-        <div class="jwt-raw-label">Encoded</div>
+        <div class="jwt-raw-label">{{ "common.encoded" | t(currentLang) }}</div>
         <div class="jwt-raw-value" id="jwt-payload-raw">-</div>
       </div>
     </div>
 
     <div class="jwt-part jwt-part--signature">
       <div class="jwt-part-header">
-        <span class="jwt-part-title jwt-part-title--signature">{{ "common.signature" | t(lang) | upper }}</span>
-        <button type="button" class="btn btn-secondary btn-sm jwt-copy-btn" data-part="signature">{{ "common.copy" | t(lang) }}</button>
+        <span class="jwt-part-title jwt-part-title--signature">{{ "common.signature" | t(currentLang) | upper }}</span>
+        <button type="button" class="btn btn-secondary btn-sm jwt-copy-btn" data-part="signature">{{ "common.copy" | t(currentLang) }}</button>
       </div>
       <div class="jwt-part-content" id="jwt-signature">-</div>
     </div>
