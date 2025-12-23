@@ -1,4 +1,6 @@
 {# Image Compressor Tool UI Partial #}
+{%- set toolId = "image-compressor" -%}
+{%- set currentLang = lang | default("en") -%}
 <style>
   .upload-zone {
     border: 2px dashed var(--color-border);
@@ -161,24 +163,24 @@
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
     </svg>
   </div>
-  <div class="upload-text">{{ "common.dragDrop" | t(lang) }}</div>
-  <div class="upload-hint">JPG, PNG, or WebP (Max 10MB)</div>
+  <div class="upload-text">{{ "common.dragDrop" | t(currentLang) }}</div>
+  <div class="upload-hint">{{ toolId | toolTNested(currentLang, "ui.uploadHint") }}</div>
 </div>
 
 <!-- Size Presets -->
 <div style="margin-top: var(--space-6);">
-  <label class="text-area-label">Target Size</label>
+  <label class="text-area-label">{{ "common.targetSize" | t(currentLang) }}</label>
   <div class="size-presets" role="group" aria-label="Preset file sizes">
-    <button class="btn-option size-btn" data-size="20">20 KB</button>
-    <button class="btn-option size-btn" data-size="50">50 KB</button>
-    <button class="btn-option size-btn active" data-size="100">100 KB</button>
-    <button class="btn-option size-btn" data-size="200">200 KB</button>
-    <button class="btn-option size-btn" data-size="500">500 KB</button>
-    <button class="btn-option size-btn" data-size="custom">Custom</button>
+    <button class="btn-option size-btn" data-size="20">{{ toolId | toolTNested(currentLang, "ui.sizePresets.20kb") }}</button>
+    <button class="btn-option size-btn" data-size="50">{{ toolId | toolTNested(currentLang, "ui.sizePresets.50kb") }}</button>
+    <button class="btn-option size-btn active" data-size="100">{{ toolId | toolTNested(currentLang, "ui.sizePresets.100kb") }}</button>
+    <button class="btn-option size-btn" data-size="200">{{ toolId | toolTNested(currentLang, "ui.sizePresets.200kb") }}</button>
+    <button class="btn-option size-btn" data-size="500">{{ toolId | toolTNested(currentLang, "ui.sizePresets.500kb") }}</button>
+    <button class="btn-option size-btn" data-size="custom">{{ "common.custom" | t(currentLang) }}</button>
   </div>
   <div class="custom-size" id="custom-size" style="display: none;">
-    <input type="number" id="custom-kb" min="5" max="5000" value="150" placeholder="KB">
-    <span>KB</span>
+    <input type="number" id="custom-kb" min="5" max="5000" value="150" placeholder="{{ 'common.kb' | t(currentLang) }}">
+    <span>{{ "common.kb" | t(currentLang) }}</span>
   </div>
 </div>
 
@@ -190,14 +192,14 @@
   <div class="preview-grid">
     <div class="preview-card">
       <div class="preview-label">
-        Original
+        {{ "common.original" | t(currentLang) }}
         <span class="preview-size" id="original-size">-</span>
       </div>
       <img id="original-preview" class="preview-img" alt="Original image">
     </div>
     <div class="preview-card">
       <div class="preview-label">
-        Compressed
+        {{ "common.compressed" | t(currentLang) }}
         <span class="preview-size" id="compressed-size">-</span>
       </div>
       <img id="compressed-preview" class="preview-img" alt="Compressed image">
@@ -206,21 +208,21 @@
 
   <div class="result-stats" id="result-stats" style="display: none;">
     <div class="stat-item">
-      <span>Reduction:</span>
+      <span>{{ "common.reduction" | t(currentLang) }}:</span>
       <span class="stat-value reduction" id="reduction-percent">-</span>
     </div>
     <div class="stat-item">
-      <span>Dimensions:</span>
+      <span>{{ "common.dimensions" | t(currentLang) }}:</span>
       <span class="stat-value" id="dimensions">-</span>
     </div>
     <div class="stat-item">
-      <span>Quality:</span>
+      <span>{{ "common.quality" | t(currentLang) }}:</span>
       <span class="stat-value" id="quality-used">-</span>
     </div>
   </div>
 
   <div class="tool-actions" style="margin-top: var(--space-4);">
-    <button id="download-btn" class="btn btn-primary" disabled>{{ "common.download" | t(lang) }}</button>
-    <button id="reset-btn" class="btn btn-ghost">{{ "common.reset" | t(lang) }}</button>
+    <button id="download-btn" class="btn btn-primary" disabled>{{ "common.download" | t(currentLang) }}</button>
+    <button id="reset-btn" class="btn btn-ghost">{{ "common.reset" | t(currentLang) }}</button>
   </div>
 </div>

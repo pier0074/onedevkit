@@ -192,6 +192,7 @@
     "tab": "Tab",
     "useNow": "Use Now",
     "startOver": "Start Over",
+    "resetAll": "Reset All",
     "center": "Center",
     "custom": "Custom",
     "original": "Original",
@@ -954,7 +955,16 @@
       "metaDescription": "Create passport and visa photos for any country. Resize to exact dimensions (2x2 inches, 35x45mm). Free passport photo maker.",
       "keywords": "passport photo maker, passport photo size, visa photo, 2x2 passport photo, 35x45mm photo, passport photo online",
       "ui": {
+        "selectCountry": "Select Country / Document Type",
+        "clickToUpload": "Click to upload your photo",
+        "fileHint": "JPG, PNG (Max 10MB)",
         "uploadHint": "JPG, PNG (Max 10MB)",
+        "dragHint": "drag preview or use buttons",
+        "optgroups": {
+          "popular": "Popular",
+          "asia": "Asia",
+          "other": "Other"
+        },
         "countries": {
           "usa": "USA - Passport (2×2 inches)",
           "india": "India - Passport/Visa (2×2 inches, 20-300KB)",
@@ -972,7 +982,8 @@
           "maxFileSize": "Max File Size",
           "background": "Background"
         },
-        "downloadPhoto": "Download Photo"
+        "downloadPhoto": "Download Photo",
+        "downloadPrintLayout": "Download Print Layout (4×6)"
       },
       "howTo": {
         "title": "How to Use",
@@ -1016,7 +1027,10 @@
       "metaDescription": "Resize images for all social media platforms. Instagram, Facebook, LinkedIn, Twitter, YouTube, TikTok, and more. Free with batch processing.",
       "keywords": "social media image resizer, instagram photo size, linkedin image size, twitter image dimensions, facebook cover photo size, resize image for social media",
       "ui": {
+        "selectPlatform": "Select Platform",
+        "selectSize": "Select Size",
         "uploadHint": "Supports JPG, PNG, WebP (max 20MB) - Drop multiple files for batch processing",
+        "dragToPan": "drag to pan",
         "platforms": {
           "instagram": "Instagram",
           "facebook": "Facebook",
@@ -1040,10 +1054,26 @@
           "profilePicture": "Profile Picture",
           "coverPhoto": "Cover Photo"
         },
+        "flip": "Flip",
+        "showGrid": "Show Grid",
+        "circle": "Circle",
         "borderPadding": "Border/Padding",
         "cropToFill": "Crop to Fill",
         "circleCrop": "Circle",
-        "circleCropHint": "Circle crop for profile pictures"
+        "circleCropHint": "Circle crop for profile pictures",
+        "downloadAllBatch": "Download All (Batch)",
+        "shortcuts": {
+          "arrowKeys": "<strong>Arrow keys</strong>: Pan image (Shift for faster)",
+          "zoomKeys": "<strong>+/-</strong>: Zoom in/out",
+          "rotate": "<strong>R</strong>: Rotate 90° (Shift for CCW)",
+          "flipH": "<strong>H</strong>: Flip horizontal",
+          "flipV": "<strong>V</strong>: Flip vertical",
+          "center": "<strong>C</strong>: Center image",
+          "grid": "<strong>G</strong>: Toggle grid",
+          "undo": "<strong>Ctrl+Z</strong>: Undo",
+          "redo": "<strong>Ctrl+Y</strong>: Redo",
+          "resetAll": "<strong>Ctrl+0</strong>: Reset all"
+        }
       },
       "howTo": {
         "title": "How to Use",

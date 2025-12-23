@@ -191,6 +191,7 @@
     "tab": "Tabulación",
     "useNow": "Usar Ahora",
     "startOver": "Empezar de Nuevo",
+    "resetAll": "Restablecer Todo",
     "center": "Centrar",
     "custom": "Personalizado",
     "original": "Original",
@@ -952,7 +953,16 @@
       "metaDescription": "Crea fotos de pasaporte y visa para cualquier país. Redimensiona a dimensiones exactas (2x2 pulgadas, 35x45mm).",
       "keywords": "creador foto pasaporte, tamaño foto pasaporte, foto visa, foto pasaporte 2x2, foto 35x45mm, foto pasaporte online",
       "ui": {
+        "selectCountry": "Seleccionar País / Tipo de Documento",
+        "clickToUpload": "Haz clic para subir tu foto",
+        "fileHint": "JPG, PNG (Máx 10MB)",
         "uploadHint": "JPG, PNG (Máx 10MB)",
+        "dragHint": "arrastra la vista previa o usa los botones",
+        "optgroups": {
+          "popular": "Populares",
+          "asia": "Asia",
+          "other": "Otros"
+        },
         "countries": {
           "usa": "EE.UU. - Pasaporte (2×2 pulgadas)",
           "india": "India - Pasaporte/Visa (2×2 pulgadas, 20-300KB)",
@@ -970,7 +980,8 @@
           "maxFileSize": "Tamaño Máximo",
           "background": "Fondo"
         },
-        "downloadPhoto": "Descargar Foto"
+        "downloadPhoto": "Descargar Foto",
+        "downloadPrintLayout": "Descargar Diseño de Impresión (4×6)"
       },
       "howTo": {
         "title": "Cómo Usar",
@@ -1013,7 +1024,10 @@
       "metaDescription": "Redimensiona imágenes para todas las redes sociales. Instagram, Facebook, LinkedIn, Twitter, YouTube, TikTok y más.",
       "keywords": "redimensionador redes sociales, tamaño foto instagram, tamaño imagen linkedin, dimensiones imagen twitter, tamaño portada facebook, redimensionar imagen para redes sociales",
       "ui": {
+        "selectPlatform": "Seleccionar Plataforma",
+        "selectSize": "Seleccionar Tamaño",
         "uploadHint": "Soporta JPG, PNG, WebP (máx 20MB) - Suelta múltiples archivos para procesamiento por lotes",
+        "dragToPan": "arrastra para mover",
         "platforms": {
           "instagram": "Instagram",
           "facebook": "Facebook",
@@ -1037,10 +1051,26 @@
           "profilePicture": "Foto de Perfil",
           "coverPhoto": "Foto de Portada"
         },
+        "flip": "Voltear",
+        "showGrid": "Mostrar Cuadrícula",
+        "circle": "Círculo",
         "borderPadding": "Borde/Relleno",
         "cropToFill": "Recortar para Llenar",
         "circleCrop": "Círculo",
-        "circleCropHint": "Recorte circular para fotos de perfil"
+        "circleCropHint": "Recorte circular para fotos de perfil",
+        "downloadAllBatch": "Descargar Todo (Lote)",
+        "shortcuts": {
+          "arrowKeys": "<strong>Flechas</strong>: Mover imagen (Shift para más rápido)",
+          "zoomKeys": "<strong>+/-</strong>: Acercar/Alejar",
+          "rotate": "<strong>R</strong>: Rotar 90° (Shift para sentido contrario)",
+          "flipH": "<strong>H</strong>: Voltear horizontal",
+          "flipV": "<strong>V</strong>: Voltear vertical",
+          "center": "<strong>C</strong>: Centrar imagen",
+          "grid": "<strong>G</strong>: Alternar cuadrícula",
+          "undo": "<strong>Ctrl+Z</strong>: Deshacer",
+          "redo": "<strong>Ctrl+Y</strong>: Rehacer",
+          "resetAll": "<strong>Ctrl+0</strong>: Restablecer todo"
+        }
       },
       "howTo": {
         "title": "Cómo Usar",

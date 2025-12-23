@@ -1,4 +1,6 @@
 {# Passport Photo Maker Tool UI Partial #}
+{%- set toolId = "passport-photo" -%}
+{%- set currentLang = lang | default("en") -%}
 <style>
   .upload-zone {
     border: 2px dashed var(--color-border);
@@ -229,23 +231,23 @@
 <div class="tool-container">
   <!-- Country Selection -->
   <div class="country-select">
-    <label for="country" class="control-label">Select Country / Document Type</label>
+    <label for="country" class="control-label">{{ toolId | toolTNested(currentLang, "ui.selectCountry") }}</label>
     <select id="country">
-      <optgroup label="Popular">
-        <option value="usa" selected>USA - Passport (2×2 inches)</option>
-        <option value="india">India - Passport/Visa (2×2 inches, 20-300KB)</option>
-        <option value="uk">UK - Passport (35×45mm)</option>
-        <option value="schengen">Schengen Visa (35×45mm)</option>
-        <option value="canada">Canada - Passport (50×70mm)</option>
-        <option value="australia">Australia - Passport (35×45mm)</option>
+      <optgroup label="{{ toolId | toolTNested(currentLang, 'ui.optgroups.popular') }}">
+        <option value="usa" selected>{{ toolId | toolTNested(currentLang, "ui.countries.usa") }}</option>
+        <option value="india">{{ toolId | toolTNested(currentLang, "ui.countries.india") }}</option>
+        <option value="uk">{{ toolId | toolTNested(currentLang, "ui.countries.uk") }}</option>
+        <option value="schengen">{{ toolId | toolTNested(currentLang, "ui.countries.schengen") }}</option>
+        <option value="canada">{{ toolId | toolTNested(currentLang, "ui.countries.canada") }}</option>
+        <option value="australia">{{ toolId | toolTNested(currentLang, "ui.countries.australia") }}</option>
       </optgroup>
-      <optgroup label="Asia">
-        <option value="china">China - Visa (33×48mm)</option>
-        <option value="japan">Japan - Passport (35×45mm)</option>
-        <option value="singapore">Singapore - Passport (35×45mm)</option>
+      <optgroup label="{{ toolId | toolTNested(currentLang, 'ui.optgroups.asia') }}">
+        <option value="china">{{ toolId | toolTNested(currentLang, "ui.countries.china") }}</option>
+        <option value="japan">{{ toolId | toolTNested(currentLang, "ui.countries.japan") }}</option>
+        <option value="singapore">{{ toolId | toolTNested(currentLang, "ui.countries.singapore") }}</option>
       </optgroup>
-      <optgroup label="Other">
-        <option value="custom">Custom Size</option>
+      <optgroup label="{{ toolId | toolTNested(currentLang, 'ui.optgroups.other') }}">
+        <option value="custom">{{ "common.customSize" | t(currentLang) }}</option>
       </optgroup>
     </select>
   </div>
@@ -254,19 +256,19 @@
   <div class="spec-info" id="spec-info">
     <div class="spec-grid">
       <div class="spec-item">
-        <span class="spec-label">{{ "common.size" | t(lang) }}:</span>
+        <span class="spec-label">{{ "common.size" | t(currentLang) }}:</span>
         <span class="spec-value" id="spec-size">2×2 inches</span>
       </div>
       <div class="spec-item">
-        <span class="spec-label">Pixels:</span>
+        <span class="spec-label">{{ "common.pixels" | t(currentLang) }}:</span>
         <span class="spec-value" id="spec-pixels">600×600px</span>
       </div>
       <div class="spec-item">
-        <span class="spec-label">Max File Size:</span>
+        <span class="spec-label">{{ "common.maxFileSize" | t(currentLang) }}:</span>
         <span class="spec-value" id="spec-filesize">240KB</span>
       </div>
       <div class="spec-item">
-        <span class="spec-label">Background:</span>
+        <span class="spec-label">{{ "common.background" | t(currentLang) }}:</span>
         <span class="spec-value" id="spec-background">White</span>
       </div>
     </div>
@@ -276,15 +278,15 @@
   <div id="custom-options" style="display: none; margin-bottom: var(--space-4);">
     <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--space-3);">
       <div>
-        <label class="control-label">{{ "common.width" | t(lang) }} (px)</label>
+        <label class="control-label">{{ "common.width" | t(currentLang) }} (px)</label>
         <input type="number" id="custom-width" value="600" min="100" max="2000" class="tool-input">
       </div>
       <div>
-        <label class="control-label">{{ "common.height" | t(lang) }} (px)</label>
+        <label class="control-label">{{ "common.height" | t(currentLang) }} (px)</label>
         <input type="number" id="custom-height" value="600" min="100" max="2000" class="tool-input">
       </div>
       <div>
-        <label class="control-label">Max KB</label>
+        <label class="control-label">{{ "common.maxKb" | t(currentLang) }}</label>
         <input type="number" id="custom-maxkb" value="200" min="10" max="5000" class="tool-input">
       </div>
     </div>
@@ -298,9 +300,9 @@
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
       </svg>
     </div>
-    <div>Click to upload your photo</div>
+    <div>{{ toolId | toolTNested(currentLang, "ui.clickToUpload") }}</div>
     <div style="font-size: var(--text-sm); color: var(--color-text-muted); margin-top: var(--space-2);">
-      JPG, PNG (Max 10MB)
+      {{ toolId | toolTNested(currentLang, "ui.fileHint") }}
     </div>
   </div>
 
@@ -318,14 +320,14 @@
         </div>
         <div class="controls-section">
           <div class="control-group">
-            <label class="control-label">Zoom: <span id="zoom-value">100%</span></label>
+            <label class="control-label">{{ "common.zoom" | t(currentLang) }}: <span id="zoom-value">100%</span></label>
             <input type="range" id="zoom-slider" class="control-slider" min="10" max="400" value="100">
           </div>
           <div class="control-group">
-            <label class="control-label">Position <span style="font-weight: normal; font-size: var(--text-xs); color: var(--color-text-muted);">(drag preview or use buttons)</span></label>
+            <label class="control-label">{{ "common.position" | t(currentLang) }} <span style="font-weight: normal; font-size: var(--text-xs); color: var(--color-text-muted);">({{ toolId | toolTNested(currentLang, "ui.dragHint") }})</span></label>
             <div class="pan-controls">
-              <button id="center-btn" class="btn btn-secondary btn-sm">Center</button>
-              <button id="reset-position" class="btn btn-secondary btn-sm">{{ "common.reset" | t(lang) }} All</button>
+              <button id="center-btn" class="btn btn-secondary btn-sm">{{ "common.center" | t(currentLang) }}</button>
+              <button id="reset-position" class="btn btn-secondary btn-sm">{{ "common.resetAll" | t(currentLang) }}</button>
             </div>
           </div>
         </div>
@@ -333,19 +335,19 @@
 
       <!-- Preview Panel -->
       <div class="preview-panel">
-        <div class="preview-title">{{ "common.preview" | t(lang) }}</div>
+        <div class="preview-title">{{ "common.preview" | t(currentLang) }}</div>
         <canvas id="preview-canvas" class="preview-image"></canvas>
         <div class="preview-stats">
-          <div><span>Dimensions:</span><span class="value" id="preview-dimensions">-</span></div>
-          <div><span>File Size:</span><span class="value" id="preview-filesize">-</span></div>
-          <div><span>Status:</span><span class="value" id="preview-status">-</span></div>
+          <div><span>{{ "common.dimensions" | t(currentLang) }}:</span><span class="value" id="preview-dimensions">-</span></div>
+          <div><span>{{ "common.fileSize" | t(currentLang) }}:</span><span class="value" id="preview-filesize">-</span></div>
+          <div><span>{{ "common.status" | t(currentLang) }}:</span><span class="value" id="preview-status">-</span></div>
         </div>
 
         <div class="tool-actions" style="margin-top: var(--space-4);">
-          <button id="download-btn" class="btn btn-primary" style="width: 100%;" disabled>{{ "common.download" | t(lang) }} Photo</button>
+          <button id="download-btn" class="btn btn-primary" style="width: 100%;" disabled>{{ toolId | toolTNested(currentLang, "ui.downloadPhoto") }}</button>
         </div>
-        <button id="download-print" class="btn btn-secondary" style="width: 100%; margin-top: var(--space-2);" disabled>{{ "common.download" | t(lang) }} Print Layout (4×6)</button>
-        <button id="reset-btn" class="btn btn-ghost" style="width: 100%; margin-top: var(--space-2);">Start Over</button>
+        <button id="download-print" class="btn btn-secondary" style="width: 100%; margin-top: var(--space-2);" disabled>{{ toolId | toolTNested(currentLang, "ui.downloadPrintLayout") }}</button>
+        <button id="reset-btn" class="btn btn-ghost" style="width: 100%; margin-top: var(--space-2);">{{ "common.startOver" | t(currentLang) }}</button>
       </div>
     </div>
   </div>
