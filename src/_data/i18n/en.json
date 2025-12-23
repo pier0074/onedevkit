@@ -925,27 +925,243 @@
     "about": {
       "title": "About OneDevKit",
       "metaDescription": "Learn about OneDevKit - free, privacy-focused developer tools that run entirely in your browser.",
-      "keywords": "about onedevkit, developer tools, free online tools, privacy-focused tools"
+      "keywords": "about onedevkit, developer tools, free online tools, privacy-focused tools",
+      "heading": "About OneDevKit",
+      "mission": {
+        "title": "Our Mission",
+        "text1": "OneDevKit was created with a simple mission: to provide developers with free, fast, and privacy-focused tools for everyday tasks. We believe that essential developer utilities should be accessible to everyone, regardless of budget or technical expertise.",
+        "text2": "Every tool on OneDevKit runs entirely in your browser. Your data never leaves your device, and we don't track, store, or sell any information you enter into our tools."
+      },
+      "whyBuilt": {
+        "title": "Why We Built This",
+        "intro": "As developers ourselves, we were frustrated with existing online tools that:",
+        "items": [
+          "Required unnecessary signups or subscriptions",
+          "Sent your data to remote servers",
+          "Were cluttered with intrusive ads",
+          "Loaded slowly with excessive JavaScript",
+          "Didn't work well on mobile devices"
+        ],
+        "conclusion": "We set out to build the toolkit we wished existed: simple, fast, private, and free."
+      },
+      "ourTools": {
+        "title": "Our Tools",
+        "intro": "We currently offer the following free developer tools:",
+        "moreComing": "More tools are coming soon. Have a suggestion?"
+      },
+      "privacyCommitment": {
+        "title": "Privacy Commitment",
+        "intro": "Privacy isn't just a feature for us - it's a core principle. Here's what that means:",
+        "items": [
+          { "title": "Client-side processing:", "text": "All tools run entirely in your browser using JavaScript" },
+          { "title": "No data collection:", "text": "We don't collect, store, or transmit any data you enter" },
+          { "title": "Minimal analytics:", "text": "We only use privacy-respecting analytics for basic traffic stats" },
+          { "title": "No third-party trackers:", "text": "No social media widgets or advertising trackers" },
+          { "title": "Open source friendly:", "text": "You can inspect our code in your browser's developer tools" }
+        ],
+        "readMore": "Read our full"
+      },
+      "contactSection": {
+        "title": "Contact Us",
+        "text": "We'd love to hear from you! Whether you have feedback, suggestions, or just want to say hello, feel free to"
+      },
+      "letUsKnow": "Let us know",
+      "getInTouch": "get in touch"
     },
     "contact": {
       "title": "Contact Us",
       "metaDescription": "Get in touch with the OneDevKit team. We'd love to hear your feedback and suggestions.",
-      "keywords": "contact onedevkit, feedback, support, suggestions"
-    },
-    "privacy": {
-      "title": "Privacy Policy",
-      "metaDescription": "OneDevKit privacy policy. Learn how we protect your privacy - all tools run in your browser.",
-      "keywords": "privacy policy, data protection, GDPR, CCPA"
-    },
-    "terms": {
-      "title": "Terms of Service",
-      "metaDescription": "OneDevKit terms of service. Read the terms for using our free developer tools.",
-      "keywords": "terms of service, terms and conditions, legal"
+      "keywords": "contact onedevkit, feedback, support, suggestions",
+      "heading": "Contact Us",
+      "intro": "We'd love to hear from you! Whether you have questions, suggestions, or feedback about OneDevKit, don't hesitate to reach out.",
+      "getInTouch": "Get in Touch",
+      "email": {
+        "title": "Email",
+        "description": "Best for detailed questions or feedback"
+      },
+      "twitter": {
+        "description": "Follow us for updates and quick questions"
+      },
+      "topics": {
+        "title": "What Can We Help With?",
+        "suggestions": { "title": "Tool Suggestions:", "text": "Have an idea for a new developer tool? We're always looking to expand our toolkit." },
+        "bugs": { "title": "Bug Reports:", "text": "Found something that's not working correctly? Let us know and we'll fix it." },
+        "features": { "title": "Feature Requests:", "text": "Want to see improvements to existing tools? Share your ideas." },
+        "feedback": { "title": "General Feedback:", "text": "Any thoughts about your experience using OneDevKit." },
+        "partnership": { "title": "Partnership Inquiries:", "text": "Interested in collaborating or integrating with OneDevKit." }
+      },
+      "response": {
+        "title": "Response Time",
+        "text": "We typically respond to emails within 24-48 hours during weekdays. For urgent matters, please mention \"URGENT\" in your subject line."
+      },
+      "beforeReach": {
+        "title": "Before Reaching Out",
+        "text": "You might find your answer in one of these resources:",
+        "faq": "Common questions and answers",
+        "about": "Learn more about OneDevKit",
+        "privacy": "How we handle your data"
+      }
     },
     "faq": {
       "title": "Frequently Asked Questions",
       "metaDescription": "Common questions about OneDevKit tools. Learn how our privacy-focused developer tools work.",
-      "keywords": "faq, help, questions, support"
+      "keywords": "faq, help, questions, support",
+      "heading": "Frequently Asked Questions",
+      "intro": "Find answers to common questions about OneDevKit and our developer tools.",
+      "items": [
+        { "question": "Is OneDevKit really free?", "answer": "Yes! All tools on OneDevKit are completely free to use with no hidden costs, subscriptions, or premium tiers. We believe essential developer tools should be accessible to everyone." },
+        { "question": "Is my data safe?", "answer": "Absolutely. All tools run entirely in your browser using JavaScript. Your data never leaves your device and is never sent to our servers. You can verify this by checking your browser's network tab while using any tool." },
+        { "question": "Do I need to create an account?", "answer": "No account or registration is required. Just visit any tool page and start using it immediately. We don't collect personal information or require sign-ups." },
+        { "question": "Can I use these tools offline?", "answer": "Once a page is loaded, most tools will continue to work offline since they run entirely in your browser. However, you'll need an internet connection to initially load the page." },
+        { "question": "How do you make money?", "answer": "OneDevKit is currently a passion project. We may add non-intrusive, privacy-respecting advertising in the future, but your privacy and user experience will always come first." },
+        { "question": "Can I suggest a new tool?", "answer": "Absolutely! We love hearing from our users. Visit our contact page to send us your suggestions." },
+        { "question": "Why do some tools require file uploads?", "answer": "Some tools work with files (like image converters). When you select a file, it's processed entirely in your browser - the file is never uploaded to any server. This is done using the browser's File API." },
+        { "question": "Do you use cookies?", "answer": "We use minimal cookies only for essential functionality like remembering your theme preference (light/dark mode). We don't use tracking cookies or sell your data." },
+        { "question": "Is OneDevKit open source?", "answer": "While our source code is not publicly available, you can inspect all client-side code in your browser's developer tools. Everything that runs is visible and verifiable." },
+        { "question": "What browsers are supported?", "answer": "OneDevKit works on all modern browsers including Chrome, Firefox, Safari, and Edge. We recommend using the latest version for the best experience." }
+      ],
+      "moreQuestions": {
+        "title": "Still Have Questions?",
+        "text": "If you couldn't find what you're looking for, feel free to",
+        "contactUs": "contact us"
+      }
+    },
+    "privacy": {
+      "title": "Privacy Policy",
+      "metaDescription": "OneDevKit privacy policy. Learn how we protect your privacy - all tools run in your browser.",
+      "keywords": "privacy policy, data protection, GDPR, CCPA",
+      "heading": "Privacy Policy",
+      "lastUpdated": "Last Updated",
+      "date": "December 2024",
+      "overview": {
+        "title": "Overview",
+        "text": "At OneDevKit, your privacy is our top priority. This Privacy Policy explains how we handle information when you use our website and tools. The short version: we collect almost nothing, and your data never leaves your browser."
+      },
+      "notCollected": {
+        "title": "Information We Don't Collect",
+        "intro": "We want to be crystal clear about what we don't collect:",
+        "personal": { "title": "Personal Information:", "text": "We don't ask for or store your name, email, or any identifying information" },
+        "toolData": { "title": "Tool Input Data:", "text": "Any data you enter into our tools (JSON, text, passwords, etc.) is processed entirely in your browser and never sent to our servers" },
+        "files": { "title": "Files:", "text": "Files you upload to our tools are never transferred to our servers" },
+        "passwords": { "title": "Passwords or Sensitive Data:", "text": "We never see, store, or have access to any sensitive data you process using our tools" }
+      },
+      "collected": {
+        "title": "Information We May Collect",
+        "intro": "We use privacy-respecting analytics to understand basic traffic patterns. This may include:",
+        "pageViews": { "title": "Page Views:", "text": "Which pages are visited (without identifying who visited them)" },
+        "referrer": { "title": "Referrer:", "text": "How you found our site (e.g., search engine, direct link)" },
+        "device": { "title": "Device Type:", "text": "General device category (desktop, mobile, tablet)" },
+        "country": { "title": "Country:", "text": "Approximate geographic location at the country level" },
+        "note": "This data is aggregated and anonymous - we cannot identify individual users."
+      },
+      "howToolsWork": {
+        "title": "How Our Tools Work",
+        "intro": "All OneDevKit tools are designed with privacy in mind:",
+        "browser": { "title": "Client-Side Processing:", "text": "All tools run entirely in your browser using JavaScript" },
+        "noServer": { "title": "No Server Communication:", "text": "Data you enter is never sent to our servers or any third party" },
+        "noStorage": { "title": "No Storage:", "text": "We don't store your input data anywhere - when you close the page, it's gone" },
+        "inspect": { "title": "Verifiable:", "text": "You can inspect our code using your browser's developer tools to verify this" }
+      },
+      "cookies": {
+        "title": "Cookies",
+        "intro": "We use minimal cookies for essential functionality only:",
+        "theme": { "title": "Theme Preference:", "text": "Remembers your light/dark mode choice" },
+        "language": { "title": "Language Preference:", "text": "Remembers your preferred language" },
+        "analytics": { "title": "Analytics (if enabled):", "text": "Anonymous analytics cookies that don't track personal information" },
+        "note": "We do not use advertising cookies, tracking pixels, or third-party marketing tools."
+      },
+      "thirdParty": {
+        "title": "Third-Party Services",
+        "intro": "We minimize the use of third-party services. When we do use them, we choose privacy-respecting options:",
+        "hosting": { "title": "Hosting:", "text": "Our site is hosted on secure, reputable infrastructure" },
+        "analyticsService": { "title": "Analytics:", "text": "We use privacy-focused analytics that don't track individual users" },
+        "cdn": { "title": "CDN:", "text": "We may use content delivery networks to serve static assets quickly" },
+        "note": "We do not use social media widgets, advertising networks, or other tracking-heavy third-party services."
+      },
+      "children": {
+        "title": "Children's Privacy",
+        "text": "OneDevKit is a general-purpose developer tools website. We do not knowingly collect information from children under 13. Since we don't collect personal information from anyone, this is not a concern for our service."
+      },
+      "changes": {
+        "title": "Changes to This Policy",
+        "text": "We may update this Privacy Policy from time to time. When we make changes, we'll update the \"Last Updated\" date at the top of this page. We encourage you to review this policy periodically."
+      },
+      "contactSection": {
+        "title": "Contact Us",
+        "text": "If you have any questions about this Privacy Policy or our privacy practices, please contact us at"
+      }
+    },
+    "terms": {
+      "title": "Terms of Service",
+      "metaDescription": "OneDevKit terms of service. Read the terms for using our free developer tools.",
+      "keywords": "terms of service, terms and conditions, legal",
+      "heading": "Terms of Service",
+      "lastUpdated": "Last Updated",
+      "date": "December 2024",
+      "acceptance": {
+        "title": "1. Acceptance of Terms",
+        "text": "By accessing and using OneDevKit (\"the Service\"), you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our Service."
+      },
+      "description": {
+        "title": "2. Description of Service",
+        "text": "OneDevKit provides free, browser-based developer tools for various purposes including text manipulation, encoding/decoding, formatting, and other utilities. All tools run entirely in your browser and do not require server-side processing of your data."
+      },
+      "useOfService": {
+        "title": "3. Use of Service",
+        "intro": "You agree to use OneDevKit only for lawful purposes. You must not:",
+        "items": [
+          "Use the Service for any illegal or unauthorized purpose",
+          "Attempt to interfere with or disrupt the Service or servers",
+          "Attempt to access areas of the Service that you are not authorized to access",
+          "Use automated systems or software to extract data from the Service",
+          "Transmit any viruses, malware, or other harmful code"
+        ]
+      },
+      "intellectual": {
+        "title": "4. Intellectual Property",
+        "text": "The Service and its original content, features, and functionality are owned by OneDevKit and are protected by international copyright, trademark, and other intellectual property laws. You may use our tools for personal and commercial purposes, but you may not copy, modify, or redistribute the website itself without permission."
+      },
+      "userContent": {
+        "title": "5. User Content",
+        "intro": "Any data you enter into our tools remains entirely yours. Since all processing happens in your browser:",
+        "items": [
+          "We never see, access, or store your input data",
+          "You retain all rights to any content you process using our tools",
+          "You are responsible for ensuring you have the right to use any data you input"
+        ]
+      },
+      "disclaimer": {
+        "title": "6. Disclaimer of Warranties",
+        "intro": "The Service is provided \"as is\" and \"as available\" without warranties of any kind, either express or implied. We do not guarantee that:",
+        "items": [
+          "The Service will be uninterrupted or error-free",
+          "The results from using our tools will be accurate or reliable",
+          "Any errors in the Service will be corrected"
+        ],
+        "note": "You use the Service at your own risk. Always verify important results independently."
+      },
+      "limitation": {
+        "title": "7. Limitation of Liability",
+        "intro": "To the fullest extent permitted by law, OneDevKit shall not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits or revenues, whether incurred directly or indirectly, or any loss of data, use, goodwill, or other intangible losses resulting from:",
+        "items": [
+          "Your use or inability to use the Service",
+          "Any unauthorized access to or use of our servers",
+          "Any errors or omissions in any content",
+          "Any other matter relating to the Service"
+        ]
+      },
+      "changesToTerms": {
+        "title": "8. Changes to Terms",
+        "text": "We reserve the right to modify these Terms of Service at any time. When we make changes, we will update the \"Last Updated\" date at the top of this page. Your continued use of the Service after any changes indicates your acceptance of the new terms."
+      },
+      "governing": {
+        "title": "9. Governing Law",
+        "text": "These Terms shall be governed by and construed in accordance with applicable laws, without regard to conflict of law principles."
+      },
+      "contactSection": {
+        "title": "10. Contact Us",
+        "text": "If you have any questions about these Terms of Service, please contact us at"
+      }
     }
   },
 
@@ -953,6 +1169,7 @@
     "company": "Company",
     "legal": "Legal",
     "followUs": "Follow Us",
+    "allRightsReserved": "All rights reserved.",
     "copyright": "© {year} OneDevKit. All rights reserved.",
     "disclaimer": "Tools provided \"as is\" without warranty."
   },

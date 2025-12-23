@@ -1,4 +1,8 @@
 {# Privacy Policy Page Partial #}
+<style>
+  .last-updated { color: var(--text-secondary); font-style: italic; margin-bottom: 2rem; }
+</style>
+
 {% block schema %}
 <script type="application/ld+json">
 {
@@ -21,48 +25,59 @@
 </section>
 
 <section class="content-section">
-  <h2>{{ "pages.privacy.dataCollection.title" | t(currentLang) }}</h2>
-  <h3>{{ "pages.privacy.dataCollection.notCollected.title" | t(currentLang) }}</h3>
+  <h2>{{ "pages.privacy.notCollected.title" | t(currentLang) }}</h2>
+  <p>{{ "pages.privacy.notCollected.intro" | t(currentLang) }}</p>
   <ul>
-    <li>{{ "pages.privacy.dataCollection.notCollected.items.personal" | t(currentLang) }}</li>
-    <li>{{ "pages.privacy.dataCollection.notCollected.items.toolData" | t(currentLang) }}</li>
-    <li>{{ "pages.privacy.dataCollection.notCollected.items.files" | t(currentLang) }}</li>
-    <li>{{ "pages.privacy.dataCollection.notCollected.items.passwords" | t(currentLang) }}</li>
-  </ul>
-  <h3>{{ "pages.privacy.dataCollection.collected.title" | t(currentLang) }}</h3>
-  <p>{{ "pages.privacy.dataCollection.collected.text" | t(currentLang) }}</p>
-  <ul>
-    <li>{{ "pages.privacy.dataCollection.collected.items.pages" | t(currentLang) }}</li>
-    <li>{{ "pages.privacy.dataCollection.collected.items.referrer" | t(currentLang) }}</li>
-    <li>{{ "pages.privacy.dataCollection.collected.items.device" | t(currentLang) }}</li>
-    <li>{{ "pages.privacy.dataCollection.collected.items.country" | t(currentLang) }}</li>
+    <li><strong>{{ "pages.privacy.notCollected.personal.title" | t(currentLang) }}</strong> {{ "pages.privacy.notCollected.personal.text" | t(currentLang) }}</li>
+    <li><strong>{{ "pages.privacy.notCollected.toolData.title" | t(currentLang) }}</strong> {{ "pages.privacy.notCollected.toolData.text" | t(currentLang) }}</li>
+    <li><strong>{{ "pages.privacy.notCollected.files.title" | t(currentLang) }}</strong> {{ "pages.privacy.notCollected.files.text" | t(currentLang) }}</li>
+    <li><strong>{{ "pages.privacy.notCollected.passwords.title" | t(currentLang) }}</strong> {{ "pages.privacy.notCollected.passwords.text" | t(currentLang) }}</li>
   </ul>
 </section>
 
 <section class="content-section">
-  <h2>{{ "pages.privacy.howToolsWork.title" | t(currentLang) }}</h2>
-  <p>{{ "pages.privacy.howToolsWork.text" | t(currentLang) }}</p>
+  <h2>{{ "pages.privacy.collected.title" | t(currentLang) }}</h2>
+  <p>{{ "pages.privacy.collected.intro" | t(currentLang) }}</p>
   <ul>
-    <li>{{ "pages.privacy.howToolsWork.items.browser" | t(currentLang) }}</li>
-    <li>{{ "pages.privacy.howToolsWork.items.noServer" | t(currentLang) }}</li>
-    <li>{{ "pages.privacy.howToolsWork.items.noStorage" | t(currentLang) }}</li>
-    <li>{{ "pages.privacy.howToolsWork.items.inspect" | t(currentLang) }}</li>
+    <li><strong>{{ "pages.privacy.collected.pageViews.title" | t(currentLang) }}</strong> {{ "pages.privacy.collected.pageViews.text" | t(currentLang) }}</li>
+    <li><strong>{{ "pages.privacy.collected.referrer.title" | t(currentLang) }}</strong> {{ "pages.privacy.collected.referrer.text" | t(currentLang) }}</li>
+    <li><strong>{{ "pages.privacy.collected.device.title" | t(currentLang) }}</strong> {{ "pages.privacy.collected.device.text" | t(currentLang) }}</li>
+    <li><strong>{{ "pages.privacy.collected.country.title" | t(currentLang) }}</strong> {{ "pages.privacy.collected.country.text" | t(currentLang) }}</li>
+  </ul>
+  <p>{{ "pages.privacy.collected.note" | t(currentLang) }}</p>
+</section>
+
+<section class="content-section">
+  <h2>{{ "pages.privacy.howToolsWork.title" | t(currentLang) }}</h2>
+  <p>{{ "pages.privacy.howToolsWork.intro" | t(currentLang) }}</p>
+  <ul>
+    <li><strong>{{ "pages.privacy.howToolsWork.browser.title" | t(currentLang) }}</strong> {{ "pages.privacy.howToolsWork.browser.text" | t(currentLang) }}</li>
+    <li><strong>{{ "pages.privacy.howToolsWork.noServer.title" | t(currentLang) }}</strong> {{ "pages.privacy.howToolsWork.noServer.text" | t(currentLang) }}</li>
+    <li><strong>{{ "pages.privacy.howToolsWork.noStorage.title" | t(currentLang) }}</strong> {{ "pages.privacy.howToolsWork.noStorage.text" | t(currentLang) }}</li>
+    <li><strong>{{ "pages.privacy.howToolsWork.inspect.title" | t(currentLang) }}</strong> {{ "pages.privacy.howToolsWork.inspect.text" | t(currentLang) }}</li>
   </ul>
 </section>
 
 <section class="content-section">
   <h2>{{ "pages.privacy.cookies.title" | t(currentLang) }}</h2>
-  <p>{{ "pages.privacy.cookies.text" | t(currentLang) }}</p>
+  <p>{{ "pages.privacy.cookies.intro" | t(currentLang) }}</p>
   <ul>
-    <li><strong>{{ "pages.privacy.cookies.items.theme.title" | t(currentLang) }}</strong> {{ "pages.privacy.cookies.items.theme.desc" | t(currentLang) }}</li>
-    <li><strong>{{ "pages.privacy.cookies.items.consent.title" | t(currentLang) }}</strong> {{ "pages.privacy.cookies.items.consent.desc" | t(currentLang) }}</li>
-    <li><strong>{{ "pages.privacy.cookies.items.analytics.title" | t(currentLang) }}</strong> {{ "pages.privacy.cookies.items.analytics.desc" | t(currentLang) }}</li>
+    <li><strong>{{ "pages.privacy.cookies.theme.title" | t(currentLang) }}</strong> {{ "pages.privacy.cookies.theme.text" | t(currentLang) }}</li>
+    <li><strong>{{ "pages.privacy.cookies.language.title" | t(currentLang) }}</strong> {{ "pages.privacy.cookies.language.text" | t(currentLang) }}</li>
+    <li><strong>{{ "pages.privacy.cookies.analytics.title" | t(currentLang) }}</strong> {{ "pages.privacy.cookies.analytics.text" | t(currentLang) }}</li>
   </ul>
+  <p>{{ "pages.privacy.cookies.note" | t(currentLang) }}</p>
 </section>
 
 <section class="content-section">
   <h2>{{ "pages.privacy.thirdParty.title" | t(currentLang) }}</h2>
-  <p>{{ "pages.privacy.thirdParty.text" | t(currentLang) }}</p>
+  <p>{{ "pages.privacy.thirdParty.intro" | t(currentLang) }}</p>
+  <ul>
+    <li><strong>{{ "pages.privacy.thirdParty.hosting.title" | t(currentLang) }}</strong> {{ "pages.privacy.thirdParty.hosting.text" | t(currentLang) }}</li>
+    <li><strong>{{ "pages.privacy.thirdParty.analyticsService.title" | t(currentLang) }}</strong> {{ "pages.privacy.thirdParty.analyticsService.text" | t(currentLang) }}</li>
+    <li><strong>{{ "pages.privacy.thirdParty.cdn.title" | t(currentLang) }}</strong> {{ "pages.privacy.thirdParty.cdn.text" | t(currentLang) }}</li>
+  </ul>
+  <p>{{ "pages.privacy.thirdParty.note" | t(currentLang) }}</p>
 </section>
 
 <section class="content-section">
@@ -76,6 +91,6 @@
 </section>
 
 <section class="content-section">
-  <h2>{{ "pages.privacy.contact.title" | t(currentLang) }}</h2>
-  <p>{{ "pages.privacy.contact.text" | t(currentLang) }} <a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+  <h2>{{ "pages.privacy.contactSection.title" | t(currentLang) }}</h2>
+  <p>{{ "pages.privacy.contactSection.text" | t(currentLang) }} <a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
 </section>

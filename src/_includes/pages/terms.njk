@@ -1,4 +1,8 @@
 {# Terms of Service Page Partial #}
+<style>
+  .last-updated { color: var(--text-secondary); font-style: italic; margin-bottom: 2rem; }
+</style>
+
 {% block schema %}
 <script type="application/ld+json">
 {
@@ -29,10 +33,10 @@
   <h2>{{ "pages.terms.useOfService.title" | t(currentLang) }}</h2>
   <p>{{ "pages.terms.useOfService.intro" | t(currentLang) }}</p>
   <ul>
-    <li>{{ "pages.terms.useOfService.items.lawful" | t(currentLang) }}</li>
-    <li>{{ "pages.terms.useOfService.items.noHarm" | t(currentLang) }}</li>
-    <li>{{ "pages.terms.useOfService.items.noInterference" | t(currentLang) }}</li>
-    <li>{{ "pages.terms.useOfService.items.noReverse" | t(currentLang) }}</li>
+    {% set useItems = "pages.terms.useOfService.items" | t(currentLang) %}
+    {% for item in useItems %}
+    <li>{{ item }}</li>
+    {% endfor %}
   </ul>
 </section>
 
@@ -42,18 +46,42 @@
 </section>
 
 <section class="content-section">
+  <h2>{{ "pages.terms.userContent.title" | t(currentLang) }}</h2>
+  <p>{{ "pages.terms.userContent.intro" | t(currentLang) }}</p>
+  <ul>
+    {% set userItems = "pages.terms.userContent.items" | t(currentLang) %}
+    {% for item in userItems %}
+    <li>{{ item }}</li>
+    {% endfor %}
+  </ul>
+</section>
+
+<section class="content-section">
   <h2>{{ "pages.terms.disclaimer.title" | t(currentLang) }}</h2>
-  <p>{{ "pages.terms.disclaimer.text" | t(currentLang) }}</p>
+  <p>{{ "pages.terms.disclaimer.intro" | t(currentLang) }}</p>
+  <ul>
+    {% set disclaimerItems = "pages.terms.disclaimer.items" | t(currentLang) %}
+    {% for item in disclaimerItems %}
+    <li>{{ item }}</li>
+    {% endfor %}
+  </ul>
+  <p>{{ "pages.terms.disclaimer.note" | t(currentLang) }}</p>
 </section>
 
 <section class="content-section">
   <h2>{{ "pages.terms.limitation.title" | t(currentLang) }}</h2>
-  <p>{{ "pages.terms.limitation.text" | t(currentLang) }}</p>
+  <p>{{ "pages.terms.limitation.intro" | t(currentLang) }}</p>
+  <ul>
+    {% set limitItems = "pages.terms.limitation.items" | t(currentLang) %}
+    {% for item in limitItems %}
+    <li>{{ item }}</li>
+    {% endfor %}
+  </ul>
 </section>
 
 <section class="content-section">
-  <h2>{{ "pages.terms.changes.title" | t(currentLang) }}</h2>
-  <p>{{ "pages.terms.changes.text" | t(currentLang) }}</p>
+  <h2>{{ "pages.terms.changesToTerms.title" | t(currentLang) }}</h2>
+  <p>{{ "pages.terms.changesToTerms.text" | t(currentLang) }}</p>
 </section>
 
 <section class="content-section">
@@ -62,6 +90,6 @@
 </section>
 
 <section class="content-section">
-  <h2>{{ "pages.terms.contact.title" | t(currentLang) }}</h2>
-  <p>{{ "pages.terms.contact.text" | t(currentLang) }} <a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+  <h2>{{ "pages.terms.contactSection.title" | t(currentLang) }}</h2>
+  <p>{{ "pages.terms.contactSection.text" | t(currentLang) }} <a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
 </section>
