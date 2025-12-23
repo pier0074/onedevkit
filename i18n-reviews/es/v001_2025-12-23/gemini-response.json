@@ -1,0 +1,6 @@
+[]
+
+// Instructions:
+// 1. Copy the contents of export.md to Gemini Pro
+// 2. Replace this file with Gemini's JSON response
+// 3. Run: npm run i18n:review:apply -- --lang=es
