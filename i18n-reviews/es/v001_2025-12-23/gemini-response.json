@@ -1,6 +1,107 @@
-[]
-
-// Instructions:
-// 1. Copy the contents of export.md to Gemini Pro
-// 2. Replace this file with Gemini's JSON response
-// 3. Run: npm run i18n:review:apply -- --lang=es
+[
+  {
+    "key": "site.tagline",
+    "issue": "naturalness",
+    "current": "Herramientas de Desarrollador Gratis",
+    "suggested": "Herramientas gratuitas para desarrolladores",
+    "explanation": "The current translation feels like a literal word-for-word translation. 'Herramientas gratuitas para desarrolladores' is the standard, professional phrasing for a site tagline."
+  },
+  {
+    "key": "site.metaTitle",
+    "issue": "naturalness",
+    "current": "OneDevKit - Herramientas de Desarrollador Gratis",
+    "suggested": "OneDevKit - Herramientas gratuitas para desarrolladores",
+    "explanation": "Aligning with the tagline correction for consistency and better Spanish phrasing in search results."
+  },
+  {
+    "key": "site.description",
+    "issue": "accuracy",
+    "current": "Herramientas de desarrollo online gratuitas para tareas cotidianas.",
+    "suggested": "Herramientas de desarrollo online gratuitas para tareas cotidianas: formateador JSON, codificador Base64, decodificador JWT, generador de hashes y más.",
+    "explanation": "The current Spanish translation truncated the list of tools present in the English source. Including the list is important for SEO and user information."
+  },
+  {
+    "key": "common.dragDrop",
+    "issue": "grammar",
+    "current": "Arrastrar y soltar o clic para subir",
+    "suggested": "Arrastra y suelta o haz clic para subir",
+    "explanation": "The current text mixes infinitives ('Arrastrar') with a noun ('clic'). The suggestion uses the imperative mode consistently ('Drag, drop, or click'), which is standard for UI instructions."
+  },
+  {
+    "key": "common.speakingTime",
+    "issue": "naturalness",
+    "current": "Tiempo de habla",
+    "suggested": "Tiempo de lectura en voz alta",
+    "explanation": "'Tiempo de habla' sounds like 'talk time' (e.g., cell phone minutes). In the context of a word counter, the standard term for reading aloud is 'Tiempo de lectura en voz alta'."
+  },
+  {
+    "key": "common.caseSensitive",
+    "issue": "naturalness",
+    "current": "Sensible a mayúsculas",
+    "suggested": "Distinguir mayúsculas y minúsculas",
+    "explanation": "'Sensible a mayúsculas' is a direct translation of the English idiom (Anglicism). The standard UI term in Spanish is 'Distinguir mayúsculas y minúsculas'."
+  },
+  {
+    "key": "common.payload",
+    "issue": "terminology",
+    "current": "Carga Útil",
+    "suggested": "Payload",
+    "explanation": "While 'Carga útil' is the literal translation, in the context of web development (JWTs, API requests), Spanish-speaking developers almost exclusively use the English term 'Payload'."
+  },
+  {
+    "key": "common.issuedAt",
+    "issue": "accuracy",
+    "current": "Emitido en",
+    "suggested": "Fecha de emisión",
+    "explanation": "'Emitido en' can be ambiguous (implying a location). In the context of JWTs ('iat'), it refers to a time, so 'Fecha de emisión' is the precise technical translation."
+  },
+  {
+    "key": "tools.json-formatter.description",
+    "issue": "naturalness",
+    "current": "Formatea, valida y embellece datos JSON al instante. Soporta minificación y resaltado de sintaxis.",
+    "suggested": "Formatea, valida y embellece datos JSON al instante. Permite minificar y resaltar sintaxis.",
+    "explanation": "'Soporta' is often considered a 'false friend' in Spanish (meaning 'to tolerate'). 'Permite' (allows) or 'Admite' is more natural for software capabilities."
+  },
+  {
+    "key": "tools.jwt-decoder.description",
+    "issue": "grammar",
+    "current": "Visualiza header, payload y verifica la estructura del token al instante.",
+    "suggested": "Visualiza el encabezado (header), el payload y verifica la estructura del token al instante.",
+    "explanation": "The current text lists English terms without articles, which sounds robotic in Spanish. Adding articles ('el payload') and the Spanish equivalent for header ('el encabezado') improves flow."
+  },
+  {
+    "key": "tools.password-generator.keywords",
+    "issue": "naturalness",
+    "current": "generador de contraseñas, contraseña aleatoria, generador de contraseñas seguras, creador de contraseñas fuertes, generar contraseña online",
+    "suggested": "generador de contraseñas, contraseña aleatoria, contraseñas seguras, crear contraseñas, generar contraseñas online",
+    "explanation": "'Contraseñas fuertes' is a literal translation of 'strong passwords'. The natural collocation in Spanish regarding security is 'contraseñas seguras' or 'robustas'."
+  },
+  {
+    "key": "tools.image-compressor.fullName",
+    "issue": "grammar",
+    "current": "Compresor de Imágenes a KB Específico",
+    "suggested": "Compresor de imágenes a un tamaño específico (KB)",
+    "explanation": "The current translation is grammatically awkward. The suggested version clarifies that the compressor targets a specific file size."
+  },
+  {
+    "key": "tools.passport-photo.name",
+    "issue": "naturalness",
+    "current": "Foto Pasaporte",
+    "suggested": "Foto tipo Pasaporte",
+    "explanation": "'Foto Pasaporte' sounds robotic. 'Foto tipo Pasaporte' or 'Foto para pasaporte' is how a native speaker describes this tool."
+  },
+  {
+    "key": "pages.about.letUsKnow",
+    "issue": "grammar",
+    "current": "Háznoslo saber",
+    "suggested": "hacérnoslo saber",
+    "explanation": "Context mismatch: This text completes the sentence 'no dudes en...' ('feel free to...'). 'Háznoslo saber' is imperative (Command), which breaks the grammar. It must be the infinitive 'hacérnoslo saber'."
+  },
+  {
+    "key": "pages.privacy.notCollected.personal.text",
+    "issue": "terminology",
+    "current": "No pedimos ni almacenamos tu nombre, correo electrónico ni ninguna información identificable",
+    "suggested": "No pedimos ni almacenamos tu nombre, correo electrónico ni ninguna información de identificación personal",
+    "explanation": "'Información identificable' is vague. The standard legal/technical translation for PII (Personally Identifiable Information) is 'Información de identificación personal'."
+  }
+]
