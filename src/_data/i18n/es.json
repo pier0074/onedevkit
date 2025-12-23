@@ -186,7 +186,71 @@
     "decodedPlaceholder": "El contenido decodificado aparecerá aquí",
     "encodedPlaceholder": "El contenido codificado aparecerá aquí",
     "hashPlaceholder": "Los valores hash aparecerán aquí",
-    "previewPlaceholder": "La vista previa aparecerá aquí"
+    "previewPlaceholder": "La vista previa aparecerá aquí",
+    "enter": "Introducir",
+    "tab": "Tabulación",
+    "useNow": "Usar Ahora",
+    "startOver": "Empezar de Nuevo",
+    "center": "Centrar",
+    "custom": "Personalizado",
+    "original": "Original",
+    "compressed": "Comprimido",
+    "reduction": "Reducción",
+    "dimensions": "Dimensiones",
+    "fileSize": "Tamaño de Archivo",
+    "status": "Estado",
+    "pixels": "Píxeles",
+    "maxFileSize": "Tamaño Máximo",
+    "background": "Fondo",
+    "white": "Blanco",
+    "maxKb": "Máx KB",
+    "kb": "KB",
+    "targetSize": "Tamaño Objetivo",
+    "selectPlatform": "Seleccionar Plataforma",
+    "selectSize": "Seleccionar Tamaño",
+    "type": "Tipo",
+    "ratio": "Proporción",
+    "transform": "Transformar",
+    "position": "Posición",
+    "history": "Historial",
+    "undo": "Deshacer",
+    "redo": "Rehacer",
+    "zoom": "Zoom",
+    "brightness": "Brillo",
+    "contrast": "Contraste",
+    "saturation": "Saturación",
+    "showGrid": "Mostrar Cuadrícula",
+    "keyboardShortcuts": "Atajos de Teclado",
+    "regularExpression": "Expresión Regular",
+    "testString": "Cadena de Prueba",
+    "groups": "Grupos",
+    "execTime": "Tiempo de Ejecución",
+    "matchDetails": "Detalles de Coincidencias",
+    "all": "Todo",
+    "markdown": "Markdown",
+    "noSpaces": "sin espacios",
+    "popular": "Populares",
+    "asia": "Asia",
+    "other": "Otros",
+    "customSize": "Tamaño Personalizado",
+    "milliseconds": "milisegundos",
+    "encoded": "Codificado",
+    "eg": "ej.",
+    "or": "o",
+    "startTypingOrPaste": "Empieza a escribir o pega tu texto aquí...",
+    "clickToUploadPhoto": "Haz clic para subir tu foto",
+    "dragToPan": "arrastra para mover",
+    "dragPreviewOrUseButtons": "arrastra la vista previa o usa los botones",
+    "rotate90Left": "↺ 90°",
+    "rotate90Right": "↻ 90°",
+    "flipHorizontal": "↔ Voltear",
+    "flipVertical": "↕ Voltear",
+    "selectCountryDocType": "Seleccionar País / Tipo de Documento",
+    "printLayout": "Diseño de Impresión (4×6)",
+    "jpgPngMax": "JPG, PNG (Máx {size})",
+    "supportsFormats": "Soporta JPG, PNG, WebP (máx {size})",
+    "dropImageOrClick": "Suelta imagen(es) aquí o haz clic para subir",
+    "dropMultipleHint": "Suelta múltiples archivos para procesamiento por lotes"
   },
   "categories": {
     "Code Tools": "Herramientas de Código",
@@ -222,6 +286,9 @@
       "metaTitle": "Formateador y Validador JSON - Herramienta Online Gratis | OneDevKit",
       "metaDescription": "Formateador y validador JSON online gratuito. Embellece, minifica y valida JSON con resaltado de sintaxis.",
       "keywords": "formateador json, validador json, embellecedor json, formatear json online, json lint, parser json, embellecer json, minificar json",
+      "ui": {
+        "placeholder": "{\"clave\": \"valor\", \"array\": [1, 2, 3]}"
+      },
       "howTo": {
         "title": "Cómo Usar",
         "steps": [
@@ -330,6 +397,11 @@
       "metaTitle": "Decodificador e Inspector JWT - Herramienta Online Gratis | OneDevKit",
       "metaDescription": "Decodificador e inspector JWT gratuito. Decodifica JSON Web Tokens para ver header, payload y firma.",
       "keywords": "decodificador jwt, depurador jwt, decodificador json web token, parser jwt, decodificar jwt online, inspector jwt",
+      "ui": {
+        "enterToken": "Introducir Token JWT",
+        "placeholder": "Pega tu token JWT aquí (eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...)",
+        "decodeButton": "Decodificar JWT"
+      },
       "howTo": {
         "title": "Cómo Usar",
         "steps": [
@@ -402,6 +474,11 @@
       "metaTitle": "Generador UUID - Genera UUIDs Aleatorios | OneDevKit",
       "metaDescription": "Genera identificadores UUID v4 aleatorios al instante. Crea IDs únicos para bases de datos y APIs.",
       "keywords": "generador uuid, generador guid, uuid aleatorio, uuid v4, generador de id único, generar uuid online",
+      "ui": {
+        "placeholder": "ej., 550e8400-e29b-41d4-a716-446655440000",
+        "enterToValidate": "Introduce UUID para validar",
+        "rangeHint": "(1-100)"
+      },
       "howTo": {
         "title": "Cómo Usar",
         "steps": [
@@ -474,6 +551,12 @@
       "metaTitle": "Generador Lorem Ipsum - Texto de Relleno | OneDevKit",
       "metaDescription": "Genera texto de relleno Lorem Ipsum para diseños y maquetas. Elige párrafos, oraciones o palabras.",
       "keywords": "generador lorem ipsum, texto de relleno, generador de texto ficticio, lipsum, generador de texto de ejemplo",
+      "ui": {
+        "numberOfParagraphs": "Número de Párrafos",
+        "numberOfSentences": "Número de Oraciones",
+        "numberOfWords": "Número de Palabras",
+        "placeholder": "Haz clic en \"Generar\" para crear texto Lorem Ipsum"
+      },
       "howTo": {
         "title": "Cómo Usar",
         "steps": [
@@ -506,6 +589,29 @@
       "metaTitle": "Generador de Códigos QR - Crea Códigos QR Gratis | OneDevKit",
       "metaDescription": "Genera códigos QR para URLs, texto, WiFi y más. Generador de códigos QR gratuito con colores personalizables.",
       "keywords": "generador de códigos qr, crear código qr, creador de códigos qr, código qr gratis, generar código qr online, creador qr",
+      "ui": {
+        "enterUrlOrText": "Introduce URL o Texto",
+        "placeholder": "https://ejemplo.com o cualquier texto...",
+        "hint": "Introduce el contenido que deseas codificar en el código QR",
+        "generateInstruction": "Introduce texto o URL arriba para generar un código QR",
+        "sizes": {
+          "tiny": "Diminuto (64×64)",
+          "small": "Pequeño (128×128)",
+          "compact": "Compacto (200×200)",
+          "medium": "Mediano (256×256)",
+          "standard": "Estándar (300×300)",
+          "large": "Grande (384×384)",
+          "extraLarge": "Extra Grande (512×512)",
+          "huge": "Enorme (768×768)",
+          "maximum": "Máximo (1024×1024)"
+        },
+        "errorCorrection": {
+          "low": "Bajo (7%)",
+          "medium": "Medio (15%)",
+          "quartile": "Cuartil (25%)",
+          "high": "Alto (30%)"
+        }
+      },
       "howTo": {
         "title": "Cómo Usar",
         "steps": [
@@ -542,6 +648,14 @@
       "metaTitle": "Convertidor de Timestamp Unix - Fecha a Timestamp | OneDevKit",
       "metaDescription": "Convierte timestamps Unix a fechas legibles y viceversa. Soporte para múltiples formatos y zonas horarias.",
       "keywords": "convertidor timestamp unix, convertidor epoch, timestamp a fecha, fecha a timestamp, convertidor tiempo unix",
+      "ui": {
+        "currentUnixTimestamp": "Timestamp Unix Actual",
+        "timestampToDate": "Timestamp Unix → Fecha",
+        "dateToTimestamp": "Fecha → Timestamp Unix",
+        "enterTimestamp": "Introducir Timestamp Unix",
+        "enterDateTime": "Introducir Fecha y Hora",
+        "timestampPlaceholder": "ej., 1703001600"
+      },
       "howTo": {
         "title": "Cómo Usar",
         "steps": [
@@ -574,6 +688,20 @@
       "metaTitle": "Probador y Depurador Regex - Prueba Expresiones Regulares | OneDevKit",
       "metaDescription": "Prueba y depura expresiones regulares en tiempo real. Ve coincidencias resaltadas con grupos de captura.",
       "keywords": "probador regex, probador de expresiones regulares, depurador regex, validador regex, probar regex online, verificador regex",
+      "ui": {
+        "patternPlaceholder": "Introduce patrón regex (ej., \\d+)",
+        "testStringPlaceholder": "Introduce texto para probar contra el patrón regex...",
+        "matchesHighlighted": "Coincidencias Resaltadas",
+        "matchesInstruction": "Introduce un patrón y cadena de prueba para ver las coincidencias resaltadas.",
+        "matchDetailsPlaceholder": "Los detalles de coincidencias aparecerán aquí.",
+        "flags": {
+          "global": "Global (g)",
+          "caseInsensitive": "Ignorar Mayúsculas (i)",
+          "multiline": "Multilínea (m)",
+          "dotAll": "Punto Todo (s)",
+          "unicode": "Unicode (u)"
+        }
+      },
       "howTo": {
         "title": "Cómo Usar",
         "steps": [
@@ -670,6 +798,9 @@
       "metaTitle": "Editor y Vista Previa Markdown - Vista Previa en Vivo | OneDevKit",
       "metaDescription": "Escribe Markdown con vista previa en vivo. Soporta GitHub Flavored Markdown, tablas, bloques de código y más.",
       "keywords": "editor markdown, vista previa markdown, markdown online, github markdown, markdown a html, editor md",
+      "ui": {
+        "defaultContent": "# ¡Hola, Markdown!\n\nComienza a escribir tu **Markdown** aquí.\n\n## Características\n- Vista previa en vivo\n- GitHub Flavored Markdown\n- Resaltado de sintaxis\n- ¡Y más!"
+      },
       "howTo": {
         "title": "Cómo Usar",
         "steps": [
@@ -770,6 +901,16 @@
       "metaTitle": "Compresor de Imágenes a KB Específico | OneDevKit",
       "metaDescription": "Comprime imágenes a tamaño exacto - 20KB, 50KB, 100KB. Perfecto para fotos de pasaporte y formularios. Gratis y privado.",
       "keywords": "compresor de imágenes, comprimir imagen a 20kb, comprimir imagen a 50kb, reducir tamaño de imagen, reductor de tamaño de imagen, comprimir foto online",
+      "ui": {
+        "uploadHint": "JPG, PNG o WebP (Máx 10MB)",
+        "sizePresets": {
+          "20kb": "20 KB",
+          "50kb": "50 KB",
+          "100kb": "100 KB",
+          "200kb": "200 KB",
+          "500kb": "500 KB"
+        }
+      },
       "howTo": {
         "title": "Cómo Usar",
         "steps": [
@@ -810,6 +951,27 @@
       "metaTitle": "Creador de Fotos de Pasaporte - Crea Fotos de Pasaporte | OneDevKit",
       "metaDescription": "Crea fotos de pasaporte y visa para cualquier país. Redimensiona a dimensiones exactas (2x2 pulgadas, 35x45mm).",
       "keywords": "creador foto pasaporte, tamaño foto pasaporte, foto visa, foto pasaporte 2x2, foto 35x45mm, foto pasaporte online",
+      "ui": {
+        "uploadHint": "JPG, PNG (Máx 10MB)",
+        "countries": {
+          "usa": "EE.UU. - Pasaporte (2×2 pulgadas)",
+          "india": "India - Pasaporte/Visa (2×2 pulgadas, 20-300KB)",
+          "uk": "Reino Unido - Pasaporte (35×45mm)",
+          "schengen": "Visa Schengen (35×45mm)",
+          "canada": "Canadá - Pasaporte (50×70mm)",
+          "australia": "Australia - Pasaporte (35×45mm)",
+          "china": "China - Visa (33×48mm)",
+          "japan": "Japón - Pasaporte (35×45mm)",
+          "singapore": "Singapur - Pasaporte (35×45mm)"
+        },
+        "specs": {
+          "size": "Tamaño",
+          "pixels": "Píxeles",
+          "maxFileSize": "Tamaño Máximo",
+          "background": "Fondo"
+        },
+        "downloadPhoto": "Descargar Foto"
+      },
       "howTo": {
         "title": "Cómo Usar",
         "steps": [
@@ -850,6 +1012,36 @@
       "metaTitle": "Redimensionador de Imágenes para Redes Sociales - Instagram, Facebook, Twitter | OneDevKit",
       "metaDescription": "Redimensiona imágenes para todas las redes sociales. Instagram, Facebook, LinkedIn, Twitter, YouTube, TikTok y más.",
       "keywords": "redimensionador redes sociales, tamaño foto instagram, tamaño imagen linkedin, dimensiones imagen twitter, tamaño portada facebook, redimensionar imagen para redes sociales",
+      "ui": {
+        "uploadHint": "Soporta JPG, PNG, WebP (máx 20MB) - Suelta múltiples archivos para procesamiento por lotes",
+        "platforms": {
+          "instagram": "Instagram",
+          "facebook": "Facebook",
+          "twitter": "Twitter/X",
+          "linkedin": "LinkedIn",
+          "youtube": "YouTube",
+          "tiktok": "TikTok",
+          "pinterest": "Pinterest",
+          "snapchat": "Snapchat",
+          "whatsapp": "WhatsApp",
+          "discord": "Discord",
+          "twitch": "Twitch",
+          "threads": "Threads",
+          "custom": "Personalizado"
+        },
+        "sizeTypes": {
+          "squarePost": "Publicación Cuadrada",
+          "portrait": "Vertical",
+          "landscape": "Horizontal",
+          "story": "Historia",
+          "profilePicture": "Foto de Perfil",
+          "coverPhoto": "Foto de Portada"
+        },
+        "borderPadding": "Borde/Relleno",
+        "cropToFill": "Recortar para Llenar",
+        "circleCrop": "Círculo",
+        "circleCropHint": "Recorte circular para fotos de perfil"
+      },
       "howTo": {
         "title": "Cómo Usar",
         "steps": [
