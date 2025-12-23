@@ -2,53 +2,69 @@
 
 This folder contains translation review history for traceability and future reference.
 
+## Quick Start
+
+```bash
+# Check status of all languages
+npm run i18n:status
+
+# Full language review (new language or periodic audit)
+npm run i18n:review -- --lang=es
+
+# Section review - all languages (for new tools)
+npm run i18n:review:section -- --section=tools.new-tool-id
+
+# Apply corrections
+npm run i18n:review:apply -- --lang=es
+npm run i18n:review:apply:section -- --section=tools.new-tool-id
+```
+
 ## Structure
 
 ```
 i18n-reviews/
-  {lang}/                          # Language code (es, fr, de, etc.)
-    v001_2024-12-23/               # Version with date
-      export.md                    # Translations sent to Gemini for review
-      gemini-response.json         # Gemini's corrections (paste here)
-      correction-report.md         # Generated report of applied changes
-    v002_2024-12-25/
-      ...
+├── README.md                           # This file
+├── ARCHITECTURE.md                     # Detailed architecture docs
+├── state.json                          # Tracks review state
+│
+├── {lang}/                             # Per-language full reviews
+│   └── v{NNN}_{date}/
+│       ├── export.md                   # Sent to Gemini
+│       ├── gemini-response.json        # Gemini's corrections
+│       └── correction-report.md        # Applied changes report
+│
+└── sections/                           # Cross-language reviews
+    └── {section}_{date}/
+        ├── export.md
+        ├── gemini-response.json
+        └── correction-report.md
 ```
 
-## Workflow
+## Workflows
 
-### 1. Export for Review
+### Adding a New Tool
 ```bash
-npm run i18n:review -- --lang=es
+# After creating tool and adding translations
+npm run i18n:review:section -- --section=tools.{tool-id}
+# Copy export.md to Gemini, paste response, then:
+npm run i18n:review:apply:section -- --section=tools.{tool-id}
 ```
-Creates a new version folder with `export.md` ready for Gemini.
 
-### 2. Get Gemini Review
-- Copy contents of `export.md` to Gemini Pro
-- Copy Gemini's JSON response
-- Paste into `gemini-response.json` in the same version folder
-
-### 3. Apply Corrections
+### Adding a New Language
 ```bash
-npm run i18n:review:apply -- --lang=es
+# After creating translation file
+npm run i18n:review -- --lang={code}
+# Copy export.md to Gemini, paste response, then:
+npm run i18n:review:apply -- --lang={code}
 ```
-Applies corrections from the latest version's `gemini-response.json` and generates `correction-report.md`.
 
-### 4. Apply from Specific Version
+### Periodic Review
 ```bash
-npm run i18n:review:apply -- --lang=es --version=001
+# Create new version for existing language
+npm run i18n:review -- --lang=es  # Creates v002, v003, etc.
 ```
 
-## Files Explained
+## See Also
 
-| File | Description |
-|------|-------------|
-| `export.md` | Full translation table with review instructions for Gemini |
-| `gemini-response.json` | Gemini's corrections in JSON format (user adds this) |
-| `correction-report.md` | Detailed report of all changes applied |
-
-## Versioning
-
-- Versions are auto-incremented (v001, v002, etc.)
-- Date is included for reference
-- All versions are preserved for audit trail
+- [ARCHITECTURE.md](./ARCHITECTURE.md) - Detailed system documentation
+- [state.json](./state.json) - Current review state

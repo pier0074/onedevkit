@@ -8,8 +8,9 @@ Thumbs.db
 *.swp
 *.swo
 
-# Claude Code
-.claude/
+# Claude Code (allow commands, ignore settings)
+.claude/settings.json
+.claude/settings.local.json
 
 # Node (if ever needed)
 node_modules/
