@@ -31,7 +31,7 @@
           <div class="nav-mega-category">
             <span class="nav-mega-category-title">{{ category | categoryT(currentLang) }}</span>
             {% for tool in categoryTools %}
-            <a href="{{ '/tools/' + tool.id + '/' | langUrl(currentLang) }}" role="menuitem"{% if page.url == '/tools/' + tool.id + '/' or page.url == '/' + currentLang + '/tools/' + tool.id + '/' %} aria-current="page"{% endif %}>
+            <a href="{{ ('/tools/' + tool.id + '/') | langUrl(currentLang) }}" role="menuitem"{% if page.url == '/tools/' + tool.id + '/' or page.url == '/' + currentLang + '/tools/' + tool.id + '/' %} aria-current="page"{% endif %}>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">{{ tool.icon | safe }}</svg>
               {{ tool.id | toolT(currentLang, "name") | default(tool.name) }}
             </a>

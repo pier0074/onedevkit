@@ -187,7 +187,72 @@
     "decodedPlaceholder": "Decoded content will appear here",
     "encodedPlaceholder": "Encoded content will appear here",
     "hashPlaceholder": "Hash values will appear here",
-    "previewPlaceholder": "Preview will appear here"
+    "previewPlaceholder": "Preview will appear here",
+    "enter": "Enter",
+    "tab": "Tab",
+    "useNow": "Use Now",
+    "startOver": "Start Over",
+    "center": "Center",
+    "custom": "Custom",
+    "original": "Original",
+    "compressed": "Compressed",
+    "reduction": "Reduction",
+    "dimensions": "Dimensions",
+    "fileSize": "File Size",
+    "status": "Status",
+    "pixels": "Pixels",
+    "maxFileSize": "Max File Size",
+    "background": "Background",
+    "white": "White",
+    "maxKb": "Max KB",
+    "kb": "KB",
+    "targetSize": "Target Size",
+    "selectPlatform": "Select Platform",
+    "selectSize": "Select Size",
+    "type": "Type",
+    "ratio": "Ratio",
+    "file": "File",
+    "transform": "Transform",
+    "position": "Position",
+    "history": "History",
+    "undo": "Undo",
+    "redo": "Redo",
+    "zoom": "Zoom",
+    "brightness": "Brightness",
+    "contrast": "Contrast",
+    "saturation": "Saturation",
+    "showGrid": "Show Grid",
+    "keyboardShortcuts": "Keyboard Shortcuts",
+    "regularExpression": "Regular Expression",
+    "testString": "Test String",
+    "groups": "Groups",
+    "execTime": "Exec Time",
+    "matchDetails": "Match Details",
+    "all": "All",
+    "markdown": "Markdown",
+    "noSpaces": "no spaces",
+    "popular": "Popular",
+    "asia": "Asia",
+    "other": "Other",
+    "customSize": "Custom Size",
+    "milliseconds": "milliseconds",
+    "encoded": "Encoded",
+    "eg": "e.g.",
+    "or": "or",
+    "startTypingOrPaste": "Start typing or paste your text here...",
+    "clickToUploadPhoto": "Click to upload your photo",
+    "dragToPan": "drag to pan",
+    "dragPreviewOrUseButtons": "drag preview or use buttons",
+    "rotate90Left": "↺ 90°",
+    "rotate90Right": "↻ 90°",
+    "flipHorizontal": "↔ Flip",
+    "flipVertical": "↕ Flip",
+    "selectCountryDocType": "Select Country / Document Type",
+    "printLayout": "Print Layout (4×6)",
+    "jpgPngMax": "JPG, PNG (Max {size})",
+    "supportsFormats": "Supports JPG, PNG, WebP (max {size})",
+    "dropImageOrClick": "Drop image(s) here or click to upload",
+    "dropMultipleHint": "Drop multiple files for batch processing"
   },
 
   "categories": {
@@ -206,6 +271,9 @@
       "metaTitle": "JSON Formatter & Validator - Free Online Tool | OneDevKit",
       "metaDescription": "Free online JSON formatter and validator. Beautify, minify, and validate JSON with syntax highlighting. No signup required, works offline.",
       "keywords": "json formatter, json validator, json beautifier, format json online, json lint, json parser, beautify json, minify json",
+      "ui": {
+        "placeholder": "{\"key\": \"value\", \"array\": [1, 2, 3]}"
+      },
       "howTo": {
         "title": "How to Use",
         "steps": [
@@ -317,6 +385,11 @@
       "metaTitle": "JWT Decoder & Inspector - Free Online Tool | OneDevKit",
       "metaDescription": "Free JWT decoder and inspector. Decode JSON Web Tokens to view header, payload, and signature. Debug authentication issues easily.",
       "keywords": "jwt decoder, jwt debugger, json web token decoder, jwt parser, decode jwt online, jwt inspector",
+      "ui": {
+        "enterToken": "Enter JWT Token",
+        "placeholder": "Paste your JWT token here (eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...)",
+        "decodeButton": "Decode JWT"
+      },
       "howTo": {
         "title": "How to Use",
         "steps": [
@@ -391,6 +464,11 @@
       "metaTitle": "UUID Generator - Generate Random UUIDs | OneDevKit",
       "metaDescription": "Generate random UUID v4 identifiers instantly. Create unique IDs for databases, APIs, and applications. Bulk generation supported.",
       "keywords": "uuid generator, guid generator, random uuid, uuid v4, unique id generator, generate uuid online",
+      "ui": {
+        "placeholder": "e.g., 550e8400-e29b-41d4-a716-446655440000",
+        "enterToValidate": "Enter UUID to validate",
+        "rangeHint": "(1-100)"
+      },
       "howTo": {
         "title": "How to Use",
         "steps": [
@@ -465,6 +543,12 @@
       "metaTitle": "Lorem Ipsum Generator - Placeholder Text | OneDevKit",
       "metaDescription": "Generate Lorem Ipsum placeholder text for designs and mockups. Choose paragraphs, sentences, or words.",
       "keywords": "lorem ipsum generator, placeholder text, dummy text generator, lipsum, sample text generator",
+      "ui": {
+        "numberOfParagraphs": "Number of Paragraphs",
+        "numberOfSentences": "Number of Sentences",
+        "numberOfWords": "Number of Words",
+        "placeholder": "Click \"Generate\" to create Lorem Ipsum text"
+      },
       "howTo": {
         "title": "How to Use",
         "steps": [
@@ -498,6 +582,29 @@
       "metaTitle": "QR Code Generator - Create Free QR Codes | OneDevKit",
       "metaDescription": "Generate QR codes for URLs, text, WiFi, and more. Free QR code generator with customizable colors and sizes.",
       "keywords": "qr code generator, create qr code, qr code maker, free qr code, generate qr code online, qr code creator",
+      "ui": {
+        "enterUrlOrText": "Enter URL or Text",
+        "placeholder": "https://example.com or any text...",
+        "hint": "Enter the content you want to encode in the QR code",
+        "generateInstruction": "Enter text or URL above to generate a QR code",
+        "sizes": {
+          "tiny": "Tiny (64×64)",
+          "small": "Small (128×128)",
+          "compact": "Compact (200×200)",
+          "medium": "Medium (256×256)",
+          "standard": "Standard (300×300)",
+          "large": "Large (384×384)",
+          "extraLarge": "Extra Large (512×512)",
+          "huge": "Huge (768×768)",
+          "maximum": "Maximum (1024×1024)"
+        },
+        "errorCorrection": {
+          "low": "Low (7%)",
+          "medium": "Medium (15%)",
+          "quartile": "Quartile (25%)",
+          "high": "High (30%)"
+        }
+      },
       "howTo": {
         "title": "How to Use",
         "steps": [
@@ -535,6 +642,14 @@
       "metaTitle": "Unix Timestamp Converter - Date to Timestamp | OneDevKit",
       "metaDescription": "Convert Unix timestamps to human-readable dates and vice versa. Support for multiple date formats and timezones.",
       "keywords": "unix timestamp converter, epoch converter, timestamp to date, date to timestamp, unix time converter",
+      "ui": {
+        "currentUnixTimestamp": "Current Unix Timestamp",
+        "timestampToDate": "Unix Timestamp → Date",
+        "dateToTimestamp": "Date → Unix Timestamp",
+        "enterTimestamp": "Enter Unix Timestamp",
+        "enterDateTime": "Enter Date & Time",
+        "timestampPlaceholder": "e.g., 1703001600"
+      },
       "howTo": {
         "title": "How to Use",
         "steps": [
@@ -568,6 +683,20 @@
       "metaTitle": "Regex Tester & Debugger - Test Regular Expressions | OneDevKit",
       "metaDescription": "Test and debug regular expressions in real-time. See matches highlighted with capture groups. Free online regex tester.",
       "keywords": "regex tester, regular expression tester, regex debugger, regex validator, test regex online, regex checker",
+      "ui": {
+        "patternPlaceholder": "Enter regex pattern (e.g., \\d+)",
+        "testStringPlaceholder": "Enter text to test against the regex pattern...",
+        "matchesHighlighted": "Matches Highlighted",
+        "matchesInstruction": "Enter a pattern and test string to see matches highlighted.",
+        "matchDetailsPlaceholder": "Match details will appear here.",
+        "flags": {
+          "global": "Global (g)",
+          "caseInsensitive": "Case Insensitive (i)",
+          "multiline": "Multiline (m)",
+          "dotAll": "Dot All (s)",
+          "unicode": "Unicode (u)"
+        }
+      },
       "howTo": {
         "title": "How to Use",
         "steps": [
@@ -667,6 +796,9 @@
       "metaTitle": "Markdown Editor & Preview - Live Preview | OneDevKit",
       "metaDescription": "Write Markdown with live preview. Supports GitHub Flavored Markdown, tables, code blocks, and more.",
       "keywords": "markdown editor, markdown preview, markdown online, github markdown, markdown to html, md editor",
+      "ui": {
+        "defaultContent": "# Hello, Markdown!\n\nStart writing your **Markdown** here.\n\n## Features\n- Live preview\n- GitHub Flavored Markdown\n- Syntax highlighting\n- And more!"
+      },
       "howTo": {
         "title": "How to Use",
         "steps": [
@@ -770,6 +902,16 @@
       "metaTitle": "Image Compressor to Specific KB Size | OneDevKit",
       "metaDescription": "Compress images to exact file size - 20KB, 50KB, 100KB. Perfect for passport photos, job applications, and government forms. Free, private.",
       "keywords": "image compressor, compress image to 20kb, compress image to 50kb, reduce image size, image size reducer, compress photo online",
+      "ui": {
+        "uploadHint": "JPG, PNG, or WebP (Max 10MB)",
+        "sizePresets": {
+          "20kb": "20 KB",
+          "50kb": "50 KB",
+          "100kb": "100 KB",
+          "200kb": "200 KB",
+          "500kb": "500 KB"
+        }
+      },
       "howTo": {
         "title": "How to Use",
         "steps": [
@@ -811,6 +953,27 @@
       "metaTitle": "Passport Photo Maker - Create Passport Photos | OneDevKit",
       "metaDescription": "Create passport and visa photos for any country. Resize to exact dimensions (2x2 inches, 35x45mm). Free passport photo maker.",
       "keywords": "passport photo maker, passport photo size, visa photo, 2x2 passport photo, 35x45mm photo, passport photo online",
+      "ui": {
+        "uploadHint": "JPG, PNG (Max 10MB)",
+        "countries": {
+          "usa": "USA - Passport (2×2 inches)",
+          "india": "India - Passport/Visa (2×2 inches, 20-300KB)",
+          "uk": "UK - Passport (35×45mm)",
+          "schengen": "Schengen Visa (35×45mm)",
+          "canada": "Canada - Passport (50×70mm)",
+          "australia": "Australia - Passport (35×45mm)",
+          "china": "China - Visa (33×48mm)",
+          "japan": "Japan - Passport (35×45mm)",
+          "singapore": "Singapore - Passport (35×45mm)"
+        },
+        "specs": {
+          "size": "Size",
+          "pixels": "Pixels",
+          "maxFileSize": "Max File Size",
+          "background": "Background"
+        },
+        "downloadPhoto": "Download Photo"
+      },
       "howTo": {
         "title": "How to Use",
         "steps": [
@@ -852,6 +1015,36 @@
       "metaTitle": "Social Media Image Resizer - Instagram, Facebook, Twitter | OneDevKit",
       "metaDescription": "Resize images for all social media platforms. Instagram, Facebook, LinkedIn, Twitter, YouTube, TikTok, and more. Free with batch processing.",
       "keywords": "social media image resizer, instagram photo size, linkedin image size, twitter image dimensions, facebook cover photo size, resize image for social media",
+      "ui": {
+        "uploadHint": "Supports JPG, PNG, WebP (max 20MB) - Drop multiple files for batch processing",
+        "platforms": {
+          "instagram": "Instagram",
+          "facebook": "Facebook",
+          "twitter": "Twitter/X",
+          "linkedin": "LinkedIn",
+          "youtube": "YouTube",
+          "tiktok": "TikTok",
+          "pinterest": "Pinterest",
+          "snapchat": "Snapchat",
+          "whatsapp": "WhatsApp",
+          "discord": "Discord",
+          "twitch": "Twitch",
+          "threads": "Threads",
+          "custom": "Custom"
+        },
+        "sizeTypes": {
+          "squarePost": "Square Post",
+          "portrait": "Portrait",
+          "landscape": "Landscape",
+          "story": "Story",
+          "profilePicture": "Profile Picture",
+          "coverPhoto": "Cover Photo"
+        },
+        "borderPadding": "Border/Padding",
+        "cropToFill": "Crop to Fill",
+        "circleCrop": "Circle",
+        "circleCropHint": "Circle crop for profile pictures"
+      },
       "howTo": {
         "title": "How to Use",
         "steps": [

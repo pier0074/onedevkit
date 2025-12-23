@@ -1,4 +1,6 @@
 {# QR Code Generator Tool UI Partial #}
+{%- set toolId = "qr-code-generator" -%}
+{%- set currentLang = lang | default("en") -%}
 <style>
   .qr-preview { display: flex; justify-content: center; align-items: center; min-height: 280px; background: var(--color-bg-alt); border: 2px dashed var(--color-border); border-radius: var(--radius-lg); padding: var(--space-6); }
   .qr-preview canvas { max-width: 100%; height: auto; border-radius: var(--radius-md); box-shadow: var(--shadow-md); }
@@ -10,40 +12,40 @@
 
 <div class="tool-container">
   <div class="tool-input-group">
-    <label for="qr-text">Enter {{ "common.url" | t(lang) }} or {{ "common.text" | t(lang) }}</label>
-    <input type="text" id="qr-text" placeholder="https://example.com or any text...">
-    <small style="color: var(--color-text-muted); font-size: var(--text-xs);">Enter the content you want to encode in the QR code</small>
+    <label for="qr-text">{{ toolId | toolTNested(currentLang, "ui.enterUrlOrText") }}</label>
+    <input type="text" id="qr-text" placeholder="{{ toolId | toolTNested(currentLang, 'ui.placeholder') }}">
+    <small style="color: var(--color-text-muted); font-size: var(--text-xs);">{{ toolId | toolTNested(currentLang, "ui.hint") }}</small>
   </div>
 
   <div class="options-row" style="margin-top: var(--space-4);">
     <div class="tool-input-group">
-      <label for="qr-size">{{ "common.size" | t(lang) }}</label>
+      <label for="qr-size">{{ "common.size" | t(currentLang) }}</label>
       <select id="qr-size">
-        <option value="64">Tiny (64x64)</option>
-        <option value="128">Small (128x128)</option>
-        <option value="200">Compact (200x200)</option>
-        <option value="256" selected>Medium (256x256)</option>
-        <option value="300">Standard (300x300)</option>
-        <option value="384">Large (384x384)</option>
-        <option value="512">Extra Large (512x512)</option>
-        <option value="768">Huge (768x768)</option>
-        <option value="1024">Maximum (1024x1024)</option>
+        <option value="64">{{ toolId | toolTNested(currentLang, "ui.sizes.tiny") }}</option>
+        <option value="128">{{ toolId | toolTNested(currentLang, "ui.sizes.small") }}</option>
+        <option value="200">{{ toolId | toolTNested(currentLang, "ui.sizes.compact") }}</option>
+        <option value="256" selected>{{ toolId | toolTNested(currentLang, "ui.sizes.medium") }}</option>
+        <option value="300">{{ toolId | toolTNested(currentLang, "ui.sizes.standard") }}</option>
+        <option value="384">{{ toolId | toolTNested(currentLang, "ui.sizes.large") }}</option>
+        <option value="512">{{ toolId | toolTNested(currentLang, "ui.sizes.extraLarge") }}</option>
+        <option value="768">{{ toolId | toolTNested(currentLang, "ui.sizes.huge") }}</option>
+        <option value="1024">{{ toolId | toolTNested(currentLang, "ui.sizes.maximum") }}</option>
       </select>
     </div>
     <div class="tool-input-group">
-      <label for="qr-ec-level">{{ "common.errorCorrectionLevel" | t(lang) }}</label>
+      <label for="qr-ec-level">{{ "common.errorCorrectionLevel" | t(currentLang) }}</label>
       <select id="qr-ec-level">
-        <option value="L">{{ "common.low" | t(lang) }} (7%)</option>
-        <option value="M" selected>Medium (15%)</option>
-        <option value="Q">Quartile (25%)</option>
-        <option value="H">{{ "common.high" | t(lang) }} (30%)</option>
+        <option value="L">{{ toolId | toolTNested(currentLang, "ui.errorCorrection.low") }}</option>
+        <option value="M" selected>{{ toolId | toolTNested(currentLang, "ui.errorCorrection.medium") }}</option>
+        <option value="Q">{{ toolId | toolTNested(currentLang, "ui.errorCorrection.quartile") }}</option>
+        <option value="H">{{ toolId | toolTNested(currentLang, "ui.errorCorrection.high") }}</option>
       </select>
     </div>
   </div>
 
   <div class="tool-actions" style="margin-top: var(--space-4);">
-    <button id="generate-qr" class="btn btn-primary">{{ "common.generate" | t(lang) }} {{ "common.qrCode" | t(lang) }}</button>
-    <button id="clear-qr" class="btn btn-ghost">{{ "common.clear" | t(lang) }}</button>
+    <button id="generate-qr" class="btn btn-primary">{{ "common.generate" | t(currentLang) }} {{ "common.qrCode" | t(currentLang) }}</button>
+    <button id="clear-qr" class="btn btn-ghost">{{ "common.clear" | t(currentLang) }}</button>
   </div>
 
   <div id="qr-output" class="qr-preview" style="margin-top: var(--space-6);" aria-live="polite">
@@ -51,13 +53,13 @@
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h2M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/>
       </svg>
-      <p>Enter text or URL above to generate a QR code</p>
+      <p>{{ toolId | toolTNested(currentLang, "ui.generateInstruction") }}</p>
     </div>
     <canvas id="qr-canvas" class="hidden" aria-label="Generated QR code"></canvas>
   </div>
 
   <div class="tool-actions" style="margin-top: var(--space-4); justify-content: center;">
-    <button id="download-qr" class="btn btn-secondary">{{ "common.downloadPng" | t(lang) }}</button>
-    <button id="copy-qr" class="btn btn-secondary">{{ "common.copy" | t(lang) }} to Clipboard</button>
+    <button id="download-qr" class="btn btn-secondary">{{ "common.downloadPng" | t(currentLang) }}</button>
+    <button id="copy-qr" class="btn btn-secondary">{{ "common.copy" | t(currentLang) }}</button>
   </div>
 </div>
