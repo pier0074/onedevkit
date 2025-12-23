@@ -30,7 +30,7 @@
 {
   "@context": "https://schema.org",
   "@type": "ContactPage",
-  "name": "{{ 'pages.contact.title' | t(currentLang) }}",
+  "name": "{{ 'pages.contact.title' | t(currentLang) }} - {{ site.name }}",
   "description": "{{ 'pages.contact.metaDescription' | t(currentLang) }}",
   "url": "{{ site.url }}{{ '/contact/' | langUrl(currentLang) }}",
   "inLanguage": "{{ currentLang }}",
@@ -79,11 +79,11 @@
 <section class="content-section">
   <h2>{{ "pages.contact.topics.title" | t(currentLang) }}</h2>
   <ul class="contact-topics">
-    <li><strong>{{ "pages.contact.topics.suggestions.title" | t(currentLang) }}</strong> {{ "pages.contact.topics.suggestions.desc" | t(currentLang) }}</li>
-    <li><strong>{{ "pages.contact.topics.bugs.title" | t(currentLang) }}</strong> {{ "pages.contact.topics.bugs.desc" | t(currentLang) }}</li>
-    <li><strong>{{ "pages.contact.topics.features.title" | t(currentLang) }}</strong> {{ "pages.contact.topics.features.desc" | t(currentLang) }}</li>
-    <li><strong>{{ "pages.contact.topics.feedback.title" | t(currentLang) }}</strong> {{ "pages.contact.topics.feedback.desc" | t(currentLang) }}</li>
-    <li><strong>{{ "pages.contact.topics.partnership.title" | t(currentLang) }}</strong> {{ "pages.contact.topics.partnership.desc" | t(currentLang) }}</li>
+    <li><strong>{{ "pages.contact.topics.suggestions.title" | t(currentLang) }}</strong> {{ "pages.contact.topics.suggestions.text" | t(currentLang) }}</li>
+    <li><strong>{{ "pages.contact.topics.bugs.title" | t(currentLang) }}</strong> {{ "pages.contact.topics.bugs.text" | t(currentLang) }}</li>
+    <li><strong>{{ "pages.contact.topics.features.title" | t(currentLang) }}</strong> {{ "pages.contact.topics.features.text" | t(currentLang) }}</li>
+    <li><strong>{{ "pages.contact.topics.feedback.title" | t(currentLang) }}</strong> {{ "pages.contact.topics.feedback.text" | t(currentLang) }}</li>
+    <li><strong>{{ "pages.contact.topics.partnership.title" | t(currentLang) }}</strong> {{ "pages.contact.topics.partnership.text" | t(currentLang) }}</li>
   </ul>
 </section>
 
@@ -96,8 +96,8 @@
   <h2>{{ "pages.contact.beforeReach.title" | t(currentLang) }}</h2>
   <p>{{ "pages.contact.beforeReach.text" | t(currentLang) }}</p>
   <ul>
+    <li><a href="{{ '/faq/' | langUrl(currentLang) }}">{{ "nav.faq" | t(currentLang) }}</a> - {{ "pages.contact.beforeReach.faq" | t(currentLang) }}</li>
     <li><a href="{{ '/about/' | langUrl(currentLang) }}">{{ "nav.about" | t(currentLang) }}</a> - {{ "pages.contact.beforeReach.about" | t(currentLang) }}</li>
     <li><a href="{{ '/privacy/' | langUrl(currentLang) }}">{{ "nav.privacy" | t(currentLang) }}</a> - {{ "pages.contact.beforeReach.privacy" | t(currentLang) }}</li>
-    <li><a href="{{ '/terms/' | langUrl(currentLang) }}">{{ "nav.terms" | t(currentLang) }}</a> - {{ "pages.contact.beforeReach.terms" | t(currentLang) }}</li>
   </ul>
 </section>

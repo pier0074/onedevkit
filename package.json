@@ -10,7 +10,11 @@
     "test:unit": "jest",
     "test:e2e": "playwright test",
     "test:unit:watch": "jest --watch",
-    "test:e2e:ui": "playwright test --ui"
+    "test:e2e:ui": "playwright test --ui",
+    "i18n:validate": "node scripts/validate-i18n.js",
+    "i18n:validate:fix": "node scripts/validate-i18n.js --fix",
+    "i18n:export": "node scripts/gemini-export.js",
+    "i18n:apply": "node scripts/gemini-apply.js"
   },
   "repository": {
     "type": "git",

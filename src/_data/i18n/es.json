@@ -103,15 +103,790 @@
     "urlSafe": "Seguro para URL",
     "lineBreaks": "Saltos de línea",
     "formattedJsonPlaceholder": "El JSON formateado aparecerá aquí",
-    "outputPlaceholder": "El resultado aparecerá aquí"
+    "outputPlaceholder": "El resultado aparecerá aquí",
+    "caseSensitive": "Sensible a mayúsculas",
+    "globalSearch": "Búsqueda global",
+    "multiline": "Multilínea",
+    "originalText": "Texto Original",
+    "modifiedText": "Texto Modificado",
+    "differences": "Diferencias",
+    "additions": "Adiciones",
+    "deletions": "Eliminaciones",
+    "unchanged": "Sin cambios",
+    "unifiedView": "Vista Unificada",
+    "splitView": "Vista Dividida",
+    "uppercase": "MAYÚSCULAS",
+    "lowercase": "minúsculas",
+    "titleCase": "Tipo Título",
+    "sentenceCase": "Tipo oración",
+    "camelCase": "camelCase",
+    "pascalCase": "PascalCase",
+    "snakeCase": "snake_case",
+    "kebabCase": "kebab-case",
+    "constantCase": "CONSTANT_CASE",
+    "strength": "Fortaleza",
+    "weak": "Débil",
+    "medium": "Media",
+    "strong": "Fuerte",
+    "veryStrong": "Muy Fuerte",
+    "includeUppercase": "Incluir Mayúsculas",
+    "includeLowercase": "Incluir Minúsculas",
+    "includeNumbers": "Incluir Números",
+    "includeSymbols": "Incluir Símbolos",
+    "excludeAmbiguous": "Excluir Ambiguos",
+    "quantity": "Cantidad",
+    "generateNew": "Generar Nuevo",
+    "bulkGenerate": "Generar en Lote",
+    "copyAll": "Copiar Todo",
+    "timestamp": "Marca de Tiempo",
+    "date": "Fecha",
+    "time": "Hora",
+    "timezone": "Zona Horaria",
+    "local": "Local",
+    "utc": "UTC",
+    "iso": "ISO 8601",
+    "relative": "Relativo",
+    "header": "Encabezado",
+    "payload": "Carga Útil",
+    "signature": "Firma",
+    "expired": "Expirado",
+    "notExpired": "No Expirado",
+    "issuedAt": "Emitido en",
+    "expiresAt": "Expira en",
+    "algorithm": "Algoritmo",
+    "hash": "Hash",
+    "md5": "MD5",
+    "sha1": "SHA-1",
+    "sha256": "SHA-256",
+    "sha512": "SHA-512",
+    "startWithLorem": "Empezar con Lorem ipsum",
+    "outputType": "Tipo de Salida",
+    "wordCount": "Cantidad de Palabras",
+    "sentenceCount": "Cantidad de Oraciones",
+    "paragraphCount": "Cantidad de Párrafos",
+    "listItems": "Elementos de Lista",
+    "qrCode": "Código QR",
+    "url": "URL",
+    "errorCorrectionLevel": "Corrección de Errores",
+    "low": "Bajo",
+    "high": "Alto",
+    "quality": "Calidad",
+    "width": "Ancho",
+    "height": "Alto",
+    "aspectRatio": "Relación de Aspecto",
+    "backgroundColor": "Color de Fondo",
+    "foregroundColor": "Color de Primer Plano",
+    "transparent": "Transparente",
+    "downloadPng": "Descargar PNG",
+    "downloadSvg": "Descargar SVG",
+    "downloadJpg": "Descargar JPG",
+    "component": "Componente",
+    "fullUrl": "URL Completa",
+    "home": "Inicio",
+    "tools": "Herramientas",
+    "toggleDarkMode": "Alternar modo oscuro",
+    "decodedPlaceholder": "El contenido decodificado aparecerá aquí",
+    "encodedPlaceholder": "El contenido codificado aparecerá aquí",
+    "hashPlaceholder": "Los valores hash aparecerán aquí",
+    "previewPlaceholder": "La vista previa aparecerá aquí"
+  },
+
+  "categories": {
+    "Code Tools": "Herramientas de Código",
+    "Generators": "Generadores",
+    "Text & Data": "Texto y Datos",
+    "Image Tools": "Herramientas de Imagen"
+  },
+
+  "footer": {
+    "company": "Empresa",
+    "legal": "Legal",
+    "followUs": "Síguenos",
+    "allRightsReserved": "Todos los derechos reservados.",
+    "disclaimer": "Herramientas proporcionadas \"tal cual\" sin garantía.",
+    "copyright": "© {year} OneDevKit. Todos los derechos reservados."
+  },
+
+  "errors": {
+    "404": {
+      "title": "Página No Encontrada",
+      "message": "La página que buscas no existe.",
+      "cta": "Ir al Inicio"
+    },
+    "generic": {
+      "title": "Algo salió mal",
+      "message": "Por favor, inténtalo de nuevo más tarde."
+    }
   },
 
   "tools": {
     "json-formatter": {
       "name": "Formateador JSON",
       "fullName": "Formateador y Validador JSON",
-      "description": "Formatea, valida y embellece datos JSON al instante.",
-      "metaDescription": "Formateador y validador JSON online gratuito."
+      "description": "Formatea, valida y embellece datos JSON al instante. Soporta minificación y resaltado de sintaxis.",
+      "shortDescription": "Formatea, valida y embellece",
+      "metaTitle": "Formateador y Validador JSON - Herramienta Online Gratis | OneDevKit",
+      "metaDescription": "Formateador y validador JSON online gratuito. Embellece, minifica y valida JSON con resaltado de sintaxis.",
+      "keywords": "formateador json, validador json, embellecedor json, formatear json online, json lint, parser json, embellecer json, minificar json",
+      "howTo": {
+        "title": "Cómo Usar",
+        "steps": [
+          {
+            "title": "Pega Tu JSON",
+            "description": "Pega tus datos JSON en el área de entrada a la izquierda."
+          },
+          {
+            "title": "Formatea o Valida",
+            "description": "Haz clic en 'Formatear' para embellecer tu JSON, o 'Minificar' para comprimirlo."
+          },
+          {
+            "title": "Copia el Resultado",
+            "description": "Copia el JSON formateado usando el botón de copiar."
+          }
+        ]
+      },
+      "faq": [
+        {
+          "question": "¿Este formateador JSON es gratis?",
+          "answer": "Sí, completamente gratis sin necesidad de registro. Úsalo las veces que quieras."
+        },
+        {
+          "question": "¿Mis datos JSON están seguros?",
+          "answer": "Sí, todo el procesamiento ocurre en tu navegador. Tus datos nunca se envían a ningún servidor."
+        },
+        {
+          "question": "¿Cuál es la diferencia entre formatear y minificar?",
+          "answer": "Formatear agrega sangría y saltos de línea para legibilidad. Minificar elimina todos los espacios en blanco para reducir el tamaño del archivo."
+        }
+      ]
+    },
+    "base64-encoder": {
+      "name": "Codificador Base64",
+      "fullName": "Codificador y Decodificador Base64",
+      "description": "Codifica texto a Base64 o decodifica Base64 a texto legible. Soporta carga de archivos y codificación segura para URL.",
+      "shortDescription": "Codifica y decodifica Base64",
+      "metaTitle": "Codificador y Decodificador Base64 - Herramienta Online Gratis | OneDevKit",
+      "metaDescription": "Codificador y decodificador Base64 gratuito. Convierte texto a Base64 o decodifica cadenas Base64.",
+      "keywords": "codificador base64, decodificador base64, convertidor base64, codificar base64, decodificar base64 online",
+      "howTo": {
+        "title": "Cómo Usar",
+        "steps": [
+          {
+            "title": "Ingresa Texto o Sube Archivo",
+            "description": "Escribe o pega tu texto, o sube un archivo para codificar."
+          },
+          {
+            "title": "Elige la Operación",
+            "description": "Selecciona 'Codificar' para convertir a Base64, o 'Decodificar' para convertir desde Base64."
+          },
+          {
+            "title": "Copia el Resultado",
+            "description": "Copia el resultado usando el botón de copiar."
+          }
+        ]
+      },
+      "faq": [
+        {
+          "question": "¿Qué es la codificación Base64?",
+          "answer": "Base64 es una forma de codificar datos binarios como texto ASCII. Se usa comúnmente para incrustar imágenes en HTML/CSS o transmitir datos en APIs."
+        },
+        {
+          "question": "¿Puedo codificar archivos?",
+          "answer": "Sí, puedes subir archivos y codificarlos a formato Base64."
+        }
+      ]
+    },
+    "url-encoder": {
+      "name": "Codificador URL",
+      "fullName": "Codificador y Decodificador URL",
+      "description": "Codifica caracteres especiales para URLs o decodifica cadenas codificadas. Esencial para desarrollo web y trabajo con APIs.",
+      "shortDescription": "Codifica y decodifica URLs",
+      "metaTitle": "Codificador y Decodificador URL - Herramienta Online Gratis | OneDevKit",
+      "metaDescription": "Codificador y decodificador URL gratuito. Codifica caracteres especiales para URLs o decodifica cadenas codificadas.",
+      "keywords": "codificador url, decodificador url, codificación porcentual, urlencode online, escapar url, codificar parámetros url",
+      "howTo": {
+        "title": "Cómo Usar",
+        "steps": [
+          {
+            "title": "Ingresa Tu URL o Texto",
+            "description": "Pega la URL o texto que deseas codificar o decodificar."
+          },
+          {
+            "title": "Codifica o Decodifica",
+            "description": "Haz clic en 'Codificar' para codificar caracteres especiales, o 'Decodificar' para convertir de vuelta."
+          },
+          {
+            "title": "Copia el Resultado",
+            "description": "Copia el resultado codificado o decodificado."
+          }
+        ]
+      },
+      "faq": [
+        {
+          "question": "¿Por qué necesito codificar URLs?",
+          "answer": "Las URLs solo pueden contener ciertos caracteres. Los caracteres especiales como espacios, & y = deben codificarse para transmitirse de forma segura en URLs."
+        }
+      ]
+    },
+    "jwt-decoder": {
+      "name": "Decodificador JWT",
+      "fullName": "Decodificador e Inspector JWT",
+      "description": "Decodifica e inspecciona JSON Web Tokens (JWT). Visualiza header, payload y verifica la estructura del token al instante.",
+      "shortDescription": "Decodifica e inspecciona JWTs",
+      "metaTitle": "Decodificador e Inspector JWT - Herramienta Online Gratis | OneDevKit",
+      "metaDescription": "Decodificador e inspector JWT gratuito. Decodifica JSON Web Tokens para ver header, payload y firma.",
+      "keywords": "decodificador jwt, depurador jwt, decodificador json web token, parser jwt, decodificar jwt online, inspector jwt",
+      "howTo": {
+        "title": "Cómo Usar",
+        "steps": [
+          {
+            "title": "Pega Tu JWT",
+            "description": "Pega el JSON Web Token que deseas decodificar."
+          },
+          {
+            "title": "Visualiza las Partes Decodificadas",
+            "description": "Ve las secciones de header, payload y firma decodificadas."
+          },
+          {
+            "title": "Analiza los Claims",
+            "description": "Revisa los claims del token, tiempo de expiración y otros datos."
+          }
+        ]
+      },
+      "faq": [
+        {
+          "question": "¿Es seguro decodificar mi JWT aquí?",
+          "answer": "Sí, el JWT se decodifica completamente en tu navegador. Nada se envía a ningún servidor."
+        },
+        {
+          "question": "¿Esta herramienta puede verificar firmas JWT?",
+          "answer": "Esta herramienta decodifica y muestra el contenido del JWT. Para verificar firmas, necesitas la clave secreta que nunca debe compartirse."
+        }
+      ]
+    },
+    "password-generator": {
+      "name": "Generador de Contraseñas",
+      "fullName": "Generador de Contraseñas",
+      "description": "Genera contraseñas seguras y aleatorias para tus cuentas. Criptográficamente seguro con opciones personalizables.",
+      "shortDescription": "Contraseñas aleatorias seguras",
+      "metaTitle": "Generador de Contraseñas - Crea Contraseñas Seguras | OneDevKit",
+      "metaDescription": "Genera contraseñas seguras y aleatorias al instante. Personaliza longitud y tipos de caracteres.",
+      "keywords": "generador de contraseñas, contraseña aleatoria, generador de contraseñas seguras, creador de contraseñas fuertes, generar contraseña online",
+      "howTo": {
+        "title": "Cómo Usar",
+        "steps": [
+          {
+            "title": "Establece la Longitud",
+            "description": "Elige qué tan larga quieres tu contraseña (recomendado: 16+ caracteres)."
+          },
+          {
+            "title": "Selecciona Tipos de Caracteres",
+            "description": "Incluye mayúsculas, minúsculas, números y símbolos para contraseñas más fuertes."
+          },
+          {
+            "title": "Genera y Copia",
+            "description": "Haz clic en generar y copia tu nueva contraseña segura."
+          }
+        ]
+      },
+      "faq": [
+        {
+          "question": "¿Qué tan seguras son las contraseñas generadas?",
+          "answer": "Las contraseñas se generan usando generación de números aleatorios criptográficamente seguros en tu navegador."
+        },
+        {
+          "question": "¿Qué hace fuerte a una contraseña?",
+          "answer": "Una contraseña fuerte tiene al menos 12 caracteres e incluye una mezcla de mayúsculas, minúsculas, números y símbolos."
+        }
+      ]
+    },
+    "uuid-generator": {
+      "name": "Generador UUID",
+      "fullName": "Generador UUID",
+      "description": "Genera UUIDs aleatorios (v4) al instante. Crea identificadores únicos para bases de datos, APIs y aplicaciones.",
+      "shortDescription": "Genera IDs únicos",
+      "metaTitle": "Generador UUID - Genera UUIDs Aleatorios | OneDevKit",
+      "metaDescription": "Genera identificadores UUID v4 aleatorios al instante. Crea IDs únicos para bases de datos y APIs.",
+      "keywords": "generador uuid, generador guid, uuid aleatorio, uuid v4, generador de id único, generar uuid online",
+      "howTo": {
+        "title": "Cómo Usar",
+        "steps": [
+          {
+            "title": "Genera UUID",
+            "description": "Haz clic en el botón generar para crear un nuevo UUID aleatorio."
+          },
+          {
+            "title": "Genera en Lote",
+            "description": "Ingresa una cantidad para generar múltiples UUIDs a la vez."
+          },
+          {
+            "title": "Copia UUIDs",
+            "description": "Copia UUIDs individuales o todos los UUIDs generados."
+          }
+        ]
+      },
+      "faq": [
+        {
+          "question": "¿Qué es un UUID?",
+          "answer": "Un UUID (Identificador Único Universal) es un identificador de 128 bits que está virtualmente garantizado de ser único en todos los sistemas."
+        },
+        {
+          "question": "¿Qué es UUID v4?",
+          "answer": "UUID v4 se genera aleatoriamente, siendo ideal para la mayoría de casos donde necesitas un identificador único."
+        }
+      ]
+    },
+    "hash-generator": {
+      "name": "Generador de Hash",
+      "fullName": "Generador de Hash",
+      "description": "Genera hashes MD5, SHA-1, SHA-256 y SHA-512 desde texto. Útil para checksums y verificación de integridad.",
+      "shortDescription": "Hashes MD5, SHA-1, SHA-256",
+      "metaTitle": "Generador de Hash - MD5, SHA-1, SHA-256, SHA-512 | OneDevKit",
+      "metaDescription": "Genera hashes MD5, SHA-1, SHA-256 y SHA-512 desde texto. Generador de hash online gratuito.",
+      "keywords": "generador de hash, generador md5, generador sha256, hash sha1, sha512 online, generador de checksum, calculadora de hash",
+      "howTo": {
+        "title": "Cómo Usar",
+        "steps": [
+          {
+            "title": "Ingresa Texto",
+            "description": "Escribe o pega el texto que deseas hashear."
+          },
+          {
+            "title": "Visualiza los Hashes",
+            "description": "Ve los hashes MD5, SHA-1, SHA-256 y SHA-512 generados al instante."
+          },
+          {
+            "title": "Copia el Hash",
+            "description": "Copia el hash que necesitas usando el botón de copiar."
+          }
+        ]
+      },
+      "faq": [
+        {
+          "question": "¿Qué algoritmo de hash debo usar?",
+          "answer": "Para propósitos de seguridad, usa SHA-256 o SHA-512. MD5 y SHA-1 se consideran débiles para seguridad pero están bien para checksums."
+        },
+        {
+          "question": "¿Puedo revertir un hash?",
+          "answer": "No, los hashes son funciones de un solo sentido. No puedes revertir un hash para obtener la entrada original."
+        }
+      ]
+    },
+    "lorem-ipsum": {
+      "name": "Lorem Ipsum",
+      "fullName": "Generador Lorem Ipsum",
+      "description": "Genera texto de relleno para tus diseños, maquetas y prototipos en párrafos, oraciones o palabras.",
+      "shortDescription": "Texto de relleno",
+      "metaTitle": "Generador Lorem Ipsum - Texto de Relleno | OneDevKit",
+      "metaDescription": "Genera texto de relleno Lorem Ipsum para diseños y maquetas. Elige párrafos, oraciones o palabras.",
+      "keywords": "generador lorem ipsum, texto de relleno, generador de texto ficticio, lipsum, generador de texto de ejemplo",
+      "howTo": {
+        "title": "Cómo Usar",
+        "steps": [
+          {
+            "title": "Elige el Tipo",
+            "description": "Selecciona párrafos, oraciones o palabras."
+          },
+          {
+            "title": "Establece la Cantidad",
+            "description": "Ingresa cuántas unidades de texto necesitas."
+          },
+          {
+            "title": "Genera y Copia",
+            "description": "Genera el texto y cópialo a tu portapapeles."
+          }
+        ]
+      },
+      "faq": [
+        {
+          "question": "¿Qué es Lorem Ipsum?",
+          "answer": "Lorem Ipsum es texto de relleno usado en diseño y publicación para llenar espacios antes de que el contenido final esté disponible."
+        }
+      ]
+    },
+    "qr-code-generator": {
+      "name": "Generador QR",
+      "fullName": "Generador de Códigos QR",
+      "description": "Genera códigos QR para URLs, texto y otros datos. Crea códigos escaneables que funcionan con cualquier smartphone.",
+      "shortDescription": "Crea códigos QR",
+      "metaTitle": "Generador de Códigos QR - Crea Códigos QR Gratis | OneDevKit",
+      "metaDescription": "Genera códigos QR para URLs, texto, WiFi y más. Generador de códigos QR gratuito con colores personalizables.",
+      "keywords": "generador de códigos qr, crear código qr, creador de códigos qr, código qr gratis, generar código qr online, creador qr",
+      "howTo": {
+        "title": "Cómo Usar",
+        "steps": [
+          {
+            "title": "Ingresa el Contenido",
+            "description": "Ingresa una URL, texto u otros datos para tu código QR."
+          },
+          {
+            "title": "Personaliza",
+            "description": "Ajusta el tamaño y los colores si lo deseas."
+          },
+          {
+            "title": "Descarga",
+            "description": "Descarga tu código QR como imagen."
+          }
+        ]
+      },
+      "faq": [
+        {
+          "question": "¿Qué puedo codificar en un código QR?",
+          "answer": "Puedes codificar URLs, texto plano, información de contacto, credenciales WiFi y más."
+        },
+        {
+          "question": "¿Qué tamaño de código QR debo usar?",
+          "answer": "Para impresión, usa al menos 300x300 píxeles. Para pantallas, 200x200 suele ser suficiente."
+        }
+      ]
+    },
+    "timestamp-converter": {
+      "name": "Convertidor Timestamp",
+      "fullName": "Convertidor de Timestamp Unix",
+      "description": "Convierte timestamps Unix a fechas legibles y viceversa. Soporta múltiples formatos de fecha y zonas horarias.",
+      "shortDescription": "Tiempo Unix ↔ Fecha",
+      "metaTitle": "Convertidor de Timestamp Unix - Fecha a Timestamp | OneDevKit",
+      "metaDescription": "Convierte timestamps Unix a fechas legibles y viceversa. Soporte para múltiples formatos y zonas horarias.",
+      "keywords": "convertidor timestamp unix, convertidor epoch, timestamp a fecha, fecha a timestamp, convertidor tiempo unix",
+      "howTo": {
+        "title": "Cómo Usar",
+        "steps": [
+          {
+            "title": "Ingresa Timestamp o Fecha",
+            "description": "Ingresa un timestamp Unix o selecciona una fecha y hora."
+          },
+          {
+            "title": "Convierte",
+            "description": "Ve la conversión entre timestamp y fecha legible."
+          },
+          {
+            "title": "Copia el Resultado",
+            "description": "Copia el valor convertido."
+          }
+        ]
+      },
+      "faq": [
+        {
+          "question": "¿Qué es un timestamp Unix?",
+          "answer": "Un timestamp Unix es el número de segundos que han pasado desde el 1 de enero de 1970 (UTC)."
+        }
+      ]
+    },
+    "regex-tester": {
+      "name": "Probador Regex",
+      "fullName": "Probador y Depurador Regex",
+      "description": "Prueba y depura expresiones regulares en tiempo real. Ve coincidencias resaltadas, grupos de captura y explicaciones detalladas.",
+      "shortDescription": "Prueba patrones regex",
+      "metaTitle": "Probador y Depurador Regex - Prueba Expresiones Regulares | OneDevKit",
+      "metaDescription": "Prueba y depura expresiones regulares en tiempo real. Ve coincidencias resaltadas con grupos de captura.",
+      "keywords": "probador regex, probador de expresiones regulares, depurador regex, validador regex, probar regex online, verificador regex",
+      "howTo": {
+        "title": "Cómo Usar",
+        "steps": [
+          {
+            "title": "Ingresa el Patrón",
+            "description": "Escribe tu patrón de expresión regular."
+          },
+          {
+            "title": "Agrega Texto de Prueba",
+            "description": "Ingresa el texto contra el que quieres probar."
+          },
+          {
+            "title": "Ve las Coincidencias",
+            "description": "Visualiza las coincidencias resaltadas y los grupos de captura en tiempo real."
+          }
+        ]
+      },
+      "faq": [
+        {
+          "question": "¿Qué sabor de regex se usa?",
+          "answer": "Esta herramienta usa el motor de regex nativo de JavaScript, que sigue los estándares ECMAScript."
+        }
+      ]
+    },
+    "color-picker": {
+      "name": "Selector de Color",
+      "fullName": "Selector y Convertidor de Color",
+      "description": "Selecciona colores y convierte entre formatos HEX, RGB, HSL y HSV. Genera paletas de colores y copia valores al instante.",
+      "shortDescription": "Convertidor HEX, RGB, HSL",
+      "metaTitle": "Selector y Convertidor de Color - HEX, RGB, HSL | OneDevKit",
+      "metaDescription": "Selecciona colores y convierte entre formatos HEX, RGB, HSL y HSV. Genera paletas para tus diseños.",
+      "keywords": "selector de color, hex a rgb, rgb a hex, convertidor de color, convertidor hsl, generador de paleta de colores",
+      "howTo": {
+        "title": "Cómo Usar",
+        "steps": [
+          {
+            "title": "Selecciona un Color",
+            "description": "Usa el selector de color o ingresa un valor de color."
+          },
+          {
+            "title": "Ve las Conversiones",
+            "description": "Ve el color en formatos HEX, RGB, HSL y HSV."
+          },
+          {
+            "title": "Copia los Valores",
+            "description": "Copia cualquier formato de color para usar en tus proyectos."
+          }
+        ]
+      },
+      "faq": [
+        {
+          "question": "¿Cuál es la diferencia entre RGB y HSL?",
+          "answer": "RGB (Rojo, Verde, Azul) define colores mezclando luz. HSL (Tono, Saturación, Luminosidad) es más intuitivo para ajustar colores."
+        }
+      ]
+    },
+    "diff-checker": {
+      "name": "Comparador Diff",
+      "fullName": "Comparador de Texto Diff",
+      "description": "Compara dos textos y ve las diferencias resaltadas. Encuentra adiciones, eliminaciones y modificaciones al instante.",
+      "shortDescription": "Compara diferencias de texto",
+      "metaTitle": "Comparador Diff - Compara Texto Online | OneDevKit",
+      "metaDescription": "Compara dos textos y ve las diferencias resaltadas. Encuentra adiciones, eliminaciones y cambios.",
+      "keywords": "comparador diff, comparar texto, comparar texto online, herramienta diff, diferencia de texto, comparar archivos online",
+      "howTo": {
+        "title": "Cómo Usar",
+        "steps": [
+          {
+            "title": "Ingresa el Texto Original",
+            "description": "Pega tu texto original en el panel izquierdo."
+          },
+          {
+            "title": "Ingresa el Texto Modificado",
+            "description": "Pega el texto modificado en el panel derecho."
+          },
+          {
+            "title": "Ve las Diferencias",
+            "description": "Visualiza las adiciones en verde y las eliminaciones en rojo."
+          }
+        ]
+      },
+      "faq": [
+        {
+          "question": "¿Puedo comparar código?",
+          "answer": "Sí, esta herramienta funciona muy bien para comparar código, archivos de configuración o cualquier contenido de texto."
+        }
+      ]
+    },
+    "markdown-preview": {
+      "name": "Vista Markdown",
+      "fullName": "Editor y Vista Previa Markdown",
+      "description": "Escribe Markdown y ve la vista previa en vivo. Soporta GitHub Flavored Markdown con resaltado de sintaxis y opciones de exportación.",
+      "shortDescription": "Vista previa Markdown en vivo",
+      "metaTitle": "Editor y Vista Previa Markdown - Vista Previa en Vivo | OneDevKit",
+      "metaDescription": "Escribe Markdown con vista previa en vivo. Soporta GitHub Flavored Markdown, tablas, bloques de código y más.",
+      "keywords": "editor markdown, vista previa markdown, markdown online, github markdown, markdown a html, editor md",
+      "howTo": {
+        "title": "Cómo Usar",
+        "steps": [
+          {
+            "title": "Escribe Markdown",
+            "description": "Escribe o pega Markdown en el editor."
+          },
+          {
+            "title": "Ve la Vista Previa",
+            "description": "Observa cómo se actualiza la vista previa en vivo mientras escribes."
+          },
+          {
+            "title": "Exporta",
+            "description": "Copia el HTML o descarga tu documento."
+          }
+        ]
+      },
+      "faq": [
+        {
+          "question": "¿Qué características de Markdown son compatibles?",
+          "answer": "Soportamos GitHub Flavored Markdown incluyendo tablas, listas de tareas, bloques de código con resaltado de sintaxis y más."
+        }
+      ]
+    },
+    "word-counter": {
+      "name": "Contador de Palabras",
+      "fullName": "Contador de Palabras",
+      "description": "Cuenta palabras, caracteres, oraciones y párrafos al instante. Obtén estimaciones de tiempo de lectura y habla.",
+      "shortDescription": "Cuenta palabras y caracteres",
+      "metaTitle": "Contador de Palabras - Cuenta Palabras y Caracteres | OneDevKit",
+      "metaDescription": "Cuenta palabras, caracteres, oraciones y párrafos al instante. Obtén estimaciones de tiempo de lectura.",
+      "keywords": "contador de palabras, contador de caracteres, cuenta palabras online, contador de letras, contador de texto, contar palabras en texto",
+      "howTo": {
+        "title": "Cómo Usar",
+        "steps": [
+          {
+            "title": "Ingresa Tu Texto",
+            "description": "Escribe o pega tu texto en el área de entrada."
+          },
+          {
+            "title": "Ve las Estadísticas",
+            "description": "Visualiza el conteo de palabras, caracteres, oraciones y párrafos."
+          },
+          {
+            "title": "Revisa los Tiempos Estimados",
+            "description": "Ve el tiempo estimado de lectura y habla."
+          }
+        ]
+      },
+      "faq": [
+        {
+          "question": "¿Cómo se calcula el tiempo de lectura?",
+          "answer": "El tiempo de lectura se basa en una velocidad promedio de lectura de 200 palabras por minuto."
+        },
+        {
+          "question": "¿Cuenta los espacios?",
+          "answer": "El conteo de caracteres muestra tanto con espacios como sin espacios."
+        }
+      ]
+    },
+    "case-converter": {
+      "name": "Convertidor de Texto",
+      "fullName": "Convertidor de Mayúsculas/Minúsculas",
+      "description": "Convierte texto entre MAYÚSCULAS, minúsculas, Título, camelCase, snake_case, kebab-case y más.",
+      "shortDescription": "Cambia formato de texto",
+      "metaTitle": "Convertidor de Texto - Cambia Formato de Texto | OneDevKit",
+      "metaDescription": "Convierte texto entre MAYÚSCULAS, minúsculas, Título, camelCase, snake_case y más.",
+      "keywords": "convertidor de texto, mayúsculas a minúsculas, convertidor tipo título, convertidor camelcase, snake case, cambiador de formato de texto",
+      "howTo": {
+        "title": "Cómo Usar",
+        "steps": [
+          {
+            "title": "Ingresa Tu Texto",
+            "description": "Escribe o pega el texto que deseas convertir."
+          },
+          {
+            "title": "Elige el Formato",
+            "description": "Selecciona el formato de texto que deseas."
+          },
+          {
+            "title": "Copia el Resultado",
+            "description": "Copia el texto convertido."
+          }
+        ]
+      },
+      "faq": [
+        {
+          "question": "¿Qué formatos de texto están disponibles?",
+          "answer": "MAYÚSCULAS, minúsculas, Tipo Título, Tipo oración, camelCase, PascalCase, snake_case, kebab-case y más."
+        }
+      ]
+    },
+    "image-compressor": {
+      "name": "Compresor de Imágenes",
+      "fullName": "Compresor de Imágenes a KB Específico",
+      "description": "Comprime imágenes a tamaño exacto (20KB, 50KB, 100KB). Perfecto para fotos de pasaporte, solicitudes de empleo y formularios gubernamentales.",
+      "shortDescription": "Comprime a KB exactos",
+      "metaTitle": "Compresor de Imágenes a KB Específico | OneDevKit",
+      "metaDescription": "Comprime imágenes a tamaño exacto - 20KB, 50KB, 100KB. Perfecto para fotos de pasaporte y formularios. Gratis y privado.",
+      "keywords": "compresor de imágenes, comprimir imagen a 20kb, comprimir imagen a 50kb, reducir tamaño de imagen, reductor de tamaño de imagen, comprimir foto online",
+      "howTo": {
+        "title": "Cómo Usar",
+        "steps": [
+          {
+            "title": "Sube la Imagen",
+            "description": "Haz clic o arrastra para subir tu imagen (JPG, PNG)."
+          },
+          {
+            "title": "Selecciona el Tamaño Objetivo",
+            "description": "Elige 20KB, 50KB, 100KB o ingresa un tamaño personalizado."
+          },
+          {
+            "title": "Descarga",
+            "description": "Descarga tu imagen comprimida."
+          }
+        ]
+      },
+      "faq": [
+        {
+          "question": "¿Por qué comprimir a KB específicos?",
+          "answer": "Muchos formularios gubernamentales, solicitudes de empleo y servicios online tienen límites estrictos de tamaño de archivo como 20KB o 50KB."
+        },
+        {
+          "question": "¿Se afectará la calidad?",
+          "answer": "La herramienta encuentra el mejor balance entre tamaño de archivo y calidad. Para tamaños muy pequeños, algo de pérdida de calidad es inevitable."
+        },
+        {
+          "question": "¿Mi imagen se sube a un servidor?",
+          "answer": "No, todo el procesamiento ocurre en tu navegador. Tus imágenes nunca salen de tu dispositivo."
+        }
+      ]
+    },
+    "passport-photo": {
+      "name": "Foto Pasaporte",
+      "fullName": "Creador de Fotos de Pasaporte",
+      "description": "Crea fotos de pasaporte y visa para cualquier país. Redimensiona a dimensiones exactas y comprime al tamaño requerido.",
+      "shortDescription": "Fotos pasaporte y visa",
+      "metaTitle": "Creador de Fotos de Pasaporte - Crea Fotos de Pasaporte | OneDevKit",
+      "metaDescription": "Crea fotos de pasaporte y visa para cualquier país. Redimensiona a dimensiones exactas (2x2 pulgadas, 35x45mm).",
+      "keywords": "creador foto pasaporte, tamaño foto pasaporte, foto visa, foto pasaporte 2x2, foto 35x45mm, foto pasaporte online",
+      "howTo": {
+        "title": "Cómo Usar",
+        "steps": [
+          {
+            "title": "Selecciona el País",
+            "description": "Elige tu país o tipo de documento para las especificaciones correctas."
+          },
+          {
+            "title": "Sube la Foto",
+            "description": "Sube una foto clara, de frente con buena iluminación."
+          },
+          {
+            "title": "Ajusta y Descarga",
+            "description": "Usa los controles de zoom y posición, luego descarga tu foto de pasaporte."
+          }
+        ]
+      },
+      "faq": [
+        {
+          "question": "¿Qué países son compatibles?",
+          "answer": "Soportamos EE.UU., India, Reino Unido, Schengen, Canadá, Australia, China, Japón, Singapur y tamaños personalizados."
+        },
+        {
+          "question": "¿Mi foto será aceptada oficialmente?",
+          "answer": "Esta herramienta ayuda con el tamaño y la compresión. Asegúrate de que tu foto original cumpla con todos los requisitos oficiales."
+        },
+        {
+          "question": "¿Qué es la función de diseño de impresión?",
+          "answer": "Descarga un diseño de 4x6 pulgadas con múltiples fotos de pasaporte para imprimir en casa o en una tienda de fotos."
+        }
+      ]
+    },
+    "social-media-resizer": {
+      "name": "Redimensionador Social",
+      "fullName": "Redimensionador de Imágenes para Redes Sociales",
+      "description": "Redimensiona imágenes para Instagram, LinkedIn, Twitter, Facebook, YouTube, Pinterest, TikTok, Snapchat, Discord, Twitch, Threads, WhatsApp. Procesamiento por lotes, tamaños personalizados, relleno de fondo.",
+      "shortDescription": "Tamaños Instagram, LinkedIn, Twitter",
+      "metaTitle": "Redimensionador de Imágenes para Redes Sociales - Instagram, Facebook, Twitter | OneDevKit",
+      "metaDescription": "Redimensiona imágenes para todas las redes sociales. Instagram, Facebook, LinkedIn, Twitter, YouTube, TikTok y más.",
+      "keywords": "redimensionador redes sociales, tamaño foto instagram, tamaño imagen linkedin, dimensiones imagen twitter, tamaño portada facebook, redimensionar imagen para redes sociales",
+      "howTo": {
+        "title": "Cómo Usar",
+        "steps": [
+          {
+            "title": "Sube la Imagen",
+            "description": "Sube la imagen que deseas redimensionar."
+          },
+          {
+            "title": "Selecciona Plataforma y Tamaño",
+            "description": "Elige la plataforma de redes sociales y el preset de tamaño específico."
+          },
+          {
+            "title": "Ajusta y Descarga",
+            "description": "Usa zoom, panorámica, rotación y filtros, luego descarga tu imagen redimensionada."
+          }
+        ]
+      },
+      "faq": [
+        {
+          "question": "¿Qué plataformas son compatibles?",
+          "answer": "Instagram, Facebook, LinkedIn, Twitter/X, YouTube, Pinterest, TikTok, Snapchat, Discord, Twitch, Threads, WhatsApp y tamaños personalizados."
+        },
+        {
+          "question": "¿Puedo redimensionar múltiples imágenes?",
+          "answer": "Sí, el procesamiento por lotes está disponible. Sube múltiples imágenes y redimensiónalas todas a la vez."
+        },
+        {
+          "question": "¿Qué funciones de edición están disponibles?",
+          "answer": "Zoom, panorámica, rotación, voltear, brillo, contraste, saturación, borde, recorte circular y color de fondo."
+        }
+      ]
     }
   },
 
@@ -154,27 +929,243 @@
     "about": {
       "title": "Acerca de OneDevKit",
       "metaDescription": "Conoce OneDevKit - herramientas de desarrollo gratuitas y enfocadas en la privacidad.",
-      "keywords": "acerca de onedevkit, herramientas de desarrollador, herramientas gratis"
+      "keywords": "acerca de onedevkit, herramientas de desarrollador, herramientas gratis",
+      "heading": "Acerca de OneDevKit",
+      "mission": {
+        "title": "Nuestra Misión",
+        "text1": "OneDevKit fue creado con una misión simple: proporcionar a los desarrolladores herramientas gratuitas, rápidas y enfocadas en la privacidad para tareas cotidianas. Creemos que las utilidades esenciales para desarrolladores deben ser accesibles para todos, independientemente del presupuesto o experiencia técnica.",
+        "text2": "Cada herramienta en OneDevKit se ejecuta completamente en tu navegador. Tus datos nunca salen de tu dispositivo, y no rastreamos, almacenamos ni vendemos ninguna información que ingreses en nuestras herramientas."
+      },
+      "whyBuilt": {
+        "title": "Por Qué Creamos Esto",
+        "intro": "Como desarrolladores, estábamos frustrados con las herramientas online existentes que:",
+        "items": [
+          "Requerían registros o suscripciones innecesarias",
+          "Enviaban tus datos a servidores remotos",
+          "Estaban llenas de anuncios intrusivos",
+          "Cargaban lentamente con JavaScript excesivo",
+          "No funcionaban bien en dispositivos móviles"
+        ],
+        "conclusion": "Nos propusimos construir el kit de herramientas que deseábamos: simple, rápido, privado y gratuito."
+      },
+      "ourTools": {
+        "title": "Nuestras Herramientas",
+        "intro": "Actualmente ofrecemos las siguientes herramientas gratuitas para desarrolladores:",
+        "moreComing": "Próximamente más herramientas. ¿Tienes alguna sugerencia?"
+      },
+      "privacyCommitment": {
+        "title": "Compromiso de Privacidad",
+        "intro": "La privacidad no es solo una característica para nosotros - es un principio fundamental. Esto es lo que significa:",
+        "items": [
+          { "title": "Procesamiento en el cliente:", "text": "Todas las herramientas se ejecutan completamente en tu navegador usando JavaScript" },
+          { "title": "Sin recolección de datos:", "text": "No recolectamos, almacenamos ni transmitimos ningún dato que ingreses" },
+          { "title": "Analíticas mínimas:", "text": "Solo usamos analíticas que respetan la privacidad para estadísticas básicas de tráfico" },
+          { "title": "Sin rastreadores de terceros:", "text": "Sin widgets de redes sociales ni rastreadores publicitarios" },
+          { "title": "Código abierto:", "text": "Puedes inspeccionar nuestro código en las herramientas de desarrollador de tu navegador" }
+        ],
+        "readMore": "Lee nuestra"
+      },
+      "contactSection": {
+        "title": "Contáctanos",
+        "text": "¡Nos encantaría saber de ti! Ya sea que tengas comentarios, sugerencias o simplemente quieras saludar, no dudes en"
+      },
+      "letUsKnow": "Háznoslo saber",
+      "getInTouch": "ponerte en contacto"
     },
     "contact": {
       "title": "Contáctanos",
       "metaDescription": "Ponte en contacto con el equipo de OneDevKit. Nos encantaría escuchar tus comentarios.",
-      "keywords": "contacto onedevkit, comentarios, soporte"
-    },
-    "privacy": {
-      "title": "Política de Privacidad",
-      "metaDescription": "Política de privacidad de OneDevKit. Todas las herramientas funcionan en tu navegador.",
-      "keywords": "política de privacidad, protección de datos"
-    },
-    "terms": {
-      "title": "Términos de Servicio",
-      "metaDescription": "Términos de servicio de OneDevKit para usar nuestras herramientas gratuitas.",
-      "keywords": "términos de servicio, condiciones legales"
+      "keywords": "contacto onedevkit, comentarios, soporte",
+      "heading": "Contáctanos",
+      "intro": "¡Nos encantaría saber de ti! Ya sea que tengas preguntas, sugerencias o comentarios sobre OneDevKit, no dudes en comunicarte.",
+      "getInTouch": "Ponte en Contacto",
+      "email": {
+        "title": "Correo Electrónico",
+        "description": "Ideal para preguntas detalladas o comentarios"
+      },
+      "twitter": {
+        "description": "Síguenos para actualizaciones y preguntas rápidas"
+      },
+      "topics": {
+        "title": "¿En Qué Podemos Ayudarte?",
+        "suggestions": { "title": "Sugerencias de Herramientas:", "text": "¿Tienes una idea para una nueva herramienta? Siempre buscamos expandir nuestro kit." },
+        "bugs": { "title": "Reportes de Errores:", "text": "¿Encontraste algo que no funciona correctamente? Avísanos y lo arreglaremos." },
+        "features": { "title": "Solicitudes de Funciones:", "text": "¿Quieres ver mejoras en las herramientas existentes? Comparte tus ideas." },
+        "feedback": { "title": "Comentarios Generales:", "text": "Cualquier opinión sobre tu experiencia usando OneDevKit." },
+        "partnership": { "title": "Consultas de Asociación:", "text": "¿Interesado en colaborar o integrar con OneDevKit?" }
+      },
+      "response": {
+        "title": "Tiempo de Respuesta",
+        "text": "Normalmente respondemos a los correos en 24-48 horas durante días laborables. Para asuntos urgentes, menciona \"URGENTE\" en el asunto."
+      },
+      "beforeReach": {
+        "title": "Antes de Contactarnos",
+        "text": "Podrías encontrar tu respuesta en uno de estos recursos:",
+        "faq": "Preguntas y respuestas comunes",
+        "about": "Conoce más sobre OneDevKit",
+        "privacy": "Cómo manejamos tus datos"
+      }
     },
     "faq": {
       "title": "Preguntas Frecuentes",
       "metaDescription": "Preguntas comunes sobre las herramientas de OneDevKit.",
-      "keywords": "faq, ayuda, preguntas, soporte"
+      "keywords": "faq, ayuda, preguntas, soporte",
+      "heading": "Preguntas Frecuentes",
+      "intro": "Encuentra respuestas a preguntas comunes sobre OneDevKit y nuestras herramientas para desarrolladores.",
+      "items": [
+        { "question": "¿OneDevKit es realmente gratis?", "answer": "¡Sí! Todas las herramientas en OneDevKit son completamente gratuitas sin costos ocultos, suscripciones ni niveles premium. Creemos que las herramientas esenciales para desarrolladores deben ser accesibles para todos." },
+        { "question": "¿Mis datos están seguros?", "answer": "Absolutamente. Todas las herramientas se ejecutan completamente en tu navegador usando JavaScript. Tus datos nunca salen de tu dispositivo y nunca se envían a nuestros servidores. Puedes verificar esto revisando la pestaña de red de tu navegador mientras usas cualquier herramienta." },
+        { "question": "¿Necesito crear una cuenta?", "answer": "No se requiere cuenta ni registro. Solo visita cualquier página de herramienta y comienza a usarla inmediatamente. No recolectamos información personal ni requerimos registros." },
+        { "question": "¿Puedo usar estas herramientas sin conexión?", "answer": "Una vez que la página está cargada, la mayoría de las herramientas seguirán funcionando sin conexión ya que se ejecutan completamente en tu navegador. Sin embargo, necesitarás conexión a internet para cargar la página inicialmente." },
+        { "question": "¿Cómo ganan dinero?", "answer": "OneDevKit es actualmente un proyecto de pasión. Podríamos agregar publicidad no intrusiva y respetuosa con la privacidad en el futuro, pero tu privacidad y experiencia de usuario siempre serán lo primero." },
+        { "question": "¿Puedo sugerir una nueva herramienta?", "answer": "¡Por supuesto! Nos encanta escuchar a nuestros usuarios. Visita nuestra página de contacto para enviarnos tus sugerencias." },
+        { "question": "¿Por qué algunas herramientas requieren subir archivos?", "answer": "Algunas herramientas trabajan con archivos (como convertidores de imágenes). Cuando seleccionas un archivo, se procesa completamente en tu navegador - el archivo nunca se sube a ningún servidor. Esto se hace usando la API de archivos del navegador." },
+        { "question": "¿Usan cookies?", "answer": "Usamos cookies mínimas solo para funcionalidad esencial como recordar tu preferencia de tema (modo claro/oscuro). No usamos cookies de rastreo ni vendemos tus datos." },
+        { "question": "¿OneDevKit es de código abierto?", "answer": "Aunque nuestro código fuente no está disponible públicamente, puedes inspeccionar todo el código del lado del cliente en las herramientas de desarrollador de tu navegador. Todo lo que se ejecuta es visible y verificable." },
+        { "question": "¿Qué navegadores son compatibles?", "answer": "OneDevKit funciona en todos los navegadores modernos incluyendo Chrome, Firefox, Safari y Edge. Recomendamos usar la última versión para la mejor experiencia." }
+      ],
+      "moreQuestions": {
+        "title": "¿Aún Tienes Preguntas?",
+        "text": "Si no encontraste lo que buscas, no dudes en",
+        "contactUs": "contactarnos"
+      }
+    },
+    "privacy": {
+      "title": "Política de Privacidad",
+      "metaDescription": "Política de privacidad de OneDevKit. Todas las herramientas funcionan en tu navegador.",
+      "keywords": "política de privacidad, protección de datos",
+      "heading": "Política de Privacidad",
+      "lastUpdated": "Última Actualización",
+      "date": "Diciembre 2024",
+      "overview": {
+        "title": "Resumen",
+        "text": "En OneDevKit, tu privacidad es nuestra máxima prioridad. Esta Política de Privacidad explica cómo manejamos la información cuando usas nuestro sitio web y herramientas. La versión corta: casi no recolectamos nada, y tus datos nunca salen de tu navegador."
+      },
+      "notCollected": {
+        "title": "Información Que No Recolectamos",
+        "intro": "Queremos ser absolutamente claros sobre lo que no recolectamos:",
+        "personal": { "title": "Información Personal:", "text": "No pedimos ni almacenamos tu nombre, correo electrónico ni ninguna información identificable" },
+        "toolData": { "title": "Datos de Herramientas:", "text": "Cualquier dato que ingreses en nuestras herramientas (JSON, texto, contraseñas, etc.) se procesa completamente en tu navegador y nunca se envía a nuestros servidores" },
+        "files": { "title": "Archivos:", "text": "Los archivos que subes a nuestras herramientas nunca se transfieren a nuestros servidores" },
+        "passwords": { "title": "Contraseñas o Datos Sensibles:", "text": "Nunca vemos, almacenamos ni tenemos acceso a ningún dato sensible que proceses usando nuestras herramientas" }
+      },
+      "collected": {
+        "title": "Información Que Podemos Recolectar",
+        "intro": "Usamos analíticas que respetan la privacidad para entender patrones básicos de tráfico. Esto puede incluir:",
+        "pageViews": { "title": "Vistas de Página:", "text": "Qué páginas se visitan (sin identificar quién las visitó)" },
+        "referrer": { "title": "Referente:", "text": "Cómo encontraste nuestro sitio (ej. motor de búsqueda, enlace directo)" },
+        "device": { "title": "Tipo de Dispositivo:", "text": "Categoría general del dispositivo (escritorio, móvil, tablet)" },
+        "country": { "title": "País:", "text": "Ubicación geográfica aproximada a nivel de país" },
+        "note": "Estos datos son agregados y anónimos - no podemos identificar usuarios individuales."
+      },
+      "howToolsWork": {
+        "title": "Cómo Funcionan Nuestras Herramientas",
+        "intro": "Todas las herramientas de OneDevKit están diseñadas con la privacidad en mente:",
+        "browser": { "title": "Procesamiento en el Cliente:", "text": "Todas las herramientas se ejecutan completamente en tu navegador usando JavaScript" },
+        "noServer": { "title": "Sin Comunicación con Servidor:", "text": "Los datos que ingresas nunca se envían a nuestros servidores ni a terceros" },
+        "noStorage": { "title": "Sin Almacenamiento:", "text": "No almacenamos tus datos de entrada en ningún lugar - cuando cierras la página, desaparecen" },
+        "inspect": { "title": "Verificable:", "text": "Puedes inspeccionar nuestro código usando las herramientas de desarrollador de tu navegador para verificar esto" }
+      },
+      "cookies": {
+        "title": "Cookies",
+        "intro": "Usamos cookies mínimas solo para funcionalidad esencial:",
+        "theme": { "title": "Preferencia de Tema:", "text": "Recuerda tu elección de modo claro/oscuro" },
+        "language": { "title": "Preferencia de Idioma:", "text": "Recuerda tu idioma preferido" },
+        "analytics": { "title": "Analíticas (si están habilitadas):", "text": "Cookies de analíticas anónimas que no rastrean información personal" },
+        "note": "No usamos cookies publicitarias, píxeles de rastreo ni herramientas de marketing de terceros."
+      },
+      "thirdParty": {
+        "title": "Servicios de Terceros",
+        "intro": "Minimizamos el uso de servicios de terceros. Cuando los usamos, elegimos opciones que respetan la privacidad:",
+        "hosting": { "title": "Alojamiento:", "text": "Nuestro sitio está alojado en infraestructura segura y de buena reputación" },
+        "analyticsService": { "title": "Analíticas:", "text": "Usamos analíticas enfocadas en la privacidad que no rastrean usuarios individuales" },
+        "cdn": { "title": "CDN:", "text": "Podemos usar redes de distribución de contenido para servir activos estáticos rápidamente" },
+        "note": "No usamos widgets de redes sociales, redes publicitarias ni otros servicios de terceros con mucho rastreo."
+      },
+      "children": {
+        "title": "Privacidad de Menores",
+        "text": "OneDevKit es un sitio web de herramientas para desarrolladores de propósito general. No recolectamos conscientemente información de niños menores de 13 años. Como no recolectamos información personal de nadie, esto no es una preocupación para nuestro servicio."
+      },
+      "changes": {
+        "title": "Cambios a Esta Política",
+        "text": "Podemos actualizar esta Política de Privacidad de vez en cuando. Cuando hagamos cambios, actualizaremos la fecha de \"Última Actualización\" en la parte superior de esta página. Te animamos a revisar esta política periódicamente."
+      },
+      "contactSection": {
+        "title": "Contáctanos",
+        "text": "Si tienes alguna pregunta sobre esta Política de Privacidad o nuestras prácticas de privacidad, contáctanos en"
+      }
+    },
+    "terms": {
+      "title": "Términos de Servicio",
+      "metaDescription": "Términos de servicio de OneDevKit para usar nuestras herramientas gratuitas.",
+      "keywords": "términos de servicio, condiciones legales",
+      "heading": "Términos de Servicio",
+      "lastUpdated": "Última Actualización",
+      "date": "Diciembre 2024",
+      "acceptance": {
+        "title": "1. Aceptación de Términos",
+        "text": "Al acceder y usar OneDevKit (\"el Servicio\"), aceptas estar sujeto a estos Términos de Servicio. Si no estás de acuerdo con estos términos, por favor no uses nuestro Servicio."
+      },
+      "description": {
+        "title": "2. Descripción del Servicio",
+        "text": "OneDevKit proporciona herramientas gratuitas para desarrolladores basadas en navegador para diversos propósitos incluyendo manipulación de texto, codificación/decodificación, formateo y otras utilidades. Todas las herramientas se ejecutan completamente en tu navegador y no requieren procesamiento del lado del servidor de tus datos."
+      },
+      "useOfService": {
+        "title": "3. Uso del Servicio",
+        "intro": "Aceptas usar OneDevKit solo para propósitos legales. No debes:",
+        "items": [
+          "Usar el Servicio para cualquier propósito ilegal o no autorizado",
+          "Intentar interferir o interrumpir el Servicio o los servidores",
+          "Intentar acceder a áreas del Servicio a las que no estás autorizado a acceder",
+          "Usar sistemas automatizados o software para extraer datos del Servicio",
+          "Transmitir virus, malware u otro código dañino"
+        ]
+      },
+      "intellectual": {
+        "title": "4. Propiedad Intelectual",
+        "text": "El Servicio y su contenido original, características y funcionalidad son propiedad de OneDevKit y están protegidos por leyes internacionales de derechos de autor, marcas registradas y otras leyes de propiedad intelectual. Puedes usar nuestras herramientas para propósitos personales y comerciales, pero no puedes copiar, modificar o redistribuir el sitio web en sí sin permiso."
+      },
+      "userContent": {
+        "title": "5. Contenido del Usuario",
+        "intro": "Cualquier dato que ingreses en nuestras herramientas sigue siendo completamente tuyo. Como todo el procesamiento ocurre en tu navegador:",
+        "items": [
+          "Nunca vemos, accedemos ni almacenamos tus datos de entrada",
+          "Retienes todos los derechos sobre cualquier contenido que proceses usando nuestras herramientas",
+          "Eres responsable de asegurar que tienes derecho a usar cualquier dato que ingreses"
+        ]
+      },
+      "disclaimer": {
+        "title": "6. Descargo de Garantías",
+        "intro": "El Servicio se proporciona \"tal cual\" y \"según disponibilidad\" sin garantías de ningún tipo, ya sean expresas o implícitas. No garantizamos que:",
+        "items": [
+          "El Servicio será ininterrumpido o libre de errores",
+          "Los resultados de usar nuestras herramientas serán precisos o confiables",
+          "Cualquier error en el Servicio será corregido"
+        ],
+        "note": "Usas el Servicio bajo tu propio riesgo. Siempre verifica los resultados importantes de forma independiente."
+      },
+      "limitation": {
+        "title": "7. Limitación de Responsabilidad",
+        "intro": "En la máxima medida permitida por la ley, OneDevKit no será responsable por ningún daño indirecto, incidental, especial, consecuente o punitivo, ni por ninguna pérdida de beneficios o ingresos, ya sea incurrida directa o indirectamente, ni por ninguna pérdida de datos, uso, buena voluntad u otras pérdidas intangibles resultantes de:",
+        "items": [
+          "Tu uso o incapacidad para usar el Servicio",
+          "Cualquier acceso no autorizado o uso de nuestros servidores",
+          "Cualquier error u omisión en cualquier contenido",
+          "Cualquier otro asunto relacionado con el Servicio"
+        ]
+      },
+      "changesToTerms": {
+        "title": "8. Cambios a los Términos",
+        "text": "Nos reservamos el derecho de modificar estos Términos de Servicio en cualquier momento. Cuando hagamos cambios, actualizaremos la fecha de \"Última Actualización\" en la parte superior de esta página. Tu uso continuado del Servicio después de cualquier cambio indica tu aceptación de los nuevos términos."
+      },
+      "governing": {
+        "title": "9. Ley Aplicable",
+        "text": "Estos Términos se regirán e interpretarán de acuerdo con las leyes aplicables, sin tener en cuenta los principios de conflicto de leyes."
+      },
+      "contactSection": {
+        "title": "10. Contáctanos",
+        "text": "Si tienes alguna pregunta sobre estos Términos de Servicio, contáctanos en"
+      }
     }
   }
 }

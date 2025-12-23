@@ -5,31 +5,31 @@
       {% set categories = tools | groupby("category") %}
       {% for category, categoryTools in categories %}
       <div class="footer-section">
-        <h4>{{ category }}</h4>
+        <h4>{{ ("categories." + category) | t(currentLang) }}</h4>
         <ul class="footer-links">
           {% for tool in categoryTools %}
-          <li><a href="/tools/{{ tool.id }}/"{% if page.url == '/tools/' + tool.id + '/' %} aria-current="page"{% endif %}>{{ tool.name }}</a></li>
+          <li><a href="{{ ('/tools/' + tool.id + '/') | langUrl(currentLang) }}"{% if page.url == '/tools/' + tool.id + '/' %} aria-current="page"{% endif %}>{{ tool.id | toolT(currentLang, 'name') | default(tool.name) }}</a></li>
           {% endfor %}
         </ul>
       </div>
       {% endfor %}
       <div class="footer-section">
-        <h4>Company</h4>
+        <h4>{{ "footer.company" | t(currentLang) }}</h4>
         <ul class="footer-links">
-          <li><a href="/about/">About</a></li>
-          <li><a href="/contact/">Contact</a></li>
-          <li><a href="/faq/">FAQ</a></li>
+          <li><a href="{{ '/about/' | langUrl(currentLang) }}">{{ "nav.about" | t(currentLang) }}</a></li>
+          <li><a href="{{ '/contact/' | langUrl(currentLang) }}">{{ "nav.contact" | t(currentLang) }}</a></li>
+          <li><a href="{{ '/faq/' | langUrl(currentLang) }}">{{ "nav.faq" | t(currentLang) }}</a></li>
         </ul>
       </div>
       <div class="footer-section">
-        <h4>Legal</h4>
+        <h4>{{ "footer.legal" | t(currentLang) }}</h4>
         <ul class="footer-links">
-          <li><a href="/privacy/">Privacy Policy</a></li>
-          <li><a href="/terms/">Terms of Service</a></li>
+          <li><a href="{{ '/privacy/' | langUrl(currentLang) }}">{{ "nav.privacy" | t(currentLang) }}</a></li>
+          <li><a href="{{ '/terms/' | langUrl(currentLang) }}">{{ "nav.terms" | t(currentLang) }}</a></li>
         </ul>
       </div>
       <div class="footer-section">
-        <h4>Follow Us</h4>
+        <h4>{{ "footer.followUs" | t(currentLang) }}</h4>
         <ul class="footer-links">
           <li>
             <a href="https://x.com/{{ site.twitter | replace('@', '') }}" target="_blank" rel="noopener noreferrer" class="footer-social-link">
@@ -44,8 +44,8 @@
     </div>
     <div class="footer-bottom">
       <p class="footer-copyright">
-        &copy; {% year %} {{ site.name }}. All rights reserved.<br>
-        <small>Tools provided "as is" without warranty.</small>
+        &copy; {% year %} {{ site.name }}. {{ "footer.allRightsReserved" | t(currentLang) }}<br>
+        <small>{{ "footer.disclaimer" | t(currentLang) }}</small>
       </p>
     </div>
   </div>
