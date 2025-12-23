@@ -156,13 +156,80 @@ After creating a language, the command:
 | Changes only | Incremental improvements |
 | Specific version diff | Compare before/after |
 
-## Gemini Prompt Variations
+## Gemini Prompt - The "Deep-Dive" Review
 
-### Full Language Review
-"Review all Spanish translations for accuracy, naturalness, and consistency."
+To get exhaustive reviews (not superficial scans), use this structured prompt that forces the AI from "scanning" mode to "auditing" mode:
 
-### Section Review (Multi-Language)
-"Review translations for the {tool} tool in Spanish, French, and German. Ensure consistency across languages."
+```
+Role: You are a Senior Localization QA Specialist and Native {LANGUAGE} Copy Editor.
 
-### Changes-Only Review
-"Review these newly added translations. Previous translations have been reviewed."
+Task: Perform a strict, line-by-line audit of the following translation JSON/Table.
+
+Review Rules:
+
+1. **Consistency Check**: Group similar keys (e.g., all titles, all descriptions, all buttons)
+   and ensure they use identical phrasing. If you correct one (e.g., "Free Tools"), ensure
+   that correction is applied to every instance of that phrase.
+
+2. **Contextual Grammar**: For keys that are parts of sentences (like "feel free to..." ->
+   "contact us"), verify that the grammatical mood (imperative vs. infinitive) matches
+   the preceding text.
+
+3. **Naturalness**: Flag any literal translations (Anglicisms) that a native speaker would not say.
+
+4. **Completeness**: Do not summarize. If there are 20 errors, list all 20.
+
+Process: Before outputting the JSON, please simulate a "double-pass" review internally:
+- **Pass 1**: Check individual lines for grammar/typos.
+- **Pass 2**: Cross-reference keys (e.g., site.title vs home.heroTitle) to ensure branding consistency.
+
+Output: Provide the JSON array of corrections in this format:
+[
+  {
+    "key": "full.key.path",
+    "issue": "consistency|grammar|naturalness|typo",
+    "current": "current text",
+    "suggested": "improved text",
+    "explanation": "why this change"
+  }
+]
+```
+
+### Why This Prompt Works Better
+
+| Element | Purpose |
+|---------|---------|
+| **"Senior Localization QA Specialist"** | Sets higher standard than "translator". A QA specialist looks for bugs and inconsistencies, not just word conversion. |
+| **"Group similar keys"** | Fixes the cross-reference problem (e.g., `site.metaTitle` vs `pages.home.heroTitle`). Treats the dataset as a system, not isolated sentences. |
+| **"Contextual Grammar"** | Alerts to "broken sentence" issues where grammatical mood must match surrounding context. |
+| **"Simulate a double-pass"** | Encourages the model to hold more logic in working memory before generating the response. |
+| **"Do not summarize"** | Prevents AI from stopping at "a few examples" when there are more issues. |
+
+### Key Lesson Learned
+
+**Problem**: Gemini may correct `site.tagline` but miss that `pages.home.heroTitle` displays the same text on the homepage.
+
+**Solution**: The "cross-reference keys" instruction in the prompt ensures related keys are checked together for consistency.
+
+### Prompt Variations by Review Type
+
+#### Full Language Review
+Add to the base prompt:
+```
+Context: This is a complete review of all {LANGUAGE} translations for the OneDevKit project.
+Focus especially on: UI consistency, SEO text naturalness, and technical terminology.
+```
+
+#### Section Review (New Tool)
+Add to the base prompt:
+```
+Context: This is a review of the "{tool-name}" tool translations across {N} languages.
+Ensure: Terminology consistency with existing tools, natural phrasing for each language.
+```
+
+#### Changes-Only Review
+Add to the base prompt:
+```
+Context: These are newly added translations. Existing translations have been reviewed.
+Focus: Integration with existing text style and terminology consistency.
+```
