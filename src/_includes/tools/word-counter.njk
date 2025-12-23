@@ -1,4 +1,6 @@
 {# Word Counter Tool UI Partial #}
+{%- set toolId = "word-counter" -%}
+{%- set currentLang = lang | default("en") -%}
 <style>
   .stats-grid {
     display: grid;
@@ -68,39 +70,39 @@
   <div class="stats-grid">
     <div class="stat-card">
       <div class="stat-card-value" id="word-count">0</div>
-      <div class="stat-card-label">{{ "common.words" | t(lang) }}</div>
+      <div class="stat-card-label">{{ "common.words" | t(currentLang) }}</div>
     </div>
     <div class="stat-card">
       <div class="stat-card-value" id="char-count">0</div>
-      <div class="stat-card-label">{{ "common.characters" | t(lang) }}</div>
+      <div class="stat-card-label">{{ "common.characters" | t(currentLang) }}</div>
     </div>
     <div class="stat-card">
       <div class="stat-card-value" id="char-no-space">0</div>
-      <div class="stat-card-label">{{ "common.characters" | t(lang) }} (no spaces)</div>
+      <div class="stat-card-label">{{ "common.characters" | t(currentLang) }} ({{ "common.noSpaces" | t(currentLang) }})</div>
     </div>
     <div class="stat-card">
       <div class="stat-card-value" id="sentence-count">0</div>
-      <div class="stat-card-label">{{ "common.sentences" | t(lang) }}</div>
+      <div class="stat-card-label">{{ "common.sentences" | t(currentLang) }}</div>
     </div>
     <div class="stat-card">
       <div class="stat-card-value" id="paragraph-count">0</div>
-      <div class="stat-card-label">{{ "common.paragraphs" | t(lang) }}</div>
+      <div class="stat-card-label">{{ "common.paragraphs" | t(currentLang) }}</div>
     </div>
     <div class="stat-card">
       <div class="stat-card-value" id="line-count">0</div>
-      <div class="stat-card-label">{{ "common.lines" | t(lang) }}</div>
+      <div class="stat-card-label">{{ "common.lines" | t(currentLang) }}</div>
     </div>
   </div>
 
   <!-- Text Input -->
   <div class="input-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-2);">
-    <label for="text-input" class="input-label" style="font-weight: 600;">Enter {{ "common.text" | t(lang) }}</label>
-    <button id="load-sample" class="btn btn-text btn-sm">{{ "common.loadSample" | t(lang) }}</button>
+    <label for="text-input" class="input-label" style="font-weight: 600;">{{ "common.enter" | t(currentLang) }} {{ "common.text" | t(currentLang) }}</label>
+    <button id="load-sample" class="btn btn-text btn-sm">{{ "common.loadSample" | t(currentLang) }}</button>
   </div>
   <textarea
     id="text-input"
     class="word-input"
-    placeholder="Start typing or paste your text here..."
+    placeholder="{{ 'common.startTypingOrPaste' | t(currentLang) }}"
     aria-label="Text input for word counting"
   ></textarea>
 
@@ -110,21 +112,21 @@
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
       </svg>
-      <span>{{ "common.readingTime" | t(lang) }}:</span>
-      <span class="time-value" id="reading-time">0 {{ "common.minutes" | t(lang) }}</span>
+      <span>{{ "common.readingTime" | t(currentLang) }}:</span>
+      <span class="time-value" id="reading-time">0 {{ "common.minutes" | t(currentLang) }}</span>
     </div>
     <div class="time-item">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/>
       </svg>
-      <span>{{ "common.speakingTime" | t(lang) }}:</span>
-      <span class="time-value" id="speaking-time">0 {{ "common.minutes" | t(lang) }}</span>
+      <span>{{ "common.speakingTime" | t(currentLang) }}:</span>
+      <span class="time-value" id="speaking-time">0 {{ "common.minutes" | t(currentLang) }}</span>
     </div>
   </div>
 
   <!-- Actions -->
   <div class="tool-actions" style="margin-top: var(--space-4);">
-    <button id="copy-text" class="btn btn-secondary">{{ "common.copy" | t(lang) }} {{ "common.text" | t(lang) }}</button>
-    <button id="clear-text" class="btn btn-ghost">{{ "common.clear" | t(lang) }}</button>
+    <button id="copy-text" class="btn btn-secondary">{{ "common.copy" | t(currentLang) }} {{ "common.text" | t(currentLang) }}</button>
+    <button id="clear-text" class="btn btn-ghost">{{ "common.clear" | t(currentLang) }}</button>
   </div>
 </div>
