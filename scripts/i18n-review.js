@@ -1,14 +1,26 @@
 #!/usr/bin/env node
 /**
- * Translation Review Manager
+ * Translation Review Manager - Scalable i18n Review System
  *
- * Handles the complete Gemini review workflow with versioning and traceability.
+ * Supports:
+ * - Full language reviews
+ * - Section reviews (across all languages)
+ * - Incremental reviews (changes only)
+ * - State tracking and versioning
  *
  * Usage:
- *   node scripts/i18n-review.js --lang=es                    # Create new review export
- *   node scripts/i18n-review.js --lang=es --apply            # Apply latest corrections
- *   node scripts/i18n-review.js --lang=es --apply --version=001  # Apply specific version
- *   node scripts/i18n-review.js --lang=es --status           # Show review status
+ *   # Full language review
+ *   node scripts/i18n-review.js --lang=es
+ *
+ *   # Section review across all languages (for new tools)
+ *   node scripts/i18n-review.js --section=tools.image-editor
+ *
+ *   # Apply corrections
+ *   node scripts/i18n-review.js --lang=es --apply
+ *   node scripts/i18n-review.js --section=tools.image-editor --apply
+ *
+ *   # Status
+ *   node scripts/i18n-review.js --status
  */
 
 const fs = require('fs');
@@ -16,6 +28,8 @@ const path = require('path');
 
 const I18N_DIR = path.join(__dirname, '../src/_data/i18n');
 const REVIEWS_DIR = path.join(__dirname, '../i18n-reviews');
+const STATE_FILE = path.join(REVIEWS_DIR, 'state.json');
+const LANGUAGES_FILE = path.join(__dirname, '../src/_data/languages.json');
 
 // ============ Utility Functions ============
 
@@ -54,302 +68,209 @@ function getDateStamp() {
   return new Date().toISOString().split('T')[0];
 }
 
-function getNextVersion(langDir) {
-  if (!fs.existsSync(langDir)) {
-    return 1;
+function padVersion(num) {
+  return String(num).padStart(3, '0');
+}
+
+function loadState() {
+  if (fs.existsSync(STATE_FILE)) {
+    return JSON.parse(fs.readFileSync(STATE_FILE, 'utf8'));
   }
-  const versions = fs.readdirSync(langDir)
+  return { lastUpdated: new Date().toISOString(), languages: {}, sections: {} };
+}
+
+function saveState(state) {
+  state.lastUpdated = new Date().toISOString();
+  fs.writeFileSync(STATE_FILE, JSON.stringify(state, null, 2) + '\n');
+}
+
+function getEnabledLanguages() {
+  const languages = JSON.parse(fs.readFileSync(LANGUAGES_FILE, 'utf8'));
+  return languages.filter(l => l.enabled && l.code !== 'en');
+}
+
+function getNextVersion(dir) {
+  if (!fs.existsSync(dir)) return 1;
+  const versions = fs.readdirSync(dir)
     .filter(d => d.startsWith('v'))
     .map(d => parseInt(d.split('_')[0].substring(1)))
     .filter(n => !isNaN(n));
-
   return versions.length > 0 ? Math.max(...versions) + 1 : 1;
 }
 
-function getLatestVersion(langDir) {
-  if (!fs.existsSync(langDir)) {
-    return null;
-  }
-  const versions = fs.readdirSync(langDir)
-    .filter(d => d.startsWith('v'))
-    .sort()
-    .reverse();
-
+function getLatestVersion(dir) {
+  if (!fs.existsSync(dir)) return null;
+  const versions = fs.readdirSync(dir).filter(d => d.startsWith('v')).sort().reverse();
   return versions.length > 0 ? versions[0] : null;
-}
-
-function padVersion(num) {
-  return String(num).padStart(3, '0');
 }
 
 // ============ Language Names ============
 
 const LANG_NAMES = {
-  es: 'Spanish',
-  fr: 'French',
-  de: 'German',
-  pt: 'Portuguese',
-  it: 'Italian',
-  ja: 'Japanese',
-  zh: 'Chinese',
-  ko: 'Korean',
-  ar: 'Arabic',
-  hi: 'Hindi',
-  ru: 'Russian',
-  nl: 'Dutch',
-  pl: 'Polish',
-  tr: 'Turkish',
-  vi: 'Vietnamese',
-  th: 'Thai'
+  es: 'Spanish', fr: 'French', de: 'German', pt: 'Portuguese',
+  it: 'Italian', ja: 'Japanese', zh: 'Chinese', ko: 'Korean',
+  ar: 'Arabic', hi: 'Hindi', ru: 'Russian', nl: 'Dutch',
+  pl: 'Polish', tr: 'Turkish', vi: 'Vietnamese', th: 'Thai'
 };
 
 // ============ Export Generation ============
 
-function generateExport(lang) {
+function generateLanguageExport(lang, section = null) {
   const langName = LANG_NAMES[lang] || lang.toUpperCase();
-
   const en = JSON.parse(fs.readFileSync(path.join(I18N_DIR, 'en.json'), 'utf8'));
   const target = JSON.parse(fs.readFileSync(path.join(I18N_DIR, `${lang}.json`), 'utf8'));
 
-  const enFlat = flatten(en);
-  const targetFlat = flatten(target);
+  const enSection = getAtPath(en, section);
+  const targetSection = getAtPath(target, section);
+
+  if (section && !enSection) {
+    throw new Error(`Section "${section}" not found in en.json`);
+  }
+
+  const enFlat = flatten(enSection);
+  const targetFlat = flatten(targetSection || {});
+
+  const sectionInfo = section ? ` (Section: ${section})` : '';
 
   let output = `# Translation Review Request
 
-You are reviewing ${langName} translations for OneDevKit, a developer tools website.
+You are reviewing ${langName} translations for OneDevKit${sectionInfo}.
 
-## Your Task
-
-Review each translation below and identify any issues. For each problematic translation, provide:
-1. The translation key
-2. The issue type (accuracy, naturalness, terminology, formality, grammar)
-3. Your suggested correction
+## Task
+Review each translation and identify issues. For problematic translations, provide:
+1. Translation key
+2. Issue type (accuracy, naturalness, terminology, formality, grammar)
+3. Suggested correction
 4. Brief explanation
 
 ## Guidelines
+- **Accuracy**: Does it convey the English meaning?
+- **Naturalness**: Does it sound natural to native speakers?
+- **Terminology**: Are technical terms consistent?
+- **Formality**: Professional but accessible?
 
-- **Accuracy**: Does the translation accurately convey the English meaning?
-- **Naturalness**: Does it sound natural to native ${langName} speakers?
-- **Terminology**: Are technical terms translated consistently and correctly?
-- **Formality**: Is the formality level appropriate (professional but accessible)?
-- **Grammar**: Is the grammar correct?
-
-## Important Notes
-
-- Keep brand names "OneDevKit" unchanged
-- Keep placeholders like \`{year}\`, \`{value}\` unchanged
-- Technical terms (JSON, Base64, UUID, JWT, etc.) can stay in English
-- URLs and code examples should not be translated
+## Rules
+- Keep "OneDevKit" unchanged
+- Keep placeholders like \`{year}\` unchanged
+- Technical terms (JSON, Base64, UUID, JWT) can stay in English
 
 ## Output Format
-
-Please respond ONLY with a JSON array of corrections. If everything is correct, respond with an empty array \`[]\`.
+Respond ONLY with a JSON array. If all correct, respond with \`[]\`.
 
 \`\`\`json
 [
   {
-    "key": "tools.json-formatter.description",
+    "key": "full.translation.key",
     "issue": "naturalness",
-    "current": "current translation text",
-    "suggested": "improved translation text",
-    "explanation": "Brief explanation of why this change improves the translation"
+    "current": "current text",
+    "suggested": "improved text",
+    "explanation": "why this is better"
   }
 ]
 \`\`\`
 
 ---
 
-# Translations to Review
+# Translations
 
 | Key | English | ${lang.toUpperCase()} |
 |-----|---------|-----|
 `;
 
   for (const key in enFlat) {
-    const enVal = enFlat[key];
-    const targetVal = targetFlat[key];
-    const enEscaped = String(enVal).replace(/\|/g, '\\|').replace(/\n/g, ' ');
-    const targetEscaped = targetVal
-      ? String(targetVal).replace(/\|/g, '\\|').replace(/\n/g, ' ')
+    const fullKey = section ? `${section}.${key}` : key;
+    const enVal = String(enFlat[key]).replace(/\|/g, '\\|').replace(/\n/g, ' ');
+    const targetVal = targetFlat[key]
+      ? String(targetFlat[key]).replace(/\|/g, '\\|').replace(/\n/g, ' ')
       : '⚠️ MISSING';
-    output += `| \`${key}\` | ${enEscaped} | ${targetEscaped} |\n`;
+    output += `| \`${fullKey}\` | ${enVal} | ${targetVal} |\n`;
   }
 
-  output += `\n---\n\n`;
-  output += `**Total translations:** ${Object.keys(enFlat).length}\n`;
-  output += `**Generated:** ${new Date().toISOString()}\n`;
-
+  output += `\n---\n**Total:** ${Object.keys(enFlat).length} | **Generated:** ${new Date().toISOString()}\n`;
   return output;
 }
 
-// ============ Correction Report ============
+function generateSectionExport(section) {
+  const en = JSON.parse(fs.readFileSync(path.join(I18N_DIR, 'en.json'), 'utf8'));
+  const enSection = getAtPath(en, section);
 
-function generateCorrectionReport(corrections, translations, lang, version) {
-  const langName = LANG_NAMES[lang] || lang.toUpperCase();
+  if (!enSection) {
+    throw new Error(`Section "${section}" not found in en.json`);
+  }
 
-  let report = `# Translation Correction Report
+  const enFlat = flatten(enSection);
+  const languages = getEnabledLanguages();
 
-**Language:** ${langName} (${lang})
-**Version:** ${version}
-**Applied:** ${new Date().toISOString()}
-**Total Corrections:** ${corrections.length}
+  let output = `# Cross-Language Translation Review
+
+Reviewing section \`${section}\` across all languages.
+
+## Task
+Review translations for consistency and quality across all languages.
+
+## Output Format
+Respond with a JSON array. Include the language code in each correction:
+
+\`\`\`json
+[
+  {
+    "lang": "es",
+    "key": "${section}.example.key",
+    "issue": "naturalness",
+    "current": "current text",
+    "suggested": "improved text",
+    "explanation": "why"
+  }
+]
+\`\`\`
 
 ---
 
-## Summary by Issue Type
+# Translations
 
 `;
 
-  const byIssue = {};
-  corrections.forEach(c => {
-    const issue = c.issue || 'unspecified';
-    if (!byIssue[issue]) byIssue[issue] = [];
-    byIssue[issue].push(c);
+  // Build header
+  const langCodes = languages.map(l => l.code);
+  output += `| Key | English | ${langCodes.map(c => c.toUpperCase()).join(' | ')} |\n`;
+  output += `|-----|---------|${langCodes.map(() => '-----').join('|')}|\n`;
+
+  // Load all translations
+  const translations = {};
+  languages.forEach(l => {
+    const langPath = path.join(I18N_DIR, `${l.code}.json`);
+    if (fs.existsSync(langPath)) {
+      translations[l.code] = flatten(getAtPath(JSON.parse(fs.readFileSync(langPath, 'utf8')), section) || {});
+    } else {
+      translations[l.code] = {};
+    }
   });
 
-  for (const [issue, items] of Object.entries(byIssue)) {
-    report += `- **${issue}**: ${items.length} correction${items.length > 1 ? 's' : ''}\n`;
+  // Build rows
+  for (const key in enFlat) {
+    const fullKey = `${section}.${key}`;
+    const enVal = String(enFlat[key]).replace(/\|/g, '\\|').replace(/\n/g, ' ').substring(0, 50);
+    const langVals = langCodes.map(code => {
+      const val = translations[code][key];
+      return val ? String(val).replace(/\|/g, '\\|').replace(/\n/g, ' ').substring(0, 50) : '⚠️';
+    });
+    output += `| \`${fullKey}\` | ${enVal} | ${langVals.join(' | ')} |\n`;
   }
 
-  report += `\n---\n\n## Detailed Changes\n\n`;
-
-  corrections.forEach((c, i) => {
-    const current = c.current || getAtPath(translations, c.key);
-    report += `### ${i + 1}. \`${c.key}\`\n\n`;
-    report += `**Issue:** ${c.issue || 'unspecified'}\n\n`;
-    report += `**Before:**\n\`\`\`\n${current}\n\`\`\`\n\n`;
-    report += `**After:**\n\`\`\`\n${c.suggested}\n\`\`\`\n\n`;
-    if (c.explanation) {
-      report += `**Reason:** ${c.explanation}\n\n`;
-    }
-    report += `---\n\n`;
-  });
-
-  return report;
+  output += `\n---\n**Keys:** ${Object.keys(enFlat).length} | **Languages:** ${langCodes.join(', ')} | **Generated:** ${new Date().toISOString()}\n`;
+  return output;
 }
 
-// ============ Commands ============
+// ============ Apply Corrections ============
 
-function cmdExport(lang) {
-  const langDir = path.join(REVIEWS_DIR, lang);
-  const nextVersion = getNextVersion(langDir);
-  const versionName = `v${padVersion(nextVersion)}_${getDateStamp()}`;
-  const versionDir = path.join(langDir, versionName);
-
-  // Create directories
-  fs.mkdirSync(versionDir, { recursive: true });
-
-  // Generate and save export
-  const exportContent = generateExport(lang);
-  const exportPath = path.join(versionDir, 'export.md');
-  fs.writeFileSync(exportPath, exportContent);
-
-  // Create placeholder for gemini response
-  const responsePath = path.join(versionDir, 'gemini-response.json');
-  fs.writeFileSync(responsePath, `[]
-
-// Instructions:
-// 1. Copy the contents of export.md to Gemini Pro
-// 2. Replace this file with Gemini's JSON response
-// 3. Run: npm run i18n:review:apply -- --lang=${lang}
-`);
-
-  console.log(`\n✅ Review export created!\n`);
-  console.log(`📁 Version: ${versionName}`);
-  console.log(`📄 Export: ${exportPath}`);
-  console.log(`\n📋 Next steps:`);
-  console.log(`   1. Copy contents of export.md to Gemini Pro`);
-  console.log(`   2. Save Gemini's JSON response to gemini-response.json`);
-  console.log(`   3. Run: npm run i18n:review:apply -- --lang=${lang}`);
-}
-
-function cmdApply(lang, specificVersion) {
-  const langDir = path.join(REVIEWS_DIR, lang);
-
-  let versionName;
-  if (specificVersion) {
-    // Find version matching the number
-    const versions = fs.readdirSync(langDir).filter(d => d.startsWith(`v${padVersion(specificVersion)}`));
-    if (versions.length === 0) {
-      console.error(`❌ Version ${specificVersion} not found for ${lang}`);
-      process.exit(1);
-    }
-    versionName = versions[0];
-  } else {
-    versionName = getLatestVersion(langDir);
-    if (!versionName) {
-      console.error(`❌ No review versions found for ${lang}`);
-      console.error(`   Run: npm run i18n:review -- --lang=${lang}`);
-      process.exit(1);
-    }
-  }
-
-  const versionDir = path.join(langDir, versionName);
-  const responsePath = path.join(versionDir, 'gemini-response.json');
-  const reportPath = path.join(versionDir, 'correction-report.md');
-
-  if (!fs.existsSync(responsePath)) {
-    console.error(`❌ No gemini-response.json found in ${versionName}`);
-    process.exit(1);
-  }
-
-  // Parse corrections
-  let content = fs.readFileSync(responsePath, 'utf8');
-
-  // Remove comments (lines starting with //)
-  content = content.split('\n').filter(line => !line.trim().startsWith('//')).join('\n');
-
-  // Extract JSON from markdown code blocks if present
-  const jsonMatch = content.match(/```json\s*([\s\S]*?)\s*```/);
-  if (jsonMatch) {
-    content = jsonMatch[1];
-  }
-
-  let corrections;
-  try {
-    corrections = JSON.parse(content.trim());
-  } catch (e) {
-    console.error(`❌ Failed to parse gemini-response.json: ${e.message}`);
-    process.exit(1);
-  }
-
-  if (!Array.isArray(corrections)) {
-    console.error(`❌ Corrections must be a JSON array`);
-    process.exit(1);
-  }
-
-  if (corrections.length === 0) {
-    console.log(`\n✅ No corrections needed - translations are perfect!`);
-
-    // Create empty report
-    const report = `# Translation Correction Report
-
-**Language:** ${LANG_NAMES[lang] || lang} (${lang})
-**Version:** ${versionName}
-**Applied:** ${new Date().toISOString()}
-
----
-
-## Result
-
-No corrections were needed. All translations passed Gemini's review.
-`;
-    fs.writeFileSync(reportPath, report);
-    console.log(`📄 Report saved: ${reportPath}`);
-    return;
-  }
-
-  // Load translations
+function applyCorrections(lang, corrections, versionName) {
   const translationPath = path.join(I18N_DIR, `${lang}.json`);
   const translations = JSON.parse(fs.readFileSync(translationPath, 'utf8'));
 
-  // Apply corrections
-  let applied = 0;
-  let skipped = 0;
+  let applied = 0, skipped = 0;
 
   corrections.forEach(c => {
     if (!c.key || !c.suggested) {
-      console.warn(`⚠️  Skipping invalid correction: ${JSON.stringify(c)}`);
       skipped++;
       return;
     }
@@ -366,58 +287,238 @@ No corrections were needed. All translations passed Gemini's review.
     console.log(`✓ Applied: ${c.key}`);
   });
 
-  // Save updated translations
   fs.writeFileSync(translationPath, JSON.stringify(translations, null, 2) + '\n');
-
-  // Generate and save report
-  const report = generateCorrectionReport(corrections, translations, lang, versionName);
-  fs.writeFileSync(reportPath, report);
-
-  console.log(`\n✅ Corrections applied!`);
-  console.log(`   Applied: ${applied}`);
-  console.log(`   Skipped: ${skipped}`);
-  console.log(`📄 Report: ${reportPath}`);
-  console.log(`📄 Updated: ${translationPath}`);
+  return { applied, skipped, translations };
 }
 
-function cmdStatus(lang) {
+function generateCorrectionReport(corrections, lang, versionName) {
+  const langName = LANG_NAMES[lang] || lang;
+
+  let report = `# Correction Report
+
+**Language:** ${langName} (${lang})
+**Version:** ${versionName}
+**Applied:** ${new Date().toISOString()}
+**Total:** ${corrections.length}
+
+---
+
+`;
+
+  if (corrections.length === 0) {
+    report += `No corrections needed. All translations passed review.\n`;
+    return report;
+  }
+
+  const byIssue = {};
+  corrections.forEach(c => {
+    const issue = c.issue || 'unspecified';
+    if (!byIssue[issue]) byIssue[issue] = [];
+    byIssue[issue].push(c);
+  });
+
+  report += `## By Issue Type\n\n`;
+  for (const [issue, items] of Object.entries(byIssue)) {
+    report += `- **${issue}**: ${items.length}\n`;
+  }
+
+  report += `\n## Changes\n\n`;
+  corrections.forEach((c, i) => {
+    report += `### ${i + 1}. \`${c.key}\`\n`;
+    report += `**Issue:** ${c.issue || '-'}\n\n`;
+    report += `**Before:** ${c.current || '-'}\n\n`;
+    report += `**After:** ${c.suggested}\n\n`;
+    if (c.explanation) report += `**Why:** ${c.explanation}\n\n`;
+    report += `---\n\n`;
+  });
+
+  return report;
+}
+
+// ============ Commands ============
+
+function cmdStatus() {
+  const state = loadState();
+  const languages = getEnabledLanguages();
+  const en = JSON.parse(fs.readFileSync(path.join(I18N_DIR, 'en.json'), 'utf8'));
+  const enKeys = Object.keys(flatten(en)).length;
+
+  console.log(`\n📊 i18n Status\n`);
+  console.log(`Source: en.json (${enKeys} keys)\n`);
+
+  languages.forEach(l => {
+    const langPath = path.join(I18N_DIR, `${l.code}.json`);
+    if (!fs.existsSync(langPath)) {
+      console.log(`❌ ${l.nativeName} (${l.code}): File missing`);
+      return;
+    }
+
+    const target = JSON.parse(fs.readFileSync(langPath, 'utf8'));
+    const targetKeys = Object.keys(flatten(target)).length;
+    const coverage = Math.round((targetKeys / enKeys) * 100);
+    const langState = state.languages[l.code] || {};
+    const lastReview = langState.lastFullReview || 'never';
+
+    const icon = coverage >= 100 ? '✅' : coverage >= 90 ? '⚠️' : '❌';
+    console.log(`${icon} ${l.nativeName} (${l.code}): ${coverage}% coverage, last review: ${lastReview}`);
+  });
+
+  console.log('');
+}
+
+function cmdExportLanguage(lang, section = null) {
+  const langDir = path.join(REVIEWS_DIR, lang);
+  const nextVersion = getNextVersion(langDir);
+  const versionName = `v${padVersion(nextVersion)}_${getDateStamp()}`;
+  const versionDir = path.join(langDir, versionName);
+
+  fs.mkdirSync(versionDir, { recursive: true });
+
+  const exportContent = generateLanguageExport(lang, section);
+  fs.writeFileSync(path.join(versionDir, 'export.md'), exportContent);
+  fs.writeFileSync(path.join(versionDir, 'gemini-response.json'), `[]\n// Paste Gemini's JSON response here\n`);
+
+  console.log(`\n✅ Review export created!\n`);
+  console.log(`📁 ${versionName}`);
+  console.log(`📄 ${path.join(versionDir, 'export.md')}`);
+  console.log(`\n📋 Next steps:`);
+  console.log(`   1. Copy export.md contents to Gemini Pro`);
+  console.log(`   2. Save response to gemini-response.json`);
+  console.log(`   3. Run: npm run i18n:review:apply -- --lang=${lang}`);
+}
+
+function cmdExportSection(section) {
+  const sectionDir = path.join(REVIEWS_DIR, 'sections', `${section.replace(/\./g, '_')}_${getDateStamp()}`);
+
+  fs.mkdirSync(sectionDir, { recursive: true });
+
+  const exportContent = generateSectionExport(section);
+  fs.writeFileSync(path.join(sectionDir, 'export.md'), exportContent);
+  fs.writeFileSync(path.join(sectionDir, 'gemini-response.json'), `[]\n// Paste Gemini's JSON response here\n// Include "lang" field in each correction\n`);
+
+  console.log(`\n✅ Section review export created!\n`);
+  console.log(`📁 ${sectionDir}`);
+  console.log(`\n📋 Next steps:`);
+  console.log(`   1. Copy export.md contents to Gemini Pro`);
+  console.log(`   2. Save response to gemini-response.json`);
+  console.log(`   3. Run: npm run i18n:review:apply:section -- --section=${section}`);
+}
+
+function cmdApplyLanguage(lang, specificVersion = null) {
   const langDir = path.join(REVIEWS_DIR, lang);
 
-  if (!fs.existsSync(langDir)) {
-    console.log(`\n📊 Status for ${lang}: No reviews yet`);
-    console.log(`   Run: npm run i18n:review -- --lang=${lang}`);
+  let versionName;
+  if (specificVersion) {
+    const versions = fs.readdirSync(langDir).filter(d => d.startsWith(`v${padVersion(specificVersion)}`));
+    if (versions.length === 0) {
+      console.error(`❌ Version ${specificVersion} not found`);
+      process.exit(1);
+    }
+    versionName = versions[0];
+  } else {
+    versionName = getLatestVersion(langDir);
+    if (!versionName) {
+      console.error(`❌ No reviews found for ${lang}`);
+      process.exit(1);
+    }
+  }
+
+  const versionDir = path.join(langDir, versionName);
+  const responsePath = path.join(versionDir, 'gemini-response.json');
+
+  let content = fs.readFileSync(responsePath, 'utf8');
+  content = content.split('\n').filter(l => !l.trim().startsWith('//')).join('\n');
+  const jsonMatch = content.match(/```json\s*([\s\S]*?)\s*```/);
+  if (jsonMatch) content = jsonMatch[1];
+
+  const corrections = JSON.parse(content.trim());
+
+  if (corrections.length === 0) {
+    console.log(`\n✅ No corrections needed!`);
+    const report = `# Correction Report\n\n**Language:** ${lang}\n**Version:** ${versionName}\n\nNo corrections needed.\n`;
+    fs.writeFileSync(path.join(versionDir, 'correction-report.md'), report);
     return;
   }
 
-  const versions = fs.readdirSync(langDir)
-    .filter(d => d.startsWith('v'))
-    .sort();
+  const { applied, skipped } = applyCorrections(lang, corrections, versionName);
+  const report = generateCorrectionReport(corrections, lang, versionName);
+  fs.writeFileSync(path.join(versionDir, 'correction-report.md'), report);
 
-  console.log(`\n📊 Review history for ${LANG_NAMES[lang] || lang} (${lang}):\n`);
+  // Update state
+  const state = loadState();
+  if (!state.languages[lang]) state.languages[lang] = {};
+  state.languages[lang].lastFullReview = versionName;
+  state.languages[lang].coverage = 100;
+  saveState(state);
 
-  versions.forEach(v => {
-    const vDir = path.join(langDir, v);
-    const hasExport = fs.existsSync(path.join(vDir, 'export.md'));
-    const hasResponse = fs.existsSync(path.join(vDir, 'gemini-response.json'));
-    const hasReport = fs.existsSync(path.join(vDir, 'correction-report.md'));
+  console.log(`\n✅ Applied ${applied} corrections (${skipped} skipped)`);
+  console.log(`📄 Report: ${path.join(versionDir, 'correction-report.md')}`);
+}
 
-    // Check if response has actual content
-    let responseStatus = '⬜';
-    if (hasResponse) {
-      const content = fs.readFileSync(path.join(vDir, 'gemini-response.json'), 'utf8');
-      if (content.includes('Instructions:')) {
-        responseStatus = '⬜ (pending)';
-      } else {
-        responseStatus = '✅';
-      }
-    }
+function cmdApplySection(section) {
+  const sectionsDir = path.join(REVIEWS_DIR, 'sections');
+  const sectionPrefix = section.replace(/\./g, '_');
 
-    console.log(`  ${v}`);
-    console.log(`    Export:   ${hasExport ? '✅' : '⬜'}`);
-    console.log(`    Response: ${responseStatus}`);
-    console.log(`    Report:   ${hasReport ? '✅' : '⬜'}`);
-    console.log('');
+  const dirs = fs.readdirSync(sectionsDir)
+    .filter(d => d.startsWith(sectionPrefix))
+    .sort()
+    .reverse();
+
+  if (dirs.length === 0) {
+    console.error(`❌ No review found for section ${section}`);
+    process.exit(1);
+  }
+
+  const latestDir = path.join(sectionsDir, dirs[0]);
+  const responsePath = path.join(latestDir, 'gemini-response.json');
+
+  let content = fs.readFileSync(responsePath, 'utf8');
+  content = content.split('\n').filter(l => !l.trim().startsWith('//')).join('\n');
+  const jsonMatch = content.match(/```json\s*([\s\S]*?)\s*```/);
+  if (jsonMatch) content = jsonMatch[1];
+
+  const corrections = JSON.parse(content.trim());
+
+  if (corrections.length === 0) {
+    console.log(`\n✅ No corrections needed for section ${section}!`);
+    return;
+  }
+
+  // Group by language
+  const byLang = {};
+  corrections.forEach(c => {
+    const lang = c.lang || 'es'; // Default to es if not specified
+    if (!byLang[lang]) byLang[lang] = [];
+    byLang[lang].push(c);
   });
+
+  let totalApplied = 0;
+  for (const [lang, langCorrections] of Object.entries(byLang)) {
+    console.log(`\nApplying ${langCorrections.length} corrections for ${lang}...`);
+    const { applied } = applyCorrections(lang, langCorrections, dirs[0]);
+    totalApplied += applied;
+  }
+
+  // Generate combined report
+  let report = `# Section Correction Report\n\n**Section:** ${section}\n**Applied:** ${new Date().toISOString()}\n\n`;
+  for (const [lang, langCorrections] of Object.entries(byLang)) {
+    report += `## ${LANG_NAMES[lang] || lang} (${lang})\n\n`;
+    langCorrections.forEach(c => {
+      report += `- \`${c.key}\`: ${c.current} → ${c.suggested}\n`;
+    });
+    report += '\n';
+  }
+  fs.writeFileSync(path.join(latestDir, 'correction-report.md'), report);
+
+  // Update state
+  const state = loadState();
+  if (!state.sections[section]) state.sections[section] = { reviewedIn: {} };
+  for (const lang of Object.keys(byLang)) {
+    state.sections[section].reviewedIn[lang] = dirs[0];
+  }
+  saveState(state);
+
+  console.log(`\n✅ Applied ${totalApplied} total corrections across ${Object.keys(byLang).length} languages`);
 }
 
 // ============ Main ============
@@ -426,34 +527,47 @@ function main() {
   const args = process.argv.slice(2);
 
   const langArg = args.find(a => a.startsWith('--lang='));
+  const sectionArg = args.find(a => a.startsWith('--section='));
   const versionArg = args.find(a => a.startsWith('--version='));
   const applyFlag = args.includes('--apply');
   const statusFlag = args.includes('--status');
 
-  if (!langArg) {
-    console.error('Usage:');
-    console.error('  npm run i18n:review -- --lang=es           Create new review export');
-    console.error('  npm run i18n:review:apply -- --lang=es     Apply latest corrections');
-    console.error('  npm run i18n:review -- --lang=es --status  Show review history');
-    process.exit(1);
-  }
-
-  const lang = langArg.split('=')[1];
+  const lang = langArg ? langArg.split('=')[1] : null;
+  const section = sectionArg ? sectionArg.split('=')[1] : null;
   const version = versionArg ? versionArg.split('=')[1] : null;
 
-  // Verify language file exists
-  if (!fs.existsSync(path.join(I18N_DIR, `${lang}.json`))) {
-    console.error(`❌ Language file not found: ${lang}.json`);
-    process.exit(1);
+  if (statusFlag) {
+    cmdStatus();
+    return;
   }
 
-  if (statusFlag) {
-    cmdStatus(lang);
-  } else if (applyFlag) {
-    cmdApply(lang, version);
-  } else {
-    cmdExport(lang);
+  if (section && applyFlag) {
+    cmdApplySection(section);
+    return;
   }
+
+  if (section) {
+    cmdExportSection(section);
+    return;
+  }
+
+  if (lang && applyFlag) {
+    cmdApplyLanguage(lang, version);
+    return;
+  }
+
+  if (lang) {
+    cmdExportLanguage(lang);
+    return;
+  }
+
+  console.error('Usage:');
+  console.error('  npm run i18n:review -- --status                    Show status');
+  console.error('  npm run i18n:review -- --lang=es                   Full language review');
+  console.error('  npm run i18n:review -- --section=tools.new-tool    Section review (all langs)');
+  console.error('  npm run i18n:review:apply -- --lang=es             Apply language corrections');
+  console.error('  npm run i18n:review:apply -- --section=tools.x     Apply section corrections');
+  process.exit(1);
 }
 
 main();
