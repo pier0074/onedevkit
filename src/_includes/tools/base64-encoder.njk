@@ -1,45 +1,50 @@
 {# Base64 Encoder Tool UI Partial #}
+{%- set currentLang = lang | default("en") -%}
 <style>
   .mode-toggle { display: flex; gap: var(--space-2); margin-bottom: var(--space-4); }
   .mode-btn { flex: 1; }
   .file-upload-area { border: 2px dashed var(--color-border); border-radius: var(--radius-md); padding: var(--space-6); text-align: center; cursor: pointer; background: var(--color-bg-alt); }
   .file-upload-area:hover, .file-upload-area.drag-over { border-color: var(--color-primary); background: var(--color-bg); }
   .file-upload-area input[type="file"] { display: none; }
-  .base64-stats { display: flex; gap: 1.5rem; flex-wrap: wrap; font-size: 0.875rem; color: var(--color-text-muted); }
+  .base64-stats { display: flex; gap: 1rem; flex-wrap: wrap; font-size: 0.875rem; color: var(--color-text-muted); }
   .base64-stat-item { display: flex; flex-direction: column; gap: 0.25rem; }
   .base64-stats dt { font-weight: 500; color: var(--color-text-secondary); }
   .base64-stats dd { margin: 0; font-family: monospace; }
+  @media (max-width: 480px) {
+    .output-header { flex-direction: column; align-items: flex-start; gap: var(--space-2); }
+    .base64-stats { width: 100%; justify-content: space-between; }
+  }
 </style>
 
 <!-- Mode Toggle -->
 <div class="mode-toggle">
-  <button type="button" class="btn-option mode-btn active" data-mode="text" id="mode-text">{{ "common.text" | t(lang) }} {{ "common.input" | t(lang) }}</button>
-  <button type="button" class="btn-option mode-btn" data-mode="file" id="mode-file">{{ "common.upload" | t(lang) }}</button>
+  <button type="button" class="btn-option mode-btn active" data-mode="text" id="mode-text">{{ "common.text" | t(currentLang) }} {{ "common.input" | t(currentLang) }}</button>
+  <button type="button" class="btn-option mode-btn" data-mode="file" id="mode-file">{{ "common.upload" | t(currentLang) }}</button>
 </div>
 
 <!-- Text Input Section -->
 <div id="text-input-section">
   <div class="tool-input-group">
     <div class="input-header">
-      <label for="base64-input" class="input-label">{{ "common.enterText" | t(lang) }}</label>
-      <button type="button" id="sample-base64" class="btn btn-text btn-sm">{{ "common.loadSample" | t(lang) }}</button>
+      <label for="base64-input" class="input-label">{{ "common.enterText" | t(currentLang) }}</label>
+      <button type="button" id="sample-base64" class="btn btn-text btn-sm">{{ "common.loadSample" | t(currentLang) }}</button>
     </div>
-    <textarea id="base64-input" class="tool-textarea" rows="8" placeholder="{{ 'common.pasteHere' | t(lang) }}" spellcheck="false"></textarea>
+    <textarea id="base64-input" class="tool-textarea" rows="8" placeholder="{{ 'common.pasteHere' | t(currentLang) }}" spellcheck="false"></textarea>
   </div>
 </div>
 
 <!-- File Input Section -->
 <div id="file-input-section" class="hidden">
   <div class="tool-input-group">
-    <label class="input-label">{{ "common.selectFile" | t(lang) }}</label>
+    <label class="input-label">{{ "common.selectFile" | t(currentLang) }}</label>
     <div class="file-upload-area" id="file-drop-zone">
       <input type="file" id="file-input" accept="*/*">
-      <p>{{ "common.dragDrop" | t(lang) }}</p>
+      <p>{{ "common.dragDrop" | t(currentLang) }}</p>
       <small>Maximum file size: 5MB</small>
     </div>
     <div id="file-info" class="hidden" style="margin-top: var(--space-3); padding: var(--space-3); background: var(--bg-secondary); border-radius: var(--radius-sm);">
       <span id="file-name"></span> <span id="file-size"></span>
-      <button type="button" id="clear-file" class="btn btn-ghost btn-sm">{{ "common.delete" | t(lang) }}</button>
+      <button type="button" id="clear-file" class="btn btn-ghost btn-sm">{{ "common.delete" | t(currentLang) }}</button>
     </div>
   </div>
 </div>
@@ -47,19 +52,19 @@
 <!-- Options -->
 <div class="tool-options">
   <label class="option-label">
-    <input type="checkbox" id="url-safe" class="tool-checkbox"> {{ "common.urlSafe" | t(lang) }}
+    <input type="checkbox" id="url-safe" class="tool-checkbox"> {{ "common.urlSafe" | t(currentLang) }}
   </label>
   <label class="option-label">
-    <input type="checkbox" id="line-breaks" class="tool-checkbox"> {{ "common.lineBreaks" | t(lang) }} (76 chars)
+    <input type="checkbox" id="line-breaks" class="tool-checkbox"> {{ "common.lineBreaks" | t(currentLang) }} (76 chars)
   </label>
 </div>
 
 <!-- Action Buttons -->
 <div class="tool-actions">
-  <button type="button" id="encode-base64" class="btn btn-primary">{{ "common.encode" | t(lang) }}</button>
-  <button type="button" id="decode-base64" class="btn btn-secondary">{{ "common.decode" | t(lang) }}</button>
-  <button type="button" id="copy-base64" class="btn btn-secondary">{{ "common.copy" | t(lang) }}</button>
-  <button type="button" id="clear-base64" class="btn btn-ghost">{{ "common.clear" | t(lang) }}</button>
+  <button type="button" id="encode-base64" class="btn btn-primary">{{ "common.encode" | t(currentLang) }}</button>
+  <button type="button" id="decode-base64" class="btn btn-secondary">{{ "common.decode" | t(currentLang) }}</button>
+  <button type="button" id="copy-base64" class="btn btn-secondary">{{ "common.copy" | t(currentLang) }}</button>
+  <button type="button" id="clear-base64" class="btn btn-ghost">{{ "common.clear" | t(currentLang) }}</button>
 </div>
 
 <!-- Error Display -->
@@ -68,12 +73,12 @@
 <!-- Output Section -->
 <div class="tool-output-group">
   <div class="output-header">
-    <span class="output-label">{{ "common.output" | t(lang) }}</span>
+    <span class="output-label">{{ "common.output" | t(currentLang) }}</span>
     <div class="base64-stats">
-      <div class="base64-stat-item"><dt>{{ "common.input" | t(lang) }}</dt><dd id="input-size">-</dd></div>
-      <div class="base64-stat-item"><dt>{{ "common.output" | t(lang) }}</dt><dd id="output-size">-</dd></div>
-      <div class="base64-stat-item"><dt>Ratio</dt><dd id="size-ratio">-</dd></div>
+      <div class="base64-stat-item"><dt>{{ "common.input" | t(currentLang) }}</dt><dd id="input-size">-</dd></div>
+      <div class="base64-stat-item"><dt>{{ "common.output" | t(currentLang) }}</dt><dd id="output-size">-</dd></div>
+      <div class="base64-stat-item"><dt>{{ "common.ratio" | t(currentLang) }}</dt><dd id="size-ratio">-</dd></div>
     </div>
   </div>
-  <pre id="base64-output" class="tool-output tool-output-placeholder">{{ "common.outputPlaceholder" | t(lang) }}</pre>
+  <pre id="base64-output" class="tool-output tool-output-placeholder">{{ "common.outputPlaceholder" | t(currentLang) }}</pre>
 </div>
