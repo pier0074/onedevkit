@@ -79,12 +79,33 @@
           : '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>';
       });
 
+      // Mobile dropdown toggle (for touch devices)
+      const dropdownToggle = nav.querySelector('.nav-dropdown-toggle');
+      const dropdown = nav.querySelector('.nav-mega-dropdown');
+
+      if (dropdownToggle && dropdown) {
+        dropdownToggle.addEventListener('click', (e) => {
+          // Only handle on mobile (when nav-toggle is visible)
+          if (window.innerWidth <= 768) {
+            e.preventDefault();
+            e.stopPropagation();
+            dropdown.classList.toggle('open');
+            dropdownToggle.setAttribute('aria-expanded', dropdown.classList.contains('open'));
+          }
+        });
+      }
+
       // Close on click outside
       document.addEventListener('click', (e) => {
         if (!nav.contains(e.target) && !toggle.contains(e.target)) {
           nav.classList.remove('open');
           toggle.setAttribute('aria-expanded', 'false');
           toggle.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>';
+          // Also close dropdown
+          if (dropdown) {
+            dropdown.classList.remove('open');
+            dropdownToggle?.setAttribute('aria-expanded', 'false');
+          }
         }
       });
 
